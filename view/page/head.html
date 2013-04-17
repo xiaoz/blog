@@ -1,5 +1,5 @@
 	<!-- 前台 -->
-	<% if(locals.current_user){%>
+	<% if(!locals.current_user){%>
 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
@@ -21,7 +21,7 @@
 		<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/css/main.css" />
 	
-		ink rel="stylesheet" type="text/css" href="/libs/SyntaxHighlighter/shCoreDefault.css" />
+		<link rel="stylesheet" type="text/css" href="/libs/SyntaxHighlighter/shCoreDefault.css" />
 		<link rel="stylesheet" type="text/css" href="/libs/ueditor/themes/default/ueditor.css" />
 	
 		<% if(locals.active){ %>

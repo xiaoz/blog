@@ -16,10 +16,14 @@
 		<!-- header -->
 		<%-partial('page/header')%>
 		<div id="content" class="container">
-			<%-body %>
+			<div class="inner">
+				<%-body %>
+				
+				<%-partial('page/footer-top')%>
+			</div>
 		</div>
 		<!-- footer -->
-		<%-partial('page/footer')%>
+		<%-partial('page/footer-bottom')%>
 	</div>
 	<div id="setting_themes_block" style="left: -174px;" class="close">
 		<div class="themes_top"></div>
