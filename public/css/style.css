@@ -6,6 +6,9 @@ img { border:none; vertical-align:top;}
 input, textarea { vertical-align:top;}
 div { overflow:hidden;}
 ul, li { list-style-type:none;}
+body, button, input, select, textarea {
+	font: 12px/1.5 tahoma,arial,\5b8b\4f53,sans-serif;
+}
 body { background:url(../images/bg1.jpg); overflow-y: scroll; }
 body.bg1 { background:url(../images/bg1.jpg);}
 body.bg2 { background:url(../images/bg2.jpg);}
@@ -34,19 +37,18 @@ body.bg5 { background:url(../images/bg5.jpg);}
 
 .col_9c9c9c { color:#9c9c9c;}
 .col_6a6969 { color:#6a6969;}
-
-h1 { font: normal 19px/24px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; padding-bottom:13px;}
-h2 { font: normal 18px/20px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; padding-bottom:18px;}
-h2 a { font: normal 18px/20px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; text-decoration:none;}
+h1 { font: normal 19px/24px  sans-serif; color:#343434; text-transform: uppercase; padding-bottom:13px;}
+h2 { font: normal 18px/20px  sans-serif; color:#343434; text-transform: uppercase; padding-bottom:18px;}
+h2 a { font: normal 18px/20px  sans-serif; color:#343434; text-transform: uppercase; text-decoration:none;}
 h2 a:hover { color:#d42d17;}
-h3 { font: normal 16px/20px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; padding-bottom:18px;}
-h3 a { font: normal 16px/20px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; text-decoration:none;}
+h3 { font: normal 16px/20px  sans-serif; color:#343434; text-transform: uppercase; padding-bottom:18px;}
+h3 a { font: normal 16px/20px  sans-serif; color:#343434; text-transform: uppercase; text-decoration:none;}
 h3 a:hover { color:#d42d17;}
-h4 { font: normal 14px/20px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; padding-bottom:18px;}
-h4 a { font: normal 14px/20px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; text-decoration:none;}
+h4 { font: normal 14px/20px  sans-serif; color:#343434; text-transform: uppercase; padding-bottom:18px;}
+h4 a { font: normal 14px/20px  sans-serif; color:#343434; text-transform: uppercase; text-decoration:none;}
 h4 a:hover { color:#d42d17;}
-h5 { font: bold 11px/20px 'Droid Sans', sans-serif; color:#424242; text-transform: uppercase; padding-bottom:2px;}
-h5 a { font: bold 11px/20px 'Droid Sans', sans-serif; color:#424242; text-transform: uppercase; text-decoration:none;}
+h5 { font: bold 11px/20px  sans-serif; color:#424242; text-transform: uppercase; padding-bottom:2px;}
+h5 a { font: bold 11px/20px  sans-serif; color:#424242; text-transform: uppercase; text-decoration:none;}
 h5 a:hover { color:#d42d17;}
 h1 span,
 h2 span,
@@ -56,10 +58,10 @@ h5 span { color:#9a9a9a;}
 p { font: normal 12px/17px Arial, Helvetica, sans-serif; color:#8e8e8e; text-align:justify;}
 a { font: normal 12px/17px Arial, Helvetica, sans-serif; color:#d42d17; text-decoration:none;}
 
-.quote { background:#fcfcfc; border:1px solid #fafafa; padding:8px 15px 9px; font: italic 11px/17px 'Droid Serif', serif; text-align:left; color:#b0b0b0}
-.quote2 { padding: 2px 0 0 14px; border-left:3px solid #f0f0f0; font: italic 11px/17px 'Droid Serif', serif; color:#BFBFBF; text-align:left;}
+.quote { background:#fcfcfc; border:1px solid #fafafa; padding:8px 15px 9px; font: italic 11px/17px  serif; text-align:left; color:#b0b0b0}
+.quote2 { padding: 2px 0 0 14px; border-left:3px solid #f0f0f0; font: italic 11px/17px  serif; color:#BFBFBF; text-align:left;}
 
-.view_more { font: normal 10px/14px 'Droid Sans', sans-serif; color:#a3a3a3; padding-right:12px; background:url(../images/mark_more.png) no-repeat right 2px; text-transform: uppercase;}
+.view_more { font: normal 10px/14px  sans-serif; color:#a3a3a3; padding-right:12px; background:url(../images/mark_more.png) no-repeat right 2px; text-transform: uppercase;}
 .view_more:hover { color:#d42d17;}
 
 ul.list li{ font: normal 11px/19px Arial, Helvetica, sans-serif; color:#a8a8a8; padding-left: 14px; background:url(../images/list_mark.jpg) no-repeat 1px 6px; }
@@ -102,7 +104,7 @@ ul.archives_list li a { display:block; float:left; height: 18px; background:url(
 ul.archives_list li a:hover { color:#8a8a8a;}
 
 a.button { display:block; height:26px; float:left; background:url(../images/new_button.jpg) repeat-x left top; text-decoration:none; overflow:hidden;}
-a.button * { display:block; height:26px; background-image:url(../images/new_button.jpg); background-repeat:no-repeat; font: normal 11px/28px 'Droid Sans', sans-serif; color:#757575; text-transform: none; cursor:pointer;}
+a.button * { display:block; height:26px; background-image:url(../images/new_button.jpg); background-repeat:no-repeat; font: normal 11px/28px  sans-serif; color:#757575; text-transform: none; cursor:pointer;}
 a.button:hover { background-position: left -78px; text-decoration:none;}
 a.button:hover * {  color:#d42d17;}
 a.button .left { background-position: left -26px; padding-left: 13px;}
@@ -185,7 +187,7 @@ a.button.yellow:hover .right { background-position: right -1066px; padding-right
 
 
 a.button_big { display:block; height:27px; float:left; background:url(../images/new_button_big.jpg) repeat-x left top; text-decoration:none; overflow:hidden;}
-a.button_big * { display:block; height:27px; background-image:url(../images/new_button_big.jpg); background-repeat:no-repeat; font: normal 10px/28px 'Droid Sans', sans-serif; color:#757575; text-transform: uppercase; cursor:pointer;}
+a.button_big * { display:block; height:27px; background-image:url(../images/new_button_big.jpg); background-repeat:no-repeat; font: normal 10px/28px  sans-serif; color:#757575; text-transform: uppercase; cursor:pointer;}
 a.button_big:hover { background-position: left -81px; text-decoration:none;}
 a.button_big:hover * {  color:#d42d17;}
 a.button_big .left { background-position: left -27px; padding-left: 13px;}
@@ -245,7 +247,7 @@ a.button_big.yellow:hover .right { background-position: right -1107px; padding-r
 
 
 a.button_green { display:block; height:27px; float:left; text-decoration:none; overflow:hidden;}
-a.button_green * { float:left; display:block; height:27px; background-image:url(../images/button_green.png); background-repeat: repeat-x; font: normal 10px/28px 'Droid Sans', sans-serif; color:#fff; text-transform: none; cursor:pointer; text-transform: uppercase;}
+a.button_green * { float:left; display:block; height:27px; background-image:url(../images/button_green.png); background-repeat: repeat-x; font: normal 10px/28px  sans-serif; color:#fff; text-transform: none; cursor:pointer; text-transform: uppercase;}
 a.button_green:hover .text { background-position: left -81px; text-decoration:none;}
 a.button_green .left { display:block; background-position: left -27px; padding-left: 12px; background-repeat: no-repeat;}
 a.button_green:hover .left { background-position: left -108px; padding-left: 12px;}
@@ -326,12 +328,12 @@ table.table_type1 .title span { color:#d42d17;}
 	background: -o-linear-gradient(#FCFCFC, #f8f8f8);
 	background: linear-gradient(#FCFCFC, #f8f8f8);
 }
-.pricing_table .title p { font: normal 17px/24px 'Oswald', sans-serif; color:#343434; text-align:center; text-transform: uppercase; padding-top:7px;
+.pricing_table .title p { font: normal 17px/24px  sans-serif; color:#343434; text-align:center; text-transform: uppercase; padding-top:7px;
 	text-shadow: 0px 1px 0px #fff;
 }
 .pricing_table .price_block { height:60px; border-bottom: 1px solid #ededed; margin:0 4px;}
 .pricing_table .price_block .price { font: bold 15px/20px Arial, Helvetica, sans-serif; color:#858585; padding:11px 0 3px;}
-.pricing_table .price_block .price_info { font: normal 10px/15px 'Droid Sans', sans-serif; color:#a6b4b7; text-transform: uppercase;}
+.pricing_table .price_block .price_info { font: normal 10px/15px  sans-serif; color:#a6b4b7; text-transform: uppercase;}
 .pricing_table .info { padding:10px 0 8px; margin:0 4px 10px; border-bottom: 1px solid #ededed;}
 .pricing_table .info p { font: normal 12px/20px Arial, Helvetica, sans-serif; color:#343434;}
 .pricing_table .info p b{ color:#d42d17;}
@@ -378,7 +380,7 @@ table.table_type1 .title span { color:#d42d17;}
 	behavior: url(js/PIE.htc);
 	cursor:pointer;
 }
-.toggler_blocks a.toggler>span { display:block; height: 35px; background:url(../images/toggler_mark.png) no-repeat 10px 8px; padding-left:36px; font: normal 10px/34px 'Droid Sans', sans-serif; color:#737373;}
+.toggler_blocks a.toggler>span { display:block; height: 35px; background:url(../images/toggler_mark.png) no-repeat 10px 8px; padding-left:36px; font: normal 10px/34px  sans-serif; color:#737373;}
 .toggler_blocks a.toggler.first,
 .toggler_blocks a.toggler.first.opened,
 .toggler_blocks a.toggler.unique.opened {
@@ -552,7 +554,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#header .block_social_top a.twitter:hover { background-position: -22px -18px;}
 	#header .block_social_top a.rss{ background-position: -44px 0;}
 	#header .block_social_top a.rss:hover { background-position: -44px -18px;}
-	#header .block_social_top p { float:left; font: italic 10px/18px 'Droid Serif', serif; color:#aaaaaa; margin:1px 4px 0 0;}
+	#header .block_social_top p { float:left; font: italic 10px/18px  serif; color:#aaaaaa; margin:1px 4px 0 0;}
 	#header .block_mid { padding: 22px 0; height:51px; overflow:visible;}
 	#header .block_mid #logo { float:left; height:51px; overflow:hidden; margin-top:-1px;}
 	#header .block_mid #logo a { display:block; width:163px; height:51px; background:url(../images/logo.jpg) no-repeat left top; text-indent:9000px;}
@@ -561,7 +563,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 		#menu>ul { display:block; border-left: solid 1px #f2f2f2; height:56px;}
 		#menu>ul>li { float:left; background:none; padding:0px; margin:5px 0 5px 37px; position:relative; height:46px;}
 		#menu>ul>li:first-child {}
-		#menu>ul>li>a { font: normal 13px/18px 'Oswald', sans-serif; color:#575757; display:block; height:41px; text-decoration:none; text-transform: uppercase; padding-top:2px;}
+		#menu>ul>li>a { font: normal 13px/18px  sans-serif; color:#575757; display:block; height:41px; text-decoration:none; text-transform: uppercase; padding-top:2px;font-size: 14px;font-weight: bold;}
 		#menu>ul>li>a>span { display:block; font: normal 12px/18px Arial, Helvetica, sans-serif; color:#b6b6b6; text-transform: lowercase; padding-top:2px;}
 		#menu>ul>li>a:hover,
 		#menu>ul>li>a.active { color:#d42d17;}
@@ -573,7 +575,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 		}
 		#menu>ul>li ul>li { display:block; position:relative; float: none; height:30px; margin:0 0 0 3px; padding-right:0px; border-top:1px solid #f7f7f7; padding-left:8px;}
 		#menu>ul>li ul>li:first-child { border-top: none;}
-		#menu>ul>li ul>li a { font: normal 11px/29px 'Oswald', sans-serif; color:#878787; text-decoration:none; text-transform: uppercase;}
+		#menu>ul>li ul>li a { font: normal 11px/29px  sans-serif; color:#878787; text-decoration:none; text-transform: uppercase;}
 		#menu>ul>li ul>li a:hover,
 		#menu>ul>li ul>li a.active { color:#d74a38;}
 		#menu>ul>li ul ul { left:auto; right:-162px; top:-1px; display:none;}
@@ -601,10 +603,10 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_about_services { margin:26px 0 18px;}
 	#content .block_about_services .column { width: 198px; float:left; margin-left:38px;}
 	#content .block_about_services .column:first-child {margin-left:0;}
-	#content .block_about_services .column .num { width:30px; height:31px; float:left; text-align:center; font: normal 16px/30px 'Oswald', sans-serif; color:#d42d17; text-transform: uppercase; background:url(../images/bg_num.png) no-repeat; margin-top:4px;}
+	#content .block_about_services .column .num { width:30px; height:31px; float:left; text-align:center; font: normal 16px/30px  sans-serif; color:#d42d17; text-transform: uppercase; background:url(../images/bg_num.png) no-repeat; margin-top:4px;}
 	#content .block_about_services .column .title { float:left; margin:1px 0 0 10px;}
 	#content .block_about_services .column .title h5 { padding:0px;}
-	#content .block_about_services .column .title p { font: italic 11px/17px 'Droid Serif', serif; color:#a5a5a5;}
+	#content .block_about_services .column .title p { font: italic 11px/17px  serif; color:#a5a5a5;}
 	#content .block_about_services .column .clear { margin-bottom:6px;}
 	#content .block_about_services .column p { text-align: justify;}
 	
@@ -615,7 +617,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_tabs .tabs_buttons li:first-child { margin-left:0px;}
 	#content .block_tabs .tabs_buttons li a {
 		display:block;
-		font: normal 10px/26px 'Droid Sans', sans-serif;
+		font: normal 10px/26px  sans-serif;
 		text-transform: uppercase;
 		padding:0 12px;
 		color:#8f8f8f;
@@ -658,7 +660,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_tabs .tab_cont .content .tab_cols a:hover { color:#d42d17;}
 	
 	#content .block_slogan { padding:17px 0;}
-	#content .block_slogan p{ font: normal 16px/24px 'Oswald', sans-serif; color:#adadad; text-align:center; text-transform: uppercase;}
+	#content .block_slogan p{ font: normal 16px/24px  sans-serif; color:#adadad; text-align:center; text-transform: uppercase;}
 	#content .block_slogan p span { color:#d42d17;}
 	#content .block_about{ padding:30px 0 22px;}
 	#content .block_about .col_1 { float:left; width:444px;}
@@ -712,15 +714,15 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	
 	#content .block_other .block_blog .img { float:left; padding:2px; border:1px solid #f2f2f2; margin-right:9px;}
 	#content .block_other .block_blog .text { overflow:hidden;}
-	#content .block_other .block_blog .text p { font: normal 10px/14px 'Droid Sans', sans-serif; color:#8a8a8a; text-transform: uppercase; text-align:left;}
-	#content .block_other .block_blog .text p a { font: normal 10px/14px 'Droid Sans', sans-serif; color:#8a8a8a; text-transform: uppercase;}
+	#content .block_other .block_blog .text p { font: normal 10px/14px  sans-serif; color:#8a8a8a; text-transform: uppercase; text-align:left;}
+	#content .block_other .block_blog .text p a { font: normal 10px/14px  sans-serif; color:#8a8a8a; text-transform: uppercase;}
 	#content .block_other .block_blog .text p a:hover { color:#d42d17;}
-	#content .block_other .block_blog .text .date { font: italic 10px/18px 'Droid Serif', serif; color:#c3c3c3; text-transform: none; padding-top:2px;}
+	#content .block_other .block_blog .text .date { font: italic 10px/18px  serif; color:#c3c3c3; text-transform: none; padding-top:2px;}
 	#content .block_other .block_blog .line2 { margin:12px 0 15px;}
 	
 	#content .block_other .block_twitter .text { padding-left:22px; background:url(../images/icon_twitter.jpg) no-repeat left 3px;}
-	#content .block_other .block_twitter .text p { font: italic 11px/17px 'Droid Serif', serif; color:#949494; text-align:left;}
-	#content .block_other .block_twitter .text a { font: italic 11px/17px 'Droid Serif', serif; color:#d42d17;}
+	#content .block_other .block_twitter .text p { font: italic 11px/17px  serif; color:#949494; text-align:left;}
+	#content .block_other .block_twitter .text a { font: italic 11px/17px  serif; color:#d42d17;}
 	#content .block_other .block_twitter .text .date{ font-size:10px; line-height:18px; color:#c3c3c3;}
 	#content .block_other .block_twitter .line2 { margin:9px 0 10px;}
 	
@@ -732,7 +734,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_testimonials .testimonials { margin-top:18px;}
 	#content .block_testimonials .testimonial { float:left; padding-left:35px; background:url(../images/icon_testimonial.png) no-repeat 0 3px; width:284px; margin-left: 32px;}
 	#content .block_testimonials .testimonial:first-child { margin-left: 0px;}
-	#content .block_testimonials .testimonial .text { padding-left:12px; border-left: 1px solid #f5f5f5; font: italic 11px/16px 'Droid Serif', serif; color:#8e8e8e;}
+	#content .block_testimonials .testimonial .text { padding-left:12px; border-left: 1px solid #f5f5f5; font: italic 11px/16px  serif; color:#8e8e8e;}
 	#content .block_testimonials .testimonial .author { font-size: 11px; color:#ababab; margin:8px 0 0 13px;}
 	#content .block_testimonials .testimonial .author a { font-size: 11px;}
 	
@@ -754,10 +756,10 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_recent_posts .post { padding-bottom:15px; width: 200px;}
 	#content .block_recent_posts .post .img { float:left; padding:1px; border:1px solid #f2f2f2; margin:2px 10px 0 0;}
 	#content .block_recent_posts .post .text { overflow:hidden;}
-	#content .block_recent_posts .post .text p { font: bold 11px/14px 'Open Sans', sans-serif; color:#6b6b6b; text-align:left;}
-	#content .block_recent_posts .post .text p a { font: bold 11px/14px 'Open Sans', sans-serif; color:#6b6b6b;}
+	#content .block_recent_posts .post .text p { font: bold 11px/14px  sans-serif; color:#6b6b6b; text-align:left;}
+	#content .block_recent_posts .post .text p a { font: bold 11px/14px  sans-serif; color:#6b6b6b;}
 	#content .block_recent_posts .post .text p a:hover { color:#d42d17;}
-	#content .block_recent_posts .post .text .date { font: italic 10px/18px 'Droid Serif', serif; color:#c3c3c3; text-transform: none; padding-top:2px;}
+	#content .block_recent_posts .post .text .date { font: italic 10px/18px  serif; color:#c3c3c3; text-transform: none; padding-top:2px;}
 	#content .block_recent_posts .post .line2 { margin:12px 0 15px;}
 	
 	#content .block_last_work { margin:22px 0 13px;}
@@ -798,11 +800,11 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_archives h4 { padding-bottom:6px;}
 	
 	#content .block_filter{ margin:30px 0 12px; height:25px; background:url(../images/filter_bg.jpg) repeat-x; padding:13px 0 0 12px;}
-	#content .block_filter p { float:left; font: italic 11px/14px 'Droid Serif', serif; color:#a8a8a8;}
+	#content .block_filter p { float:left; font: italic 11px/14px  serif; color:#a8a8a8;}
 	#content .block_filter li { float:left; display:block; height:12px; padding:0 12px; border-left: 1px solid #fff; border-right: 1px solid #e8e8e8; margin-top:1px;}
 	#content .block_filter li.first { border-left: none;}
 	#content .block_filter li.last { border-right: none;}
-	#content .block_filter li a { display:block; font: normal 10px/12px 'Droid Sans', sans-serif; color:#707070; text-transform: uppercase;}
+	#content .block_filter li a { display:block; font: normal 10px/12px  sans-serif; color:#707070; text-transform: uppercase;}
 	#content .block_filter li a:hover,
 	#content .block_filter li a.active { color:#d42d17;}
 	
@@ -866,7 +868,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	
 	#content .block_portfolio_c2 .img_box .title,
 	#content .block_portfolio_c3 .img_box .title,
-	#content .block_portfolio_c4 .img_box .title { display:block; font: normal 12px/14px 'Oswald', sans-serif; color:#343434; text-transform: uppercase; float:left;}
+	#content .block_portfolio_c4 .img_box .title { display:block; font: normal 12px/14px  sans-serif; color:#343434; text-transform: uppercase; float:left;}
 	
 	#content .block_portfolio_c2 .img_box .big_mark,
 	#content .block_portfolio_c3 .img_box .big_mark,
@@ -897,9 +899,9 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_portfolio_c2_t2 .description a,
 	#content .block_portfolio_c2_wl .description a,
 	#content .block_portfolio_c3_t2 .description a,
-	#content .block_portfolio_c3_wl .description a{ font: normal 13px/18px 'Oswald', sans-serif; color:#343434; text-decoration:none; text-transform: uppercase;}
+	#content .block_portfolio_c3_wl .description a{ font: normal 13px/18px  sans-serif; color:#343434; text-decoration:none; text-transform: uppercase;}
 	#content .block_portfolio_c4_t2 .description a,
-	#content .block_portfolio_c4_wl .description a{ font: bold 11px/18px 'Droid Sans', sans-serif; color:#343434; text-decoration:none; text-transform: uppercase;}
+	#content .block_portfolio_c4_wl .description a{ font: bold 11px/18px  sans-serif; color:#343434; text-decoration:none; text-transform: uppercase;}
 	
 	#content .block_portfolio_c2_t2 .description a:hover,
 	#content .block_portfolio_c2_wl .description a:hover,
@@ -959,7 +961,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_portfolio_c4_ws .img_block { float:left; margin: 0 0 18px 23px; width:150px;}
 	#content .block_portfolio_c4_ws .img_box { width:138px; height: 123px; background:url(../images/img_border_150_135.jpg) no-repeat; padding:6px;}
 	#content .block_portfolio_c4_ws .description { margin: 9px 0 0 6px;}
-	#content .block_portfolio_c4_ws .description a{ font: bold 10px/18px 'Droid Sans', sans-serif; color:#343434; text-decoration:none; text-transform: uppercase;}
+	#content .block_portfolio_c4_ws .description a{ font: bold 10px/18px  sans-serif; color:#343434; text-decoration:none; text-transform: uppercase;}
 
 	#content .block_portfolio_slider { width:656px; height:330px; background:url(../images/p_slider_border.jpg) no-repeat; padding:7px 7px 0; margin-bottom:21px;}
 	#content .block_portfolio_slider #block_slider_images { width:656px; height:299px;}
@@ -1260,9 +1262,9 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_blog_right .block_recent_posts .post:first-child { margin:0px;}
 	#content .block_blog_right .block_recent_posts .post h5,
 	#content .block_blog_right .block_recent_posts .post h5 a { font-weight:normal; font-size:10px; line-height:15px;}
-	#content .block_blog_right .block_recent_posts .post li{ float:left; margin-left:5px; padding-left:7px; background:url(../images/list_mark_plus.jpg) no-repeat left 8px; font: italic 10px/18px 'Droid Serif', serif; color:#a5a5a5;}
+	#content .block_blog_right .block_recent_posts .post li{ float:left; margin-left:5px; padding-left:7px; background:url(../images/list_mark_plus.jpg) no-repeat left 8px; font: italic 10px/18px  serif; color:#a5a5a5;}
 	#content .block_blog_right .block_recent_posts .post li:first-child { margin:0; padding:0; background: none;}
-	#content .block_blog_right .block_recent_posts .post li a { font: italic 10px/18px 'Droid Serif', serif; color:#6d6c6c;}
+	#content .block_blog_right .block_recent_posts .post li a { font: italic 10px/18px  serif; color:#6d6c6c;}
 	
 	#content .block_blog_wrapper { width:420px; float:left; margin-left:37px;}
 	
@@ -1352,23 +1354,19 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	.block_latest_projects .image_carousel .box_img .icon { display:block; width:25px; height:25px; background:url(../images/see_big_img.png) no-repeat; overflow:hidden; position:absolute; left:50%; top:50%; margin:-13px 0 0 -13px;}
 	.block_latest_projects .image_carousel .box_img .icon.video { background:url(../images/see_big_video.png) no-repeat;}
 	.block_latest_projects .image_carousel .box_img .icon:hover { background-position: 0 -25px;}
-	.block_latest_projects .image_carousel .box_img .title { font: normal 10px/14px 'Droid Sans', sans-serif; color:#343434; text-transform:uppercase; margin-top:16px;}
+	.block_latest_projects .image_carousel .box_img .title { font: normal 10px/14px  sans-serif; color:#343434; text-transform:uppercase; margin-top:16px;}
 	#foo2_pag { margin-left:23px; margin-top:9px;}
 	#foo2_pag a { display:block; width:25px; height:25px; float:left; background:url(../images/bg_pages_buttons.png) no-repeat left bottom; text-align:center; font: normal 10px/26px Arial, Helvetica, sans-serif; color:#c7c7c7;}
 	#foo2_pag a:hover { background-position: left -25px;}
 	#foo2_pag a.selected { background-position: left top; color:#e4867a;}
 	
-	
-	
-	
-	
 	#content .block_other .block_contact .input_box{ width: 206px; height:26px; background:url(../images/input_bg.jpg) no-repeat; margin-bottom:6px;}
 	#content .block_other .block_contact .input_box:first-child { margin-top:3px;}
-	#content .block_other .block_contact .input_box input { background:none; border: none; display:block; margin:3px 10px; height:20px; width:186px; font: italic 10px/20px 'Droid Serif', serif; color:#949494;}
-	#content .block_other .block_contact .input_box span  { background:none; border: none; display:block; padding:3px 10px; height:20px; width:186px; font: italic 10px/20px 'Droid Serif', serif; color:#949494; cursor: text;}
+	#content .block_other .block_contact .input_box input { background:none; border: none; display:block; margin:3px 10px; height:20px; width:186px; font: italic 10px/20px  serif; color:#949494;}
+	#content .block_other .block_contact .input_box span  { background:none; border: none; display:block; padding:3px 10px; height:20px; width:186px; font: italic 10px/20px  serif; color:#949494; cursor: text;}
 	#content .block_other .block_contact .textarea_box{ width: 206px; height:57px; background:url(../images/textarea_bg.jpg) no-repeat; margin-bottom:6px;}
-	#content .block_other .block_contact .textarea_box textarea { background:none; border: none; display:block; margin:3px 10px; height:51px; width:186px; font: italic 10px/20px 'Droid Serif', serif; color:#949494; resize:none;}
-	#content .block_other .block_contact .textarea_box span 	  { background:none; border: none; display:block; padding:3px 10px; height:51px; width:186px; font: italic 10px/20px 'Droid Serif', serif; color:#949494; cursor:text;}
+	#content .block_other .block_contact .textarea_box textarea { background:none; border: none; display:block; margin:3px 10px; height:51px; width:186px; font: italic 10px/20px  serif; color:#949494; resize:none;}
+	#content .block_other .block_contact .textarea_box span 	  { background:none; border: none; display:block; padding:3px 10px; height:51px; width:186px; font: italic 10px/20px  serif; color:#949494; cursor:text;}
 
 	#footer { height: 63px; background:url(../images/bg_footer.jpg) repeat-x left bottom;}
 	#footer .block_footer{ margin-top:14px;}
@@ -1383,4 +1381,4 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#footer .block_social_footer a.twitter:hover { background-position: -22px -18px;}
 	#footer .block_social_footer a.rss{ background-position: -44px 0;}
 	#footer .block_social_footer a.rss:hover { background-position: -44px -18px;}
-	#footer .block_social_footer p { float:left; font: italic 10px/18px 'Droid Serif', serif; color:#aaaaaa; margin:1px 4px 0 0;}
+	#footer .block_social_footer p { float:left; font: italic 10px/18px  serif; color:#aaaaaa; margin:1px 4px 0 0;}
