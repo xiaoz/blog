@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<% if(locals.article) { %>
+	<title><%= article.title %></title> <% }else{ %>
+	<title><%= config.description %></title> <% } %>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+	
+	<link rel="stylesheet" type="text/css" href="/libs/SyntaxHighlighter/shCoreDefault.css" />
+	<link rel="stylesheet" type="text/css" href="/libs/ueditor/themes/default/ueditor.css" />
+	
+    <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+	<link href="/css/base.css" rel="stylesheet" type="text/css" />
+	<% if(locals.active){ %>
+	<link rel="stylesheet" type="text/css" href="/css/app/main-<%= locals.active%>.css" media="screen" />	
+	<% } %>
+	<!-- script -->
+	<script type='text/javascript' src='/libs/jquery/jquery.js'></script>
+
+    <script src="http://a.tbcdn.cn/s/kissy/1.2.0/??kissy-min.js"> </script>
+     <script src="/caihongpu/base-min.js"> </script>
+     <script type='text/javascript' src='/caihongpu/modernizr-2.5.3.js'></script>
+	<script type="text/javascript">
+	    var S = KISSY, DOM = S.DOM,Event = S.Event;	doc = document;
+	    KISSY.config({
+	        packages:[
+	            {
+	                name:"1.0", //包名
+	                tag:"20120528",//时间戳, 添加在动态脚本路径后面, 用于更新包内模块代码
+	                path:"/caihongpu/", //包对应路径, 相对路径指相对于当前页面路径
+	                charset:"utf-8"//包里模块文件编码格式
+	            }
+	        ],
+	        map:[
+	             [/(.+1.0\/.+)-min.js(\?[^?]+)?$/, "$1.js$2"]
+	         ]
+	    });
+		</script>
+<style>
+	
+</style>
+
+</head>
+<body>
+	
+	<form name="form1" method="post" action="/" id="form1">
+			<div id="container" class="dark"  >	
+            <div class="center loading" id="J_Loading" style="display: none; "></div>
+             <%- body %>	
+     	</div>   
+	</form>
+	<hr/>
+
+    <script src="/libs/isotope-min.js"></script>
+</body>
+</html>

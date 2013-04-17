@@ -1,0 +1,16 @@
+{
+	"name": "sumorio",
+	"version": "0.2.1",
+	"main": "./app.js",
+	"private": true,
+	"dependencies": {
+      "node.js": "0.6.18",	
+      "express": "2.5.9",
+      "ejs": "0.7.1",
+      "mysql": "0.9.6",
+      "validator": "0.4.6-2",
+      "generic-pool": "1.0.10",
+      "async": "0.1.18",
+      "ndir": "0.1.3"
+  },"customHost" : ["blog.caihongpu.com"]
+}

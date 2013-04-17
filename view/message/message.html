@@ -1,0 +1,53 @@
+
+<div class='cell message' message_id='<%= message.id %>'>
+
+<%
+	var content = JSON.parse(message.content);
+%>
+	<% if(message.type == 1){ %>
+	<span>
+		<a href='/user/<%= content.from_user_id %>' target='_blank'><%= content.from_user_name %></a> 
+		发布文章 
+		<a href='/article/<%= content.article_id %>' target='_blank'><%= content.article_title %></a>
+	</span>
+	<% } %>	
+	
+	<% if(message.type == 2){ %>
+	<span>
+		<a href='/user/<%= content.from_user_id %>' target='_blank'><%= content.from_user_name %></a> 
+		更新了文章 
+		<a href='/article/<%= content.article_id %>' target='_blank'><%= content.article_title %></a>
+	</span>
+	<% } %>	
+	
+	<% if(message.type == 3){ %>
+	<span>
+		<a href='/user/<%= content.from_user_id %>' target='_blank'><%= content.from_user_name %></a> 
+		回复了你的文章 
+		<a href='/article/<%= content.article_id %>' target='_blank'><%= content.article_title %></a>
+	</span>
+	<% } %>
+	
+	<% if(message.type == 4){ %>
+	<span>
+		<a href='/user/<%= content.from_user_id %>' target='_blank'><%= content.from_user_name %></a> 
+		关注了你 
+	</span>
+	<% } %>
+	
+	<% if(message.type == 5){ %>
+	<span>
+		<a href='/user/<%= content.from_user_id %>' target='_blank'><%= content.from_user_name %></a> 
+		已取消关注你
+	</span>
+	<% } %>
+	
+	<% if(message.type == 6){ %>
+	<span>
+		<a href='/user/<%= content.from_user_id %>' target='_blank'><%= content.from_user_name %></a> 
+		分享了文件 <a href='/file/<%=content.file_id%>'><%=content.file_name%></a>
+	</span>
+	<% } %>
+
+	<span class='fr' style="color:#ccc"><%=message.create_at%></span>
+</div>
