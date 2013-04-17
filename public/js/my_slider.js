@@ -21,9 +21,9 @@ $(document).ready(function(){
 		min_images_code += '<li><a href="#"><img src="'+mas[x][0]+'" alt="" title="" /></a></li>';
 		big_images_code += '<div style="overflow: hidden; display:none"><img src="'+mas[x][1]+'" alt="" title="" /></div>';
 		}else{
-			min_images_code += '<li><a href="#" class="active"><img src="'+mas[x][0]+'" alt="" title="" /></a></li>';
-			big_images_code += '<div style="overflow: hidden; display:block" class="active"><img src="'+mas[x][1]+'" alt="" title="" /></div>';
-			}
+		min_images_code += '<li><a href="#" class="active"><img src="'+mas[x][0]+'" alt="" title="" /></a></li>';
+		big_images_code += '<div style="overflow: hidden; display:block" class="active"><img src="'+mas[x][1]+'" alt="" title="" /></div>';
+		}
 	}
 	
 	html = '<div class="info_block_my_slider"><div id="min_images_my_slider"><ul>'+min_images_code+'</ul></div><div class="clear_my_slider"></div><div id="description_my_slider"><div class="alt_my_slider">'+mas[0][2]+'</div><div class="clear_my_slider"></div><div class="title_my_slider">'+mas[0][3]+'</div><div class="clear_my_slider"></div><div class="number_my_slider">1</div></div><div class="prev_my_slider"><a href="#"><span>&nbsp;</span></a></div><div class="close_see_info_block_my_slider active"><a href="#">&nbsp;</a></div></div><div class="inner_block_my_slider">'+big_images_code+'</div><div class="next_my_slider"><a href="#"><span>&nbsp;</span></a></div>';

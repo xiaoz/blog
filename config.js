@@ -1,6 +1,6 @@
 exports.config = {
-	name : '彩虹铺',
-	description : '彩虹铺 是基于Node.js开发的社区系统',
+	name : 'blog',
+	description : 'blog 是基于Node.js开发的个人系统',
 	host : 'http://127.0.0.1',
 	session_secret : 'secret',
 	auth_cookie_name : 'secret',
