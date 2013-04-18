@@ -8,8 +8,25 @@
 		<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
 		<script type="text/javascript" src="js/jquery.inputstext.js"></script>
 		<script type="text/javascript" src="js/jquery.easing.js"></script>
-		<script type="text/javascript" src="js/my_slider.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+		
+		<% if(locals.active == 'index'){ %> 
+			<script type="text/javascript" src="js/my_slider.js"></script>
+		 <% } %>
+		 <% if(locals.active == 'about'){ %> 
+			<script type="text/javascript" src="js/about_tabs.js"></script>
+		 <% } %>
+		 <script type="text/javascript" src="js/main.js"></script>
+		 <% if(locals.active == 'product'){ %> 
+			<script type="text/javascript" src="js/jquery.quicksand.js"></script>
+			<script type="text/javascript" src="js/quicksand.js"></script>
+		 <% } %>
+		 
+		  <% if(locals.active == 'contact'){ %> 
+			<script type="text/javascript" src="js/comm_input_bg.js"></script>
+			<script type="text/javascript" src="js/contact.form.js"></script>
+		 <% } %>
+		
+		
 
 		<!-- //主题设置 -->
 		<link rel="stylesheet" type="text/css" href="css/themes.css">

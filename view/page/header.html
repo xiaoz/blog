@@ -20,15 +20,15 @@
 	            </div>
                 <div id="menu">
                 	<ul>
-	                	<li><a href="index.html" class="active">首页<span>start here</span></a>
+	                	<li><a href="/"  <% if(locals.active == 'index'){ %> class="active" <% } %> >首页<span>start here</span></a>
                         	<ul style="display: none;">
                             	<li><a href="index.html" class="active" style="padding-left: 0px;">Basic slider</a></li>
                             	<li><a href="index2.html" style="padding-left: 0px;">Nivo slider</a></li>
                             	<li><a href="index3.html" style="padding-left: 0px;">Thumbnail slider</a></li>
                             </ul>
                         </li>
-	                	<li><a href="about.html">关于我们<span>our company</span></a></li>
-	                	<li><a href="columns.html">Features<span>about this theme</span></a>
+	                	<li><a href="/about" <% if(locals.active == 'about'){ %> class="active" <% } %> >关于我们<span>our company</span></a></li>
+	                	<li><a href="/cases" <% if(locals.active == 'cases'){ %> class="active" <% } %>>案例<span>about this theme</span></a>
                         	<ul style="display: none;">
                               	<li><a href="columns.html">Columns</a></li>
                                 <li><a href="typography.html">Typography</a></li>
@@ -38,7 +38,7 @@
                             	<li><a href="archives.html">archives</a></li>
                             </ul>
                         </li>
-	                	<li><a href="portfolio_c2.html">Portfolio<span>videos &amp; images</span></a>
+	                	<li><a href="/product" <% if(locals.active == 'product'){ %> class="active" <% } %> >产品<span>videos &amp; images</span></a>
                         	<ul style="display: none;">
                             	<li><a href="portfolio_c2.html">Portfolio 2 columns 1</a></li>
                             	<li><a href="portfolio_c2_t2.html">Portfolio 2 columns 2</a></li>
@@ -62,7 +62,7 @@
                             	<li><a href="portfolio_item.html">Portfolio item page</a></li>
                             </ul>
                         </li>
-	                	<li><a href="blog1.html">blog<span>daily posts</span></a>
+	                	<li><a href="/news" <% if(locals.active == 'news'){ %> class="active" <% }  %> >新闻<span>daily posts</span></a>
                         	<ul>
                             	<li><a href="blog1.html">blog style 1</a></li>
                             	<li><a href="blog2.html">blog style 2</a></li>
@@ -80,7 +80,7 @@
                                 </li>
                             </ul>
                         </li>
-	                	<li><a href="contact.html">联系我们<span>get in touch</span></a></li>
+	                	<li><a href="/contact" <% if(locals.active == 'contact'){ %> class="active" <%  } %> >联系我们<span>get in touch</span></a></li>
                     </ul>
                 </div>
             </div>

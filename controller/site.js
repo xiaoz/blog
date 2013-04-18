@@ -9,6 +9,7 @@ var userDao = require('../dao/user.js');
 exports.index = function(req, res, next) {
     
         res.render('front/index', {
+        	active : 'index'
         });
   
 };
@@ -18,6 +19,7 @@ exports.index = function(req, res, next) {
 exports.about = function(req, res, next) {
     
     res.render('front/about', {
+    	active : 'about'
     });
 
 };
@@ -27,6 +29,7 @@ exports.about = function(req, res, next) {
 exports.product = function(req, res, next) {
     
     res.render('front/product', {
+    	active : 'product'
     });
 
 };
@@ -36,6 +39,7 @@ exports.product = function(req, res, next) {
 exports.news = function(req, res, next) {
     
     res.render('front/news', {
+    	active : 'news'
     });
 
 };
@@ -45,6 +49,7 @@ exports.news = function(req, res, next) {
 exports.cases = function(req, res, next) {
     
     res.render('front/cases', {
+    	active : 'cases'
     });
 
 };
@@ -54,6 +59,7 @@ exports.cases = function(req, res, next) {
 exports.contact = function(req, res, next) {
     
     res.render('front/contact', {
+    	active : 'contact'
     });
 
 };
