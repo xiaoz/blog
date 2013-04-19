@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<% if(locals.article) { %>
+	<title><%= article.title %></title> 
+	<% }else{ %>
+	<title><%= config.description %></title>
+	 <% } %>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<!-- head -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
+		<link rel="stylesheet" type="text/css" href="css/my_slider_style.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
+		<script type="text/javascript" src="js/jquery.inputstext.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.js"></script>
+		
+		<% if(locals.active == 'index'){ %> 
+			<script type="text/javascript" src="js/my_slider.js"></script>
+		 <% } %>
+		 <% if(locals.active == 'about'){ %> 
+			<script type="text/javascript" src="js/about_tabs.js"></script>
+		 <% } %>
+		 <script type="text/javascript" src="js/main.js"></script>
+		 <% if(locals.active == 'product'){ %> 
+			<script type="text/javascript" src="js/jquery.quicksand.js"></script>
+			<script type="text/javascript" src="js/quicksand.js"></script>
+		 <% } %>
+		  <% if(locals.active == 'contact'){ %> 
+			<script type="text/javascript" src="js/comm_input_bg.js"></script>
+			<script type="text/javascript" src="js/contact.form.js"></script>
+		 <% } %>
+		
+		
+		<!-- //主题设置 -->
+		<link rel="stylesheet" type="text/css" href="css/themes.css">
+		<link rel="stylesheet" type="text/css" href="css/theme_style.css">
+		<script type="text/javascript" src="js/setting_themes.js"></script>
+
+</head>
+<body id="blue">
+	<div id="wrapper">
+		<!-- header -->
+		<%-partial('page/header')%>
+		<div id="content" class="container">
+			<div class="inner">
+				<%-body %>
+				<%-partial('page/footer-top')%>
+			</div>
+		</div>
+		<!-- footer -->
+		<%-partial('page/footer-bottom')%>
+	</div>
+	<div id="setting_themes_block" style="left: -174px;" class="close">
+		<div class="themes_top"></div>
+		<div class="themes_content">
+			<form id="themes_setting" action="">
+				<a href="#" id="themes_button"><span></span></a>
+				<p>General skins</p>
+				<select id="g_skin">
+					<option value="clean_theme">Clean theme</option>
+					<option value="dark_theme">Dark theme</option>
+				</select>
+				<div class="clear"></div>
+				<p>Backround</p>
+				<select id="bg_skin">
+					<option value="boxed">Boxed</option>
+					<option value="stretched">Stretched</option>
+				</select>
+				<div class="clear"></div>
+				<p>Color schemes</p>
+				<div class="theame_box">
+					<a href="#" class="c_theame" id="red"><img src="images/prev_color_red.jpg" alt=""></a>
+					<a href="#" class="c_theame" id="orange"><img src="images/prev_color_orange.jpg" alt=""></a>
+					<a href="#" class="c_theame" id="blue"><img src="images/prev_color_blue.jpg" alt=""></a>
+					<a href="#" class="c_theame" id="green"><img src="images/prev_color_green.jpg" alt=""></a>
+					<a href="#" class="c_theame" id="dark_red"><img src="images/prev_color_darck_red.jpg" alt=""></a>
+					<a href="#" class="c_theame" id="yellow"><img src="images/prev_color_yellow.jpg" alt=""></a>
+					<a href="#" class="c_theame" id="purple"><img src="images/prev_color_purple.jpg" alt=""></a>
+				</div>
+				<div class="clear"></div>
+				<p>Background Patterns</p>
+				<div class="theame_box">
+					<a href="#" class="bg_patterns" id="bg1"><img src="images/bg_p_type1.jpg" alt=""></a>
+					<a href="#" class="bg_patterns" id="bg2"><img src="images/bg_p_type2.jpg" alt=""></a>
+					<a href="#" class="bg_patterns" id="bg3"><img src="images/bg_p_type3.jpg" alt=""></a>
+					<a href="#" class="bg_patterns" id="bg4"><img src="images/bg_p_type4.jpg" alt=""></a>
+					<a href="#" class="bg_patterns" id="bg5"><img src="images/bg_p_type5.jpg" alt=""></a>
+				</div><div class="clear"></div>
+				</form>
+				<a href="#" id="themes_reset">Reset styles</a></div>
+				<div class="themes_bottom"></div>
+			</div>
+</body>
+</html>

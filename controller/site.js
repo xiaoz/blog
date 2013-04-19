@@ -9,36 +9,40 @@ var userDao = require('../dao/user.js');
 exports.index = function(req, res, next) {
     
         res.render('front/index', {
+			layout: 'flayout',
         	active : 'index'
         });
   
 };
 /**
- * 网站首页主体数据
+ * 网站首页关于我们
  */
 exports.about = function(req, res, next) {
     
     res.render('front/about', {
+		layout: 'flayout',
     	active : 'about'
-    });
-
-};
-/**
- * 网站首页关于我们
- */
-exports.product = function(req, res, next) {
-    
-    res.render('front/product', {
-    	active : 'product'
     });
 
 };
 /**
  * 网站首页产品展示
  */
+exports.product = function(req, res, next) {
+    
+    res.render('front/product', {
+		layout: 'flayout',
+    	active : 'product'
+    });
+
+};
+/**
+ * 网站新闻
+ */
 exports.news = function(req, res, next) {
     
     res.render('front/news', {
+		layout: 'flayout',
     	active : 'news'
     });
 
@@ -49,6 +53,7 @@ exports.news = function(req, res, next) {
 exports.cases = function(req, res, next) {
     
     res.render('front/cases', {
+		layout: 'flayout',
     	active : 'cases'
     });
 
@@ -59,6 +64,7 @@ exports.cases = function(req, res, next) {
 exports.contact = function(req, res, next) {
     
     res.render('front/contact', {
+		layout: 'flayout',
     	active : 'contact'
     });
 

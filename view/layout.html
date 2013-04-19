@@ -8,62 +8,109 @@
 	 <% } %>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<!-- head -->
-	<%-partial('page/head')%>
+	<!-- //后台 -->
+		<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/main.css" />
+
+		<link rel="stylesheet" type="text/css" href="/libs/SyntaxHighlighter/shCoreDefault.css" />
+		<link rel="stylesheet" type="text/css" href="/libs/ueditor/themes/default/ueditor.css" />
+		<!-- script -->
+		<script type='text/javascript' src='/libs/jquery/jquery.js'></script>
+		<script type='text/javascript' src='/libs/bootstrap/js/bootstrap.min.js'></script>
+		<script type='text/javascript' src='/libs/bootstrap/js/bootstrap-tooltip.js'></script>
+		<script type="text/javascript" charset="utf-8" src="/libs/juicer/juicer-min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/libs/easydialog/easydialog.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/libs/SyntaxHighlighter/shCore.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/libs/ueditor/editor_config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/libs/ueditor/editor_all_min.js"></script>
+    
 </head>
-<body id="blue">
-	<div id="wrapper">
-		<!-- header -->
-		<%-partial('page/header')%>
-		<div id="content" class="container">
-			<div class="inner">
-				<%-body %>
-				
-				<%-partial('page/footer-top')%>
+<body>
+	<div class="navbar" id='navbar'><!-- navbar-fixed-top -->
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="brand" href="/">Sumor.io</a> 
+				<% if(locals.current_user){ %>
+				<div class="btn-group pull-right">	
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-user"></i> <%=current_user.loginname %> <span
+						class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/user/<%=current_user.id%>"><i class="icon-user"></i> 我的主页</a></li>
+						<li><a href="/messages"><i class="icon-envelope"></i> 我的消息</a></li>
+						<li><a href="/folders/edit"><i class="icon-folder-close"></i> 我的文件夹</a></li>
+						<li class="divider"></li>
+						<li><a href="/pwd"><i class="icon-chevron-right"></i>  修改密码</a></li>
+						<li><a href="/avatar"><i class="icon-chevron-right"></i>  修改头像</a></li>
+						<li class="divider"></li>
+						<li><a href="/signout"><i class="icon-off"></i> 退出登录</a></li>
+					</ul>
+				</div>
+				<ul class="nav pull-right">
+		            <li id="message_m"></li>
+		            <li class="divider-vertical"></li>
+		        </ul>
+				<%} else{%>
+				<div class="nav-collapse">
+					<ul class="nav pull-right">
+						<li><a href="/signup">注册</a></li>
+						<li><a href="/signin">登录</a></li>
+					</ul>
+				</div>
+				<%}%>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="/">首页</a></li>
+						<li><a href="/users">用户</a></li>
+						<li><a href="/files">文件</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		<!-- footer -->
-		<%-partial('page/footer-bottom')%>
 	</div>
-	<div id="setting_themes_block" style="left: -174px;" class="close">
-		<div class="themes_top"></div>
-		<div class="themes_content">
-			<form id="themes_setting" action="">
-				<a href="#" id="themes_button"><span></span></a>
-				<p>General skins</p>
-				<select id="g_skin">
-					<option value="clean_theme">Clean theme</option>
-					<option value="dark_theme">Dark theme</option>
-				</select>
-				<div class="clear"></div>
-				<p>Backround</p>
-				<select id="bg_skin">
-					<option value="boxed">Boxed</option>
-					<option value="stretched">Stretched</option>
-				</select>
-				<div class="clear"></div>
-				<p>Color schemes</p>
-				<div class="theame_box">
-					<a href="#" class="c_theame" id="red"><img src="images/prev_color_red.jpg" alt=""></a>
-					<a href="#" class="c_theame" id="orange"><img src="images/prev_color_orange.jpg" alt=""></a>
-					<a href="#" class="c_theame" id="blue"><img src="images/prev_color_blue.jpg" alt=""></a>
-					<a href="#" class="c_theame" id="green"><img src="images/prev_color_green.jpg" alt=""></a>
-					<a href="#" class="c_theame" id="dark_red"><img src="images/prev_color_darck_red.jpg" alt=""></a>
-					<a href="#" class="c_theame" id="yellow"><img src="images/prev_color_yellow.jpg" alt=""></a>
-					<a href="#" class="c_theame" id="purple"><img src="images/prev_color_purple.jpg" alt=""></a>
-				</div>
-				<div class="clear"></div>
-				<p>Background Patterns</p>
-				<div class="theame_box">
-					<a href="#" class="bg_patterns" id="bg1"><img src="images/bg_p_type1.jpg" alt=""></a>
-					<a href="#" class="bg_patterns" id="bg2"><img src="images/bg_p_type2.jpg" alt=""></a>
-					<a href="#" class="bg_patterns" id="bg3"><img src="images/bg_p_type3.jpg" alt=""></a>
-					<a href="#" class="bg_patterns" id="bg4"><img src="images/bg_p_type4.jpg" alt=""></a>
-					<a href="#" class="bg_patterns" id="bg5"><img src="images/bg_p_type5.jpg" alt=""></a>
-				</div><div class="clear"></div>
-				</form>
-				<a href="#" id="themes_reset">Reset styles</a></div>
-				<div class="themes_bottom"></div>
+
+
+
+	<div class="container">
+		<%-body %>
+	</div>
+
+	<script>
+        <% if(locals.current_user){ %>
+        $.ajax({
+            type : "POST",
+            url : "/messages/unread",
+            success : function(data) {
+                if (data.count == 0) {
+                    $('#message_m').html('');
+                }
+                else {
+                    $('#message_m').html('<a href="/messages"><i class="icon-envelope icon-white"></i> 新消息(' + data.count + ')</a>');
+                }
+            },
+            error : function() {
+                $('#message_m').html('');
+            }
+        });
+        <%}%>
+    </script>
+
+	<hr/>
+	<!-- footer -->
+	<div id='footer'>
+		<div id='footer_main'>
+			<div class='fr'></div>
+			<div>
+				<strong><a class='dark' href='#'>关于</a></strong>
+				&nbsp;&nbsp;|&nbsp;&nbsp; <strong><a class='dark' href='#'>反馈</a></strong>
+				&nbsp;&nbsp;|&nbsp;&nbsp; <strong><a class='dark' href='#'>©2012
+						Sumory</a></strong> &nbsp;&nbsp;|&nbsp;&nbsp; <strong><a class='dark'
+					href='#'>版本: <%= config.version %></a></strong>
 			</div>
+			<div class='sep10'></div>
+		</div>
+	</div>
+	<a href="#navbar" id="totop"></a>
 </body>
 </html>
