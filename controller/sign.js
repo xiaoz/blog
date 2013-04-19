@@ -107,6 +107,11 @@ exports.signup = function(req, res, next) {
  */
 exports.signin = function(req, res, next) {
     var method = req.method.toLowerCase();
+    
+    if (req.session.user) {
+        res.redirect('/index');
+        return ;
+    }
     if (method == 'get') {
         res.render('sign/signin');
         return;
@@ -140,7 +145,7 @@ exports.signin = function(req, res, next) {
             }
 
             gen_session(user, res);// store session cookie
-            res.redirect('home');
+            res.redirect('/index');
         });
     }
 };
@@ -153,7 +158,7 @@ exports.signout = function(req, res, next) {
     res.clearCookie(config.auth_cookie_name, {
         path : '/'
     });
-    res.redirect('home');
+    res.redirect('/signin');
 };
 
 

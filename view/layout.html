@@ -29,7 +29,7 @@
 	<div class="navbar" id='navbar'><!-- navbar-fixed-top -->
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<a class="brand" href="/">Sumor.io</a> 
+				<a class="brand" href="/index">xiaoz</a> 
 				<% if(locals.current_user){ %>
 				<div class="btn-group pull-right">	
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -52,26 +52,24 @@
 		            <li class="divider-vertical"></li>
 		        </ul>
 				<%} else{%>
-				<div class="nav-collapse">
-					<ul class="nav pull-right">
-						<li><a href="/signup">注册</a></li>
-						<li><a href="/signin">登录</a></li>
-					</ul>
-				</div>
+
 				<%}%>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><a href="/">首页</a></li>
+					<% if(locals.current_user){ %>
+						<li><a href="/index">首页</a></li>
 						<li><a href="/users">用户</a></li>
 						<li><a href="/files">文件</a></li>
+						<% if(current_user.loginname == 'admin'){ %>
+						<li><a href="/signup">注册</a></li>
+						<% } %>
+					<% } %>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
+	
 	<div class="container">
 		<%-body %>
 	</div>

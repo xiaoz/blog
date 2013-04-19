@@ -1,6 +1,9 @@
 var site_ctrl = require('./controller/site.js');
 var sign_ctrl = require('./controller/sign.js');
 
+
+var dashboard_ctrl = require('./controller/dashboard.js');
+
 exports = module.exports = function(app) {
     // 前台相关首页
     app.get('/', site_ctrl.index);
@@ -22,6 +25,11 @@ exports = module.exports = function(app) {
     app.get('/signout', sign_ctrl.signout);
     app.post('/signup', sign_ctrl.signup);
     app.post('/signin', sign_ctrl.signin);
+    
+    //后台首页
+    app.get('/index', dashboard_ctrl.index);
+    
+    
 };
 
 
