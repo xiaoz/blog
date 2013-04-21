@@ -13,7 +13,7 @@ var categoryDao = require('../../dao/category.js');
 var fileDao = require('../../dao/file.js');
 
 var path_prefix = config.avatar_path;
-var upload_path = path.join(path.dirname(__dirname), '../../public' + path_prefix);
+var upload_path = path.join(path.dirname(__dirname), '../public' + path_prefix);
 ndir.mkdir(upload_path, function(err) {
     if (err)
         throw err;
@@ -26,7 +26,7 @@ ndir.mkdir(upload_path, function(err) {
  */
 exports.index = function(req, res, next) {
     var user_id = req.params.id;
-    res.redirect('/'+user_id+'/articles');
+    res.redirect('/index');
 };
 
 /**
@@ -82,7 +82,9 @@ exports.updateAvatar = function(req, res, next){
         var new_name = uid + ext;
         var new_path = path.join(upload_path, new_name);
         var img_path = path_prefix +'/'+ new_name;
-        
+        console.log(new_path);
+        console.log(path_prefix);
+        console.log(img_path);
         fs.rename(file.path, new_path, function(err) {
             if (err) {
                 res.json({ state : 'failed'});

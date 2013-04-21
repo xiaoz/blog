@@ -150,7 +150,7 @@ exports.updatePwd = function(userId, pwd, callback){
  * 更新头像
  */
 exports.updateAvatar = function(userId, avatar, callback){
-    mysql.updateAvatar('update userBlog set avatar = ? where id = ?', [avatar, userId], function(err, info){
+    mysql.update('update userBlog set avatar = ? where id = ?', [avatar, userId], function(err, info){
         callback(err, info);
     }); 
 };
