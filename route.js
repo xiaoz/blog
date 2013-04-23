@@ -44,6 +44,9 @@ exports = module.exports = function(app) {
     //后台首页
     app.get('/index', dashboard_ctrl.index);
     
+	app.get('/focus/index', dashboard_ctrl.focus_index);
+	app.get('/focus/add', dashboard_ctrl.focus_add);
+    
     
 };
 
