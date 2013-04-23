@@ -46,8 +46,8 @@ exports = module.exports = function(app) {
     //焦点图相关
 	app.get('/focus/index', dashboard_ctrl.focus_index);
 	app.get('/focus/add', dashboard_ctrl.focus_add);
+	app.post('/focus/add', dashboard_ctrl.focus_add);
 	app.post('/focus/upload', dashboard_ctrl.focus_upload);
-    
     
 };
 

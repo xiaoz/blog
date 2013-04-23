@@ -1,11 +1,21 @@
+			<% if(locals.error){ %>
+			<div class="alert alert-error">	
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				<strong><%= error %></strong>
+			</div>
+			<% } %>
+			<% if(locals.success){ %>
+			<div class="alert alert-success">
+				<strong><%= success %></strong>
+			</div>
+			<% } %>
 
-<form class="form-horizontal">
 
-
+<form class="form-horizontal" aciton="/focus/add" method="post" >
   <div class="control-group">
     <label class="control-label" >所属分类 :</label>
     <div class="controls">
-     	<select>
+     	<select name="category">
 		  <option value="1">首页焦点图</option>
 		</select>
     </div>
@@ -13,21 +23,22 @@
   <div class="control-group">
     <label class="control-label" for="inputTitle">焦点标题 ：</label>
     <div class="controls">
-      <input class="span8" type="text" id="inputTitle" placeholder="">
+      <input class="span8" type="text" id="inputTitle" <% if(locals.title){ %>value="<%= title %>" <% } %> name="title" placeholder="">
     </div>
   </div>
   
    <div class="control-group">
     <label class="control-label" for="inputUrl">链接地址 :	</label>
     <div class="controls">
-      <input class="span8" type="text" id="inputUrl"  placeholder="">
+      <input class="span8" type="text" id="inputUrl" name="link" <% if(locals.link){ %>value="<%= link %>" <% } %> placeholder="">
     </div>
   </div>
    <div class="control-group">
-		<label class="control-label"></label>
+		<label class="control-label">图片 920 x 300 最适合</label>
 		<div class="controls">
-			<img id='current_avatar' style='padding:4px;width:70px;border:1px solid #eee' src='#'/>
-			</div>
+<input class="" type="hidden" name="url" <% if(locals.url){ %><%= url %> <% } %> id="J_Url" >
+			<img id='current_avatar' style='padding:4px;border:1px solid #eee' src='<% if(locals.url){ %><%= url %> <% } %>'/>
+		</div>
   </div>
    <div class="control-group">
 		<label class="control-label">选择文件</label>
@@ -42,14 +53,14 @@
    <div class="control-group">
     <label class="control-label" for="inputNum">焦点排序</label>
     <div class="controls">
-      <input class="span3" type="text" id="inputNum" value="0" placeholder="">
+      <input class="span3" type="text" id="inputNum" name="sort" value="0" placeholder="">
     </div>
   </div>
   
    <div class="control-group">
     <label class="control-label" for="inputDetail">焦点描述</label>
     <div class="controls">
-      <textarea rows="5" id="inputDetail"></textarea>
+      <textarea rows="5" id="inputDetail" name="content"><% if(locals.content){ %><%= content %> <% } %></textarea>
     </div>
   </div>
   
@@ -77,6 +88,8 @@
 					        if (data.state=='success') {
 					            $('#file_name_span').html($('#file_name_span').text()+":上传成功");
 					            $('#current_avatar').attr('src', data.url);
+ 								$('#J_Url').attr('value', data.url);
+
 					        }
 					        else {
 					            alert('上传图片失败');
@@ -95,5 +108,6 @@
 				        $('#link_upload_file').hide();
 				        $('#upload_submit_button').click();
 				    }
+
 				</script> 
 

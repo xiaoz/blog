@@ -7,6 +7,10 @@ var config = require('../config.js').config;
 var common = require('./common/common.js');
 var mod = require('express/node_modules/connect/node_modules/formidable');
 
+var Util = require('../lib/util.js');
+var check = require('validator').check;
+var sanitize = require('validator').sanitize;
+var focusDao = require('../dao/focus.js');
 
 var path_prefix = config.article_pic_path;
 var upload_path = path.join(path.dirname(__dirname), '/public' + path_prefix);
@@ -20,30 +24,82 @@ ndir.mkdir(upload_path, function(err) {
  * 网站后台首页
  */
 exports.index = function(req, res, next) {
-    
-        res.render('dashboard', {
+		res.render('dashboard', {
 			current: 'dashboard'
-        	
         });
-  
 };
 
 exports.focus_index = function(req, res, next) {
     
-        res.render('focus/index', {
-			current: 'focus_index'
-        	
+	 focusDao.queryAllFocus(function(err, focus) {
+            if (err)
+                return next(err);
+            res.render('focus/index', {
+				current: 'focus_index',
+				focus:focus
+	        	
+	        });
+            return;
         });
+       
 };
-// 增加焦点图
+// 增加焦点图 保存焦点图
 exports.focus_add = function(req, res, next) {
-    
+	var method = req.method.toLowerCase();
+    if (method == 'get') {
         res.render('focus/add', {
 			current: 'focus_add'
         });
+        return;
+    }
+    if (method == 'post') {
+        var title = sanitize(req.body.title).trim();
+        title = sanitize(title).xss();
+        var category = req.body.category || 0;
+        var link = sanitize(req.body.link).trim();
+        link = sanitize(link).xss();
+		var url = sanitize(req.body.url).trim();
+		var sort = sanitize(req.body.sort).trim();
+        var content = sanitize(req.body.content).trim();
+        content = sanitize(content).xss();
+        if (title == '' || link == '' || url == '') {
+            res.render('focus/add', {
+                error : '信息不完整。',
+				current: 'focus_add',
+                title : title,
+                link : link,
+				url : url,
+				content:content
+            });
+            return;
+        }
+		try {
+            check(link, '链接地址不正确。。').isUrl();
+        }
+        catch (e) {
+			 res.render('focus/add', {
+                error : e.message,
+				current: 'focus_add',
+                title : title,
+                link : link,
+				url : url,
+				content:content
+            });
+            return;
+        }
+        focusDao.saveFocus(title, link, sort, new Date() , url,content , function(err, info) {
+            if (err)
+                return next(err);
+            res.render('focus/add', {
+				current: 'focus_add',
+                success : '成功 保存!'
+            });
+            return;
+        });
+    }
   
 };
-//保存焦点图
+//上传焦点图
 exports.focus_upload = function(req, res, next) {
      if (!req.session || !req.session.user) {
         res.render('notify/notify', { error : '登录后才可上传图片'});
@@ -56,25 +112,20 @@ exports.focus_upload = function(req, res, next) {
         var name = file.name;
         var ext = name.substr(name.lastIndexOf('.'), 4);
         var uid = req.session.user.id;
-        var new_name = uid + ext;
+        var new_name = uid + new Date().getTime()+name;
         var new_path = path.join(upload_path, new_name);
         var img_path = path_prefix +'/'+ new_name;
-        console.log(new_path);
-        console.log(path_prefix);
-        console.log(img_path);
         fs.rename(file.path, new_path, function(err) {
             if (err) {
                 res.json({ state : 'failed'});
                 return;
             }
             else{
-                	//userDao.updateAvatar( req.session.user.id, img_path, function(err, info){
                     res.json({
                         state : 'success',
                         url : img_path
                     });
                     return;
-//                }); 
             }       
         });
     }
@@ -84,6 +135,4 @@ exports.focus_upload = function(req, res, next) {
         });
         return;
     }
-  
 };
-
