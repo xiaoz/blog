@@ -1,13 +1,22 @@
-
-
-
-<table class="table table-hover">
+	<% if(locals.error){ %>
+			<div class="alert alert-error">	
+				<a class="close" data-dismiss="alert" href="#">&times;</a>
+				<strong><%= error %></strong>
+			</div>
+			<% } %>
+			<% if(locals.success){ %>
+			<div class="alert alert-success">
+				<strong><%= success %></strong>
+			</div>
+			<% } %>
+<table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                  <th>序号</th>
+                  <th>焦点图</th>
+                  <th>标题</th>
+                  <th>描述</th>
+                  <th>操作</th>
                 </tr>
               </thead>
      <tbody>
@@ -15,13 +24,12 @@
 				var focu = locals.focus[i];
 			%>
    				<tr>
+   				  <td><%= focu.sort %></td>
+                  <td><img style="width: 200px;"  src="<%= focu.url%>" /> </td>
                   <td><%= focu.title%></td>
-                  <td><%= focu.url%></td>
-                  <td><%= focu.sort %></td>
-                  <td><%= focu.create_at%></td>
- 					<td><%= focu.content%></td>
+ 				  <td><%= focu.content%></td>
+ 				  <td><a href="/focus/add?id=<%= focu.id%>" >编辑</a>&nbsp;&nbsp;<a href="/focus/index?id=<%= focu.id%>" >删除</a></td>
                 </tr>
-
 			<%}%>
       </tbody>
 </table>

@@ -30,27 +30,63 @@ exports.index = function(req, res, next) {
 };
 
 exports.focus_index = function(req, res, next) {
-    
-	 focusDao.queryAllFocus(function(err, focus) {
-            if (err)
-                return next(err);
-            res.render('focus/index', {
-				current: 'focus_index',
-				focus:focus
-	        	
+	 if(req.query.id){
+		 focusDao.deleteFocus(req.query.id, function(err, info) {
+	            if (err)
+	                return next(err);
+	            
+	            focusDao.queryAllFocus(function(err, focus) {
+		            if (err)
+		                return next(err);
+		            res.render('focus/index', {
+						current: 'focus_index',
+						focus:focus,
+						 success : '删除成功!'
+			        });
+		            return;
+		        });
 	        });
-            return;
-        });
+	 }else{
+		 focusDao.queryAllFocus(function(err, focus) {
+	            if (err)
+	                return next(err);
+	            res.render('focus/index', {
+					current: 'focus_index',
+					focus:focus
+		        });
+	            return;
+	        });
+	 }
        
 };
 // 增加焦点图 保存焦点图
 exports.focus_add = function(req, res, next) {
 	var method = req.method.toLowerCase();
+	var focus_id = req.query.id;
     if (method == 'get') {
-        res.render('focus/add', {
-			current: 'focus_add'
-        });
-        return;
+    		//编辑
+    		if(focus_id){
+    			focusDao.queryFocusById(focus_id,function(err,info){
+    				 if (err)
+    		                return next(err);
+    				 res.render('focus/add', {
+    						current: 'focus_add',
+    						id : focus_id,
+    		                title : info[0].title,
+    		                link : info[0].link,
+    						url : info[0].url,
+    						sort :info[0].sort,
+    						content:info[0].content
+    		            });
+    			})
+    		}else{
+    			  res.render('focus/add', {
+    					current: 'focus_add'
+    		        });
+    		        return;
+    		}
+    	
+      
     }
     if (method == 'post') {
         var title = sanitize(req.body.title).trim();
@@ -87,15 +123,25 @@ exports.focus_add = function(req, res, next) {
             });
             return;
         }
-        focusDao.saveFocus(title, link, sort, new Date() , url,content , function(err, info) {
-            if (err)
-                return next(err);
-            res.render('focus/add', {
-				current: 'focus_add',
-                success : '成功 保存!'
-            });
-            return;
-        });
+        if(focus_id){
+        	 focusDao.updateFocus(title, link, sort , url,content,focus_id , function(err, info) {
+                 if (err)
+                     return next(err);
+                 res.redirect('/focus/index');
+                 return;
+             });
+        }else{
+        	  focusDao.saveFocus(title, link, sort, new Date() , url,content , function(err, info) {
+                  if (err)
+                      return next(err);
+                  res.render('focus/add', {
+      				current: 'focus_add',
+                      success : '成功 保存!'
+                  });
+                  return;
+              });
+        }
+      
     }
   
 };

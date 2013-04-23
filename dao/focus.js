@@ -5,8 +5,17 @@ var Util = require('../lib/util.js');
  * 查询所有焦点图
  */
 exports.queryAllFocus = function(callback){
-    mysql.query('select * from focus',function(err, focus){
+    mysql.query('select * from focus where status = ?',['0'],function(err, focus){
         callback(err, focus);
+    });
+};
+
+/**
+ * 查询某个焦点图
+ */
+exports.queryFocusById = function(id,callback){
+    mysql.query('select * from focus where id = ?',[id],function(err, info){
+        callback(err, info);
     });
 };
 /**
@@ -17,11 +26,22 @@ exports.saveFocus = function(title, link, sort, createAt, url,content, callback)
        callback(err, info);
     });
 };
+
+
 /**
- * 编辑
+ * 编辑更新
  */
-exports.updateFocus = function(userId, avatar, callback){
-    mysql.update('update userBlog set avatar = ? where id = ?', [avatar, userId], function(err, info){
+exports.updateFocus = function(title, link, sort , url,content,id, callback){
+    mysql.update('update focus set title = ? ,link = ?, sort= ? ,url = ? , content = ? where id = ?' ,[title,link,sort,url,content,id], function(err, info) {
+       callback(err, info);
+    });
+};
+
+/**
+ * 删除
+ */
+exports.deleteFocus = function(id , callback){
+    mysql.update('update focus set status = ? where id = ?', ['1', id], function(err, info){
         callback(err, info);
     }); 
 };
