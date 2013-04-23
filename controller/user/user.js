@@ -82,9 +82,6 @@ exports.updateAvatar = function(req, res, next){
         var new_name = uid + ext;
         var new_path = path.join(upload_path, new_name);
         var img_path = path_prefix +'/'+ new_name;
-        console.log(new_path);
-        console.log(path_prefix);
-        console.log(img_path);
         fs.rename(file.path, new_path, function(err) {
             if (err) {
                 res.json({ state : 'failed'});
