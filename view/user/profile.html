@@ -4,18 +4,14 @@ if(locals.current_user && (locals.current_user.id == user_id)){
 	isCurrentUser = true;
 }
 %>
-   <div class="side_span" style='min-height:200px;'>
 	    <%if(isCurrentUser){%>
-	<div class="operate">
+	<div class="operate" style="height:auto">
 		<a href="/article/create" class="btn btn-info"><i class="icon-pencil icon-white"></i> 发布文章</a>
 		<a href="/file/upload" class="btn btn-info"><i class="icon-upload icon-white"></i> 上传文件</a>
 	</div>
 	<%}else{%>
 	<div  class="operate" id ='follow_area'></div>
 	<%}%>
-	<ol class="activity" id="caregory_panel"></ol>
-	<ol class="activity" id="folder_panel"></ol>
-</div>
 	
 
 <script>
@@ -23,7 +19,7 @@ if(locals.current_user && (locals.current_user.id == user_id)){
 
 		var html_caregory_panel = '';
 		if(<%=isCurrentUser%>){//根据是否是登录人的页面显示’编辑‘
-			html_caregory_panel+='<li>&nbsp;我的归档&nbsp;&nbsp;&nbsp;&nbsp;<a href="/categories/edit/">编辑</a></li> <li class="divider"></li>'; 
+			html_caregory_panel+='<li>&nbsp;我的归档&nbsp;&nbsp;&nbsp;&nbsp;<a href="/categories/edit/">编辑</a></li>'; 
 		}
 		else{
 		    html_caregory_panel+='<li>&nbsp;Ta 的归档'; 

@@ -116,14 +116,14 @@ body {
 
 .activity {
 	margin: 0;
-	padding: 5px 15px;
-	border-top: 1px solid #e1dfdf
+	padding: 0px;
+	border-top: 0px
 }
 
 .activity li {
 	display: block;
 	margin: 0 -15px;
-	padding: 8px 15px;
+	padding: 8px 0px;
 	font-size: 12px;
 	color: #8c7e7e;
 	overflow: hidden
@@ -373,7 +373,7 @@ body {
 }
 /* common end*/
 
-/*ÆÀÂÛÑùÊ½ start*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ start*/
 .user_avatar {
 	width: 48px;
 	height: 48px;
@@ -400,9 +400,9 @@ body {
 .reply_content {
 	margin-left: 58px;
 }
-/*ÆÀÂÛÑùÊ½ end*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ end*/
 
-/*ÎÄÕÂÁÐ±íÑùÊ½ start*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Ê½ start*/
 a.archive_title {
 	font-size: 14px;
 	color: #0088cc;
@@ -435,7 +435,7 @@ a.count:hover {
 	text-decoration: none;
 }
 
-/*ÎÄÕÂÁÐ±íÑùÊ½ end*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Ê½ end*/
 
 /*disk icon -start */
 .disk_icon32_v2 {
@@ -694,7 +694,7 @@ a.count:hover {
 .easyDialog_wrapper .btn_normal{ margin-left:10px; border-color:#c3c3c3; background:#ececec; color:#333; background:-webkit-gradient(linear,center bottom,center top,from(#ececec),to(#f4f4f4)); background:-moz-linear-gradient(90deg,#ececec,#f4f4f4); }
 /*easydialog -end*/
 
-/*×Ô¶¨ÒåµÄ¸²¸ÇbootstrapµÄÑùÊ½ start*/
+/*ï¿½Ô¶ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½bootstrapï¿½ï¿½ï¿½ï¿½Ê½ start*/
 .folder_files_table .btn-group > .dropdown-toggle {
 	height:18px;
 }
@@ -712,5 +712,5 @@ a.count:hover {
 .folder_files_table .btn-group{
 	padding:2px 0;
 }
-/*×Ô¶¨ÒåµÄ¸²¸ÇbootstrapµÄÑùÊ½ end*/
+/*ï¿½Ô¶ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½bootstrapï¿½ï¿½ï¿½ï¿½Ê½ end*/
 
