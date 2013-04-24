@@ -14,20 +14,28 @@ exports.queryArticle = function(articleId, callback) {
 /**
  * 查询用户的所有文章
  */
-exports.queryArticlesOfUser = function(userId, callback) {
-    mysql.query('select  id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? order by update_at desc',
-            [ userId ], function(err, articles) {
+exports.queryArticlesOfUser = function(userId,start,page_size, callback) {
+    mysql.query('select id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? order by update_at desc limit ? ,?',
+            [ userId , start,page_size], function(err, articles) {
                 callback(err, articles);
             });
 };
+/**
+ * 查询用户的所有文章总数
+ */
+exports.queryArticlesOfUserTotal = function(userId, callback) {
+    mysql.query('select count(*) as total  from article where author_id = ? ',
+            [ userId ], function(err, total) {
+                callback(err, total);
+            });
+};
+
 
 /**
  * 查询用户某分类下的所有文章
  */
 exports.queryArticlesOfUserCategory = function(userId, categoryId, callback) {
-    mysql
-            .query(
-                    'select  id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? and id in (select article_id from article_category where category_id = ?) order by update_at desc',
+    mysql.query('select  id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? and id in (select article_id from article_category where category_id = ?) order by update_at desc',
                     [ userId, categoryId ], function(err, articles) {
                         callback(err, articles);
                     });

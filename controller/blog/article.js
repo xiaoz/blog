@@ -288,20 +288,53 @@ exports.deleteArticle = function(req, res, next) {
  */
 exports.viewArticlesOfUser = function(req, res, next) {
     var user_id = req.params.user_id;
-    articleDao.queryArticlesOfUser(user_id, function(err, articles) {
-        if (err) {
-            res.render('notify/notify', {
-                error : '查找用户的所有文章出错'
-            });
-            return;
-        }
-        res.render('article/user_articles', {
+	
+	var page_id  = Number(req.query.page_id) || 1;
+	var page_size = Number(req.query.page_size) || 6;
+	var start = (page_id - 1)*page_size;
+		async.auto({
+	        articles : function(cb) {
+				articleDao.queryArticlesOfUser(user_id,start,page_size, function(err, articles) {
+					if (err) {
+	                    cb(null, []);
+	                }
+	                if (!articles) {
+	                    cb(null, []);
+	                }
+	                cb(null, articles);
+				})
+	        },
+	        totalRecords : function(cb) {
+	           articleDao.queryArticlesOfUserTotal(user_id, function(err, total) {
+					if (err) {
+	                    cb(null, []);
+	                }
+	                if (!total) {
+	                    cb(null, 0);
+	                }
+	                cb(null, total);
+				})
+	        },
+	      
+	    }, function(err, results) {
+	        if (err) {
+	        	 res.render('notify/notify', {
+                	error : '查找用户的所有文章出错'
+            	});
+            	return;
+	        }
+			console.log(results);
+			res.render('article/user_articles', {
 			current	: 'user_index',
             user_id : user_id,
             articles : articles
-        });
+        	});
         return;
-    });
+	        
+	        return;
+	    });
+	
+     
 };
 
 /**
