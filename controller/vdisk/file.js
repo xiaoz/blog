@@ -11,7 +11,9 @@ var folderDao = require('../../dao/folder.js');
 var fileDao = require('../../dao/file.js');
 var userDao = require('../../dao/user.js');
 
-var upload_path = config.vdisk_path;
+var path_prefix = config.vdisk_path;
+
+var upload_path = path.join(path.dirname(__dirname), '../' + path_prefix);
 ndir.mkdir(upload_path, function(err) {
     if (err)
         throw err;
@@ -346,11 +348,11 @@ exports.downloadFile = function(req, res, next) {
         }
         else if (file) {
             if (file.is_public == 1 || (req.session && req.session.user && (req.session.user.id == file.user_id))) {// 文件公开;文件私有，只有拥有者可以下载
-                fileDao.updateFileDownload(file.id, function(err, info) {
+            	fileDao.updateFileDownload(file.id, function(err, info) {
                     res.header('Content-Type', "application/octet-stream;charset=utf-8");
                     res.header('Content-Length', file.size);
                     res.header('Content-Disposition', "attachment;filename=" + file.name);
-                    res.sendfile(upload_path + '/' + file.user_id + '/' + file.hash);
+                    res.sendfile(upload_path + "/" + file.user_id + "/" + file.hash);
                 });
             }
             else {

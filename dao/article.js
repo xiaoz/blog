@@ -34,18 +34,27 @@ exports.queryArticlesOfUserTotal = function(userId, callback) {
 /**
  * 查询用户某分类下的所有文章
  */
-exports.queryArticlesOfUserCategory = function(userId, categoryId, callback) {
-    mysql.query('select  id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? and id in (select article_id from article_category where category_id = ?) order by update_at desc',
-                    [ userId, categoryId ], function(err, articles) {
+exports.queryArticlesOfUserCategory = function(userId, categoryId,start,page_size, callback) {
+    mysql.query('select  id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? and id in (select article_id from article_category where category_id = ?) order by update_at desc limit ? ,?',
+                    [ userId, categoryId , start,page_size], function(err, articles) {
                         callback(err, articles);
                     });
 };
 
 /**
+ * 查询用户某分类下的所有文章总数
+ */
+exports.queryArticlesOfUserCategoryTotal = function(userId, categoryId, callback) {
+    mysql.query('select  count(*) as total  from article where author_id = ? and id in (select article_id from article_category where category_id = ?)',
+            [ userId ,categoryId], function(err, total) {
+                callback(err, total);
+            });
+};
+/**
  * 更新文章查看数据
  */
 exports.updateVisitCountOfArticle = function(articleId, callback) {
-    mysql.update('update article set visit_count = visit_count + 1 where id = ?', [ articleId ], function(err, info) {
+    mysql.update('update article set visit_count = visit_count + 1 where id = ? ', [ articleId ], function(err, info) {
         callback(err, info);
     });
 };

@@ -160,7 +160,8 @@ exports.editArticle = function(req, res, next) {
 
         res.render('article/edit', {
             article : results.article,
-            categories : results.all_categories
+            categories : results.all_categories,
+            user_id :req.session.user.id
         });
         return;
     });
@@ -324,7 +325,6 @@ exports.viewArticlesOfUser = function(req, res, next) {
             	});
             	return;
 	        }
-			console.log(results.pages);
 			res.render('article/user_articles', {
 			current	: 'user_index',
             user_id : user_id,
@@ -333,8 +333,6 @@ exports.viewArticlesOfUser = function(req, res, next) {
 			current_page :page
         	});
         return;
-	        
-	        return;
 	    });
 	
      
@@ -346,24 +344,54 @@ exports.viewArticlesOfUser = function(req, res, next) {
 exports.viewArticlesOfUserCategory = function(req, res, next) {
     var category_id = req.params.category_id;
     var user_id = req.params.user_id;
-
-    articleDao.queryArticlesOfUserCategory(user_id, category_id, function(err, articles) {
+    var page  = Number(req.query.page) || 1;
+	var page_size = Number(req.query.page_size) || 6;
+	var start = (page - 1)*page_size;
+	async.auto({
+        articles : function(cb) {
+			 articleDao.queryArticlesOfUserCategory(user_id, category_id,start,page_size, function(err, articles) {
+		        if (err) {
+		            res.render('notify/notify', {
+		                error : '查找分类下文章出错'
+		            });
+		            return;
+		        }
+		        
+		        cb(null, articles);
+			 })
+        },
+        pages : function(cb) {
+           articleDao.queryArticlesOfUserCategoryTotal(user_id,category_id, function(err, total) {
+				if (err) {
+                    cb(null, []);
+                }
+                if (!total) {
+                    cb(null, 0);
+                }
+				var nums = Math.ceil(total[0].total/page_size);
+                cb(null, nums);
+			})
+        },
+      
+    }, function(err, results) {
         if (err) {
-            res.render('notify/notify', {
-                error : '查找分类下文章出错'
+        	 res.render('notify/notify', {
+                 error : '查找分类下文章出错'
+             });
+        	return;
+        }
+        categoryDao.queryCategory(category_id, function(err, category) {
+            res.render('article/articles', {
+            	current	: 'user_index',
+                user_id : user_id,
+                articles : results.articles,
+                current_page :page,
+                pages : results.pages,
+                category : category || {}
             });
             return;
-        }
-        else {
-            categoryDao.queryCategory(category_id, function(err, category) {
-                res.render('article/articles', {
-                    user_id : user_id,
-                    articles : articles,
-                    category : category || {}
-                });
-                return;
-            });
-        }
+        });
+        
     });
 };
 

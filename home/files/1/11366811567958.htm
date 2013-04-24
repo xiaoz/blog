@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link rel="stylesheet" href="reset.css"  type="text/css" />
+<script src="http://a.tbcdn.cn/s/kissy/1.3.0pr1/kissy.js"></script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-image: url(img/bg.jpg); width:750px;	height:465px; margin: 0 auto"  >
+			
+
+	 <div id="J_SmartContent">
+           
+            <div id ="J_Templets" style="height: 465px; background: url(img/bg2.png) no-repeat ">
+                <ul class="margin-auto" id="J_ItemDataTable">
+                	
+                    <li class="" style="position:relative;top:0px;left:94px;width:182px;height:86px">
+                        <div style="float:left">
+                       	<img src="img/home.png" alt="" style=" width:86px; height:86px"  />
+                       </div>
+                       <div style="float:left; padding-left:10px; padding-top:10px">
+                       	 <img src="img/t5.png" alt="" style=" width:86px; height:40px"  />
+                         <div style="clear:both">
+                     		<b style="color:#f29df5; font-size:25px; padding-left:25px; font-family: "微软雅黑";text-align:center" > 铺 </b>
+                         </div>
+       				  </div>   
+                    </li>
+                      <li class="" style="position:relative;top:10px;left:0px;width:86px;height:86px">
+                        <img src="img/T1bD1WXm8sXXbe.mPe-40-40.png" alt="" style=" width:40px; height:40px"  />
+                       <div class="overlap-base shadow-750"></div>
+                       <a href="#2" class="J_Flip" data="750" tid="1" ><div class="overlap-text  font-size-14"><b>点击选择这个模板</b></div></a>
+         
+                    </li>
+                    
+                      <li class="" style="position:relative;top:20px;left:94px;width:86px;height:86px">
+                       <img src="img/T1bD1WXm8sXXbe.mPe-40-40.png" alt="" style=" width:40px; height:40px"  />
+                       <div class="overlap-base shadow-750"></div>
+                       <a href="#2" class="J_Flip" data="750" tid="1" ><div class="overlap-text  font-size-14"><b>点击选择这个模板</b></div></a>
+         
+                    </li>
+                    
+                      <li class="" style="position:relative;top:28px;left:190px;width:86px;height:86px">
+                       <img src="img/T1bD1WXm8sXXbe.mPe-40-40.png" alt="" style=" width:40px; height:40px"  />
+                       <div class="overlap-base shadow-750"></div>
+                       <a href="#2" class="J_Flip" data="750" tid="1" ><div class="overlap-text  font-size-14"><b>点击选择这个模板</b></div></a>
+         
+                    </li>
+                    
+                      <li class="" style="position:relative;top:35px;left:0px;width:192px;height:86px">
+                       <div style="float:left">
+                       	<a href="http://caihongpu.com" target="_blank"><img src="img/myspace.png" alt="" style=" width:86px; height:86px"  /></a>
+                       </div>
+                       <div style="float:left; padding-left:30px; padding-top:10px">
+                       	 <img src="img/A-left.png" alt="" style=" width:40px; height:40px"  />
+                        <div style="clear:both">
+                     	 <a href="http://caihongpu.com" target="_blank"><b style="color:#ff6699; font-size:20px">更多 </b></a>
+                         </div>
+       				  </div>
+                    </li>
+                  
+                </ul>
+                 <div class="clear"></div>
+            </div>
+        
+            </div>
+
+
+</div>
+
+
+
+<script>
+
+KISSY.ready(function(S){
+		var DOM = S.DOM, Event = S.Event;
+		Event.delegate(document,'click','.J_Flip', function(ev) {
+					 var tid = DOM.attr(ev.currentTarget,'tid');
+					 var Twidth = DOM.attr(ev.currentTarget,'data');
+					 if(!KISSY.one('#J_TempletContent'+tid)){
+						var div = DOM.create('<div id="J_TempletContent'+tid+'"></div>');
+						DOM.append(div,DOM.get('#J_SmartContent'));
+						var SubmitHandle = function(o) {
+							DOM.html('#J_TempletContent'+tid,o.payload);
+							 var width = DOM.width('#J_Templets');
+							 var height = DOM.height('#J_Templets');
+							 DOM.css('#J_Templets',{'height': height+'px','width': width+'px', 'position': 'absolute'})						
+							 DOM.css('#J_SmartContent',{'height': height+'px','width': width+'px', 'overflow': 'hidden','position': 'relative'})
+							 DOM.css('#J_TempletContent'+tid,{'height': height+'px','width': width+'px', 'position': 'absolute', 'left': width+'px'})
+							 var list = DOM.get('#J_Templets'),  
+							      detail = DOM.get('#J_TempletContent'+tid);
+							S.Anim(list,{left:'-'+width},.8,KISSY.Easing.easeOutStrong).run();
+						    S.Anim(detail,{left:0},.8,KISSY.Easing.easeOutStrong).run();
+				 	    };
+				 	    var ErrorHandle = function(o){
+							
+					 	};
+				 	    data = "templet_id="+tid+"&templet_width="+Twidth
+				 	    new H.widget.asyncRequest().setURI(getPromoTempletUrl).setMethod("GET").setHandle(SubmitHandle).setErrorHandle(ErrorHandle).setData(data).setDataType('json').send();
+					 }else{
+						 var width = DOM.width('#J_Templets');
+						 var height = DOM.height('#J_Templets');
+						 DOM.css('#J_Templets',{'height': height+'px','width': width+'px', 'position': 'absolute'})						
+						 DOM.css('#J_SmartContent',{'height': height+'px','width': width+'px', 'overflow': 'hidden','position': 'relative'})
+						 DOM.css('#J_TempletContent'+tid,{'height': height+'px','width': width+'px', 'position': 'absolute', 'left': width+'px'})
+						 var list = DOM.get('#J_Templets'),  
+						      detail = DOM.get('#J_TempletContent'+tid);
+						S.Anim(list,{left:'-'+width},.8,KISSY.Easing.easeOutStrong).run();
+					    S.Anim(detail,{left:0},.8,KISSY.Easing.easeOutStrong).run();	
+					}
+				})
+	
+	
+})
+
+
+
+</script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+<%-partial('user/profile',{object:locals.current_user.id, as:'user_id'})%>
 <div class="main-body">
 	<div class='panel'>
 		<div class='header' style='height:28px;line-height:28px;'>
@@ -34,7 +35,6 @@
 	</div>
 </div>
 
-<%-partial('user/profile',{object:locals.current_user.id, as:'user_id'})%>
 
 <script>
 	function setPrivate(fileId){
