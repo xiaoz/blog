@@ -304,7 +304,7 @@ exports.viewArticlesOfUser = function(req, res, next) {
 	                cb(null, articles);
 				})
 	        },
-	        totalRecords : function(cb) {
+	        pages : function(cb) {
 	           articleDao.queryArticlesOfUserTotal(user_id, function(err, total) {
 					if (err) {
 	                    cb(null, []);
@@ -312,7 +312,8 @@ exports.viewArticlesOfUser = function(req, res, next) {
 	                if (!total) {
 	                    cb(null, 0);
 	                }
-	                cb(null, total);
+					var pages = Math.ceil(total/page_size);
+	                cb(null, pages);
 				})
 	        },
 	      
@@ -327,7 +328,9 @@ exports.viewArticlesOfUser = function(req, res, next) {
 			res.render('article/user_articles', {
 			current	: 'user_index',
             user_id : user_id,
-            articles : articles
+            articles : results.articles,
+			pages : results.pages,
+			current_page :page_id
         	});
         return;
 	        
