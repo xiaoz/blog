@@ -26,7 +26,7 @@ ndir.mkdir(upload_path, function(err) {
  */
 exports.index = function(req, res, next) {
     var user_id = req.params.id;
-    res.redirect('/index');
+   res.redirect('/'+user_id+'/articles');
 };
 
 /**

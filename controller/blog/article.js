@@ -296,6 +296,7 @@ exports.viewArticlesOfUser = function(req, res, next) {
             return;
         }
         res.render('article/user_articles', {
+			current	: 'user_index',
             user_id : user_id,
             articles : articles
         });
