@@ -289,9 +289,9 @@ exports.deleteArticle = function(req, res, next) {
 exports.viewArticlesOfUser = function(req, res, next) {
     var user_id = req.params.user_id;
 	
-	var page_id  = Number(req.query.page_id) || 1;
+	var page  = Number(req.query.page) || 1;
 	var page_size = Number(req.query.page_size) || 6;
-	var start = (page_id - 1)*page_size;
+	var start = (page - 1)*page_size;
 		async.auto({
 	        articles : function(cb) {
 				articleDao.queryArticlesOfUser(user_id,start,page_size, function(err, articles) {
@@ -312,8 +312,8 @@ exports.viewArticlesOfUser = function(req, res, next) {
 	                if (!total) {
 	                    cb(null, 0);
 	                }
-					var pages = Math.ceil(total/page_size);
-	                cb(null, pages);
+					var nums = Math.ceil(total[0].total/page_size);
+	                cb(null, nums);
 				})
 	        },
 	      
@@ -324,13 +324,13 @@ exports.viewArticlesOfUser = function(req, res, next) {
             	});
             	return;
 	        }
-			console.log(results);
+			console.log(results.pages);
 			res.render('article/user_articles', {
 			current	: 'user_index',
             user_id : user_id,
             articles : results.articles,
 			pages : results.pages,
-			current_page :page_id
+			current_page :page
         	});
         return;
 	        

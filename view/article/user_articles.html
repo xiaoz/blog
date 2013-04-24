@@ -13,7 +13,8 @@
 			<%}else{%>
 			<p class='col_fade' style="margin:20px;">该用户暂无文章</p>
 			<%}%>
+
+			<%-partial('pagination',{pages:pages,current_pages:current_page,base:'/'+user_id+'/articles'})%>
 		</div>
 
-<%-partial('pagination',{locals.current_page,locals.pages})%>
 </div>
