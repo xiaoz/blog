@@ -13,49 +13,14 @@
             <div class="line"></div>
             <div class="separator"></div>
             <div class="block_cont_left">
-<!--             	5ƪ���� -->
-            	
-            	
-            	
-            	<div class="block_blog_type2">
-                    <div class="post_pic shadow_img">
-                    	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_prev_min_blog1.jpg); ">
-                        	<a href="blog_post3.html"><img src="images/img_prev_min_blog1.jpg" alt="" title=""></a>
-                        </div>
-                    </div>
-                    <div class="block_content">
-	                    <div class="title">
-	                    	<div class="date">
-	                        	<p>Nov <b>22</b></p>
-	                        </div>
-	                        <div class="blog_info">
-	                        	<h3><a href="blog_post3.html">established fact that a reader.</a></h3>
-	                            <ul>
-	                            	<li><i>posted by</i> <a href="#">Admin</a></li>
-	                                <li><i>in</i> <a href="#">Web Design</a></li>
-	                                <li><a href="#">7</a> comments</li>
-	                            </ul>
-	                        </div>
-	                    </div>
-	                    <div class="blog_content">
-	                    	<p>Established fact that a reader will be distracted by  readable content  of a page when looking at its layout. The point of using Lorem Ipsum is that. Has a more-or-less normal distribution. Of letters, as opposed to using content here, content here. Making it look like readable English. Many desktop publishing packages and web page editors now are many variations of passages but the majority have suffered.</p>
-							<a href="blog_post3.html" class="button">
-	                        	<span class="left">
-	                                <span class="right">
-	                                    Read more
-	                                </span>
-	                            </span>
-	                        </a>
-	                    </div>
-                	</div>
-                </div>
-                <div class="separator_3"></div>
-                <div class="line"></div>
-                <div class="separator_4"></div>
-                
-                
-               
-             
+<!--             	 -->
+            <%
+			if(articles && articles.length > 0){
+			%>
+			<%- partial('front/news_item',{collection:articles,as:'article'}) %>
+			<%}else{%>
+			<p class='col_fade' style="margin:20px;">该用户暂无文章</p>
+			<%}%>
 
               <!--   <div class="separator_4"></div>
                 <div class="line"></div> -->

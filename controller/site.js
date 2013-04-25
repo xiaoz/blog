@@ -43,15 +43,70 @@ exports.product = function(req, res, next) {
 };
 /*网站首页新闻*/
 exports.news = function(req, res, next) {
-    
-    res.render('front/news', {
-		layout: 'flayout',
-    	active : 'news'
-    });
+	/*网站首页查看用户的文章[不按分类] 默认为管理者*/
+	//var user_id = req.params.user_id;
+	var user_id = 1;
+	var page  = Number(req.query.page) || 1;
+	var page_size = Number(req.query.page_size) || 5;
+	var start = (page - 1)*page_size;
+		async.auto({
+	        articles : function(cb) {
+				articleDao.queryArticlesOfUser(user_id,start,page_size, function(err, articles) {
+					if (err) {
+	                    cb(null, []);
+	                }
+	                if (!articles) {
+	                    cb(null, []);
+	                }
+	                console.log(articles)
+					 if(articles instanceof Array){
+						  for(var i =0,len = articles.length ; i< len ; i++){
+							  articles[i].thumbnails = articles[i].content.match(/\/user_data\/images\/1\/\d+\.\w+/) || "/user_data/images/default.jpg";
+							  articles[i].thumbcontent  = articles[i].content.substring(0,100);
+						  }
+		             }
+	                
+	                cb(null, articles);
+				})
+	        },
+	        pages : function(cb) {
+	           articleDao.queryArticlesOfUserTotal(user_id, function(err, total) {
+					if (err) {
+	                    cb(null, []);
+	                }
+	                if (!total) {
+	                    cb(null, 0);
+	                }
+					var nums = Math.ceil(total[0].total/page_size);
+	                cb(null, nums);
+				})
+	        },
+	      
+	    }, function(err, results) {
+	        if (err) {
+	        	 res.render('notify/notify', {
+                	error : '查找用户的所有文章出错'
+            	});
+            	return;
+	        }
+	        
+	        res.render('front/news', {
+	    		layout: 'flayout',
+	        	active : 'news',
+	        	user_id : user_id,
+	        	articles : results.articles,
+	        	pages : results.pages,
+				current_page :page
+	        	
+	        });
+        return;
+	    });
+		
+   
 
 };
 /*网站首页查看某篇文章*/
-exports.viewArticle = function(req, res, next) {
+exports.viewArticleForFront = function(req, res, next) {
     var article_id = req.params.article_id;
     var author_id;
     async.auto({
@@ -128,60 +183,7 @@ exports.viewArticle = function(req, res, next) {
         return;
     });
 };
-/*网站首页查看用户的文章[不按分类]*/
 
-exports.viewArticlesOfUser = function(req, res, next) {
-    var user_id = req.params.user_id;
-	
-	var page  = Number(req.query.page) || 1;
-	var page_size = Number(req.query.page_size) || 6;
-	var start = (page - 1)*page_size;
-		async.auto({
-	        articles : function(cb) {
-				articleDao.queryArticlesOfUser(user_id,start,page_size, function(err, articles) {
-					if (err) {
-	                    cb(null, []);
-	                }
-	                if (!articles) {
-	                    cb(null, []);
-	                }
-					result = str.match(/\/user_data\/images\/1\/\d+\.\w+/)
-
-	                cb(null, articles);
-				})
-	        },
-	        pages : function(cb) {
-	           articleDao.queryArticlesOfUserTotal(user_id, function(err, total) {
-					if (err) {
-	                    cb(null, []);
-	                }
-	                if (!total) {
-	                    cb(null, 0);
-	                }
-					var nums = Math.ceil(total[0].total/page_size);
-	                cb(null, nums);
-				})
-	        },
-	      
-	    }, function(err, results) {
-	        if (err) {
-	        	 res.render('notify/notify', {
-                	error : '查找用户的所有文章出错'
-            	});
-            	return;
-	        }
-			res.render('article/user_articles', {
-			current	: 'user_index',
-            user_id : user_id,
-            articles : results.articles,
-			pages : results.pages,
-			current_page :page
-        	});
-        return;
-	    });
-	
-     
-};
 /*网站首页查看用户某分类下文章*/
 
 exports.viewArticlesOfUserCategory = function(req, res, next) {

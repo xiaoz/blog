@@ -23,6 +23,7 @@ exports = module.exports = function(app) {
 	app.get('/product', site_ctrl.product);
 	// 新闻 blog
 	app.get('/news', site_ctrl.news);
+	app.get('/news/detail/:article_id', site_ctrl.viewArticleForFront);
 	//客户案例
 	app.get('/cases', site_ctrl.cases);
 	// 联系我们

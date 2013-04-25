@@ -1,0 +1,41 @@
+
+	<div class="block_blog_type2">
+                    <div class="post_pic">
+                    	<div >
+                        	<a href="/news/detail/<%=article.id%>"><img width="250"src="<%=article.thumbnails %>" alt="" title="" /></a>
+                        </div>
+                    </div>
+                    <div class="block_content">
+	                    <div class="title">
+	                    	<div class="date" style="width:55px;height:55px">
+	                    		<div class="calendar"> 
+									<div class="calendar-month"><%=article.create_at.substring(5,7)%></div> 
+									<div class="calendar-day"><%=article.create_at.substring(8,10)%></div> 
+								</div>
+	                        </div>
+	                        <div class="blog_info" style="padding-top: 4px;">
+	                        	<h3><a href="/news/detail/<%=article.id%>"><%= article.title %></a></h3>
+	                            <ul>
+	                            	<li><a href="#"><%=article.visit_count%></a>&nbsp; 次点击</li>
+	                                <li><a href="#"><%=article.reply_count%></a>&nbsp; 次回复</li>
+	                                <li><%if(article.update_at != article.create_at){%>
+										 <a href="#"><%=article.update_at%></a>&nbsp; 更新  
+										<%}%></li>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                    <div class="blog_content">
+	                    	<p><%=article.thumbcontent %> </p>
+							<a href="/news/detail/<%=article.id%>" class="button">
+	                        	<span class="left">
+	                                <span class="right">
+	                                    Read more 
+	                                </span>
+	                            </span>
+	                        </a>
+	                    </div>
+                	</div>
+                </div>
+                <div class="separator_3"></div>
+                <div class="line"></div>
+                <div class="separator_4"></div>
