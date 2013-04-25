@@ -352,7 +352,7 @@ exports.downloadFile = function(req, res, next) {
                     res.header('Content-Type', "application/octet-stream;charset=utf-8");
                     res.header('Content-Length', file.size);
                     res.header('Content-Disposition', "attachment;filename=" + file.name);
-                    res.sendfile(upload_path + "/" + file.user_id + "/" + file.hash);
+                    res.sendfile(""+upload_path + "/" + file.user_id + "/" + file.hash);
                 });
             }
             else {
