@@ -145,6 +145,8 @@ exports.viewArticlesOfUser = function(req, res, next) {
 	                if (!articles) {
 	                    cb(null, []);
 	                }
+					result = str.match(/\/user_data\/images\/1\/\d+\.\w+/)
+
 	                cb(null, articles);
 				})
 	        },
