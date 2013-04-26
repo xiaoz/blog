@@ -1,0 +1,30 @@
+
+<% if(locals.error){ %>
+<div class="error_box">
+                            	<div>
+                            		<p><b>Error:</b> <%= error %></p>
+                            	</div>
+	                        </div>
+
+<% } %>
+<% if(locals.success){ %>
+ <div class="download_box">
+                            	<div>
+                            		<p><b>Download:</b><%= success %></p>
+                            	</div>
+	                        </div>
+<% } %>
+<% if(locals.info){ %>
+ <div class="info_box">
+                            	<div>
+                            		<p><b>Download:</b><%= info %></p>
+                            	</div>
+	                        </div>
+<% } %>
+<% if(locals.note){ %>
+ <div class="note_box">
+                            	<div>
+                            		<p><b>Download:</b><%= note %></p>
+                            	</div>
+	                        </div>
+<% } %>

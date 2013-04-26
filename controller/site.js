@@ -58,11 +58,11 @@ exports.news = function(req, res, next) {
 	                if (!articles) {
 	                    cb(null, []);
 	                }
-	                console.log(articles)
 					 if(articles instanceof Array){
 						  for(var i =0,len = articles.length ; i< len ; i++){
 							  articles[i].thumbnails = articles[i].content.match(/\/user_data\/images\/1\/\d+\.\w+/) || "/user_data/images/default.jpg";
-							  articles[i].thumbcontent  = articles[i].content.substring(0,100);
+							  var tcontent  = articles[i].content.match(/[^\x00-\xff]/g); 
+							  articles[i].thumbcontent  = tcontent == null ? "暂无内容" :  tcontent.join('').substring(0,107);
 						  }
 		             }
 	                
@@ -84,20 +84,20 @@ exports.news = function(req, res, next) {
 	      
 	    }, function(err, results) {
 	        if (err) {
-	        	 res.render('notify/notify', {
+	        	 res.render('front/notify/notify', {
+				 	layout: 'flayout',
+					active : 'news',
                 	error : '查找用户的所有文章出错'
             	});
             	return;
 	        }
-	        
 	        res.render('front/news', {
 	    		layout: 'flayout',
 	        	active : 'news',
 	        	user_id : user_id,
 	        	articles : results.articles,
 	        	pages : results.pages,
-				current_page :page
-	        	
+				current_page :page,
 	        });
         return;
 	    });
@@ -107,13 +107,16 @@ exports.news = function(req, res, next) {
 };
 /*网站首页查看某篇文章*/
 exports.viewArticleForFront = function(req, res, next) {
-    var article_id = req.params.article_id;
+	
+    var article_id = req.query.article_id;
     var author_id;
     async.auto({
         article : function(cb) {
             articleDao.queryArticle(article_id, function(err, article) {
                 if (err || !article) {
-                    res.render('notify/notify', {
+                    res.render('front/notify/notify', {
+						layout: 'flayout',
+						active : 'news',
                         error : '您查找的文章信息存在错误,该文章可能已被删除'
                     });
                     return;
@@ -169,13 +172,17 @@ exports.viewArticleForFront = function(req, res, next) {
         }
     }, function(err, results) {
         if (err) {
-            res.render('notify/notify', {
+            res.render('front/notify/notify', {
+				layout: 'flayout',
+				active : 'news',
                 error : '您查找的文章信息存在错误'
             });
             return;
         }
         results.article.replies = results.article_replies;
-        res.render('article/article', {
+        res.render('front/detail_news', {
+			layout: 'flayout',
+			active : 'news',
             author : results.author,
             article : results.article,
             article_categories : results.article_categories

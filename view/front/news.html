@@ -14,8 +14,7 @@
             <div class="separator"></div>
             <div class="block_cont_left">
 <!--             	 -->
-            <%
-			if(articles && articles.length > 0){
+			<% if(articles && articles.length > 0){
 			%>
 			<%- partial('front/news_item',{collection:articles,as:'article'}) %>
 			<%}else{%>
@@ -25,8 +24,16 @@
               <!--   <div class="separator_4"></div>
                 <div class="line"></div> -->
                 <div class="block_blogs_nav">
-                	<a href="#" class="prev">Older posts</a>
-                    <a href="#" class="next">Newer posts</a>
+<% if(current_page == pages){ %>
+		<a href="#2" class="prev">没有了</a>
+		<% }else{ %>
+		<a href="/news?page=<%=current_page+1 %>" class="prev">下一页</a>
+		<% } %>
+	<% if(current_page == 1){ %>
+		<a href="#2" class="next">最新了</a> 
+		<% }else{ %>
+		<a href="/news?page=<%=current_page-1 %>" class="next">上一页</a> 
+		<% } %>
                 </div>
                 <div class="line"></div>
             </div>
