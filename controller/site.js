@@ -180,7 +180,7 @@ exports.viewArticleForFront = function(req, res, next) {
             return;
         }
         results.article.replies = results.article_replies;
-        res.render('front/detail_news', {
+        res.render('front/news/detail_news', {
 			layout: 'flayout',
 			active : 'news',
             author : results.author,

@@ -51,106 +51,10 @@
 	<% if (article.replies && article.replies.length > 0) { %>
  		<h2>回复 <span>(<%= article.replies.length %>)</span></h2>
 
-
-<div class='cell reply_area reply_item' id='reply<%= indexInCollection+1 %>' reply_id='<%= reply.id %>'>
-	<% if(reply.author.avatar){ %>
-	<div class='user_avatar'><a href='/user/<%= reply.author.id %>'><img src='<%= reply.author.avatar %>' title='<%= reply.author.loginname %>' /></a></div>
-	<% }else{ %>
-	<div class='user_avatar'><a href='/user/<%= reply.author.id %>'><img src='/img/avatar.png' title='<%= reply.author.loginname %>' /></a></div>
-	<% } %>
-	<span class='col_fade fr'>#<%= indexInCollection+1 %></span>
-	<span class='reply_author'><a class='dark' href='/user/<%= reply.author.id %>'><%= reply.author.loginname %></a></span>
-	<div class='sep5'></div>
-	<div class='reply_content'>
-	<%- reply.content %>
-	</div>
-	<div class='cl'>
-		<div class='sep5'></div>
-		<span class='col_fade'>
-			<%= reply.friendly_create_at %>
-			<% if(locals.current_user && current_user.id == reply.author.id){ %>
-			<span class='sp10'></span>
-			<a href='javascript:void(0);' class='delete_reply_btn'><img class='user_icon' src='/img/trash_icon&16.png' title='删除' /></a>
-			<% } %>
-		</span>
-		<span class='fr'>
-			<% if(locals.current_user){ %>
-			<a href='#reply_editor_panel' class='dark reply2_btn'>回复</a>	
-			<% } %>
-		</span>
-	</div>
-</div>
-
-		<%- partial('reply/reply', article.replies) %>
-	</div>
+		<%- partial('front/news/reply',article.replies) %>
 	<% } %>
                    
-                    <div class="box_comment">
-                        <div class="avatar"><img src="images/user_1.jpg" alt="" title=""></div>
-                        <div class="comment">
-                            <div class="comment_title">
-                                <p class="user"><a href="#">ADMIN</a></p>
-                                <p class="date">December 15, 2011 at 12:45 am</p>
-                            </div>
-                            <div class="comment_body">
-                                <p>Рandful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefor use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncove.</p>
-                            </div>
-                            <div class="reply"><a href="#">Reply</a></div>
-                        </div>
-                    </div>
-                    <div class="box_comment">
-                        <div class="avatar"><img src="images/user_2.jpg" alt="" title=""></div>
-                        <div class="comment">
-                            <div class="comment_title">
-                                <p class="user"><a href="#">Roman polyarush</a></p>
-                                <p class="date">December 5 2011 at 10:20 am</p>
-                            </div>
-                            <div class="comment_body">
-                                <p>Model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefor use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncove.</p>
-                            </div>
-                            <div class="reply"><a href="#">Reply</a></div>
-                        </div>
-                        <div class="box_comment">
-                            <div class="avatar"><img src="images/user_3.jpg" alt="" title=""></div>
-                            <div class="comment">
-                                <div class="comment_title">
-                                    <p class="user"><a href="#">Sara jordan</a></p>
-                                    <p class="date">December 5 2011 at 14:20 am</p>
-                                </div>
-                                <div class="comment_body">
-                                    <p>Model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefor use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncove.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box_comment">
-                            <div class="avatar"></div>
-                            <div class="comment">
-                                <div class="comment_title">
-                                    <p class="user"><a href="#">Piter larkin</a></p>
-                                    <p class="date">December 5 2011 at 16:24 am</p>
-                                </div>
-                                <div class="comment_body">
-                                    <p>Model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefor use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncove.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box_comment">
-                        <div class="avatar"><img src="images/user_2.jpg" alt="" title=""></div>
-                        <div class="comment">
-                            <div class="comment_title">
-                                <p class="user"><a href="#">Roman polyarush</a></p>
-                                <p class="date">December 5 2011 at 10:20 am</p>
-                            </div>
-                            <div class="comment_body">
-                                <p>Many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                            </div>
-                            <div class="reply"><a href="#">Reply</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="block_comments_form">
+                <div class="block_comments_form" id="reply_editor_panel">
                     <h2>Add comment</h2>
                     <form action="">
                     <div class="comment_input active_bg_form">
@@ -181,6 +85,13 @@
                 <div class="block_blog_category">
                   	<h4>文章分类</h4>
                     <ul class="list2" id="caregory_panel">
+                    </ul>
+                </div>
+				<div class="line"></div>
+                <div class="block_archives">
+                  	<h4>文档分类</h4>
+                    <ul class="list2" id="folder_panel">
+                    	
                     </ul>
                 </div>
                 <div class="block_recent_posts">
@@ -229,16 +140,7 @@
 	                    <p class="alt">Photo of old Venice</p>
                     </div>
                 </div>
-                <div class="line"></div>
-                <div class="block_archives">
-                  	<h4>ARCHIVES</h4>
-                    <ul class="list2">
-                    	<li><a href="#">August 2011</a></li>
-                    	<li><a href="#">September 2011</a></li>
-                    	<li><a href="#">October 2011</a></li>
-                    	<li><a href="#">November 2011</a></li>
-                    </ul>
-                </div>
+                
             </div>
              <div class="clear"></div>
             <div class="separator_5"></div>
@@ -257,6 +159,20 @@
 			url: '/userinfo/category/1',
 			success:function(data){
 			    $('#caregory_panel').html(tpl_caregory_panel.render(data));
+			},
+		  	error:function(){}
+		});
+
+		var html_folder_panel = '';
+		html_folder_panel+='{@each folders as item,index}'+
+		'<li><a href="/${item.id}/files">${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+		'{@/each}';
+		var tpl_folder_panel=juicer(html_folder_panel);
+	    $.ajax({//得到用户网盘文件夹
+			type: "POST",
+			url: "/userinfo/folder/1",
+			success:function(data){
+			    $('#folder_panel').html(tpl_folder_panel.render(data));
 			},
 		  	error:function(){}
 		});

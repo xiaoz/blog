@@ -236,12 +236,16 @@ exports.getUserInfo = function(req, res, next) {
  * 查看文件夹
  */
 exports.getUserFolders = function(req, res, next) {
-    if (!req.session || !req.session.user) {
-        res.json({folders : []});
-        return;
-    }  
     
-    var user_id = req.session.user.id;   
+	var user_id = req.params.user_id;
+	
+	if(!user_id){
+		if (!req.session || !req.session.user) {
+        	res.json({folders : []});
+        	return;
+    	}  
+    	var user_id = req.session.user.id;   
+	}
     folderDao.queryAllFoldersOfUser(user_id, function(err, folders) {
         if (err) {
             res.json({

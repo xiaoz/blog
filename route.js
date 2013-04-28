@@ -47,7 +47,7 @@ exports = module.exports = function(app) {
     app.post('/positive_users', user_ctrl.positiveUsers);
     // sidebar
     app.post('/userinfo/category/:user_id', user_ctrl.getUserCategories);
-    app.post('/userinfo/folder', user_ctrl.getUserFolders);
+    app.post('/userinfo/folder/:user_id', user_ctrl.getUserFolders);
 	
 	
     // message相关

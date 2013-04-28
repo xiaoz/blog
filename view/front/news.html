@@ -16,7 +16,7 @@
 <!--             	 -->
 			<% if(articles && articles.length > 0){
 			%>
-			<%- partial('front/news_item',{collection:articles,as:'article'}) %>
+			<%- partial('front/news/news_item',{collection:articles,as:'article'}) %>
 			<%}else{%>
 			<p class='col_fade' style="margin:20px;">该用户暂无文章</p>
 			<%}%>
@@ -46,6 +46,14 @@
                     	
                     </ul>
                 </div>
+ 				<div class="line"></div>
+                <div class="block_archives">
+                  	<h4>文档分类</h4>
+                    <ul class="list2" id="folder_panel">
+                    	
+                    </ul>
+                </div>
+
                 <div class="block_recent_posts">
                 	<h4>Recent Posts</h4>
                     <div class="post">
@@ -92,20 +100,10 @@
 	                    <p class="alt">Photo of old Venice</p>
                     </div>
                 </div>
-                <div class="line"></div>
-                <div class="block_archives">
-                  	<h4>ARCHIVES</h4>
-                    <ul class="list2">
-                    	<li><a href="#">August 2011</a></li>
-                    	<li><a href="#">September 2011</a></li>
-                    	<li><a href="#">October 2011</a></li>
-                    	<li><a href="#">November 2011</a></li>
-                    </ul>
-                </div>
             </div>
             <div class="clear"></div>
-               <div class="separator_5"></div>
-            <div class="line"></div>
+            <div class="separator_5"></div>
+       
 
 
 <script>
@@ -121,6 +119,20 @@
 			url: '/userinfo/category/1',
 			success:function(data){
 			    $('#caregory_panel').html(tpl_caregory_panel.render(data));
+			},
+		  	error:function(){}
+		});
+
+		var html_folder_panel = '';
+		html_folder_panel+='{@each folders as item,index}'+
+		'<li><a href="/${item.id}/files">${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+		'{@/each}';
+		var tpl_folder_panel=juicer(html_folder_panel);
+	    $.ajax({//得到用户网盘文件夹
+			type: "POST",
+			url: "/userinfo/folder/1",
+			success:function(data){
+			    $('#folder_panel').html(tpl_folder_panel.render(data));
 			},
 		  	error:function(){}
 		});
