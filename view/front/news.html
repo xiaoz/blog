@@ -110,7 +110,7 @@
 	$(document).ready(function() {    
 		var html_caregory_panel = '';
 		html_caregory_panel+='{@each categories as item,index}'+
-		'<li><a href="/articles/${item.user_id}/${item.id}">${item.name}</a> ({@if !item.article_count}0{@else}${item.article_count}{@/if})</li>'+
+		'<li><a href="/newsincategory?user_id=${item.user_id}&category_id=${item.id}">${item.name}</a> ({@if !item.article_count}0{@else}${item.article_count}{@/if})</li>'+
 		'{@/each}';
 		var tpl_caregory_panel=juicer(html_caregory_panel);
 
@@ -124,8 +124,10 @@
 		});
 
 		var html_folder_panel = '';
+		html_folder_panel+='<li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>';
+	
 		html_folder_panel+='{@each folders as item,index}'+
-		'<li><a href="/${item.id}/files">${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+		'<li><a href="/${item.id}/filesForFront">${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
 		'{@/each}';
 		var tpl_folder_panel=juicer(html_folder_panel);
 	    $.ajax({//得到用户网盘文件夹

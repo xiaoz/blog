@@ -55,7 +55,7 @@ if(locals.current_user && (locals.current_user.id == user_id)){
 	    <%if(isCurrentUser){%>
 	    $.ajax({//得到用户网盘文件夹
 			type: "POST",
-			url: "/userinfo/folder",
+			url: "/userinfo/folder/1",
 			success:function(data){
 			    $('#folder_panel').html(tpl_folder_panel.render(data));
 			},

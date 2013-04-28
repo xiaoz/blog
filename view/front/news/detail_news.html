@@ -150,7 +150,7 @@
 	$(document).ready(function() {    
 		var html_caregory_panel = '';
 		html_caregory_panel+='{@each categories as item,index}'+
-		'<li><a href="/articles/${item.user_id}/${item.id}">${item.name}</a> ({@if !item.article_count}0{@else}${item.article_count}{@/if})</li>'+
+		'<li><a href="/newsincategory?user_id=${item.user_id}&category_id=${item.id}">${item.name}</a> ({@if !item.article_count}0{@else}${item.article_count}{@/if})</li>'+
 		'{@/each}';
 		var tpl_caregory_panel=juicer(html_caregory_panel);
 

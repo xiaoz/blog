@@ -1,9 +1,9 @@
  					<div class="box_comment" id='reply<%= indexInCollection+1 %>' reply_id='<%= reply.id %>' >
                         <div class="avatar">
 <% if(reply.author.avatar){ %>
-	<img src='<%= reply.author.avatar %>' title='<%= reply.author.loginname %>' />
+	<img width ="48px" src='<%= reply.author.avatar %>' title='<%= reply.author.loginname %>' />
 	<% }else{ %>
-	<img src='/img/avatar.png' title='<%= reply.author.loginname %>' />
+	<img width ="48px" src='/img/avatar.png' title='<%= reply.author.loginname %>' />
 	<% } %>
 						</div>
                         <div class="comment">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="box_comment">
+                   <!-- <div class="box_comment">
                         <div class="avatar"><img src="images/user_2.jpg" alt="" title=""></div>
                         <div class="comment">
                             <div class="comment_title">
@@ -55,5 +55,5 @@
                             </div>
                         </div>
                     </div>
-                   
+                  -->
 

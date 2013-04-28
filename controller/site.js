@@ -14,6 +14,9 @@ var categoryDao = require('../dao/category.js');
 var replyDao = require('../dao/reply.js');
 var articleCategoryDao = require('../dao/article_category.js');
 
+var folderDao = require('../dao/folder.js');
+var fileDao = require('../dao/file.js');
+
 /*网站首页主体数据*/
 exports.index = function(req, res, next) {
     
@@ -193,9 +196,9 @@ exports.viewArticleForFront = function(req, res, next) {
 
 /*网站首页查看用户某分类下文章*/
 
-exports.viewArticlesOfUserCategory = function(req, res, next) {
-    var category_id = req.params.category_id;
-    var user_id = req.params.user_id;
+exports.viewArticlesOfUserCategoryForFront = function(req, res, next) {
+    var category_id = req.query.category_id;
+    var user_id = req.query.user_id;
     var page  = Number(req.query.page) || 1;
 	var page_size = Number(req.query.page_size) || 6;
 	var start = (page - 1)*page_size;
@@ -203,7 +206,9 @@ exports.viewArticlesOfUserCategory = function(req, res, next) {
         articles : function(cb) {
 			 articleDao.queryArticlesOfUserCategory(user_id, category_id,start,page_size, function(err, articles) {
 		        if (err) {
-		            res.render('notify/notify', {
+		            res.render('front/notify/notify', {
+						layout: 'flayout',
+						active : 'news',
 		                error : '查找分类下文章出错'
 		            });
 		            return;
@@ -227,14 +232,17 @@ exports.viewArticlesOfUserCategory = function(req, res, next) {
       
     }, function(err, results) {
         if (err) {
-        	 res.render('notify/notify', {
+        	 res.render('front/notify/notify', {
+			 	layout: 'flayout',
+				active : 'news',
                  error : '查找分类下文章出错'
              });
         	return;
         }
         categoryDao.queryCategory(category_id, function(err, category) {
-            res.render('article/articles', {
-            	current	: 'user_index',
+            res.render('front/news', {
+				layout: 'flayout',
+	        	active : 'news',
                 user_id : user_id,
                 articles : results.articles,
                 current_page :page,
@@ -246,6 +254,134 @@ exports.viewArticlesOfUserCategory = function(req, res, next) {
         
     });
 };
+/**
+ * 添加用户信息
+ * 
+ * @param files
+ * @param func
+ */
+function file_user_info(files, func) {
+    async.map(files, function(file, callback) {
+        userDao.queryUser(file.user_id, function(err, user) {
+            if (err || !user) {
+                file.user = {};
+                callback(null, file);
+            }
+            else {
+                file.user = user;
+                callback(null, file);
+            }
+        });
+    }, function(err, files) {
+        func(err, files);
+    });
+}
+
+/**
+ * 一级导航：‘文件’
+ */
+exports.filesForFront = function(req, res, next) {
+
+    async.auto({
+        new_files : function(cb) {
+            fileDao.queryNewFiles(8, function(err, new_files) {
+                if (err) {
+                    res.render('notify/notify', {
+                        error : '查询最新文件列表出错'
+                    });
+                    return;
+                }
+                else {
+                    file_user_info(new_files, function(err, new_files) {
+                        cb(null, new_files);
+                    });
+                }
+            });
+        },
+        hot_files : function(cb) {
+            fileDao.queryHotFiles(10, function(err, hot_files) {
+                if (err) {
+                    res.render('notify/notify', {
+                        error : '查询最新文件列表出错'
+                    });
+                    return;
+                }
+                else {
+                    file_user_info(hot_files, function(err, hot_files) {
+                        cb(null, hot_files);
+                    });
+                }
+            });
+        },
+    }, function(err, results) {
+        if (err) {
+            res.render('front/notify/notify', {
+                error : '查找文件列表失败'
+            });
+            return;
+        }
+        res.render('files', {
+            new_files : results.new_files,
+            hot_files : results.hot_files
+        });
+        return;
+    });
+
+};
+/**
+ * 查询文件夹下文件列表
+ */
+exports.viewFilesOfFolderForFront = function(req, res, next) {
+    if (!req.session || !req.session.user) {
+        res.render('notify/notify', {
+            error : '你还没有登录,不能查看您网盘中的文件'
+        });
+        return;
+    }
+
+    var folder_id = req.params.folder_id;
+    var user_id = req.session.user.id;
+
+    folderDao.queryFolder(user_id, folder_id, function(err, folder) {
+        if (err) {
+            res.render('notify/notify', {
+                error : '查找文件夹基本信息出错'
+            });
+            return;
+        }
+        else if (!folder || folder.length <= 0) {
+            res.render('notify/notify', {
+                error : '该文件夹不存在或您不具备访问该文件夹的权限'
+            });
+            return;
+        }
+        else {
+            fileDao.queryFiles(folder_id, user_id, function(err, files) {
+                if (err) {
+                    res.render('vdisk/folder_files', {
+                        files : [],
+                        folder : folder,
+                        folders : [],
+                        user_id : user_id
+                    });
+                    return;
+                }
+                folderDao.queryAllFoldersOfUser(user_id, function(err, folders) {
+                    res.render('vdisk/folder_files', {
+                        files : files || [],
+                        folder : folder,
+                        folders : folders || [],
+                        user_id : user_id
+                    });
+                    return;
+                });
+            });
+        }
+    });
+};
+
+
+
 /*网站首页客户案例*/
 exports.cases = function(req, res, next) {
     

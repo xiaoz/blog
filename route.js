@@ -24,6 +24,9 @@ exports = module.exports = function(app) {
 	// 新闻 blog
 	app.get('/news', site_ctrl.news);
 	app.get('/newsdetail', site_ctrl.viewArticleForFront);
+	app.get('/newsincategory', site_ctrl.viewArticlesOfUserCategoryForFront);
+	app.get('/filesForFront', site_ctrl.filesForFront);
+	app.get('/:folder_id/filesForFront', site_ctrl.viewFilesOfFolderForFront);
 	//客户案例
 	app.get('/cases', site_ctrl.cases);
 	// 联系我们
