@@ -13,6 +13,8 @@ var check = require('validator').check;
 var sanitize = require('validator').sanitize;
 var focusDao = require('../dao/focus.js');
 
+var siteconfigDao = require('../dao/siteconfig.js');
+
 var path_prefix = config.article_pic_path;
 var upload_path = path.join(path.dirname(__dirname), '/public' + path_prefix);
 ndir.mkdir(upload_path, function(err) {
@@ -21,14 +23,81 @@ ndir.mkdir(upload_path, function(err) {
     mod.IncomingForm.UPLOAD_DIR = upload_path;
 });
 
+
+
 /**
  * 网站后台首页
  */
 exports.index = function(req, res, next) {
-		res.render('dashboard', {
-			current: 'dashboard'
+		res.render('index', {
+			current: 'index',
+			active :'site'
         });
 };
+
+
+exports.siteconfig = function(req, res, next) {
+	
+	var method = req.method.toLowerCase();
+    if (method == 'get') {
+    	siteconfigDao.queryConfig(function(err,config){
+    		if (err){
+    			res.render('siteconfig/add', {
+        			current: 'index',
+        			active :'siteconfig',
+        			error : err
+        	    });
+    			return ;
+    		}
+    		o = eval('(' + config[0].shop_config + ')');
+    		res.render('siteconfig/add', {
+    			current: 'index',
+    			active :'siteconfig',
+    			o : o
+    	    });
+    	});
+    }else{
+    	 var site_name = sanitize(req.body.site_name).trim();
+    	 var keyword = sanitize(req.body.keyword).trim();
+    	 var content = sanitize(req.body.content).trim();
+    	 var o = {};
+    	 o.site_name = site_name;
+    	 o.keyword = keyword;
+    	 o.content = content;
+         if (site_name == '' || keyword == '' || content == '') {
+             res.render('siteconfig/add', {
+                 error : '信息不完整。填写完整有助于SEO',
+                 current: 'index',
+     			 active :'siteconfig',
+     			 o : o
+             });
+             return;
+         }
+    	var box = '{"site_name":"' + site_name + '", "keyword":"' + keyword + '", "content":"' + content + '"}';
+    	o = eval('(' + box + ')');
+    	siteconfigDao.updateConfig(box,function(err,info){
+    		if (err){
+    			res.render('siteconfig/add', {
+        			current: 'index',
+        			active :'siteconfig',
+        			error : err
+        	    });
+    			 return ;
+    		}
+    		res.render('siteconfig/add', {
+    			 current: 'index',
+     			 active :'siteconfig',
+                 success : '成功 保存!',
+                 o : o
+              });
+    	})
+    	
+    }
+	
+	
+	
+};
+
 
 exports.focus_index = function(req, res, next) {
 	 if(req.query.id){

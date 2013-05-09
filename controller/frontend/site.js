@@ -1,27 +1,26 @@
 var async = require('async');
-var mysql = require('../lib/mysql.js');
-var Util = require('../lib/util.js');
-var userDao = require('../dao/user.js');
+var mysql = require('../../lib/mysql.js');
+var Util = require('../../lib/util.js');
+var userDao = require('../../dao/user.js');
 
 var check = require('validator').check;
 var sanitize = require('validator').sanitize;
-var common = require('./common/common.js');
-var memssage_ctrl = require('./message/message.js');
-var Util = require('../lib/util.js');
-var log = require('../lib/log.js');
-var articleDao = require('../dao/article.js');
-var categoryDao = require('../dao/category.js');
-var replyDao = require('../dao/reply.js');
-var articleCategoryDao = require('../dao/article_category.js');
+var common = require('./../common/common.js');
+var memssage_ctrl = require('./../message/message.js');
+var log = require('../../lib/log.js');
+var articleDao = require('../../dao/article.js');
+var categoryDao = require('../../dao/category.js');
+var replyDao = require('../../dao/reply.js');
+var articleCategoryDao = require('../../dao/article_category.js');
 
-var folderDao = require('../dao/folder.js');
-var fileDao = require('../dao/file.js');
+var folderDao = require('../../dao/folder.js');
+var fileDao = require('../../dao/file.js');
 
 /*网站首页主体数据*/
 exports.index = function(req, res, next) {
     
-        res.render('front/index', {
-			layout: 'flayout',
+        res.render('frontend/index', {
+			layout: 'frontend/flayout',
         	active : 'index'
         });
   

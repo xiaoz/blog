@@ -33,7 +33,6 @@ exports.signup = function(req, res, next) {
             });
             return;
         }
-
         if (name.length < 5) {
             res.render('sign/signup', {
                 error : '用户名至少需要5个字符。',
@@ -107,7 +106,6 @@ exports.signup = function(req, res, next) {
  */
 exports.signin = function(req, res, next) {
     var method = req.method.toLowerCase();
-    
     if (req.session.user) {
         res.redirect('/index');
         return ;

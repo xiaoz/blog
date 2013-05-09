@@ -11,11 +11,11 @@ var file_ctrl = require('./controller/vdisk/file.js');
 
 
 // 前台相关首页
-//var dashboard_ctrl = require('./controller/dashboard.js');
+var dashboard_ctrl = require('./controller/frontend/site.js');
 
 exports = module.exports = function(app) {
     // 前台相关首页
-//   app.get('/', site_ctrl.index);
+   app.get('/', dashboard_ctrl.index);
 //	// 关于我们
 //	app.get('/about', site_ctrl.about);
 //	// 产品展示
@@ -34,6 +34,13 @@ exports = module.exports = function(app) {
 	
 	 //后台首页
     app.get('/index', site_ctrl.index);
+    
+    app.get('/siteconfig', site_ctrl.siteconfig);
+    app.post('/siteconfig', site_ctrl.siteconfig);
+    
+    
+    
+    
     //焦点图相关
 	app.get('/focus/index', site_ctrl.focus_index);
 	app.get('/focus/add', site_ctrl.focus_add);

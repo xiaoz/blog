@@ -26,21 +26,19 @@
     
 </head>
 <body>
+<% if(locals.current_user){ %>
 	<div class="navbar" id='navbar'><!-- navbar-fixed-top -->
 		<div class="navbar-inner">
 			<div class="container-fluid">
+			
 				<a class="brand" href="/index">xiaoz</a> 
-				<% if(locals.current_user){ %>
 				<div class="btn-group pull-right">	
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 						<i class="icon-user"></i> <%=current_user.loginname %> <span
 						class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="/user/<%=current_user.id%>"><i class="icon-user"></i> 我的主页</a></li>
 						<li><a href="/messages"><i class="icon-envelope"></i> 我的消息</a></li>
-						<li><a href="/folders/edit"><i class="icon-folder-close"></i> 我的文件夹</a></li>
-						<li class="divider"></li>
 						<li><a href="/pwd"><i class="icon-chevron-right"></i>  修改密码</a></li>
 						<li><a href="/avatar"><i class="icon-chevron-right"></i>  修改头像</a></li>
 						<li class="divider"></li>
@@ -48,38 +46,47 @@
 					</ul>
 				</div>
 				<ul class="nav pull-right">
+					 <li><a href="/" target="_blank">网站首页</a></li>
 		            <li id="message_m"></li>
 		            <li class="divider-vertical"></li>
 		        </ul>
-				<%} else{%>
-
-				<%}%>
+				
 				<div class="nav-collapse">
 					<ul class="nav">
 					<% if(locals.current_user){ %>
-						<li><a href="/index">首页</a></li>
+						<li><a href="/index">管理首页</a></li>
+						
+						
+						
 						<li><a href="/users">用户</a></li>
 						<li><a href="/files">文件</a></li>
-						<% if(current_user.loginname == 'admin'){ %>
+						
+						
 						<li><a href="/signup">注册</a></li>
-						<% } %>
 					<% } %>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+	<%}%>
 	<div class="container">
-	
-	<div class="container-fluid">
-		 <div class="row-fluid">
-			<% if(locals.current_user){ %>
+	<% if(locals.current_user){ %>
+		<div class="container-fluid">
+		 	<div class="row-fluid">
 		        <div class="span2">
 		          <div class="well sidebar-nav">
-
 		            <ul class="nav nav-list">
-					  <li class="nav-header <% if(locals.current == 'dashboard'){ %>active <% }%>"><a href="/index">主页</a></li>
+		            	<% if(locals.current == 'index'){ %>
+					  		<li class="nav-header <% if(locals.active == 'site'){ %>active <% }%>"><a href="/index">我的主页</a></li>
+					  		  <li class="divider"></li>
+							  <li class="nav-header">系统基本管理</li>
+				              <li class="<% if(locals.active == 'siteconfig'){ %>active <% }%>" ><a href="/siteconfig">网站基本配置</a></li>
+				              
+					  		
+						<% }else{%>  
+						
+						
 		              <li class="divider"></li>
 					  <li class="nav-header">焦点图管理</li>
 		              <li class="<% if(locals.current == 'focus_index'){ %>active <% }%>"><a href="/focus/index">焦点图列表</a></li>
@@ -88,11 +95,10 @@
 					  <li class="nav-header">blog管理</li>
 		              <li class="<% if(locals.current == 'user_index'){ %>active <% }%>" ><a href="/<%=current_user.id%>/articles">我的文章</a></li>
 						<li class="">
-
-<ol class="activity" id="caregory_panel" ></ol>
-<ol class="activity" id="folder_panel" ></ol>
-</li>
-
+						<ol class="activity" id="caregory_panel" ></ol>
+						<ol class="activity" id="folder_panel" ></ol>
+						</li>
+						
 					  <li class="divider"></li>
 					  <li class="nav-header">文件管理</li>
 		              <li><a href="">Link</a></li>
@@ -102,10 +108,11 @@
 		              <li><a href="#">Link</a></li>
 		              <li><a href="#">Link</a></li>
 		              <li><a href="#">Link</a></li>
+		              <% }%>  
 		            </ul>
 		          </div><!--/.well -->
 		        </div><!--/span-->
-				<% } %>
+				
 		        <div class="span10">
 		           <div class="well">
 		          		<div class="row-fluid">
@@ -115,7 +122,9 @@
 		        </div>
 		   </div>
 	</div>
-		
+	<% }else { %>
+		  <%-body %> 
+	<% } %>
 	</div>
 
 	<script>
@@ -139,7 +148,7 @@
     </script>
 
 	<hr/>
-	<!-- footer -->
+	<!-- footer 
 	<div id='footer'>
 		<div id='footer_main'>
 			<div class='fr'></div>
@@ -153,6 +162,7 @@
 			<div class='sep10'></div>
 		</div>
 	</div>
+	-->
 	<a href="#navbar" id="totop"></a>
 </body>
 </html>
