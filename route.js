@@ -41,7 +41,7 @@ exports = module.exports = function(app) {
 	app.post('/focus/upload', site_ctrl.focus_upload);
 	
 	// 后台注册登录相关
-    app.get('/login', sign_ctrl.signup);
+    app.get('/signup', sign_ctrl.signup);
     app.get('/signin', sign_ctrl.signin);
     app.get('/signout', sign_ctrl.signout);
     app.post('/signup', sign_ctrl.signup);
