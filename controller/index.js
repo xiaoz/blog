@@ -2,8 +2,9 @@ var fs = require('fs');
 var path = require('path');
 var async = require('async');
 var ndir = require('ndir');
-var log = require('../lib/log.js');
 var config = require('../config.js').config;
+var log = require('../lib/log.js');
+
 var common = require('./common/common.js');
 var mod = require('express/node_modules/connect/node_modules/formidable');
 
