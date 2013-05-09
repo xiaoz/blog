@@ -213,6 +213,13 @@ exports.viewArticlesOfUserCategoryForFront = function(req, res, next) {
 		            });
 		            return;
 		        }
+		        if(articles instanceof Array){
+					  for(var i =0,len = articles.length ; i< len ; i++){
+						  articles[i].thumbnails = articles[i].content.match(/\/user_data\/images\/1\/\d+\.\w+/) || "/user_data/images/default.jpg";
+						  var tcontent  = articles[i].content.match(/[^\x00-\xff]/g); 
+						  articles[i].thumbcontent  = tcontent == null ? "暂无内容" :  tcontent.join('').substring(0,107);
+					  }
+	             }
 		        
 		        cb(null, articles);
 			 })
