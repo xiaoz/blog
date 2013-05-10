@@ -34,11 +34,12 @@ exports = module.exports = function(app) {
 	
 	 //后台首页
     app.get('/index', site_ctrl.index);
-    
+    //网站基本配置
     app.get('/siteconfig', site_ctrl.siteconfig);
     app.post('/siteconfig', site_ctrl.siteconfig);
-    
-    
+    //公司相关消息
+    app.get('/companyinfo', site_ctrl.companyinfo);
+    app.post('/companyinfo', site_ctrl.companyinfo);
     
     
     //焦点图相关

@@ -35,9 +35,8 @@ exports.index = function(req, res, next) {
         });
 };
 
-
+ //网站基本配置
 exports.siteconfig = function(req, res, next) {
-	
 	var method = req.method.toLowerCase();
     if (method == 'get') {
     	siteconfigDao.queryConfig(function(err,config){
@@ -49,7 +48,14 @@ exports.siteconfig = function(req, res, next) {
         	    });
     			return ;
     		}
-    		o = eval('(' + config[0].shop_config + ')');
+			if(config[0].shop_config != ''){
+				o = eval('(' + config[0].shop_config + ')');
+			}else{
+				 o.site_name = '公司名称';
+    	 		 o.keyword = '购物';
+    	 		 o.content = '我们是';
+			}
+    		
     		res.render('siteconfig/add', {
     			current: 'index',
     			active :'siteconfig',
@@ -93,12 +99,79 @@ exports.siteconfig = function(req, res, next) {
     	})
     	
     }
-	
-	
-	
 };
-
-
+//公司相关消息
+exports.companyinfo = function(req, res, next) {
+	var method = req.method.toLowerCase();
+    if (method == 'get') {
+    	siteconfigDao.queryCompanyInfo(function(err,config){
+    		if (err){
+    			res.render('company_info/add', {
+        			current: 'index',
+        			active :'company_info',
+        			error : err
+        	    });
+    			return ;
+    		}
+			if(config[0].company_info != ''){
+				o = eval('(' + config[0].company_info + ')');
+			}else{
+				var o = {};
+    	 		o.title = '24小时服务，联系我们我们支持你';
+    	 		o.address = 'Los Angeles, USA, 45896';
+    	 		o.content = '我们的服务';
+				o.tel = '+1 568 247 15 44';
+				o.phone = '+1 568 354 78 25';
+				o.email = 'info@elephantweb.com';
+			}
+			res.render('company_info/add', {
+    			current: 'index',
+    			active :'company_info',
+    			o : o
+    	    });
+    		
+    	});
+    }else{
+    	 var title = req.body.title;
+    	 var address = req.body.address;
+    	 var content = (req.body.content).trim();
+		 var tel = req.body.tel;
+		 var phone = req.body.phone;
+		 var email = sanitize(req.body.email).trim();
+    	 var o = {};
+    	 o.title = title;
+    	 o.address = address;
+    	 o.content = content;o.tel = tel;o.phone = phone;o.email = email;
+         if (title == '' || address == '' || content == '' || tel == '' || phone == ''|| email == '') {
+             res.render('company_info/add', {
+                 error : '信息不完整。',
+                 current: 'index',
+     			 active :'company_info',
+     			 o : o
+             });
+             return;
+         }
+    	var box = '{"title":"' + title + '", "address":"' + address + '", "content":"' + content + '", "tel":"' + tel + '", "phone":"' + phone + '", "email":"' + email + '"}';
+    	o = eval('(' + box + ')');
+    	siteconfigDao.updateCompanyInfo(box,function(err,info){
+    		if (err){
+    			res.render('company_info/add', {
+        			current: 'index',
+        			active :'company_info',
+        			error : err
+        	    });
+    			 return ;
+    		}
+    		res.render('company_info/add', {
+    			 current: 'index',
+     			 active :'company_info',
+                 success : '成功 保存!',
+                 o : o
+              });
+    	})
+    	
+    }
+};
 exports.focus_index = function(req, res, next) {
 	 if(req.query.id){
 		 focusDao.deleteFocus(req.query.id, function(err, info) {
