@@ -387,15 +387,28 @@ exports.viewFilesOfFolderForFront = function(req, res, next) {
 };
 
 
+var jodDao = require('../../dao/jod.js');
 
-/*网站首页客户案例*/
+
+/*网站首页工作案例*/
 exports.cases = function(req, res, next) {
     
-    res.render('frontend/cases', {
-		layout: 'frontend/flayout',
-    	active : 'cases'
-    });
-
+	jodDao.queryJodInfo(function(err,info){
+		 if(err){
+			 res.render('frontend/notify/notify', {
+				 	layout: 'frontend/flayout',
+					active : 'cases',
+	                error : 'err'
+	             });
+			 return ;
+		 }
+		 var jod = info[0].comtent;
+		 res.render('frontend/cases', {
+				layout: 'frontend/flayout',
+		    	active : 'cases',
+		    	info : jod
+		    });
+	})
 };
 /*网站首页主体联系我们*/
 exports.contact = function(req, res, next) {
