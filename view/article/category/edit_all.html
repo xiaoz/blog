@@ -1,6 +1,4 @@
-<%-partial('user/profile',{object:locals.current_user.id, as:'user_id'})%>>
 <div class="main-body">
-
 					<div class='panel'>
 						<div class='header'>
 							<span class='col_fade'>所有文章分类</span>
@@ -15,7 +13,7 @@
 									<th width=100px>删除</th>
 								</thead>
 								<tbody>
-								<%- partial('category/category_can_edit',{collection:categories,as:'category'}) %>
+								<%- partial('article/category/category_can_edit',{collection:categories,as:'category'}) %>
 								</tbody>
 							</table>
 							<% }else{ %>

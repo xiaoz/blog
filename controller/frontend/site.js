@@ -28,8 +28,8 @@ exports.index = function(req, res, next) {
 /*网站首页关于我们*/
 exports.about = function(req, res, next) {
     
-    res.render('front/about', {
-		layout: 'flayout',
+    res.render('frontend/about', {
+		layout: 'frontend/flayout',
     	active : 'about'
     });
 
@@ -37,8 +37,8 @@ exports.about = function(req, res, next) {
 /*网站首页产品展示*/
 exports.product = function(req, res, next) {
     
-    res.render('front/product', {
-		layout: 'flayout',
+    res.render('frontend/product', {
+		layout: 'frontend/flayout',
     	active : 'product'
     });
 
@@ -86,15 +86,15 @@ exports.news = function(req, res, next) {
 	      
 	    }, function(err, results) {
 	        if (err) {
-	        	 res.render('front/notify/notify', {
-				 	layout: 'flayout',
+	        	 res.render('frontend/notify/notify', {
+				 	layout: 'frontend/flayout',
 					active : 'news',
                 	error : '查找用户的所有文章出错'
             	});
             	return;
 	        }
-	        res.render('front/news', {
-	    		layout: 'flayout',
+	        res.render('frontend/news', {
+	    		layout: 'frontend/flayout',
 	        	active : 'news',
 	        	user_id : user_id,
 	        	articles : results.articles,
@@ -116,8 +116,8 @@ exports.viewArticleForFront = function(req, res, next) {
         article : function(cb) {
             articleDao.queryArticle(article_id, function(err, article) {
                 if (err || !article) {
-                    res.render('front/notify/notify', {
-						layout: 'flayout',
+                    res.render('frontend/notify/notify', {
+						layout: 'frontend/flayout',
 						active : 'news',
                         error : '您查找的文章信息存在错误,该文章可能已被删除'
                     });
@@ -174,16 +174,16 @@ exports.viewArticleForFront = function(req, res, next) {
         }
     }, function(err, results) {
         if (err) {
-            res.render('front/notify/notify', {
-				layout: 'flayout',
+            res.render('frontend/notify/notify', {
+				layout: 'frontend/flayout',
 				active : 'news',
                 error : '您查找的文章信息存在错误'
             });
             return;
         }
         results.article.replies = results.article_replies;
-        res.render('front/news/detail_news', {
-			layout: 'flayout',
+        res.render('frontend/news/detail_news', {
+			layout: 'frontend/flayout',
 			active : 'news',
             author : results.author,
             article : results.article,
@@ -205,8 +205,8 @@ exports.viewArticlesOfUserCategoryForFront = function(req, res, next) {
         articles : function(cb) {
 			 articleDao.queryArticlesOfUserCategory(user_id, category_id,start,page_size, function(err, articles) {
 		        if (err) {
-		            res.render('front/notify/notify', {
-						layout: 'flayout',
+		            res.render('frontend/notify/notify', {
+						layout: 'frontend/flayout',
 						active : 'news',
 		                error : '查找分类下文章出错'
 		            });
@@ -238,8 +238,8 @@ exports.viewArticlesOfUserCategoryForFront = function(req, res, next) {
       
     }, function(err, results) {
         if (err) {
-        	 res.render('front/notify/notify', {
-			 	layout: 'flayout',
+        	 res.render('frontend/notify/notify', {
+			 	layout: 'frontend/flayout',
 				active : 'news',
                  error : '查找分类下文章出错'
              });
@@ -391,8 +391,8 @@ exports.viewFilesOfFolderForFront = function(req, res, next) {
 /*网站首页客户案例*/
 exports.cases = function(req, res, next) {
     
-    res.render('front/cases', {
-		layout: 'flayout',
+    res.render('frontend/cases', {
+		layout: 'frontend/flayout',
     	active : 'cases'
     });
 
@@ -400,8 +400,8 @@ exports.cases = function(req, res, next) {
 /*网站首页主体联系我们*/
 exports.contact = function(req, res, next) {
     
-    res.render('front/contact', {
-		layout: 'flayout',
+    res.render('frontend/contact', {
+		layout: 'frontend/flayout',
     	active : 'contact'
     });
 

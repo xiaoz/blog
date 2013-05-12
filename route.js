@@ -9,6 +9,10 @@ var upload_ctrl = require('./controller/blog/upload.js');
 var folder_ctrl = require('./controller/vdisk/folder.js');
 var file_ctrl = require('./controller/vdisk/file.js');
 
+//产品相关
+var product_category_ctrl = require('./controller/product/category.js');
+var product_ctrl = require('./controller/product/list.js');
+var product_reply_ctrl = require('./controller/product/reply.js');
 
 // 前台相关首页
 var dashboard_ctrl = require('./controller/frontend/site.js');
@@ -17,44 +21,48 @@ exports = module.exports = function(app) {
     // 前台相关首页
    app.get('/', dashboard_ctrl.index);
 //	// 关于我们
-//	app.get('/about', site_ctrl.about);
+	app.get('/about', dashboard_ctrl.about);
 //	// 产品展示
-//	app.get('/product', site_ctrl.product);
+	app.get('/product', dashboard_ctrl.product);
 //	// 新闻 blog
-//	app.get('/news', site_ctrl.news);
-//	app.get('/newsdetail', site_ctrl.viewArticleForFront);
-//	app.get('/newsincategory', site_ctrl.viewArticlesOfUserCategoryForFront);
-//	app.get('/filesForFront', site_ctrl.filesForFront);
-//	app.get('/:folder_id/filesForFront', site_ctrl.viewFilesOfFolderForFront);
+	app.get('/news', dashboard_ctrl.news);
+	app.get('/newsdetail', dashboard_ctrl.viewArticleForFront);
+	app.get('/newsincategory', dashboard_ctrl.viewArticlesOfUserCategoryForFront);
+	app.get('/filesForFront', dashboard_ctrl.filesForFront);
+	app.get('/:folder_id/filesForFront', dashboard_ctrl.viewFilesOfFolderForFront);
 //	//客户案例
-//	app.get('/cases', site_ctrl.cases);
+	app.get('/cases', dashboard_ctrl.cases);
 //	// 联系我们
-//	app.get('/contact', site_ctrl.contact);
+	app.get('/contact', dashboard_ctrl.contact);
 	
 	
 	 //后台首页
     app.get('/index', site_ctrl.index);
-    //网站基本配置
+    //网站基本设置
     app.get('/siteconfig', site_ctrl.siteconfig);
     app.post('/siteconfig', site_ctrl.siteconfig);
     //公司相关消息
     app.get('/companyinfo', site_ctrl.companyinfo);
     app.post('/companyinfo', site_ctrl.companyinfo);
-    
+   //关于我们设置
+    app.get('/aboutinfo', site_ctrl.aboutinfo);
+    app.post('/aboutinfo', site_ctrl.aboutinfo);
+   //工作设置
+    app.get('/jodinfo', site_ctrl.jodinfo);
+    app.post('/jodinfo', site_ctrl.jodinfo);
     
     //焦点图相关
 	app.get('/focus/index', site_ctrl.focus_index);
 	app.get('/focus/add', site_ctrl.focus_add);
 	app.post('/focus/add', site_ctrl.focus_add);
 	app.post('/focus/upload', site_ctrl.focus_upload);
-	
 	// 后台注册登录相关
     app.get('/signup', sign_ctrl.signup);
     app.get('/signin', sign_ctrl.signin);
     app.get('/signout', sign_ctrl.signout);
     app.post('/signup', sign_ctrl.signup);
     app.post('/signin', sign_ctrl.signin);
-    
+     
     // 用户相关
     app.get('/user/:id', user_ctrl.index);
     app.get('/avatar', user_ctrl.getAvatar);
@@ -63,9 +71,11 @@ exports = module.exports = function(app) {
     app.post('/pwd/update', user_ctrl.updatePwd);
     app.get('/users', user_ctrl.users);
     app.post('/positive_users', user_ctrl.positiveUsers);
+    
     // sidebar
     app.post('/userinfo/category/:user_id', user_ctrl.getUserCategories);
     app.post('/userinfo/folder/:user_id', user_ctrl.getUserFolders);
+    app.post('/userinfo/product/:user_id', user_ctrl.getUserProductCategories);
 	
     // message相关
     app.post('/messages/unread', message_ctrl.unread_message_count);
@@ -92,7 +102,29 @@ exports = module.exports = function(app) {
 	// reply
     app.post('/:article_id/reply', reply_ctrl.createReply);
     app.post('/reply/:reply_id/delete', reply_ctrl.deleteReply);
+    
+	// 产品分类相关
+    app.get('/product/categories/edit', product_category_ctrl.editCategories);
+    app.get('/product/category/:category_id/edit', product_category_ctrl.editCategory);
+    app.post('/product/category/:category_id/modify', product_category_ctrl.modifyCategory);
+    app.post('/product/category/add', product_category_ctrl.addCategory);
+    app.get('/product/category/:category_id/delete', product_category_ctrl.deleteCategory);
+    
+    // 产品相关
+    app.get('/product/create', product_ctrl.createArticle);
+    app.post('/product/create', product_ctrl.createArticle);
+    app.get('/product/:product_id/edit', product_ctrl.editArticle);
+    app.post('/product/:product_id/modify', product_ctrl.modifyArticle);
+    app.get('/product/:product_id/delete', product_ctrl.deleteArticle);
+    app.get('/products/:user_id/:category_id', product_ctrl.viewArticlesOfUserCategory);
+    app.get('/:user_id/products', product_ctrl.viewArticlesOfUser);
+    app.get('/product/:product_id', product_ctrl.viewArticle);
+	
+	// 产品reply
+    app.post('/:product_id/reply', product_reply_ctrl.createReply);
+    app.post('/product/reply/:reply_id/delete', product_reply_ctrl.deleteReply);
 
+    
     // 上传图片
     app.post('/upload/image', upload_ctrl.upload_image);
 	
@@ -121,7 +153,8 @@ exports = module.exports = function(app) {
 	
 	
     app.get('*', function(req, res){
-		  res.send('what???', 404);
+		  res.send("<div style=\"width:960px;margin:0 auto;text-align: center;\" ><img  src =\"/img/15.jpg\" /><p><a href=\"/\">返回首页</a></p></div>", 404);
+
 	});
 };
 

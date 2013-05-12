@@ -54,15 +54,10 @@
 				<div class="nav-collapse">
 					<ul class="nav">
 					<% if(locals.current_user){ %>
-						<li><a href="/index">管理首页</a></li>
+						<li class="<% if(locals.current == 'index'){ %>active <% }%>"><a  href="/index">管理首页</a></li>
+						<li class="<% if(locals.current == 'blog'){ %>active <% }%>" ><a href="/<%=current_user.id%>/articles">新闻&文档管理</a></li>
 						
-						
-						
-						<li><a href="/users">用户</a></li>
-						<li><a href="/files">文件</a></li>
-						
-						
-						<li><a href="/signup">注册</a></li>
+						<li class="<% if(locals.current == 'product'){ %>active <% }%>" ><a href="/<%=current_user.id%>/products">产品管理</a></li>
 					<% } %>
 					</ul>
 				</div>
@@ -76,39 +71,46 @@
 		 	<div class="row-fluid">
 		        <div class="span2">
 		          <div class="well sidebar-nav">
-		            <ul class="nav nav-list">
+		            <ul class="nav nav-list" style="padding: 8px">
 		            	<% if(locals.current == 'index'){ %>
 					  		<li class="nav-header <% if(locals.active == 'site'){ %>active <% }%>"><a href="/index">我的主页</a></li>
 					  		  <li class="divider"></li>
 				              <li class="<% if(locals.active == 'siteconfig'){ %>active <% }%>" ><a href="/siteconfig">网站基本配置</a></li>
 				              <li class="divider"></li>
-					  		  <li class="<% if(locals.active == 'company_info'){ %>active <% }%>" ><a href="/companyinfo">公司相关消息</a></li>
-				              
-						<% }else{%>  
-						
-						
-		              <li class="divider"></li>
-					  <li class="nav-header">焦点图管理</li>
-		              <li class="<% if(locals.current == 'focus_index'){ %>active <% }%>"><a href="/focus/index">焦点图列表</a></li>
-		              <li class="<% if(locals.current == 'focus_add'){ %>active <% }%>"><a href="/focus/add">添加焦点图</a></li>
-		              <li class="divider"></li>
-					  <li class="nav-header">blog管理</li>
-		              <li class="<% if(locals.current == 'user_index'){ %>active <% }%>" ><a href="/<%=current_user.id%>/articles">我的文章</a></li>
+					  		  <li class="<% if(locals.active == 'company_info'){ %>active <% }%>" ><a href="/companyinfo">联系我们设置</a></li>
+					  		  <li class="divider"></li>
+					  		  <li class="<% if(locals.active == 'about_info'){ %>active <% }%>" ><a href="/aboutinfo">关于我们设置</a></li>
+					  		  <li class="divider"></li>
+					  		  <li class="<% if(locals.active == 'jod_info'){ %>active <% }%>" ><a href="/jodinfo">工作设置</a></li>
+					  		  <li class="divider"></li>
+					  		  <li class="nav-header">首页焦点图管理</li>
+					  		  <li class="<% if(locals.active == 'focus_index'){ %>active <% }%>"><a href="/focus/index">焦点图列表</a></li>
+		              		  <li class="<% if(locals.active == 'focus_add'){ %>active <% }%>"><a href="/focus/add">添加焦点图</a></li>
+		              		  
+		              		  
+						<% }else if(locals.current == 'blog'){%>  
+		
+		              	<li class="" ><a href="/article/create" class="btn btn-link"><i class="icon-pencil "></i> 发布文章</a></li>
+		              	 <li class="divider"></li>
+		              	
+		              	<li class="" ><a href="/file/upload" class="btn btn-link"><i class="icon-upload "></i> 上传文件</a></li>
+		              	 <li class="divider"></li>
 						<li class="">
-						<ol class="activity" id="caregory_panel" ></ol>
-						<ol class="activity" id="folder_panel" ></ol>
+							<ol class="activity" id="caregory_panel" ></ol>
+							<ol class="activity" id="folder_panel" ></ol>
 						</li>
-						
-					  <li class="divider"></li>
-					  <li class="nav-header">文件管理</li>
-		              <li><a href="">Link</a></li>
-		              <li><a href="#">Link</a></li>
-		              <li><a href="#">Link</a></li>
-		              <li class="nav-header">Sidebar</li>
-		              <li><a href="#">Link</a></li>
-		              <li><a href="#">Link</a></li>
-		              <li><a href="#">Link</a></li>
+					  <% }else if(locals.current == 'product'){%>  
+					  
+					  	 <li class="" ><a href="/product/create" class="btn btn-link"><i class="icon-pencil "></i> 发布产品</a></li>
+		              	 <li class="divider"></li>
+		              	 
+		              	<li ><a href="/1/products">产品列表</a></li>
+						<li class="">
+							<ol class="activity" id="caregory_panel" ></ol>
+						</li>
+					  
 		              <% }%>  
+		              
 		            </ul>
 		          </div><!--/.well -->
 		        </div><!--/span-->
@@ -129,21 +131,73 @@
 
 	<script>
         <% if(locals.current_user){ %>
-        $.ajax({
-            type : "POST",
-            url : "/messages/unread",
-            success : function(data) {
-                if (data.count == 0) {
-                    $('#message_m').html('');
-                }
-                else {
-                    $('#message_m').html('<a href="/messages"><i class="icon-envelope icon-white"></i> 新消息(' + data.count + ')</a>');
-                }
-            },
-            error : function() {
-                $('#message_m').html('');
-            }
-        });
+		        $.ajax({
+		            type : "POST",
+		            url : "/messages/unread",
+		            success : function(data) {
+		                if (data.count == 0) {
+		                    $('#message_m').html('');
+		                }
+		                else {
+		                    $('#message_m').html('<a href="/messages"><i class="icon-envelope icon-white"></i> 新消息(' + data.count + ')</a>');
+		                }
+		            },
+		            error : function() {
+		                $('#message_m').html('');
+		            }
+		        });
+		        $(document).ready(function() {    
+		        <% if(locals.current == 'blog'){ %>
+		        		var html_caregory_panel = '';
+		        			html_caregory_panel+='<li>&nbsp;新闻分类&nbsp;&nbsp;&nbsp;&nbsp;<a href="/categories/edit/">编辑</a></li>'; 
+		        		html_caregory_panel+='{@each categories as item,index}'+
+		        		'<li>▶&nbsp;&nbsp;<a href="/articles/${item.user_id}/${item.id}">${item.name}&nbsp;&nbsp;({@if !item.article_count}0{@else}${item.article_count}{@/if})</a></li>'+
+		        		'{@/each}';
+		        		var tpl_caregory_panel=juicer(html_caregory_panel);
+		        		
+		        		var html_folder_panel = '';
+		        		    html_folder_panel+='<li>&nbsp;文件夹&nbsp;&nbsp;&nbsp;&nbsp;<a href="/folders/edit/">编辑</a></li>'; 
+		        		html_folder_panel+='{@each folders as item,index}'+
+		        		'<li>▶&nbsp;&nbsp;<a href="/${item.id}/files">${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+		        		'{@/each}';
+		        		var tpl_folder_panel=juicer(html_folder_panel);
+		        		
+		        	    $.ajax({//得到用户文章分类
+		        			type: 'POST',
+		        			url: '/userinfo/category/1',
+		        			success:function(data){
+		        			    $('#caregory_panel').html(tpl_caregory_panel.render(data));
+		        			},
+		        		  	error:function(){}
+		        		});
+		        	    $.ajax({//得到用户网盘文件夹
+		        			type: "POST",
+		        			url: "/userinfo/folder/1",
+		        			success:function(data){
+		        			    $('#folder_panel').html(tpl_folder_panel.render(data));
+		        			},
+		        		  	error:function(){}
+		        		});
+		        
+		         <% }%>
+		         <% if(locals.current == 'product'){ %>
+		        		var html_caregory_panel = '';
+		        			html_caregory_panel+='<li>&nbsp;产品分类&nbsp;&nbsp;&nbsp;&nbsp;<a href="/product/categories/edit/">编辑</a></li>'; 
+		        		html_caregory_panel+='{@each categories as item,index}'+
+		        		'<li>▶&nbsp;&nbsp;<a href="/products/${item.user_id}/${item.id}">${item.name}&nbsp;&nbsp;({@if !item.article_count}0{@else}${item.article_count}{@/if})</a></li>'+
+		        		'{@/each}';
+		        		var tpl_caregory_panel=juicer(html_caregory_panel);
+		        	    $.ajax({//得到用户产品分类
+		        			type: 'POST',
+		        			url: '/userinfo/product/1',
+		        			success:function(data){
+		        			    $('#caregory_panel').html(tpl_caregory_panel.render(data));
+		        			},
+		        		  	error:function(){}
+		        		});
+
+		         <% }%>
+		    	});
         <%}%>
     </script>
 

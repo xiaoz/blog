@@ -16,7 +16,7 @@
 <!--             	 -->
 			<% if(articles && articles.length > 0){
 			%>
-			<%- partial('front/news/news_item',{collection:articles,as:'article'}) %>
+			<%- partial('frontend/news/news_item',{collection:articles,as:'article'}) %>
 			<%}else{%>
 			<p class='col_fade' style="margin:20px;">该用户暂无文章</p>
 			<%}%>

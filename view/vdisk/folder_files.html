@@ -3,8 +3,8 @@
 	<div class='panel'>
 		<div class='header' style='height:28px;line-height:28px;'>
 			<span class='col_fade'><span class="label label-important"><%=folder.name%></span> (共<span id="file_count_span" class="label label-important"><%=files.length%></span>个文件)</span>
-			<div style='float:right;'>
-				跳转到 <select class="span2" onchange="viewFolderFiles(this.value)" value='<%=folder.id%>'>
+			<div style='float:right;'class="span4">
+				<select class="span6" onchange="viewFolderFiles(this.value)" value='<%=folder.id%>'>
 	              <%
 	              	for(var i = 0; i < folders.length; i++){
 	              		if(folders[i].id == folder.id){
@@ -20,6 +20,9 @@
 	              %>
 	             </select>
 			</div>
+			<div style='float:right;'>
+				跳转到 
+				</div>
 		</div>
 		<table class='table folder_files_table' style="width:720px;margin:20px;">
 			<thead>

@@ -12,6 +12,9 @@ var folderDao = require('../../dao/folder.js');
 var categoryDao = require('../../dao/category.js');
 var fileDao = require('../../dao/file.js');
 
+var productCategoryDao = require('../../dao/product_categorys.js');
+
+
 var path_prefix = config.avatar_path;
 var upload_path = path.join(path.dirname(__dirname), '../public' + path_prefix);
 ndir.mkdir(upload_path, function(err) {
@@ -283,7 +286,9 @@ exports.getUserFolders = function(req, res, next) {
  * 查看用户的文章分类
  */
 exports.getUserCategories = function(req, res, next) {
-    var user_id = req.params.user_id;
+    var user_id = req.params.user_id || 1;
+    
+        
     categoryDao.queryCategoriesOfUser(user_id, function(err, categories) {
         if (err) {
             res.json({
@@ -295,6 +300,7 @@ exports.getUserCategories = function(req, res, next) {
             return item.id;
         });
         if (category_ids && category_ids.length > 0) {
+        	
             categoryDao.queryArticlesCountOfCategories(category_ids, function(err, kvs) {
                 for ( var j = 0; j < categories.length; j++) {
                     for ( var i = 0; i < kvs.length; i++) {
@@ -302,13 +308,54 @@ exports.getUserCategories = function(req, res, next) {
                             categories[j].article_count = kvs[i].count;
                     }
                 }
+            
                 res.json({
                     categories : categories
                 });
                 return;
             });
+        }else {
+            res.json({
+                categories : []
+            });
+            return;
         }
-        else {
+    });
+};
+
+/**
+ * 查看用户的产品分类
+ */
+exports.getUserProductCategories = function(req, res, next) {
+    var user_id = req.params.user_id || 1;
+    
+        
+    productCategoryDao.queryCategoriesOfUser(user_id, function(err, categories) {
+        if (err) {
+            res.json({
+                categories : []
+            });
+            return;
+        }
+        var category_ids = Array.prototype.map.call(categories, function(item) {
+            return item.id;
+        });
+        if (category_ids && category_ids.length > 0) {
+        	
+        	productCategoryDao.queryArticlesCountOfCategories(category_ids, function(err, kvs) {
+                for ( var j = 0; j < categories.length; j++) {
+                    for ( var i = 0; i < kvs.length; i++) {
+                        if (categories[j].id == kvs[i].category_id)
+                            categories[j].article_count = kvs[i].count;
+                    }
+                }
+            
+                res.json({
+                    categories : categories
+                });
+                return;
+            });
+        }else {
             res.json({
                 categories : []
             });

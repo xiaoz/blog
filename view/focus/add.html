@@ -37,7 +37,7 @@
    <div class="control-group">
 		<label class="control-label">图片 920 x 300 最适合</label>
 		<div class="controls">
-<input class="" type="hidden" name="url" <% if(locals.url){ %>value="<%= url %>"  <% } %> id="J_Url" >
+			<input class="" type="hidden" name="url" <% if(locals.url){ %>value="<%= url %>"  <% } %> id="J_Url" >
 			<img id='current_avatar' style='padding:4px;border:1px solid #eee' src='<% if(locals.url){ %><%= url %> <% } %>'/>
 		</div>
   </div>
@@ -68,7 +68,7 @@
   
   <div class="control-group">
     <div class="controls">
-      <button type="submit" class="btn">保存</button>
+      <button type="submit" class="btn" id="submit_button" disabled="disabled">保存</button>
     </div>
   </div>
 </form>
@@ -90,7 +90,7 @@
 					            $('#file_name_span').html($('#file_name_span').text()+":上传成功");
 					            $('#current_avatar').attr('src', data.url);
  								$('#J_Url').attr('value', data.url);
-
+ 								$('#submit_button').removeAttr('disabled');
 					        }
 					        else {
 					            alert('上传图片失败');
@@ -104,6 +104,7 @@
 				    function changeFileChoose(obj){		
 				        $('#link_upload_file').show();
 						$('#file_name_span').html(obj.value);
+						$('#submit_button').attr('disabled','disabled');
 					}
 				    function uploadAvatar(obj){
 				        $('#link_upload_file').hide();

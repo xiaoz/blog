@@ -1,0 +1,20 @@
+<div class='cell'>
+
+	<div class='user_avatar' style="margin-right:20px;">
+		<div class='calendar'>
+			<img src ="<%=product.goods_img%>" />
+		</div>
+	</div>
+	<a class='article_title' href='/product/<%=product.id%>'><%=product.title%></a> <a class='count fr' href='/product/<%=product.id%>#reply1'><%=product.reply_count%></a>
+	<div class='sep10'></div>
+	<div class='sep5'></div>
+	<span class='col_fade'>
+	• <%=product.visit_count%>次点击 • <%=product.reply_count%>次回复  
+	<%if(product.update_at != product.create_at){%>
+	 •  <%=product.update_at%> 更新  
+	<%}else{%>
+	• <%=product.create_at%>发布
+	<%}%>
+	</span>
+	
+</div>

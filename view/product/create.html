@@ -1,0 +1,149 @@
+<div class="main-body">
+	<div class='panel'>
+		<div class='header'>
+			<span class='col_fade'>发布产品</span>
+		</div>
+		<%if(categories && categories.length>0){%>
+		<form id='create_article_form' action='/product/create' class="form-horizontal" method='post' onSubmit="return check();">
+			<div class='inner'>
+				<%if(locals.edit_error){%>
+				<div class="alert alert-error">
+					<strong><%= edit_error %></strong>
+				</div>
+				<%}%> 
+				
+					<div class="control-group">
+				    <label class="control-label" for="inputTitle">产品名称 ：</label>
+				    <div class="controls">
+				      <input class="span8" type="text" id="inputTitle" <% if(locals.title){ %>value="<%= title %>" <% } %> name="title" placeholder="">
+				     	字数在2到100个之间
+				    </div>
+				  </div>
+		
+				<div class='sep10'></div>
+				<div class='sep10'></div>
+					  <div class="control-group">
+							<label class="control-label">上传产品缩略图：</label>
+							<div class="controls">
+								<input class="" type="hidden" name="goods_img" <% if(locals.goods_img){ %>value="<%= goods_img %>"  <% } %> id="J_Url" >
+								<img id='current_avatar' style='padding:4px;border:1px solid #eee' src='<% if(locals.goods_img){ %><%= goods_img %> <% } %>'/>
+							</div>
+					  </div>
+				   		<div class="control-group">
+						<label class="control-label">选择文件：</label>
+						<div class="controls">
+							<a onclick="chooseAvatar()" href='javascript:void(0)' class="btn btn-info">选择文件</a>
+							<a id="link_upload_file" onclick="uploadAvatar()" href='javascript:void(0)' class="btn btn-info" style="display:none;"'>上传</a>
+							<div style="height:15px;width:100px;"></div>
+							<span  class="label label-info" id="file_name_span">提示信息</span>
+						</div>
+				  		</div>
+				<div class='sep10'></div>
+				<div class='sep10'></div>
+				<div>
+					<label class='bold' for='t_content'>产品分类：</label>
+					<div class='tabbable'>
+						<div style='width: 698px; height: 40px; padding: 10px 0;'>
+						<%-partial('product/category_selectable',{collection:categories, as:'category'}) %>
+						</div>
+					</div>
+				</div>
+				<div class='sep10'></div>
+				<div>
+					<label class='bold' for='t_content'>产品描述：</label>
+					<div class='tabbable'>
+						<div class='input'>
+							<% if(locals.content){ %>
+							<textarea id="editor" name='content' rows='20' style='width: 700px; height: auto;'><%= content %></textarea>
+							<% }else{ %>
+							<textarea id="editor" name='content' rows='20' style='width: 700px; height: auto;'></textarea>
+							<% } %>
+						</div>
+					</div>
+				</div>
+				<input type='hidden' id='article_categories' name='product_categories' value=''></input> <input type='hidden'
+					name='_csrf' value='<%= csrf %>' />
+
+				<div class='form-actions'>
+					<input type='submit' id='submit_btn' disabled="disabled" class='btn btn-large btn-info' value="发布" />
+				</div>
+				<script type='text/javascript'>
+                    window.UEDITOR_CONFIG.minFrameHeight = 500;
+                    var editor = new baidu.editor.ui.Editor();
+                    editor.render('editor');
+
+                    $('.category_selectable').click(function() {
+                        $(this).toggleClass('category_select');
+                    });
+
+                    function check() {
+                        editor.sync();//同步
+                        var values = [];
+                        $('.category_selectable').each(function() {
+                            if ($(this).hasClass('category_select')) {
+                                values.push($(this).attr('tag_id'));
+                            }
+                        });
+                        $('#article_categories').val(values);
+                        if (document.getElementById('inputTitle').value.length > 100 || document.getElementById('inputTitle').value.length < 2) {
+                            alert('标题字数须在2-100之间');
+                            return false;
+                        }
+                        else if (document.getElementById('article_categories').value == '') {
+                            alert('请至少选择一个分类');
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+                </script>
+			</div>
+		</form>
+				<form id="avatarForm" action="/focus/upload" method="post" target="hidden_frame" enctype="multipart/form-data" style="visibility:hidden;">
+					<input type="file" name="avatar" onchange="changeFileChoose(this);" />
+					<input type="submit" id="upload_submit_button"/>
+				</form>
+				<!-- 隐藏提交iframe -->
+				<iframe name="hidden_frame" id="hidden_frame" style="display:none"></iframe>
+				<script type="text/javascript" src="/libs/jquery/jquery.form.js"></script>
+     			 <script>
+					$('#avatarForm').ajaxForm({
+					    complete : function(xhr) {
+					        var data = xhr.responseText;
+					        data = eval("(" + data + ")");
+					        if (data.state=='success') {
+					            $('#file_name_span').html($('#file_name_span').text()+":上传成功");
+					            $('#current_avatar').attr('src', data.url);
+ 								$('#J_Url').attr('value', data.url);
+ 								$('#submit_btn').removeAttr('disabled');
+					        }
+					        else {
+					            alert('上传图片失败');
+					        }
+					    }
+					});
+				    function chooseAvatar() {
+				        $("input[name='avatar']").click();
+				        $('#link_upload_file').show();
+				    }
+				    function changeFileChoose(obj){		
+				        $('#link_upload_file').show();
+						$('#file_name_span').html(obj.value);
+						$('#submit_btn').attr('disabled','disabled');
+					}
+				    function uploadAvatar(obj){
+				        $('#link_upload_file').hide();
+				        $('#upload_submit_button').click();
+				    }
+
+				</script> 		
+		
+				<%}else{%>
+				<div class="alert alert-error">
+					请先<a href='/product/categories/edit'>新建产品分类</a>再发布产品
+				</div>
+				<%}%>
+	</div>
+</div>
+

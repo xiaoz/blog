@@ -1,0 +1,44 @@
+	<% if(locals.error){ %>
+	<div class="alert alert-error">	
+		<a class="close" data-dismiss="alert" href="#">&times;</a>
+		<strong><%= error %></strong>
+	</div>
+	<% } %>
+	<% if(locals.success){ %>
+	<div class="alert alert-success">
+		<strong><%= success %></strong>
+	</div>
+	<% } %>
+<form class="form-horizontal" aciton="/jodinfo" method="post"  onSubmit="return check();">
+
+					<div>
+					<label class='bold' for='t_content'>描述：</label>
+					<div class='tabbable'>
+						<div class='input'>
+							<% if(locals.content){ %>
+							<textarea id="editor" name='content' rows='20' style='width: 700px; height: auto;'><%= content %></textarea>
+							<% }else{ %>
+							<textarea id="editor" name='content' rows='20' style='width: 700px; height: auto;'></textarea>
+							<% } %>
+						</div>
+					</div>
+				</div>
+<input type='hidden' id='article_categories' name='product_categories' value=''></input> <input type='hidden'
+					name='_csrf' value='<%= csrf %>' />
+						<div class='sep10'></div>
+							<div class='sep10'></div>
+  <div class="control-group">
+    <div class="controls">
+					<input type='submit' id='submit_btn'  class='btn btn-large btn-info' value="发布" />
+    </div>
+  </div>
+</form>
+
+<script type='text/javascript'>
+                    window.UEDITOR_CONFIG.minFrameHeight = 500;
+                    var editor = new baidu.editor.ui.Editor();
+                    editor.render('editor');
+                    function check() {
+                        editor.sync();//同步
+                    }
+                </script>

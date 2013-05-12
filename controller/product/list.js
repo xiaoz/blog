@@ -5,36 +5,36 @@ var common = require('../common/common.js');
 var memssage_ctrl = require('../message/message.js');
 var Util = require('../../lib/util.js');
 var log = require('../../lib/log.js');
-var articleDao = require('../../dao/article.js');
+var productDao = require('../../dao/product.js');
 var userDao = require('../../dao/user.js');
-var categoryDao = require('../../dao/category.js');
+var categoryDao = require('../../dao/product_categorys.js');
 var replyDao = require('../../dao/reply.js');
-var articleCategoryDao = require('../../dao/article_category.js');
+var productCategoryDao = require('../../dao/product_category.js');
 
 /**
- * 查看某篇文章
+ * 查看某篇产品
  */
 exports.viewArticle = function(req, res, next) {
-    var article_id = req.params.article_id;
+    var product_id = req.params.product_id;
     var author_id;
     async.auto({
-        article : function(cb) {
-            articleDao.queryArticle(article_id, function(err, article) {
-                if (err || !article) {
+        product : function(cb) {
+            productDao.queryArticle(product_id, function(err, product) {
+                if (err || !product) {
                     res.render('notify/notify', {
-                    	current	: 'blog',
+                    	current	: 'product',
             			active	: 'user_index',
-                        error : '您查找的文章信息存在错误,该文章可能已被删除'
+                        error : '您查找的产品信息存在错误,该产品可能已被删除'
                     });
                     return;
                 }
                 else {
-                    author_id = article.author_id;
-                    cb(null, article);
+                    author_id = product.author_id;
+                    cb(null, product);
                 }
             });
         },
-        author : [ 'article', function(cb) {
+        author : [ 'product', function(cb) {
             userDao.queryUser(author_id, function(err, user) {
                 if (err || !user) {
                     cb(null, {});
@@ -44,13 +44,13 @@ exports.viewArticle = function(req, res, next) {
                 }
             });
         } ],
-        updateArticle : [ 'article', function(cb) {
-            articleDao.updateVisitCountOfArticle(article_id, function(err, info) {
+        updateArticle : [ 'product', function(cb) {
+            productDao.updateVisitCountOfArticle(product_id, function(err, info) {
                 cb(null, null);
             });
         } ],
-        article_categories : function(cb) {
-            categoryDao.queryCategoriesOfArticle(article_id, function(err, categories) {
+        product_categories : function(cb) {
+            categoryDao.queryCategoriesOfProduct(product_id, function(err, categories) {
                 if (err || !categories) {
                     cb(null, []);
                 }
@@ -59,8 +59,8 @@ exports.viewArticle = function(req, res, next) {
                 }
             });
         },
-        article_replies : function(cb) {// 该篇文章的回复
-            replyDao.queryRepliesOfArticle(article_id, function(err, replies) {
+        product_replies : function(cb) {// 该篇产品的回复
+            replyDao.queryRepliesOfArticle(product_id, function(err, replies) {
                 if (err || !replies) {
                     cb(null, []);
                 }
@@ -71,8 +71,8 @@ exports.viewArticle = function(req, res, next) {
                             reply_item.author = user || {};
                             callback(null, reply_item);
                         });
-                    }, function(err, article_replies) {
-                        cb(null, article_replies);
+                    }, function(err, product_replies) {
+                        cb(null, product_replies);
                     });
                 }
             });
@@ -80,57 +80,57 @@ exports.viewArticle = function(req, res, next) {
     }, function(err, results) {
         if (err) {
             res.render('notify/notify', {
-            	current	: 'blog',
+            	current	: 'product',
     			active	: 'user_index',
-                error : '您查找的文章信息存在错误'
+                error : '您查找的产品信息存在错误'
             });
             return;
         }
-        results.article.replies = results.article_replies;
-        res.render('article/article', {
-        	current	: 'blog',
+        results.product.replies = results.product_replies;
+        res.render('product/product', {
+        	current	: 'product',
 			active	: 'user_index',
             author : results.author,
-            article : results.article,
-            article_categories : results.article_categories
+            product : results.product,
+            product_categories : results.product_categories
         });
         return;
     });
 };
 
 /**
- * 点击编辑文章
+ * 点击编辑产品
  */
 exports.editArticle = function(req, res, next) {
     if (!req.session.user) {
         res.render('notify/notify', {
-            error : '未登录用户不能编辑文章'
+            error : '未登录用户不能编辑产品'
         });
         return;
     }
-    var article_id = req.params.article_id;
+    var product_id = req.params.product_id;
     var author_id;
     async.auto({
-        article : function(cb) {
-            articleDao.queryArticle(article_id, function(err, article) {
-                if (err || !article) {
+        product : function(cb) {
+            productDao.queryArticle(product_id, function(err, product) {
+                if (err || !product) {
                     cb(null, {});
                 }
                 else {
-                    author_id = article.author_id;
+                    author_id = product.author_id;
                     if (author_id != req.session.user.id) {
                         res.render('notify/notify', {
-                        	current	: 'blog',
+                        	current	: 'product',
                 			active	: 'user_index',
-                            error : '您不具备编辑该文章的权限'
+                            error : '您不具备编辑该产品的权限'
                         });
                         return;
                     }
-                    cb(null, article);
+                    cb(null, product);
                 }
             });
         },
-        all_categories : [ 'article', function(cb) {
+        all_categories : [ 'product', function(cb) {
             categoryDao.queryCategoriesOfUser(author_id, function(err, categories) {
                 if (err || !categories) {
                     cb(null, []);
@@ -140,36 +140,38 @@ exports.editArticle = function(req, res, next) {
                 }
             });
         } ],
-        article_categories : function(cb) {
-            categoryDao.queryCategoriesOfArticle(article_id, function(err, article_categories) {
-                if (err || !article_categories) {
+        product_categories : function(cb) {
+            categoryDao.queryCategoriesOfProduct(product_id, function(err, product_categories) {
+                if (err || !product_categories) {
                     cb(null, []);
                 }
                 else {
-                    cb(null, article_categories);
+                    cb(null, product_categories);
                 }
             });
         }
     }, function(err, results) {
         if (err) {
             res.render('notify/notify', {
-            	current	: 'blog',
+            	current	: 'product',
     			active	: 'user_index',
-                error : '您要编辑的文章信息存在错误'
+                error : '您要编辑的产品信息存在错误'
             });
             return;
         }
 
         for ( var i = 0; results.all_categories.length && i < results.all_categories.length; i++) {
-            for ( var j = 0; j < results.article_categories.length; j++) {
-                if (results.article_categories[j].id == results.all_categories[i].id) {
+            for ( var j = 0; j < results.product_categories.length; j++) {
+                if (results.product_categories[j].id == results.all_categories[i].id) {
                     results.all_categories[i].is_selected = true;
                 }
             }
         }
 
-        res.render('article/edit', {
-            article : results.article,
+        res.render('product/edit', {
+        	current	: 'product',
+			active	: 'user_index',
+            product : results.product,
             categories : results.all_categories,
             user_id :req.session.user.id
         });
@@ -178,31 +180,32 @@ exports.editArticle = function(req, res, next) {
 };
 
 /**
- * 更改文章
+ * 更改产品
  */
 exports.modifyArticle = function(req, res, next) {
     if (!req.session.user) {
         res.render('notify/notify', {
-            error : '未登录用户不能修改文章'
+            error : '未登录用户不能修改产品'
         });
         return;
     }
-    var article_id = req.params.article_id;
+    var product_id = req.params.product_id;
     var title = sanitize(req.body.title).trim();
     title = sanitize(title).xss();
     var content = req.body.content;
-    var article_categories = [];
-    if (req.body.article_categories != '') {
-        article_categories = req.body.article_categories.split(',');
+    var goods_img = req.body.goods_img;
+    var product_categories = [];
+    if (req.body.product_categories != '') {
+        product_categories = req.body.product_categories.split(',');
     }
     var updateDate = Util.format_date(new Date());
 
     async.auto({
-        updateArticle : function(cb) {// 更新文章基本信息
-            articleDao.updateArticle(title, content, updateDate, article_id, function(err, info) {
+        updateArticle : function(cb) {// 更新产品基本信息
+            productDao.updateArticle(title, content, updateDate, goods_img,product_id, function(err, info) {
                 if (err) {
                     res.render('notify/notify', {
-                        error : '修改文章发生错误'
+                        error : '修改产品发生错误'
                     });
                     return;
                 }
@@ -211,9 +214,9 @@ exports.modifyArticle = function(req, res, next) {
                         var mbody = {};
                         mbody.from_user_id = req.session.user.id;
                         mbody.from_user_name = req.session.user.loginname;
-                        mbody.article_id = article_id;
-                        mbody.article_title = title;
-                        memssage_ctrl.create_message(common.MessageType.update_article, user.id, JSON.stringify(mbody), function() {
+                        mbody.product_id = product_id;
+                        mbody.product_title = title;
+                        memssage_ctrl.create_message(common.MessageType.update_product, user.id, JSON.stringify(mbody), function() {
                             callback();
                         });
                     }, function(err) {
@@ -222,18 +225,18 @@ exports.modifyArticle = function(req, res, next) {
                 });
             });
         },
-        deleteCategoriesOfArticle : [ 'updateArticle', function(cb) {// 删除旧的文章分类
-            articleCategoryDao.deleteCategoriesOfArticle(article_id, function(err, info) {
+        deleteCategoriesOfProduct : [ 'updateArticle', function(cb) {// 删除旧的产品分类
+            productCategoryDao.deleteCategoriesOfProduct(product_id, function(err, info) {
                 if (err) {
-                    log.error('删除文章旧分类发生异常,articleId:' + article_id);
+                    log.error('删除产品旧分类发生异常,productId:' + product_id);
                 }
                 cb(null, '');
             });
         } ],
-        saveCategoriesOfArticle : [ 'deleteCategoriesOfArticle', function(cb) {// 插入新的文章分类
-            categoryDao.saveCategoriesOfArticle(article_id, article_categories, function(err, categories) {
+        saveCategoriesOfArticle : [ 'deleteCategoriesOfProduct', function(cb) {// 插入新的产品分类
+            categoryDao.saveCategoriesOfArticle(product_id, product_categories, function(err, categories) {
                 if (err) {
-                    log.error('修改文章：插入新的文章分类出现错误[' + article_id + ',' + article_categories + ']');
+                    log.error('修改产品：插入新的产品分类出现错误[' + product_id + ',' + product_categories + ']');
                 }
                 cb(null, '');
             });
@@ -241,18 +244,18 @@ exports.modifyArticle = function(req, res, next) {
     }, function(err, results) {
         if (err) {
             res.render('notify/notify', {
-            	current	: 'blog',
+            	current	: 'product',
     			active	: 'user_index',
-                error : '修改文章时发生错误'
+                error : '修改产品时发生错误'
             });
             return;
         }
-        res.redirect('/article/' + article_id);
+        res.redirect('/product/' + product_id);
     });
 };
 
 /**
- * 删除文章
+ * 删除产品
  * 
  * @param req
  * @param res
@@ -261,42 +264,42 @@ exports.modifyArticle = function(req, res, next) {
 exports.deleteArticle = function(req, res, next) {
     if (!req.session.user) {
         res.render('notify/notify', {
-            error : '未登录用户不能删除文章'
+            error : '未登录用户不能删除产品'
         });
         return;
     }
-    articleDao.deleteArticle(req.params.article_id, req.session.user.id, function(err, info) {
+    productDao.deleteArticle(req.params.product_id, req.session.user.id, function(err, info) {
         if (err) {
             res.render('notify/notify', {
-            	current	: 'blog',
+            	current	: 'product',
     			active	: 'user_index',
-                error : '删除文章出错,请检查您是否为该文章作者或者操作是否出错'
+                error : '删除产品出错,请检查您是否为该产品作者或者操作是否出错'
             });
             return;
         }
-        articleCategoryDao.deleteCategoriesOfArticle(req.params.article_id, function(err, info) {
+        productCategoryDao.deleteCategoriesOfProduct(req.params.product_id, function(err, info) {
             if (err) {
                 res.render('notify/notify', {
-                	current	: 'blog',
+                	current	: 'product',
         			active	: 'user_index',
-                    error : '从文章分类中删除这篇文章出错'
+                    error : '从产品分类中删除这篇产品出错'
                 });
                 return;
             }
 
-            replyDao.deleteRepliesOfArticle(req.params.article_id, function(err, info) {
+            replyDao.deleteRepliesOfArticle(req.params.product_id, function(err, info) {
                 if (err) {
                     res.render('notify/notify', {
-                    	current	: 'blog',
+                    	current	: 'product',
             			active	: 'user_index',
-                        error : '删除这篇文章的回复出错'
+                        error : '删除这篇产品的回复出错'
                     });
                     return;
                 }
                 res.render('notify/notify', {
-                	current	: 'blog',
+                	current	: 'product',
         			active	: 'user_index',
-                    success : '删除文章成功'
+                    success : '删除产品成功'
                 });
                 return;
             });
@@ -305,7 +308,7 @@ exports.deleteArticle = function(req, res, next) {
 };
 
 /**
- * 查看用户的文章[不按分类]
+ * 查看用户的产品[不按分类]
  */
 exports.viewArticlesOfUser = function(req, res, next) {
     var user_id = req.params.user_id;
@@ -314,19 +317,19 @@ exports.viewArticlesOfUser = function(req, res, next) {
 	var page_size = Number(req.query.page_size) || 6;
 	var start = (page - 1)*page_size;
 		async.auto({
-	        articles : function(cb) {
-				articleDao.queryArticlesOfUser(user_id,start,page_size, function(err, articles) {
+	        products : function(cb) {
+				productDao.queryArticlesOfUser(user_id,start,page_size, function(err, products) {
 					if (err) {
 	                    cb(null, []);
 	                }
-	                if (!articles) {
+	                if (!products) {
 	                    cb(null, []);
 	                }
-	                cb(null, articles);
+	                cb(null, products);
 				})
 	        },
 	        pages : function(cb) {
-	           articleDao.queryArticlesOfUserTotal(user_id, function(err, total) {
+	           productDao.queryArticlesOfUserTotal(user_id, function(err, total) {
 					if (err) {
 	                    cb(null, []);
 	                }
@@ -341,17 +344,17 @@ exports.viewArticlesOfUser = function(req, res, next) {
 	    }, function(err, results) {
 	        if (err) {
 	        	 res.render('notify/notify', {
-	        		current	: 'blog',
+	        		current	: 'product',
 	     			active	: 'user_index',
-                	error : '查找用户的所有文章出错'
+                	error : '查找用户的所有产品出错'
             	});
             	return;
 	        }
-			res.render('article/user_articles', {
-			current	: 'blog',
+			res.render('product/user_products', {
+			current	: 'product',
 			active	: 'user_index',
             user_id : user_id,
-            articles : results.articles,
+            products : results.products,
 			pages : results.pages,
 			current_page :page
         	});
@@ -362,7 +365,7 @@ exports.viewArticlesOfUser = function(req, res, next) {
 };
 
 /**
- * 查看用户某分类下文章
+ * 查看用户某分类下产品
  */
 exports.viewArticlesOfUserCategory = function(req, res, next) {
     var category_id = req.params.category_id;
@@ -371,22 +374,22 @@ exports.viewArticlesOfUserCategory = function(req, res, next) {
 	var page_size = Number(req.query.page_size) || 6;
 	var start = (page - 1)*page_size;
 	async.auto({
-        articles : function(cb) {
-			 articleDao.queryArticlesOfUserCategory(user_id, category_id,start,page_size, function(err, articles) {
+        products : function(cb) {
+			 productDao.queryArticlesOfUserCategory(user_id, category_id,start,page_size, function(err, products) {
 		        if (err) {
 		            res.render('notify/notify', {
-		            	current	: 'blog',
+		            	current	: 'product',
 		    			active	: 'user_index',
-		                error : '查找分类下文章出错'
+		                error : '查找分类下产品出错'
 		            });
 		            return;
 		        }
 		        
-		        cb(null, articles);
+		        cb(null, products);
 			 })
         },
         pages : function(cb) {
-           articleDao.queryArticlesOfUserCategoryTotal(user_id,category_id, function(err, total) {
+           productDao.queryArticlesOfUserCategoryTotal(user_id,category_id, function(err, total) {
 				if (err) {
                     cb(null, []);
                 }
@@ -401,18 +404,18 @@ exports.viewArticlesOfUserCategory = function(req, res, next) {
     }, function(err, results) {
         if (err) {
         	 res.render('notify/notify', {
-        		 current	: 'blog',
+        		 current	: 'product',
      			 active	: 'user_index',
-                 error : '查找分类下文章出错'
+                 error : '查找分类下产品出错'
              });
         	return;
         }
         categoryDao.queryCategory(category_id, function(err, category) {
-            res.render('article/articles', {
-            	current	: 'blog',
+            res.render('product/products', {
+            	current	: 'product',
     			active	: 'user_index',
                 user_id : user_id,
-                articles : results.articles,
+                products : results.products,
                 current_page :page,
                 pages : results.pages,
                 category : category || {}
@@ -424,12 +427,12 @@ exports.viewArticlesOfUserCategory = function(req, res, next) {
 };
 
 /**
- * 发布新文章
+ * 发布新产品
  */
 exports.createArticle = function(req, res, next) {
     if (!req.session.user) {
         res.render('notify/notify', {
-            error : '未登录用户不能发布文章'
+            error : '未登录用户不能发布产品'
         });
         return;
     }
@@ -444,8 +447,8 @@ exports.createArticle = function(req, res, next) {
                 });
                 return;
             }
-            res.render('article/create', {
-            	current	: 'blog',
+            res.render('product/create', {
+            	current	: 'product',
     			active	: 'user_index',
                 categories : categories
             });
@@ -457,28 +460,29 @@ exports.createArticle = function(req, res, next) {
         var title = sanitize(req.body.title).trim();
         title = sanitize(title).xss();
         var content = req.body.content;// 要配置editor_config.js的textarea才会生效
-        var article_categories = [];
-        if (req.body.article_categories != '') {
-            article_categories = req.body.article_categories.split(',');
+        var goods_img = req.body.goods_img;
+        var product_categories = [];
+        if (req.body.product_categories != '') {
+            product_categories = req.body.product_categories.split(',');
         }
 
         var insertDate = Util.format_date(new Date());
-        articleDao.saveArticle(title, content, req.session.user.id, insertDate, function(err ,info){
+        productDao.saveArticle(title, content, req.session.user.id, insertDate,goods_img, function(err ,info){
             if (err) {
                 res.render('notify/notify', {
-                	current	: 'blog',
+                	current	: 'product',
         			active	: 'user_index',
-                    error : '保存文章时发生错误'
+                    error : '保存产品时发生错误'
                 });
                 return;
             }
 
-            categoryDao.saveCategoriesOfArticle(info.insertId,article_categories, function(err, categories){
+            categoryDao.saveCategoriesOfArticle(info.insertId,product_categories, function(err, categories){
                 if (err) {
                     res.render('notify/notify', {
-                    	current	: 'blog',
+                    	current	: 'product',
             			active	: 'user_index',
-                        error : '保存文章分类时发生错误'
+                        error : '保存产品分类时发生错误'
                     });
                     return;
                 }
@@ -488,13 +492,13 @@ exports.createArticle = function(req, res, next) {
                             var mbody = {};
                             mbody.from_user_id = req.session.user.id;
                             mbody.from_user_name = req.session.user.loginname;
-                            mbody.article_id = info.insertId;
+                            mbody.product_id = info.insertId;
                             mbody._title = title;
-                            memssage_ctrl.create_message(common.MessageType.create_article, user.id, JSON.stringify(mbody), function() {
+                            memssage_ctrl.create_message(common.MessageType.create_product, user.id, JSON.stringify(mbody), function() {
                                 callback();
                             });
                         }, function(err) {
-                            res.redirect('/article/' + info.insertId);
+                            res.redirect('/product/' + info.insertId);
                         });
                     });
                 }

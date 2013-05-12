@@ -14,6 +14,7 @@ var userDao = require('../../dao/user.js');
 var path_prefix = config.vdisk_path;
 
 var upload_path = path.join(path.dirname(__dirname), '../' + path_prefix);
+
 ndir.mkdir(upload_path, function(err) {
     if (err)
         throw err;
@@ -33,6 +34,8 @@ exports.uploadFile = function(req, res, next) {
     if (method == 'get') {
         folderDao.queryAllFoldersOfUser(req.session.user.id, function(err, folders) {
             res.render('vdisk/upload_file', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 folders : folders
             });
             return;
@@ -108,6 +111,8 @@ exports.addFile = function(req, res, next) {
     fileDao.saveFile(file.name, user_id, folder_id, file.hashname, file.size, file.mime, is_public, Util.format_date(new Date()), description, function(err, info) {
         if (err) {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : '保存文件到文件夹出错'
             });
             return;
@@ -142,12 +147,16 @@ exports.viewFilesOfFolder = function(req, res, next) {
     folderDao.queryFolder(user_id, folder_id, function(err, folder) {
         if (err) {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : '查找文件夹基本信息出错'
             });
             return;
         }
         else if (!folder || folder.length <= 0) {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : '该文件夹不存在或您不具备访问该文件夹的权限'
             });
             return;
@@ -165,6 +174,8 @@ exports.viewFilesOfFolder = function(req, res, next) {
                 }
                 folderDao.queryAllFoldersOfUser(user_id, function(err, folders) {
                     res.render('vdisk/folder_files', {
+                    	current	: 'blog',
+            			active	: 'user_index',
                         files : files || [],
                         folder : folder,
                         folders : folders || [],
@@ -283,6 +294,8 @@ exports.viewFile = function(req, res, next) {
     fileDao.queryFile(file_id, function(err, file) {
         if (err) {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : '查看文件详细信息出错,该文件可能不存在或已被删除'
             });
             return;
@@ -293,12 +306,16 @@ exports.viewFile = function(req, res, next) {
                 folderDao.queryAllFoldersOfUser(req.session.user.id, function(err, folders) {
                     if (err) {
                         res.render('notify/notify', {
+                        	current	: 'blog',
+                			active	: 'user_index',
                             error : '查看文件详细信息时查找文件夹目录出错'
                         });
                         return;
                     }
                     else {
                         res.render('vdisk/file', {
+                        	current	: 'blog',
+                			active	: 'user_index',
                             file : file,
                             folders : folders,
                             isOwner : true
@@ -310,6 +327,8 @@ exports.viewFile = function(req, res, next) {
             else {// 非当前文件拥有者，要根据文件是否公开
                 if (file.is_public == '公开') {// 文件公开
                     res.render('vdisk/file', {
+                    	current	: 'blog',
+            			active	: 'user_index',
                         file : file,
                         isOwner : false
                     });
@@ -317,6 +336,8 @@ exports.viewFile = function(req, res, next) {
                 }
                 else {// 文件私有
                     res.render('notify/notify', {
+                    	current	: 'blog',
+            			active	: 'user_index',
                         error : '文件现在状态为私密,您不具备查看该文件权限'
                     });
                     return;
@@ -325,6 +346,8 @@ exports.viewFile = function(req, res, next) {
         }
         else {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : '您查找的文件不存在或已被删除'
             });
             return;
@@ -352,6 +375,8 @@ exports.downloadFile = function(req, res, next) {
                     res.header('Content-Type', "application/octet-stream;charset=utf-8");
                     res.header('Content-Length', file.size);
                     res.header('Content-Disposition', "attachment;filename=" + file.name);
+                    //var newStr = String(""+upload_path + "/" + file.user_id + "/" + file.hash);
+                    //console.log("'"+newStr+"");
                     res.sendfile(""+upload_path + "/" + file.user_id + "/" + file.hash);
                 });
             }

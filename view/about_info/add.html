@@ -1,0 +1,79 @@
+	<% if(locals.error){ %>
+	<div class="alert alert-error">	
+		<a class="close" data-dismiss="alert" href="#">&times;</a>
+		<strong><%= error %></strong>
+	</div>
+	<% } %>
+	<% if(locals.success){ %>
+	<div class="alert alert-success">
+		<strong><%= success %></strong>
+	</div>
+	<% } %>
+<form class="form-horizontal" aciton="/companyinfo" method="post" >
+
+  <div class="control-group">
+    <label class="control-label" for="inputTitle">标题  ：</label>
+    <div class="controls">
+      <input class="span8" type="text" id="inputTitle" <% if(locals.o){ %>value="<%= o.title %>" <% } %> name="title" placeholder="">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDetail">公司描述 :</label>
+    <div class="controls">
+      <textarea rows="5" class="span8" id="inputDetail" name="content"><% if(locals.o ){ %><%= o.content %> <% } %></textarea>
+    </div>
+  </div>
+   <div class="control-group">
+    <label class="control-label" for="inputTitle">我们的目标 简介  ：</label>
+    <div class="controls">
+       <textarea rows="5" class="span8" id="inputDetail" name="content1"><% if(locals.o ){ %><%= o.content1 %> <% } %></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDetail">阶段1 :</label>
+    <div class="controls">
+      <textarea rows="5" class="span8" id="inputDetail" name="content1_1"><% if(locals.o ){ %><%= o.content1_1 %> <% } %></textarea>
+    </div>
+  </div>
+   <div class="control-group">
+    <label class="control-label" for="inputDetail">阶段2 :</label>
+    <div class="controls">
+      <textarea rows="5" class="span8" id="inputDetail" name="content1_2"><% if(locals.o ){ %><%= o.content1_2 %> <% } %></textarea>
+    </div>
+  </div>
+   <div class="control-group">
+    <label class="control-label" for="inputDetail">阶段3 :</label>
+    <div class="controls">
+      <textarea rows="5" class="span8" id="inputDetail" name="content1_3"><% if(locals.o ){ %><%= o.content1_3 %> <% } %></textarea>
+    </div>
+  </div>
+  
+   <div class="control-group">
+    <label class="control-label" for="inputTitle">我们的服务  1：</label>
+    <div class="controls">
+    	<textarea rows="5" class="span8" id="inputDetail" name="content2_1"><% if(locals.o ){ %><%= o.content2_1 %> <% } %></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDetail">我们的服务  2 :</label>
+    <div class="controls">
+      <textarea rows="5" class="span8" id="inputDetail" name="content2_2"><% if(locals.o ){ %><%= o.content2_2 %> <% } %></textarea>
+    </div>
+  </div>
+    <div class="control-group">
+    <label class="control-label" for="inputDetail">我们的服务 3 :</label>
+    <div class="controls">
+      <textarea rows="5" class="span8" id="inputDetail" name="content2_3"><% if(locals.o ){ %><%= o.content2_3 %> <% } %></textarea>
+    </div>
+  </div>  <div class="control-group">
+    <label class="control-label" for="inputDetail">我们的服务  4 :</label>
+    <div class="controls">
+      <textarea rows="5" class="span8" id="inputDetail" name="content2_4"><% if(locals.o ){ %><%= o.content2_4 %> <% } %></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">保存</button>
+    </div>
+  </div>
+</form>

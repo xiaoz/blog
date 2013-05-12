@@ -34,3 +34,19 @@ exports.updateCompanyInfo = function(content, callback){
        callback(err, info);
     });
 };
+/**
+ * 查询关于我们
+ */
+exports.queryAboutInfo= function(callback){
+    mysql.query('select * from site_config  where id =1',function(err, config){
+        callback(err, config);
+    });
+};
+/**
+ * 编辑更新关于我们
+ */
+exports.updateAboutInfo = function(content, callback){
+    mysql.update('update site_config set  about_info = ? where id =1' ,[content], function(err, info) {
+       callback(err, info);
+    });
+};

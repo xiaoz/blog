@@ -4,21 +4,21 @@
 			<span class='col_fade'>分类下文章</span>
 		</div>						
 		<div class='inner'>
-			<h3><%= article.title %></h3>
+			<h3><%= product.title %></h3>
 			<div class='sep10'></div>	
 			<div class='topic_content'>
-				<%- article.content %>
+				<%- product.content %>
 			</div>
 			<div class='sep10'></div><div class='sep10'></div>
 			<span class='col_fade'>分类：</span>
-			<%for(var cli=0;cli < article_categories.length;cli++){%>
-				<a class='category_tag_link' href='/articles/<%=article.author_id%>/<%=article_categories[cli].id%>'><%=article_categories[cli].name%></a>
+			<%for(var cli=0;cli < product_categories.length;cli++){%>
+				<a class='category_tag_link' href='/products/<%=product.author_id%>/<%=product_categories[cli].id%>'><%=product_categories[cli].name%></a>
 			<%}%>
 
 			<div class='sep5'></div>
 			<span class='col_fade'>
-				<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= article.create_at %> 发布
-				&nbsp;&nbsp;&nbsp;&nbsp;<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= article.update_at %> 重新编辑
+				<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= product.create_at %> 发布
+				&nbsp;&nbsp;&nbsp;&nbsp;<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= product.update_at %> 重新编辑
 			</span>
 
 			<span class='sp10'></span>
@@ -26,21 +26,21 @@
 			<% if(locals.current_user){ %>
 			<% if(current_user.id==author.id){ %>
 			<span class='sp10'></span>
-			<a href='/article/<%= article.id %>/edit'><img class='user_icon' src='/img/doc_edit_icon&16.png' title='编辑' /></a>
-			<a href='/article/<%= article.id %>/delete' class='delete_topic_btn'><img class='user_icon' src='/img/trash_icon&16.png' title='删除' /></a>
+			<a href='/product/<%= product.id %>/edit'><img class='user_icon' src='/img/doc_edit_icon&16.png' title='编辑' /></a>
+			<a href='/product/<%= product.id %>/delete' class='delete_topic_btn'><img class='user_icon' src='/img/trash_icon&16.png' title='删除' /></a>
 			<% }%>
 			<% } %>
 		</div>
 	</div>
 	
 	<!-- 回复列表 -->	
-	<% if (article.replies && article.replies.length > 0) { %>
+	<% if (product.replies && product.replies.length > 0) { %>
 	<div class='sep10'></div>
 	<div class='panel'>
 		<div class='header'>
-			<span class='col_fade'><%= article.replies.length %> 回复</span>
+			<span class='col_fade'><%= product.replies.length %> 回复</span>
 		</div>
-		<%- partial('reply/reply', article.replies) %>
+		<%- partial('reply/reply', product.replies) %>
 	</div>
 	<% } %>
 	

@@ -14,7 +14,7 @@ var sanitize = require('validator').sanitize;
 var focusDao = require('../dao/focus.js');
 
 var siteconfigDao = require('../dao/siteconfig.js');
-
+var jodDao = require('../dao/jod.js');
 var path_prefix = config.article_pic_path;
 var upload_path = path.join(path.dirname(__dirname), '/public' + path_prefix);
 ndir.mkdir(upload_path, function(err) {
@@ -172,6 +172,145 @@ exports.companyinfo = function(req, res, next) {
     	
     }
 };
+//关于我们消息
+exports.aboutinfo = function(req, res, next) {
+	var method = req.method.toLowerCase();
+    if (method == 'get') {
+    	siteconfigDao.queryAboutInfo(function(err,config){
+    		if (err){
+    			res.render('about_info/add', {
+        			current: 'index',
+        			active :'about_info',
+        			error : err
+        	    });
+    			return ;
+    		}
+			if(config[0].about_info != ''){
+				o = eval('(' + config[0].about_info + ')');
+			}else{
+				var o = {};
+    	 		o.title = '关于我们公司';
+    	 		o.content = '描述1';
+    	 		o.content1 = '目标描述1';
+    	 		o.content1_1 = '阶段1描述';
+    	 		o.content1_2 = '阶段2描述';
+    	 		o.content1_3 = '阶段3描述';
+    	 		o.content2_1 = '服务1描述';
+    	 		o.content2_2 = '服务2描述';
+    	 		o.content2_3 = '服务3描述';
+    	 		o.content2_4 = '服务4描述';
+			}
+			res.render('about_info/add', {
+    			current: 'index',
+    			active :'about_info',
+    			o : o
+    	    });
+    		
+    	});
+    }else{
+    	 var title = req.body.title;
+    	 var content = (req.body.content).trim();
+    	 var content1 = (req.body.content1).trim();
+    	 var content1_1 = (req.body.content1_1).trim();
+    	 var content1_2 = (req.body.content1_2).trim();
+    	 var content1_3 = (req.body.content1_3).trim();
+    	 var content2_1 = (req.body.content2_1).trim();
+    	 var content2_2 = (req.body.content2_2).trim();
+    	 var content2_3 = (req.body.content2_3).trim();
+    	 var content2_4 = (req.body.content2_4).trim();
+    	 
+    	 var o = {};
+    	  	o.title = '关于我们公司';
+    	  	o.content = '描述1';
+    	  	o.content1 = '目标描述1';
+    	  	o.content1_1 = '阶段1描述';
+    	  	o.content1_2 = '阶段2描述';
+    	  	o.content1_3 = '阶段3描述';
+    	  	o.content2_1 = '服务1描述';
+    	  	o.content2_2 = '服务2描述';
+    	  	o.content2_3 = '服务3描述';
+    	  	o.content2_4 = '服务4描述';
+         if (title == '' || content == '' || content1 == '' || content2_1 == '' || content1_1 == '') {
+             res.render('about_info/add', {
+                 error : '信息不完整。',
+                 current: 'index',
+     			 active :'about_info',
+     			 o : o
+             });
+             return;
+         }
+    	var box = '{"title":"' + title + '", "content":"' + content + '", "content1":"' + content1 + '", "content1_1":"' + content1_1 + '", "content1_2":"' + content1_2 + '", "content1_3":"' + content1_3 + '", "content2_1":"' + content2_1 + '", "content2_2":"' + content2_2 + '", "content2_3":"' + content2_3 + '", "content2_4":"' + content2_4 + '"}';
+    	o = eval('(' + box + ')');
+    	siteconfigDao.updateAboutInfo(box,function(err,info){
+    		if (err){
+    			res.render('about_info/add', {
+        			current: 'index',
+        			active :'about_info',
+        			error : err
+        	    });
+    			 return ;
+    		}
+    		res.render('about_info/add', {
+    			 current: 'index',
+     			 active :'about_info',
+                 success : '成功 保存!',
+                 o : o
+              });
+    	})
+    	
+    }
+};
+
+//工作消息
+exports.jodinfo = function(req, res, next) {
+	var method = req.method.toLowerCase();
+    if (method == 'get') {
+    	jodDao.queryJodInfo(function(err,config){
+    		if (err){
+    			res.render('jod_info/add', {
+        			current: 'index',
+        			active :'jod_info',
+        			error : err
+        	    });
+    			return ;
+    		}
+			res.render('jod_info/add', {
+    			current: 'index',
+    			active :'jod_info',
+    			content : config[0].comtent
+    	    });
+    		
+    	});
+    }else{
+    	 var content = req.body.content;
+         if (content == '') {
+             res.render('jod_info/add', {
+                 error : '信息不完整。',
+                 current: 'index',
+     			 active :'jod_info'
+             });
+             return;
+         }
+    	jodDao.updateJodInfo(content,function(err,info){
+    		if (err){
+    			res.render('jod_info/add', {
+        			current: 'index',
+        			active :'jod_info',
+        			error : err
+        	    });
+    			 return ;
+    		}
+    		res.render('jod_info/add', {
+    			 current: 'index',
+     			 active :'jod_info',
+                 success : '成功 保存!',
+                 content : content
+              });
+    	})
+    }
+};
+
+//首页 焦点图管理
 exports.focus_index = function(req, res, next) {
 	 if(req.query.id){
 		 focusDao.deleteFocus(req.query.id, function(err, info) {
@@ -182,7 +321,8 @@ exports.focus_index = function(req, res, next) {
 		            if (err)
 		                return next(err);
 		            res.render('focus/index', {
-						current: 'focus_index',
+		            	 current: 'index',
+		            	 active: 'focus_index',
 						focus:focus,
 						 success : '删除成功!'
 			        });
@@ -194,7 +334,8 @@ exports.focus_index = function(req, res, next) {
 	            if (err)
 	                return next(err);
 	            res.render('focus/index', {
-					current: 'focus_index',
+	            	 current: 'index',
+	            	 active: 'focus_index',
 					focus:focus
 		        });
 	            return;
@@ -202,6 +343,7 @@ exports.focus_index = function(req, res, next) {
 	 }
        
 };
+
 // 增加焦点图 保存焦点图
 exports.focus_add = function(req, res, next) {
 	var method = req.method.toLowerCase();
@@ -213,7 +355,8 @@ exports.focus_add = function(req, res, next) {
     				 if (err)
     		                return next(err);
     				 res.render('focus/add', {
-    						current: 'focus_add',
+    					 	current: 'index',
+    					 	active: 'focus_add',
     						id : focus_id,
     		                title : info[0].title,
     		                link : info[0].link,
@@ -224,7 +367,8 @@ exports.focus_add = function(req, res, next) {
     			})
     		}else{
     			  res.render('focus/add', {
-    					current: 'focus_add'
+    				  current: 'index',
+    				  active: 'focus_add'
     		        });
     		        return;
     		}
@@ -244,7 +388,8 @@ exports.focus_add = function(req, res, next) {
         if (title == '' || link == '' || url == '') {
             res.render('focus/add', {
                 error : '信息不完整。',
-				current: 'focus_add',
+                current: 'index',
+                active: 'focus_add',
                 title : title,
                 link : link,
 				url : url,
@@ -258,7 +403,8 @@ exports.focus_add = function(req, res, next) {
         catch (e) {
 			 res.render('focus/add', {
                 error : e.message,
-				current: 'focus_add',
+                current: 'index',
+                active: 'focus_add',
                 title : title,
                 link : link,
 				url : url,
@@ -278,7 +424,8 @@ exports.focus_add = function(req, res, next) {
                   if (err)
                       return next(err);
                   res.render('focus/add', {
-      				current: 'focus_add',
+                	  current: 'index',
+                	  active: 'focus_add',
                       success : '成功 保存!'
                   });
                   return;

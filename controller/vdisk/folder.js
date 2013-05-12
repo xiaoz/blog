@@ -16,6 +16,8 @@ exports.editFolders = function(req, res, next) {
     }
     folderDao.queryAllFoldersOfUser(req.session.user.id, function(err, folders) {
         res.render('vdisk/edit_all_folders', {
+        	current	: 'blog',
+			active	: 'user_index',
             folders : folders
         });
     });
@@ -38,6 +40,8 @@ exports.editFolder = function(req, res, next) {
         folderDao.queryFolder(user_id, folder_id, function(err, folder) {
             if (err || !folder) {
                 res.render('vdisk/edit_folder', {
+                	current	: 'blog',
+        			active	: 'user_index',
                     folder : {},
                     folders : []
                 });
@@ -45,6 +49,8 @@ exports.editFolder = function(req, res, next) {
             }
             else {
                 res.render('vdisk/edit_folder', {
+                	current	: 'blog',
+        			active	: 'user_index',
                     folder : folder,
                     folders : folders
                 });
@@ -81,6 +87,8 @@ exports.modifyFolder = function(req, res, next) {
         else {
             folderDao.queryAllFoldersOfUser(req.session.user.id, function(err, folders) {
                 res.render('vdisk/edit_all_folders', {
+                	current	: 'blog',
+        			active	: 'user_index',
                     folders : folders || []
                 });
                 return;
@@ -107,6 +115,8 @@ exports.addFolder = function(req, res, next) {
 
     if (name == '') {
         res.render('notify/notify', {
+        	current	: 'blog',
+			active	: 'user_index',
             error : '请输入文件夹名'
         });
         return;
@@ -115,6 +125,8 @@ exports.addFolder = function(req, res, next) {
     folderDao.saveFolder(name, sequence, req.session.user.id, Util.format_date(new Date()), function(err, info) {
         if (err) {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : '创建新文件夹出错'
             });
             return;
@@ -140,12 +152,16 @@ exports.deleteFolder = function(req, res, next) {
     fileDao.queryFilesOfFolder(folder_id, function(err, files) {
         if (err) {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : '删除文件夹出错'
             });
             return;
         }
         if (files && files.length > 0) {
             res.render('notify/notify', {
+            	current	: 'blog',
+    			active	: 'user_index',
                 error : ' 删除文件夹时请先把文件移到其它文件夹下'
             });
             return;
@@ -153,6 +169,8 @@ exports.deleteFolder = function(req, res, next) {
         folderDao.deleteFolder(folder_id, user_id, function(err, info) {
             if (err) {
                 res.render('notify/notify', {
+                	current	: 'blog',
+        			active	: 'user_index',
                     error : '删除文件夹出错'
                 });
                 return;

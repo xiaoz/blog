@@ -4,7 +4,7 @@ var config = require('./config.js').config;
 
 var app = express.createServer();
 var static_dir = __dirname + '/public';
-
+var download_dir = __dirname + '/home';
 app.configure(function() {
     app.set('view engine', 'html');
     app.set('views', __dirname + '/view');

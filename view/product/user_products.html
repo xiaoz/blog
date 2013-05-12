@@ -1,0 +1,20 @@
+
+<div class="main-body">
+		<div class='panel'>
+			<div class='header'>
+				<span class='col_fade'>所有产品</span>
+			</div>
+			<%
+			if(products && products.length > 0){
+			%>
+			<%- partial('product/product_item',{collection:products,as:'product'}) %>
+			
+			
+			<%-partial('pagination',{pages:pages,current_pages:current_page,base:'/'+user_id+'/products'})%>
+			<%}else{%>
+			<p class='col_fade' style="margin:20px;">暂无产品</p>
+			<%}%>
+			
+		</div>
+
+</div>
