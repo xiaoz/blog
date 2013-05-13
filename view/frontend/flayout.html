@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
 		<script type="text/javascript" src="js/jquery.inputstext.js"></script>
 		<script type="text/javascript" src="js/jquery.easing.js"></script>
-		
+		<script type="text/javascript" charset="utf-8" src="/libs/juicer/juicer-min.js"></script>
 		<% if(locals.active == 'index'){ %> 
 			<script type="text/javascript" src="js/my_slider.js"></script>
 		 <% } %>
@@ -54,6 +54,26 @@
 		<!-- footer -->
 		<%-partial('page/footer-bottom')%>
 	</div>
+	<li><a href="portfolio_c2.html">Portfolio 2 columns 1</a></li>
+<script>
+ $(document).ready(function() {    
+		        		var html_caregory_panel = '';
+		        		html_caregory_panel+='{@each categories as item,index}'+
+		        		'<li><a href="/products/${item.user_id}/${item.id}">${item.name}&nbsp;&nbsp;</a></li>'+
+		        		'{@/each}';
+		        		var tpl_caregory_panel=juicer(html_caregory_panel);
+		        	    $.ajax({//得到用户产品分类
+		        			type: 'POST',
+		        			url: '/userinfo/product/1',
+		        			success:function(data){
+		        			    $('#caregory_panel').html(tpl_caregory_panel.render(data));
+		        			},
+		        		  	error:function(){}
+		        		});
+
+});
+</script>
+
 	<div id="setting_themes_block" style="left: -174px;" class="close">
 		<div class="themes_top"></div>
 		<div class="themes_content">
