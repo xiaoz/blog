@@ -29,8 +29,8 @@ exports.queryCompanyInfo= function(callback){
 /**
  * 编辑更新公司基本消息
  */
-exports.updateCompanyInfo = function(content, callback){
-    mysql.update('update site_config set  company_info = ? where id =1' ,[content], function(err, info) {
+exports.updateCompanyInfo = function(content,contact_detail, callback){
+    mysql.update('update site_config set  company_info = ? ,contact_detail = ? where id =1' ,[content,contact_detail], function(err, info) {
        callback(err, info);
     });
 };
@@ -45,8 +45,8 @@ exports.queryAboutInfo= function(callback){
 /**
  * 编辑更新关于我们
  */
-exports.updateAboutInfo = function(content, callback){
-    mysql.update('update site_config set  about_info = ? where id =1' ,[content], function(err, info) {
+exports.updateAboutInfo = function(content,about_detail, callback){
+    mysql.update('update site_config set  about_info = ? ,about_detail = ? where id =1' ,[content,about_detail], function(err, info) {
        callback(err, info);
     });
 };

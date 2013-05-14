@@ -113,13 +113,13 @@ exports.companyinfo = function(req, res, next) {
         	    });
     			return ;
     		}
+    		
 			if(config[0].company_info != ''){
 				o = eval('(' + config[0].company_info + ')');
 			}else{
 				var o = {};
     	 		o.title = '24小时服务，联系我们我们支持你';
     	 		o.address = 'Los Angeles, USA, 45896';
-    	 		o.content = '我们的服务';
 				o.tel = '+1 568 247 15 44';
 				o.phone = '+1 568 354 78 25';
 				o.email = 'info@elephantweb.com';
@@ -127,33 +127,36 @@ exports.companyinfo = function(req, res, next) {
 			res.render('company_info/add', {
     			current: 'index',
     			active :'company_info',
-    			o : o
+    			o : o,
+    			content:config[0].contact_detail
     	    });
     		
     	});
     }else{
     	 var title = req.body.title;
     	 var address = req.body.address;
-    	 var content = (req.body.content).trim();
+    	 var content = req.body.content;
 		 var tel = req.body.tel;
 		 var phone = req.body.phone;
 		 var email = sanitize(req.body.email).trim();
     	 var o = {};
     	 o.title = title;
     	 o.address = address;
-    	 o.content = content;o.tel = tel;o.phone = phone;o.email = email;
-         if (title == '' || address == '' || content == '' || tel == '' || phone == ''|| email == '') {
+    	 o.tel = tel;o.phone = phone;o.email = email;
+         if (title == '' || address == '' || tel == '' || phone == ''|| email == '') {
              res.render('company_info/add', {
                  error : '信息不完整。',
                  current: 'index',
      			 active :'company_info',
-     			 o : o
+     			 o : o,
+     			 content:content
              });
              return;
          }
-    	var box = '{"title":"' + title + '", "address":"' + address + '", "content":"' + content + '", "tel":"' + tel + '", "phone":"' + phone + '", "email":"' + email + '"}';
+    	var box = '{"title":"' + title + '", "address":"' + address + '", "tel":"' + tel + '", "phone":"' + phone + '", "email":"' + email + '"}';
     	o = eval('(' + box + ')');
-    	siteconfigDao.updateCompanyInfo(box,function(err,info){
+    	
+    	siteconfigDao.updateCompanyInfo(box,content,function(err,info){
     		if (err){
     			res.render('company_info/add', {
         			current: 'index',
@@ -166,7 +169,8 @@ exports.companyinfo = function(req, res, next) {
     			 current: 'index',
      			 active :'company_info',
                  success : '成功 保存!',
-                 o : o
+                 o : o,
+                 content:content
               });
     	})
     	
@@ -190,7 +194,6 @@ exports.aboutinfo = function(req, res, next) {
 			}else{
 				var o = {};
     	 		o.title = '关于我们公司';
-    	 		o.content = '描述1';
     	 		o.content1 = '目标描述1';
     	 		o.content1_1 = '阶段1描述';
     	 		o.content1_2 = '阶段2描述';
@@ -203,13 +206,14 @@ exports.aboutinfo = function(req, res, next) {
 			res.render('about_info/add', {
     			current: 'index',
     			active :'about_info',
-    			o : o
+    			o : o,
+    			content:config[0].about_detail
     	    });
     		
     	});
     }else{
     	 var title = req.body.title;
-    	 var content = (req.body.content).trim();
+    	 var content = req.body.content;
     	 var content1 = (req.body.content1).trim();
     	 var content1_1 = (req.body.content1_1).trim();
     	 var content1_2 = (req.body.content1_2).trim();
@@ -218,10 +222,8 @@ exports.aboutinfo = function(req, res, next) {
     	 var content2_2 = (req.body.content2_2).trim();
     	 var content2_3 = (req.body.content2_3).trim();
     	 var content2_4 = (req.body.content2_4).trim();
-    	 
     	 var o = {};
     	  	o.title = '关于我们公司';
-    	  	o.content = '描述1';
     	  	o.content1 = '目标描述1';
     	  	o.content1_1 = '阶段1描述';
     	  	o.content1_2 = '阶段2描述';
@@ -230,18 +232,19 @@ exports.aboutinfo = function(req, res, next) {
     	  	o.content2_2 = '服务2描述';
     	  	o.content2_3 = '服务3描述';
     	  	o.content2_4 = '服务4描述';
-         if (title == '' || content == '' || content1 == '' || content2_1 == '' || content1_1 == '') {
+         if (title == '' || content1 == '' || content2_1 == '' || content1_1 == '') {
              res.render('about_info/add', {
                  error : '信息不完整。',
                  current: 'index',
      			 active :'about_info',
-     			 o : o
+     			 o : o,
+     			 content:content
              });
              return;
          }
-    	var box = '{"title":"' + title + '", "content":"' + content + '", "content1":"' + content1 + '", "content1_1":"' + content1_1 + '", "content1_2":"' + content1_2 + '", "content1_3":"' + content1_3 + '", "content2_1":"' + content2_1 + '", "content2_2":"' + content2_2 + '", "content2_3":"' + content2_3 + '", "content2_4":"' + content2_4 + '"}';
+    	var box = '{"title":"' + title + '", "content1":"' + content1 + '", "content1_1":"' + content1_1 + '", "content1_2":"' + content1_2 + '", "content1_3":"' + content1_3 + '", "content2_1":"' + content2_1 + '", "content2_2":"' + content2_2 + '", "content2_3":"' + content2_3 + '", "content2_4":"' + content2_4 + '"}';
     	o = eval('(' + box + ')');
-    	siteconfigDao.updateAboutInfo(box,function(err,info){
+    	siteconfigDao.updateAboutInfo(box,content,function(err,info){
     		if (err){
     			res.render('about_info/add', {
         			current: 'index',
@@ -254,7 +257,8 @@ exports.aboutinfo = function(req, res, next) {
     			 current: 'index',
      			 active :'about_info',
                  success : '成功 保存!',
-                 o : o
+                 o : o,
+                 content:content
               });
     	})
     	

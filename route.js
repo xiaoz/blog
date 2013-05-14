@@ -17,13 +17,15 @@ var product_reply_ctrl = require('./controller/product/reply.js');
 // 前台相关首页
 var dashboard_ctrl = require('./controller/frontend/site.js');
 
+var front_base = require('./controller/frontend/base.js').base_info;// custom middleware
+
 exports = module.exports = function(app) {
     // 前台相关首页
-   app.get('/', dashboard_ctrl.index);
+   app.get('/',front_base, dashboard_ctrl.index);
 //	// 关于我们
-	app.get('/about', dashboard_ctrl.about);
+	app.get('/about', front_base,dashboard_ctrl.about);
 //	// 产品展示
-	app.get('/product', dashboard_ctrl.product);
+	app.get('/product', front_base,dashboard_ctrl.product);
 //	// 新闻 blog
 	app.get('/news', dashboard_ctrl.news);
 	app.get('/newsdetail', dashboard_ctrl.viewArticleForFront);
@@ -31,9 +33,9 @@ exports = module.exports = function(app) {
 	app.get('/filesForFront', dashboard_ctrl.filesForFront);
 	app.get('/:folder_id/filesForFront', dashboard_ctrl.viewFilesOfFolderForFront);
 //	//客户案例
-	app.get('/cases', dashboard_ctrl.cases);
+	app.get('/cases', front_base, dashboard_ctrl.cases);
 //	// 联系我们
-	app.get('/contact', dashboard_ctrl.contact);
+	app.get('/contact',front_base, dashboard_ctrl.contact);
 	
 	
 	 //后台首页

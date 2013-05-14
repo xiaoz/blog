@@ -16,6 +16,9 @@ var articleCategoryDao = require('../../dao/article_category.js');
 var folderDao = require('../../dao/folder.js');
 var fileDao = require('../../dao/file.js');
 
+
+var siteconfigDao = require('../../dao/siteconfig.js');
+
 /*网站首页主体数据*/
 exports.index = function(req, res, next) {
     
@@ -412,7 +415,6 @@ exports.cases = function(req, res, next) {
 };
 /*网站首页主体联系我们*/
 exports.contact = function(req, res, next) {
-    
     res.render('frontend/contact', {
 		layout: 'frontend/flayout',
     	active : 'contact'

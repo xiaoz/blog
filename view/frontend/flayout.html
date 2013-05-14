@@ -4,8 +4,10 @@
 	<% if(locals.article) { %>
 	<title><%= article.title %></title> 
 	<% }else{ %>
-	<title><%= config.description %></title>
+	<title><%= site_info.site_name %></title>
 	 <% } %>
+	 <meta name="description" content="<%= site_info.content %>">
+	 <meta name="keywords" content="<%= site_info.keyword %>">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<!-- head -->
@@ -54,7 +56,6 @@
 		<!-- footer -->
 		<%-partial('page/footer-bottom')%>
 	</div>
-	<li><a href="portfolio_c2.html">Portfolio 2 columns 1</a></li>
 <script>
  $(document).ready(function() {    
 		        		var html_caregory_panel = '';

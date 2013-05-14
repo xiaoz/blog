@@ -9,48 +9,63 @@
 		<strong><%= success %></strong>
 	</div>
 	<% } %>
-<form class="form-horizontal" aciton="/companyinfo" method="post" >
+<form class="form-horizontal" aciton="/companyinfo" method="post" onSubmit="return check();" >
 
   <div class="control-group">
-    <label class="control-label" for="inputTitle">标题  ：</label>
-    <div class="controls">
+    <label class="bold" for="inputTitle">标题  ：</label>
+    <div class="tabbable">
       <input class="span8" type="text" id="inputTitle" <% if(locals.o){ %>value="<%= o.title %>" <% } %> name="title" placeholder="">
     </div>
   </div>
-  <div class="control-group">
-    <label class="control-label" for="inputDetail">联系我们描述 :</label>
-    <div class="controls">
-      <textarea rows="5" class="span8" id="inputDetail" name="content"><% if(locals.o ){ %><%= o.content %> <% } %></textarea>
-    </div>
-  </div>
+  		<div class="control-group">
+			<label class='bold' for='t_content'>联系我们描述 ：</label>
+			<div class='tabbable'>
+				<div class='input'>
+					<% if(locals.content){ %>
+					<textarea id="editor" name='content' rows='20' style='width: 700px; height: auto;'><%= content %></textarea>
+					<% }else{ %>
+					<textarea id="editor" name='content' rows='20' style='width: 700px; height: auto;'></textarea>
+					<% } %>
+				</div>
+			</div>
+	</div>
    <div class="control-group">
-    <label class="control-label" for="inputUrl">地址:	</label>
-    <div class="controls">
+    <label class="bold" for="inputUrl">地址:	</label>
+    <div class="tabbable">
       <input class="span8" type="text" id="inputUrl" name="address" <% if(locals.o){ %>value="<%= o.address %>" <% } %> placeholder="">
     </div>
   </div>
   
   <div class="control-group">
-    <label class="control-label" for="inputUrl">电话:	</label>
-    <div class="controls">
+    <label class="bold" for="inputUrl">电话:	</label>
+    <div class="tabbable">
       <input class="span8" type="text" id="inputUrl" name="tel" <% if(locals.o){ %>value="<%= o.tel %>" <% } %> placeholder="">
     </div>
   </div>
   <div class="control-group">
-    <label class="control-label" for="inputUrl">手机:	</label>
-    <div class="controls">
+    <label class="bold" for="inputUrl">手机:	</label>
+    <div class="tabbable">
       <input class="span8" type="text" id="inputUrl" name="phone" <% if(locals.o){ %>value="<%= o.phone %>" <% } %> placeholder="">
     </div>
   </div>
   <div class="control-group">
-    <label class="control-label" for="inputUrl">邮箱:	</label>
-    <div class="controls">
+    <label class="bold" for="inputUrl">邮箱:	</label>
+    <div class="tabbable">
       <input class="span8" type="text" id="inputUrl" name="email" <% if(locals.o){ %>value="<%= o.email %>" <% } %> placeholder="">
     </div>
   </div>
+  <input type='hidden' name='_csrf' value='<%= csrf %>' />
   <div class="control-group">
-    <div class="controls">
+    <div class="tabbable">
       <button type="submit" class="btn">保存</button>
     </div>
   </div>
 </form>
+<script type='text/javascript'>
+                    window.UEDITOR_CONFIG.minFrameHeight = 500;
+                    var editor = new baidu.editor.ui.Editor();
+                    editor.render('editor');
+                    function check() {
+                        editor.sync();//同步
+                    }
+                </script>
