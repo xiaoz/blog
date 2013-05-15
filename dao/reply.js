@@ -5,7 +5,7 @@ var Util = require('../lib/util.js');
  * 根据文章id查询文章的评论信息
  */
 exports.queryRepliesOfArticle = function(articleId, callback) {
-    mysql.query('select * from reply where article_id = ?', [ articleId ], function(err, replies) {
+    mysql.query('select * from reply where article_id = ? ', [ articleId ], function(err, replies) {
         callback(err, replies);
     });
 };
@@ -36,5 +36,6 @@ exports.deleteReply = function(userId, replyId, callback){
         callback(err, info);
     });
 };
+
 
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.0.1.1
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: r2602binghua7.mysql.aliyun.com
--- 生成日期: 2013 年 05 月 14 日 06:57
+-- 生成日期: 2013 年 05 月 15 日 11:29
 -- 服务器版本: 5.1.61
--- PHP 版本: 5.2.7
+-- PHP 版本: 5.3.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -25,7 +25,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 表的结构 `article`
 --
 
-CREATE TABLE `article` (
+CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) DEFAULT '',
   `content` varchar(20000) DEFAULT '' COMMENT 'utf8的只能接受21000多个字符(带中文)',
@@ -42,7 +42,7 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
 
 --
--- 导出表中的数据 `article`
+-- 转存表中的数据 `article`
 --
 
 INSERT INTO `article` (`id`, `title`, `content`, `author_id`, `reply_count`, `visit_count`, `collect_count`, `create_at`, `update_at`, `last_reply`, `last_reply_at`, `content_is_html`) VALUES
@@ -62,13 +62,13 @@ INSERT INTO `article` (`id`, `title`, `content`, `author_id`, `reply_count`, `vi
 -- 表的结构 `article_category`
 --
 
-CREATE TABLE `article_category` (
+CREATE TABLE IF NOT EXISTS `article_category` (
   `article_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 导出表中的数据 `article_category`
+-- 转存表中的数据 `article_category`
 --
 
 INSERT INTO `article_category` (`article_id`, `category_id`) VALUES
@@ -88,7 +88,7 @@ INSERT INTO `article_category` (`article_id`, `category_id`) VALUES
 -- 表的结构 `category`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) DEFAULT '',
   `sequence` int(4) DEFAULT '0',
@@ -97,7 +97,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
--- 导出表中的数据 `category`
+-- 转存表中的数据 `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `sequence`, `user_id`) VALUES
@@ -114,7 +114,7 @@ INSERT INTO `category` (`id`, `name`, `sequence`, `user_id`) VALUES
 -- 表的结构 `file`
 --
 
-CREATE TABLE `file` (
+CREATE TABLE IF NOT EXISTS `file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL DEFAULT '',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '文件所有者',
@@ -127,10 +127,10 @@ CREATE TABLE `file` (
   `create_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `description` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
 --
--- 导出表中的数据 `file`
+-- 转存表中的数据 `file`
 --
 
 INSERT INTO `file` (`id`, `name`, `user_id`, `folder_id`, `down_count`, `hash`, `size`, `mime`, `is_public`, `create_at`, `description`) VALUES
@@ -144,7 +144,7 @@ INSERT INTO `file` (`id`, `name`, `user_id`, `folder_id`, `down_count`, `hash`, 
 -- 表的结构 `focus`
 --
 
-CREATE TABLE `focus` (
+CREATE TABLE IF NOT EXISTS `focus` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `title` varchar(100) DEFAULT NULL COMMENT '用户名',
   `link` varchar(200) DEFAULT NULL,
@@ -157,10 +157,10 @@ CREATE TABLE `focus` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `create_at` (`create_at`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 导出表中的数据 `focus`
+-- 转存表中的数据 `focus`
 --
 
 INSERT INTO `focus` (`id`, `title`, `link`, `sort`, `create_at`, `url`, `category`, `content`, `status`) VALUES
@@ -174,17 +174,17 @@ INSERT INTO `focus` (`id`, `title`, `link`, `sort`, `create_at`, `url`, `categor
 -- 表的结构 `folder`
 --
 
-CREATE TABLE `folder` (
+CREATE TABLE IF NOT EXISTS `folder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(15) NOT NULL DEFAULT '0',
   `create_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `sequence` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- 导出表中的数据 `folder`
+-- 转存表中的数据 `folder`
 --
 
 INSERT INTO `folder` (`id`, `user_id`, `name`, `create_at`, `sequence`) VALUES
@@ -198,7 +198,7 @@ INSERT INTO `folder` (`id`, `user_id`, `name`, `create_at`, `sequence`) VALUES
 -- 表的结构 `follow`
 --
 
-CREATE TABLE `follow` (
+CREATE TABLE IF NOT EXISTS `follow` (
   `user_id` int(11) NOT NULL,
   `following_id` int(11) NOT NULL,
   `create_at` datetime DEFAULT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE `follow` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 导出表中的数据 `follow`
+-- 转存表中的数据 `follow`
 --
 
 
@@ -217,13 +217,13 @@ CREATE TABLE `follow` (
 -- 表的结构 `jod_info`
 --
 
-CREATE TABLE `jod_info` (
+CREATE TABLE IF NOT EXISTS `jod_info` (
   `id` int(11) NOT NULL,
   `comtent` varchar(20000) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 导出表中的数据 `jod_info`
+-- 转存表中的数据 `jod_info`
 --
 
 INSERT INTO `jod_info` (`id`, `comtent`) VALUES
@@ -235,7 +235,7 @@ INSERT INTO `jod_info` (`id`, `comtent`) VALUES
 -- 表的结构 `message`
 --
 
-CREATE TABLE `message` (
+CREATE TABLE IF NOT EXISTS `message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) DEFAULT '0' COMMENT '消息类型',
   `user_id` int(11) DEFAULT '0' COMMENT '此条信息的接收者',
@@ -244,10 +244,10 @@ CREATE TABLE `message` (
   `is_read` bit(1) DEFAULT b'0' COMMENT '0表示未读，1表示已读',
   PRIMARY KEY (`id`),
   KEY `index_message_user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=123 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=122 ;
 
 --
--- 导出表中的数据 `message`
+-- 转存表中的数据 `message`
 --
 
 INSERT INTO `message` (`id`, `type`, `user_id`, `content`, `create_at`, `is_read`) VALUES
@@ -265,7 +265,7 @@ INSERT INTO `message` (`id`, `type`, `user_id`, `content`, `create_at`, `is_read
 -- 表的结构 `product`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) DEFAULT '',
   `content` varchar(20000) DEFAULT '' COMMENT 'utf8的只能接受21000多个字符(带中文)',
@@ -280,10 +280,10 @@ CREATE TABLE `product` (
   `content_is_html` int(1) DEFAULT '0',
   `goods_img` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 导出表中的数据 `product`
+-- 转存表中的数据 `product`
 --
 
 INSERT INTO `product` (`id`, `title`, `content`, `author_id`, `reply_count`, `visit_count`, `collect_count`, `create_at`, `update_at`, `last_reply`, `last_reply_at`, `content_is_html`, `goods_img`) VALUES
@@ -296,13 +296,13 @@ INSERT INTO `product` (`id`, `title`, `content`, `author_id`, `reply_count`, `vi
 -- 表的结构 `product_category`
 --
 
-CREATE TABLE `product_category` (
+CREATE TABLE IF NOT EXISTS `product_category` (
   `product_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 导出表中的数据 `product_category`
+-- 转存表中的数据 `product_category`
 --
 
 INSERT INTO `product_category` (`product_id`, `category_id`) VALUES
@@ -315,16 +315,16 @@ INSERT INTO `product_category` (`product_id`, `category_id`) VALUES
 -- 表的结构 `product_categorys`
 --
 
-CREATE TABLE `product_categorys` (
+CREATE TABLE IF NOT EXISTS `product_categorys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) DEFAULT '',
   `sequence` int(4) DEFAULT '0',
   `user_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
--- 导出表中的数据 `product_categorys`
+-- 转存表中的数据 `product_categorys`
 --
 
 INSERT INTO `product_categorys` (`id`, `name`, `sequence`, `user_id`) VALUES
@@ -340,7 +340,7 @@ INSERT INTO `product_categorys` (`id`, `name`, `sequence`, `user_id`) VALUES
 -- 表的结构 `reply`
 --
 
-CREATE TABLE `reply` (
+CREATE TABLE IF NOT EXISTS `reply` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(20000) DEFAULT '',
   `article_id` int(11) DEFAULT '0',
@@ -350,10 +350,10 @@ CREATE TABLE `reply` (
   `content_is_html` int(11) DEFAULT '1',
   `reply_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=72 ;
 
 --
--- 导出表中的数据 `reply`
+-- 转存表中的数据 `reply`
 --
 
 
@@ -363,20 +363,22 @@ CREATE TABLE `reply` (
 -- 表的结构 `site_config`
 --
 
-CREATE TABLE `site_config` (
+CREATE TABLE IF NOT EXISTS `site_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shop_config` text NOT NULL,
   `company_info` text NOT NULL,
   `about_info` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `contact_detail` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `about_detail` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- 导出表中的数据 `site_config`
+-- 转存表中的数据 `site_config`
 --
 
-INSERT INTO `site_config` (`id`, `shop_config`, `company_info`, `about_info`) VALUES
-(1, '{"site_name":"厦门", "keyword":"电子商务 促销", "content":"一个神奇的网站"}', '{"title":"24小时服务，联系我们我们支持你", "address":"Los Angeles, USA, 45896", "content":"我们的服务 sd 213", "tel":"+1 568 247 15 44", "phone":"+1 568 354 78 25", "email":"info@elephantweb.com"}', '{"title":"关于我们公司", "content":"描述1", "content1":"目标描述1", "content1_1":"阶段1描述", "content1_2":"阶段2描述", "content1_3":"阶段3描述", "content2_1":"服务1描述", "content2_2":"服务2描述", "content2_3":"服务3描述", "content2_4":"服务4描述"}');
+INSERT INTO `site_config` (`id`, `shop_config`, `company_info`, `about_info`, `contact_detail`, `about_detail`) VALUES
+(1, '{"site_name":"淘宝网 - 淘！我喜欢", "keyword":"淘宝,掏宝,网上购物,C2C,在线交易,交易市场,网上交易,交易市场,网上买,网上卖,购物网站,团购,网上贸易,安全购物,电子商务,放心买,供应,买卖信息,网店,一口价,拍卖,网上开店,网络购物,打折,免费开店,网购,频道,店铺", "content":"淘宝网 - 亚洲最大、最安全的网上交易平台，提供各类服饰、美容、家居、数码、话费/点卡充值… 8亿优质特价商品，同时提供担保交易(先收货后付款)、先行赔付、假一赔三、七天无理由退换货、数码免费维修等安全交易保障服务，让你全面安心享受网上购物乐趣！"}', '{"title":"WE SUPPORT YOU BY 24 HOURS, CONTACT US", "address":"Los Angeles, USA, 45896", "tel":"+1 568 247 15 44", "phone":"+1 568 354 78 25", "email":"info@elephantweb.com"}', '{"title":"ABOUT THE COMPANY", "content1":"Be distracted by of a page when looking at its layout. The point of using Lorem Ipsum is that. Has a more-or-less. Of letters, as opposed to using content here, content here. Making it look like readable English.", "content1_1":"阶段1描述", "content1_2":"阶段2描述", "content1_3":"阶段3描述", "content2_1":"服务1描述", "content2_2":"服务2描述", "content2_3":"服务3描述", "content2_4":"服务4描述"}', '<p><span class="Apple-style-span" style="font-family:tahoma, arial, 宋体, sans-serif"><div class="title" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:15px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; "><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 11px/17px arial, helvetica, sans-serif; color:#3096d0; text-align:justify; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted.</p></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; "><strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Рandful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate&nbsp;Lorem&nbsp;Ipsum&nbsp;which&nbsp;looks&nbsp;reasonable.&nbsp;The&nbsp;generated&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;therefor&nbsp;use&nbsp;Lorem&nbsp;Ipsum&nbsp;as&nbsp;their&nbsp;default&nbsp;model&nbsp;text.</strong></p><p class="separator_2" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; height:13px; float:none; ">&nbsp;</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; ">Need&nbsp;to&nbsp;be&nbsp;sure&nbsp;there&nbsp;isn&#39;t&nbsp;anything&nbsp;embarrassing&nbsp;hidden&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;text.&nbsp;All&nbsp;the&nbsp;Lorem&nbsp;Ipsum&nbsp;generators&nbsp;on&nbsp;the&nbsp;Internet&nbsp;tend&nbsp;to&nbsp;repeat&nbsp;predefined&nbsp;chunks&nbsp;as&nbsp;necessary,&nbsp;making&nbsp;this&nbsp;the&nbsp;first&nbsp;true&nbsp;generator&nbsp;on&nbsp;the&nbsp;Internet.&nbsp;It&nbsp;uses&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;over&nbsp;200&nbsp;Latin&nbsp;words,&nbsp;combined&nbsp;with&nbsp;a&nbsp;handful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate.</p></span><br /></p>', '<p><span class="Apple-style-span" style="font-family:tahoma, arial, 宋体, sans-serif"><p class="col_9c9c9c" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#9c9c9c; text-align:justify; overflow-x:hidden; overflow-y:hidden; "><em style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;the&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that&nbsp;it&nbsp;has&nbsp;a&nbsp;more-or-less&nbsp;normal&nbsp;distribution&nbsp;of&nbsp;letters.</em></p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">&nbsp;</p><div class="about_pic" style="padding-top:5px; padding-right:5px; padding-bottom:5px; padding-left:5px; margin-top:0px; margin-right:22px; margin-bottom:13px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; width:254px; height:163px; background-image:url(http://127.0.0.1:10080/images/img_border_264_173.jpg); background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; float:left; background-position:initial initial; background-repeat:no-repeat no-repeat; "><img src="http://127.0.0.1:10080/images/img_about1.jpg" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; border-top-style:none; border-right-style:none; border-bottom-style:none; border-left-style:none; border-width:initial; border-color:initial; vertical-align:top; " /></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">reader&nbsp;will&nbsp;be&nbsp;distracted</a>&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less&nbsp;<strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">normal&nbsp;distribution</strong>.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable.</p><p class="quote2" style="padding-top:2px; padding-right:0px; padding-bottom:0px; padding-left:14px; margin-top:9px; margin-bottom:12px; outline-style:none; outline-width:initial; outline-color:initial; font:italic normal normal 11px/17px serif; color:#bfbfbf; text-align:left; border-left-width:3px; border-left-style:solid; border-left-color:#f0f0f0; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;thatnormal&nbsp;distribution.</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;more-or-less.&nbsp;Of&nbsp;lettersopposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.</p><div class="clear" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; height:1px; background-image:none; background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; clear:both; background-position:initial initial; background-repeat:initial initial; "></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">readable&nbsp;content</a>&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.&nbsp;Many&nbsp;desktop&nbsp;publishing&nbsp;packages&nbsp;and&nbsp;web&nbsp;page&nbsp;editors&nbsp;now.</p></span><br /></p>');
 
 -- --------------------------------------------------------
 
@@ -384,7 +386,7 @@ INSERT INTO `site_config` (`id`, `shop_config`, `company_info`, `about_info`) VA
 -- 表的结构 `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `loginname` varchar(30) DEFAULT '' COMMENT '用户名',
   `pwd` varchar(100) DEFAULT '',
@@ -398,7 +400,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1100 ;
 
 --
--- 导出表中的数据 `user`
+-- 转存表中的数据 `user`
 --
 
 INSERT INTO `user` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`, `type`) VALUES
@@ -895,7 +897,7 @@ INSERT INTO `user` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`, `t
 -- 表的结构 `userblog`
 --
 
-CREATE TABLE `userblog` (
+CREATE TABLE IF NOT EXISTS `userblog` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `loginname` varchar(30) DEFAULT '' COMMENT '用户名',
   `pwd` varchar(100) DEFAULT '',
@@ -906,10 +908,10 @@ CREATE TABLE `userblog` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `create_at` (`create_at`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 导出表中的数据 `userblog`
+-- 转存表中的数据 `userblog`
 --
 
 INSERT INTO `userblog` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`, `type`) VALUES
@@ -922,7 +924,7 @@ INSERT INTO `userblog` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`
 -- 表的结构 `xx_case`
 --
 
-CREATE TABLE `xx_case` (
+CREATE TABLE IF NOT EXISTS `xx_case` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linktopic` varchar(255) NOT NULL DEFAULT '',
   `linkimg` varchar(255) NOT NULL DEFAULT '',
@@ -933,7 +935,7 @@ CREATE TABLE `xx_case` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 导出表中的数据 `xx_case`
+-- 转存表中的数据 `xx_case`
 --
 
 INSERT INTO `xx_case` (`id`, `linktopic`, `linkimg`, `smallimg`, `linkstate`, `orders`) VALUES

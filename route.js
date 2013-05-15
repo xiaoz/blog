@@ -16,6 +16,8 @@ var product_reply_ctrl = require('./controller/product/reply.js');
 
 // 前台相关首页
 var dashboard_ctrl = require('./controller/frontend/site.js');
+var reply_ctrl = require('./controller/frontend/reply.js');
+
 
 var front_base = require('./controller/frontend/base.js').base_info;// custom middleware
 
@@ -36,6 +38,11 @@ exports = module.exports = function(app) {
 	app.get('/cases', front_base, dashboard_ctrl.cases);
 //	// 联系我们
 	app.get('/contact',front_base, dashboard_ctrl.contact);
+	
+	app.post('/sendReplay',front_base,reply_ctrl.sendReply);
+	
+	
+	
 	
 	
 	 //后台首页

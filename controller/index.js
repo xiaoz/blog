@@ -49,7 +49,7 @@ exports.siteconfig = function(req, res, next) {
     			return ;
     		}
 			if(config[0].shop_config != ''){
-				o = eval('(' + config[0].shop_config + ')');
+				o = JSON.parse(config[0].shop_config);
 			}else{
 				 o.site_name = '公司名称';
     	 		 o.keyword = '购物';
@@ -79,8 +79,7 @@ exports.siteconfig = function(req, res, next) {
              });
              return;
          }
-    	var box = '{"site_name":"' + site_name + '", "keyword":"' + keyword + '", "content":"' + content + '"}';
-    	o = eval('(' + box + ')');
+    	var box = JSON.stringify(o);
     	siteconfigDao.updateConfig(box,function(err,info){
     		if (err){
     			res.render('siteconfig/add', {
@@ -115,7 +114,7 @@ exports.companyinfo = function(req, res, next) {
     		}
     		
 			if(config[0].company_info != ''){
-				o = eval('(' + config[0].company_info + ')');
+				o = JSON.parse(config[0].company_info);
 			}else{
 				var o = {};
     	 		o.title = '24小时服务，联系我们我们支持你';
@@ -153,9 +152,7 @@ exports.companyinfo = function(req, res, next) {
              });
              return;
          }
-    	var box = '{"title":"' + title + '", "address":"' + address + '", "tel":"' + tel + '", "phone":"' + phone + '", "email":"' + email + '"}';
-    	o = eval('(' + box + ')');
-    	
+    	var box = JSON.stringify(o);
     	siteconfigDao.updateCompanyInfo(box,content,function(err,info){
     		if (err){
     			res.render('company_info/add', {
@@ -190,7 +187,7 @@ exports.aboutinfo = function(req, res, next) {
     			return ;
     		}
 			if(config[0].about_info != ''){
-				o = eval('(' + config[0].about_info + ')');
+				o = JSON.parse(config[0].about_info);
 			}else{
 				var o = {};
     	 		o.title = '关于我们公司';
@@ -223,15 +220,15 @@ exports.aboutinfo = function(req, res, next) {
     	 var content2_3 = (req.body.content2_3).trim();
     	 var content2_4 = (req.body.content2_4).trim();
     	 var o = {};
-    	  	o.title = '关于我们公司';
-    	  	o.content1 = '目标描述1';
-    	  	o.content1_1 = '阶段1描述';
-    	  	o.content1_2 = '阶段2描述';
-    	  	o.content1_3 = '阶段3描述';
-    	  	o.content2_1 = '服务1描述';
-    	  	o.content2_2 = '服务2描述';
-    	  	o.content2_3 = '服务3描述';
-    	  	o.content2_4 = '服务4描述';
+    	  	o.title = title;
+    	  	o.content1 = content1;
+    	  	o.content1_1 = content1_1;
+    	  	o.content1_2 = content1_2;
+    	  	o.content1_3 = content1_3;
+    	  	o.content2_1 = content2_1;
+    	  	o.content2_2 = content2_2;
+    	  	o.content2_3 = content2_3;
+    	  	o.content2_4 = content2_4;
          if (title == '' || content1 == '' || content2_1 == '' || content1_1 == '') {
              res.render('about_info/add', {
                  error : '信息不完整。',
@@ -242,8 +239,8 @@ exports.aboutinfo = function(req, res, next) {
              });
              return;
          }
-    	var box = '{"title":"' + title + '", "content1":"' + content1 + '", "content1_1":"' + content1_1 + '", "content1_2":"' + content1_2 + '", "content1_3":"' + content1_3 + '", "content2_1":"' + content2_1 + '", "content2_2":"' + content2_2 + '", "content2_3":"' + content2_3 + '", "content2_4":"' + content2_4 + '"}';
-    	o = eval('(' + box + ')');
+        var box = JSON.stringify(o);
+        console.log(box);
     	siteconfigDao.updateAboutInfo(box,content,function(err,info){
     		if (err){
     			res.render('about_info/add', {
