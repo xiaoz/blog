@@ -50,7 +50,10 @@
 		<div id="content" class="container">
 			<div class="inner">
 				<%-body %>
+
+ 			<% if(locals.active != 'contact'){ %> 
 				<%-partial('page/footer-top')%>
+		 	<% } %>
 			</div>
 		</div>
 		<!-- footer -->
