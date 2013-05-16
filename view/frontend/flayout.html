@@ -49,7 +49,7 @@
 		<%-partial('page/header')%>
 		<div id="content" class="container">
 			<div class="inner">
-			 	<%-partial('notify/notify')%>
+			 	<div id="messages"><%-partial('notify/notify')%></div>
 				<%-body %>
 
  			<% if(locals.active != 'contact'){ %> 

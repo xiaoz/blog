@@ -28,12 +28,7 @@ exports.sendReply = function(req,res,next){
     mbody.site = site;
     
     if (userName == '' || userEmail == '' || content == '') {
-    	 res.render('frontend/contact', {
-				layout: 'frontend/flayout',
-		    	active : 'contact',
-		    	error : '信息不完整！',
-		    	mbody : mbody
-		 });
+		 res.json({error : '信息不完整！'})
        return;
     }
 	 try {

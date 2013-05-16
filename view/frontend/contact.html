@@ -38,7 +38,7 @@
           <div class="line"></div>
           <div class="block_contact_form">
           	<h3>Contact form</h3>
-              <form action="/contact" method="post" id="contact_form">
+              <form action="" method="post" id="contact_form">
               	<div class="double_block">
                   	<div class="inut_bg active_bg_form">
                       	<input type="text" name="u_name" title="Name&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" <% if(locals.mbody){ %>value="<%= mbody.userName %>" <% } %>   style="display: none; ">
@@ -71,6 +71,7 @@
                   </a>
               </form>
           </div>
+			<div id="J_MsgBox"></div>
       </div>
       <div class="block_cont_right">
       	<div class="block_our_loc">
@@ -97,7 +98,52 @@
 
       $(document).ready(function() {   
       		$('#submit').click(function(){
-      			$('#contact_form').submit();
+$.ajax({
+   url: "/contact",
+	type:"POST",
+	data : $('#contact_form').serialize(),
+	success:function(data){
+		$('#J_MsgBox').html('<div class="error_box"><div><p><b>错误:</b>'+o.error+'</p></div></div>');
+		status = $.parseJSON(data).status;
+			switch (status) {
+				case '0':
+					message('Error, try again later.', 0) 
+					break
+				case '1':
+					message('Message sent successfully!', 1) 
+					break
+				case '2':
+					message('Fill out the required fields!', 0) 
+					break
+				case '3':
+					message('Incorrect email!', 0) 
+					break
+				default:
+					message('Error, try again later.', 0) 					
+			}
+
+			
+		});
+
+		
+	},
+	error:function(){
+
+
+	}
+
+function message(a, b){
+		if(b == 1){
+			$('#status').removeClass('false').addClass('ok');
+		}else{
+			$('#status').removeClass('ok').addClass('false');
+			}
+		$('#status span').text(a).parent().slideDown(function(){setTimeout(function(){$('#status').slideUp()},3000)});
+    }
+   
+});
+				
+      		
       			
         	})
       
