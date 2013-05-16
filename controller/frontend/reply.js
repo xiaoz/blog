@@ -49,13 +49,13 @@ exports.sendReply = function(req,res,next){
      }
        var create_at =  Util.format_date(new Date());
 	  
-      memssage_ctrl.create_message(common.MessageType.subject, article.author_id, JSON.stringify(mbody), function(flag){
+      memssage_ctrl.create_message(common.MessageType.subject, 1 , JSON.stringify(mbody), function(flag){
     	  //成功发送
     	  if(flag){
     		  res.render('frontend/contact', {
   				layout: 'frontend/flayout',
   		    	active : 'contact',
-  		    	sucess : '您的消息已经成功发送，我们会尽快联系您！'
+  		    	success : '您的消息已经成功发送，我们会尽快联系您！'
   		    });
     	  }else{
     		  res.render('frontend/contact', {
@@ -63,13 +63,72 @@ exports.sendReply = function(req,res,next){
   		    	active : 'contact',
   		    	error : '发送消息失败！'
   		    });
+			
     	  }
          
       });
 
 };
 
+exports.sendMsg = function(req,res,next){
+	var content = req.body.u_comment;
+	var title = req.body.u_subject;
+	var userName = sanitize(req.body.u_name).trim();
+	var userEmail = sanitize(req.body.u_mail).trim();
+	userName = sanitize(userName).xss();
+	var phone = sanitize(req.body.u_phone).trim();
+	var site = sanitize(req.body.u_site).trim();
+	
+	var mbody = {};
+    mbody.userName = userName;
+    mbody.userEmail = userEmail;
+    mbody.title = title;
+    mbody.content = content;
+    mbody.phone = phone;
+    mbody.site = site;
+    
+    if (userName == '' || userEmail == '' || content == '') {
+    	 res.render('frontend/contact', {
+				layout: 'frontend/flayout',
+		    	active : 'contact',
+		    	error : '信息不完整！',
+		    	mbody : mbody
+		 });
+       return;
+    }
+	 try {
+         check(userEmail, '不正确的电子邮箱。').isEmail();
+     }catch (e) {
+    	 res.render('frontend/contact', {
+				layout: 'frontend/flayout',
+		    	active : 'contact',
+		    	error : '不正确的电子邮箱！',
+		    	mbody : mbody
+		    });
+    	 return;
+     }
+       var create_at =  Util.format_date(new Date());
+	  
+      memssage_ctrl.create_message(common.MessageType.subject, 1 , JSON.stringify(mbody), function(flag){
+    	  //成功发送
+    	  if(flag){
+    		  res.render('frontend/contact', {
+  				layout: 'frontend/flayout',
+  		    	active : 'contact',
+  		    	success : '您的消息已经成功发送，我们会尽快联系您！'
+  		    });
+    	  }else{
+    		  res.render('frontend/contact', {
+  				layout: 'frontend/flayout',
+  		    	active : 'contact',
+  		    	error : '发送消息失败！'
+  		    });
+			
+    	  }
+         
+      });
 
+};
 
 /**
  * 管理员回复文章

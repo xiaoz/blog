@@ -2,7 +2,7 @@
 <% if(locals.error){ %>
 <div class="error_box">
                             	<div>
-                            		<p><b>Error:</b> <%= error %></p>
+                            		<p><b>错误:</b> <%= error %></p>
                             	</div>
 	                        </div>
 
@@ -10,21 +10,21 @@
 <% if(locals.success){ %>
  <div class="download_box">
                             	<div>
-                            		<p><b>Download:</b><%= success %></p>
+                            		<p><b>温馨提示:</b><%= success %></p>
                             	</div>
 	                        </div>
 <% } %>
-<% if(locals.info){ %>
+<% if(locals.infomsg){ %>
  <div class="info_box">
                             	<div>
-                            		<p><b>Download:</b><%= info %></p>
+                            		<p><b>温馨提示:</b><%= infomsg %></p>
                             	</div>
 	                        </div>
 <% } %>
 <% if(locals.note){ %>
  <div class="note_box">
                             	<div>
-                            		<p><b>Download:</b><%= note %></p>
+                            		<p><b>警告:</b><%= note %></p>
                             	</div>
 	                        </div>
 <% } %>

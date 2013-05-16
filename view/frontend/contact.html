@@ -38,7 +38,7 @@
           <div class="line"></div>
           <div class="block_contact_form">
           	<h3>Contact form</h3>
-              <form action="/sendReplay" method="post" id="contact_form">
+              <form action="/contact" method="post" id="contact_form">
               	<div class="double_block">
                   	<div class="inut_bg active_bg_form">
                       	<input type="text" name="u_name" title="Name&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" <% if(locals.mbody){ %>value="<%= mbody.userName %>" <% } %>   style="display: none; ">
@@ -60,7 +60,7 @@
                       <input type="text" name="u_subject" title="Subject" class="s_inp_text" <% if(locals.mbody){ %>value="<%=  mbody.title %>" <% } %> style="display: none; ">
                   <span>Subject</span></div>
                   <div class="area_bg active_bg_form">
-                      <textarea name="u_comment" cols="30" rows="10" title="Your comment&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" style="display: none; "><% if(locals.mbody){ %>value="<%=  mbody.content %>" <% } %></textarea>
+                      <textarea name="u_comment" cols="30" rows="10" title="Your comment&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" style="display: none; "><% if(locals.mbody){ %><%=  mbody.content %><% } %></textarea>
                   <span>Your comment<span>*</span></span></div>
                   <a href="#" class="button" id="submit">
                       <span class="left">

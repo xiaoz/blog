@@ -38,9 +38,10 @@ exports = module.exports = function(app) {
 	app.get('/cases', front_base, dashboard_ctrl.cases);
 //	// 联系我们
 	app.get('/contact',front_base, dashboard_ctrl.contact);
+	app.post('/contact',front_base,reply_ctrl.sendReply);
 	
-	app.post('/sendReplay',front_base,reply_ctrl.sendReply);
-	
+	//foot-top
+	app.get('/sendMsg',front_base,reply_ctrl.sendMsg);
 	
 	
 	

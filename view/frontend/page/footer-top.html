@@ -45,17 +45,17 @@
 	           </div>
 	           <div class="block_contact">
 	               <h4>Contact form</h4>
-	               <form action="">
+	               <form action="" id="contact_form">
 	               	<div class="input_box">
-	                   	<input type="text" name="" title="Name" class="s_inp_text" style="display: none;" id="acpro_inp0">
+	                   	<input type="text" name="u_u_name" title="Name" class="s_inp_text" style="display: none;" id="acpro_inp0">
 	                   <span style="">Name</span></div>
 	                   <div class="input_box">
-	                   	<input type="text" name="" title="You e-mail" class="s_inp_text" style="display: none;" id="acpro_inp1">
+	                   	<input type="text" name="u_mail" title="You e-mail" class="s_inp_text" style="display: none;" id="acpro_inp1">
 	                   <span style="">You e-mail</span></div>
 	                   <div class="textarea_box">
-	                   	<textarea name="" cols="30" rows="10" title="Message" class="s_inp_text" style="display: none;"></textarea>
+	                   	<textarea name="u_comment" cols="30" rows="10" title="Message" class="s_inp_text" style="display: none;"></textarea>
 	                   <span style="">Message</span></div>
-	                   <a href="#" class="button">
+	                   <a href="#" class="button J_submit">
 	                       <span class="left">
 	                           <span class="right">
 	                               Send
@@ -65,3 +65,22 @@
 	               </form>
 	           </div>
 	       </div>
+
+   <script>
+
+      $(document).ready(function() {   
+      		$('#J_submit').click(function(){
+      			
+
+	 					$.ajax({//得到用户产品分类
+		        			type: 'POST',
+		        			url: '/sendMsg',
+		        			success:function(data){
+		        			    $('#caregory_panel').html(tpl_caregory_panel.render(data));
+		        			},
+		        		  	error:function(){}
+		        		});
+      			
+        	})
+      });
+      </script>
