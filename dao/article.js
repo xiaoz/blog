@@ -95,3 +95,13 @@ exports.deleteArticle = function(articleId, authorId, callback) {
         callback(err, info);
     });
 };
+
+
+/**
+ * 查询最新新闻
+ */
+exports.queryNewArticle = function(limit, callback){
+    mysql.query('select * from article  where author_id = 1 order by id desc limit ?', [ limit ], function(err, articles) {
+        callback(err, articles);
+    });
+};

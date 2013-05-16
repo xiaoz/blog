@@ -47,7 +47,7 @@
 	               <h4>Contact form</h4>
 	               <form action="" id="contact_form">
 	               	<div class="input_box">
-	                   	<input type="text" name="u_u_name" title="Name" class="s_inp_text" style="display: none;" id="acpro_inp0">
+	                   	<input type="text" name="u_name" title="Name" class="s_inp_text" style="display: none;" id="acpro_inp0">
 	                   <span style="">Name</span></div>
 	                   <div class="input_box">
 	                   	<input type="text" name="u_mail" title="You e-mail" class="s_inp_text" style="display: none;" id="acpro_inp1">
@@ -55,7 +55,7 @@
 	                   <div class="textarea_box">
 	                   	<textarea name="u_comment" cols="30" rows="10" title="Message" class="s_inp_text" style="display: none;"></textarea>
 	                   <span style="">Message</span></div>
-	                   <a href="#" class="button J_submit">
+	                   <a href="#2" class="button" id="submit">
 	                       <span class="left">
 	                           <span class="right">
 	                               Send
@@ -63,24 +63,59 @@
 	                       </span>
 	                   </a>
 	               </form>
+				<div id="J_MsgBox"></div>
 	           </div>
 	       </div>
 
-   <script>
+    <script>
 
       $(document).ready(function() {   
-      		$('#J_submit').click(function(){
-      			
+      		$('#submit').click(function(ev){
+				ev.preventDefault()
+				alert('a');
+if($('#submit').hasClass('ing')){
+	return ;
+}
+$('#submit').addClass('ing');
+$.ajax({
+   url: "/contact",
+	type:"POST",
+	data : $('#contact_form').serialize(),
+	success:function(o){
+			$('#submit').removeClass('ing');
+			status = o.status;
+			switch (status) {
+				case '0':
+					message('信息不完整！', 0); 
+					break
+				case '1':
+					message('不正确的电子邮箱！', 0); 
+					break
+				case '2':
+					message('您的消息已经成功发送，我们会尽快联系您！',1); 
+					$('#contact_form').reset();
+					break
+				case '3':
+					message('发送消息失败！', 0);
+					break
+				default:
+					message('错误,请稍候再试.', 0);					
+			}
+	},
+	error:function(o){
+		$('#submit').removeClass('ing');
+		message('错误,请稍候再试.', 0);	
+	}
 
-	 					$.ajax({//得到用户产品分类
-		        			type: 'POST',
-		        			url: '/sendMsg',
-		        			success:function(data){
-		        			    $('#caregory_panel').html(tpl_caregory_panel.render(data));
-		        			},
-		        		  	error:function(){}
-		        		});
-      			
-        	})
+		});
+});
+function message(a, b){
+		if(b == 1){
+			$('#J_MsgBox').html('<div class="download_box"><div><p><b>温馨提示:</b>'+o.error+'</p></div></div>');
+		}else{
+			$('#J_MsgBox').html('<div class="error_box"><div><p><b>错误:</b>'+o.error+'</p></div></div>');
+		}
+		$('#J_MsgBox').slideDown(function(){setTimeout(function(){$('#J_MsgBox').slideUp()},3000)});
+    }
       });
       </script>

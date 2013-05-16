@@ -28,39 +28,24 @@ exports.sendReply = function(req,res,next){
     mbody.site = site;
     
     if (userName == '' || userEmail == '' || content == '') {
-		 res.json({error : '信息不完整！'})
+		 res.json({error : '信息不完整！',status : '0'})
        return;
     }
 	 try {
-         check(userEmail, '不正确的电子邮箱。').isEmail();
+         check(userEmail, '不正确的电子邮箱!').isEmail();
      }catch (e) {
-    	 res.render('frontend/contact', {
-				layout: 'frontend/flayout',
-		    	active : 'contact',
-		    	error : '不正确的电子邮箱！',
-		    	mbody : mbody
-		    });
+    	  res.json({error : '不正确的电子邮箱！',status : '1'})
     	 return;
      }
-       var create_at =  Util.format_date(new Date());
+     var create_at =  Util.format_date(new Date());
 	  
       memssage_ctrl.create_message(common.MessageType.subject, 1 , JSON.stringify(mbody), function(flag){
     	  //成功发送
     	  if(flag){
-    		  res.render('frontend/contact', {
-  				layout: 'frontend/flayout',
-  		    	active : 'contact',
-  		    	success : '您的消息已经成功发送，我们会尽快联系您！'
-  		    });
+		  	 res.json({success : '您的消息已经成功发送，我们会尽快联系您！',status : '2'})
     	  }else{
-    		  res.render('frontend/contact', {
-  				layout: 'frontend/flayout',
-  		    	active : 'contact',
-  		    	error : '发送消息失败！'
-  		    });
-			
+		  	 res.json({error : '发送消息失败！',status : '3'})
     	  }
-         
       });
 
 };
