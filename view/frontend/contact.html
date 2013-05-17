@@ -22,7 +22,7 @@
           <div class="line"></div>
           <div class="block_our_adress">
           	<h3>Our adress</h3>
-          	<p class="icon1"><b>Corporate info:</b> <%= locals.company_info.address %></p>
+          		<p class="icon1"><b>Corporate info:</b> <%= locals.company_info.address %></p>
               <p class="icon2"><b>Phone:</b> <%= locals.company_info.phone %></p>
               <p class="icon3"><b>Fax:</b> <%= locals.company_info.tel %></p>
               <p class="icon4"><b>Email:</b> <a href="mailto:info@elephantweb.com" class="main_link"><%= locals.company_info.email %></a></p>
@@ -41,26 +41,26 @@
               <form action="" method="post" id="contact_form">
               	<div class="double_block">
                   	<div class="inut_bg active_bg_form">
-                      	<input type="text" name="u_name" title="Name&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" <% if(locals.mbody){ %>value="<%= mbody.userName %>" <% } %>   style="display: none; ">
+                      	<input type="text" name="u_name" title="Name&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" value=""   style="display: none; ">
                       <span>Name<span>*</span></span></div>
                       <div class="inut_bg active_bg_form">
-                      	<input type="text" name="u_mail" title="E-mail&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" <% if(locals.mbody){ %>value="<%=  mbody.userEmail %>" <% } %>   style="display: none; ">
+                      	<input type="text" name="u_mail" title="E-mail&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" value=""    style="display: none; ">
                       <span>E-mail<span>*</span></span></div>
                   </div>
                   <div class="double_block">
                   	<div class="inut_bg active_bg_form">
-                      	<input type="text" name="u_site" title="Website" class="s_inp_text" <% if(locals.mbody){ %>value="<%=  mbody.site %>" <% } %>  style="display: none; ">
+                      	<input type="text" name="u_site" title="Website" class="s_inp_text"  value=""  style="display: none; ">
                       <span>Website</span></div>
                       <div class="inut_bg active_bg_form">
-                      	<input type="text" name="u_phone" title="Phone" class="s_inp_text" <% if(locals.mbody){ %>value="<%=  mbody.phone %>" <% } %>  style="display: none; ">
+                      	<input type="text" name="u_phone" title="Phone" class="s_inp_text" value=""   style="display: none; ">
                       <span>Phone</span></div>
                   </div>
                   <div class="clear"></div>
                   <div class="inut_bg big active_bg_form">
-                      <input type="text" name="u_subject" title="Subject" class="s_inp_text" <% if(locals.mbody){ %>value="<%=  mbody.title %>" <% } %> style="display: none; ">
+                      <input type="text" name="u_subject" title="Subject" class="s_inp_text" value=""  style="display: none; ">
                   <span>Subject</span></div>
                   <div class="area_bg active_bg_form">
-                      <textarea name="u_comment" cols="30" rows="10" title="Your comment&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" style="display: none; "><% if(locals.mbody){ %><%=  mbody.content %><% } %></textarea>
+                      <textarea name="u_comment" cols="30" rows="10" title="Your comment&lt;span&gt;*&lt;/span&gt;" class="s_inp_text" style="display: none; "></textarea>
                   <span>Your comment<span>*</span></span></div>
                   <a href="#2" class="button" id="submit">
                       <span class="left">
@@ -71,7 +71,9 @@
                   </a>
               </form>
           </div>
-			<div id="J_MsgBox"></div>
+           <div class="clear"></div>
+          <div class="separator_3"></div>
+		 <div id="J_MsgBox"></div>
       </div>
       <div class="block_cont_right">
       	<div class="block_our_loc">
@@ -95,60 +97,53 @@
       <div class="clear"></div>
       <div class="separator_5"></div>
       <script>
-
+      function message(a, b){
+  		if(b == 1){
+  			$('#J_MsgBox').html('<div class="download_box"><div><p><b>温馨提示:</b>'+a+'</p></div></div>');
+  		}else{
+  			$('#J_MsgBox').html('<div class="error_box"><div><p><b>错误:</b>'+a+'</p></div></div>');
+  		}
+  		$('#J_MsgBox').slideDown(function(){setTimeout(function(){$('#J_MsgBox').slideUp()},3000)});
+      }
       $(document).ready(function() {   
       		$('#submit').click(function(ev){
-ev.preventDefault();
-
-if($('#submit').hasClass('ing')){
-	return ;
-}
-$('#submit').addClass('ing');
-
-$.ajax({
-   url: "/contact",
-	type:"POST",
-	data : $('#contact_form').serialize(),
-	success:function(o){
-			$('#submit').removeClass('ing');
-			status = o.status;
-			switch (status) {
-				case '0':
-					message('信息不完整！', 0); 
-					break
-				case '1':
-					message('不正确的电子邮箱！', 0); 
-					break
-				case '2':
-					message('您的消息已经成功发送，我们会尽快联系您！',1); 
-					$('#contact_form').reset();
-					break
-				case '3':
-					message('发送消息失败！', 0);
-					break
-				default:
-					message('错误,请稍候再试.', 0);					
-			}
-	},
-	error:function(o){
-		$('#submit').removeClass('ing');
-		message('错误,请稍候再试.', 0);	
-	}
-
-		});
-});
-})
-
-      
-function message(a, b){
-		if(b == 1){
-			$('#J_MsgBox').html('<div class="download_box"><div><p><b>温馨提示:</b>'+o.error+'</p></div></div>');
-		}else{
-			$('#J_MsgBox').html('<div class="error_box"><div><p><b>错误:</b>'+o.error+'</p></div></div>');
-		}
-		$('#J_MsgBox').slideDown(function(){setTimeout(function(){$('#J_MsgBox').slideUp()},3000)});
-    }
-      
+				ev.preventDefault();
+				if($('#submit').hasClass('ing')){
+					return ;
+				}
+				$('#submit').addClass('ing');
+				$.ajax({
+				   url: "/contact",
+					type:"POST",
+					data : $('#contact_form').serialize(),
+					success:function(data){
+							$('#submit').removeClass('ing');
+							status = data.status;
+							switch (status) {
+								case '0':
+									message('信息不完整！', 0); 
+									break
+								case '1':
+									message('不正确的电子邮箱！', 0); 
+									break
+								case '2':
+									message('您的消息已经成功发送，我们会尽快联系您！',1); 
+									$('#contact_form').reset();
+									break
+								case '3':
+									message('发送消息失败！', 0);
+									break
+								default:
+									message('错误,请稍候再试.', 0);					
+							}
+					},
+					error:function(o){
+						$('#submit').removeClass('ing');
+						message('错误,请稍候再试.', 0);	
+					}
+				
+				});
+			});
       });
       </script>
       

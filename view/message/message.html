@@ -48,6 +48,15 @@
 		分享了文件 <a href='/file/<%=content.file_id%>'><%=content.file_name%></a>
 	</span>
 	<% } %>
+	
+	<% if(message.type == 7){ %>
+	<span>
+		用户：<%= content.userName %> &nbsp;&nbsp; 邮箱：<%= content.userEmail %>&nbsp;&nbsp; 电话：<%= content.phone %>&nbsp;&nbsp; 网址：<%= content.site %> </br>
+		
+		标题：<%= content.title %></br>
+		内容：<%= content.content %>
+	</span>
+	<% } %>
 
 	<span class='fr' style="color:#ccc"><%=message.create_at%></span>
 </div>

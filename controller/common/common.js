@@ -8,5 +8,6 @@ exports.MessageType = {
     'follow' : 4,
     'unfollow' : 5,
     'share_file' : 6,
-    'subject' : 7
+    'subject' : 7,
+    'product' : 8
 };

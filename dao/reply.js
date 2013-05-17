@@ -20,14 +20,21 @@ exports.deleteRepliesOfArticle = function(articleId, callback){
 };
 
 /**
- * 创建回复
+ * 前台创建文章回复
  */
-exports.saveReply = function(content, userId, articleId, createAt, callback){
-    mysql.update('insert into reply(content,author_id,article_id,create_at,update_at) values(?,?,?,?,?)',[content, userId, articleId, createAt, createAt], function(err, info){
+exports.saveReply = function(content, userId, articleId, createAt,user_info, callback){
+    mysql.update('insert into reply(content,author_id,article_id,create_at,update_at,user_info) values(?,?,?,?,?,?)',[content, userId, articleId, createAt, createAt,user_info], function(err, info){
         callback(err, info);
     });
 };
-
+/**
+ * 后台文章回复
+ */
+exports.saveReply2 = function(content, userId, articleId, createAt,reply_id, callback){
+    mysql.update('insert into reply(content,author_id,article_id,create_at,update_at,reply_id) values(?,?,?,?,?,?)',[content, userId, articleId, createAt, createAt,reply_id], function(err, info){
+        callback(err, info);
+    });
+};
 /**
  * 删除回复
  */
@@ -36,6 +43,51 @@ exports.deleteReply = function(userId, replyId, callback){
         callback(err, info);
     });
 };
+
+
+/**
+ * 根据产品id查询产品的评论信息
+ */
+exports.queryRepliesOfProduct = function(articleId, callback) {
+    mysql.query('select * from product_reply where article_id = ? ', [ articleId ], function(err, replies) {
+        callback(err, replies);
+    });
+};
+
+/**
+ * 根据产品id删除所有评论信息
+ */
+exports.deleteRepliesOfProduct = function(articleId, callback){
+    mysql.update('delete from product_reply where article_id = ?', [ articleId], function(err, info) {
+        callback(err, info);
+    });
+};
+
+/**
+ * 前台创建产品回复
+ */
+exports.saveProductReply = function(content, userId, articleId, createAt,user_info, callback){
+    mysql.update('insert into product_reply(content,author_id,article_id,create_at,update_at,user_info) values(?,?,?,?,?,?)',[content, userId, articleId, createAt, createAt,user_info], function(err, info){
+        callback(err, info);
+    });
+};
+/**
+ * 后台产品回复
+ */
+exports.saveProductReply2 = function(content, userId, articleId, createAt,reply_id, callback){
+    mysql.update('insert into product_reply(content,author_id,article_id,create_at,update_at,reply_id) values(?,?,?,?,?,?)',[content, userId, articleId, createAt, createAt,reply_id], function(err, info){
+        callback(err, info);
+    });
+};
+/**
+ * 删除产品回复
+ */
+exports.deleteProductReply = function(userId, replyId, callback){
+    mysql.update('delete from product_reply where id = ? and author_id = ?',[ replyId, userId], function(err, info){
+        callback(err, info);
+    });
+};
+
 
 
 

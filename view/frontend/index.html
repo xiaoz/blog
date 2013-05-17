@@ -76,47 +76,31 @@
             </div>
             <div class="line"></div>
             <div class="block_resent">
-                <h2>Resent Work</h2>
+                <h2>最新产品</h2>
                 <div class="images">
-	                <div class="img_box shadow_img see_big">
-	                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_home_min1.jpg);">
+                 <% if(new_products && new_products.length > 0){
+	               
+	               		for(var i =0,len = new_products.length ; i< 4 ; i++){
+					%>
+					 <div class="img_box shadow_img see_big">
+	                	<div>
                         	<div class="description">
                             	<p class="alt">Description of the image 1</p>
-                                <p class="title"><a href="#">Title porfolio 1</a></p>
+                                <p class="title"><a href="/productdetail?product_id=<%=new_products[i].id%>"><%=new_products[i].title%></a></p>
                             </div>
-                            <div class="link_big"><a href="images/big_img14.jpg" rel="prettyPhoto[gallery1]"></a></div>
-	                    	<img src="images/img_home_min1.jpg" title="" alt="" data-pinit="registered">
+                            <div class="link_big"><a href="<%= new_products[i].goods_img %>" rel="prettyPhoto[gallery1]"></a></div>
+	                    	<img style="width: 196px;display: block" src="<%= new_products[i].goods_img %>" title="" alt="" data-pinit="registered">
 	                    </div>
 	                </div>
-	                <div class="img_box shadow_img see_big">
-	                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_home_min2.jpg);">
-	                    	<div class="description">
-                            	<p class="alt">Description of the image 2</p>
-                                <p class="title"><a href="#">Title porfolio 2</a></p>
-                            </div>
-                            <div class="link_big"><a href="images/big_img9.jpg" rel="prettyPhoto[gallery1]"></a></div>
-	                    	<img src="images/img_home_min2.jpg" title="" alt="" data-pinit="registered">
-	                    </div>
-	                </div>
-	                <div class="img_box shadow_img see_big">
-	                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_home_min3.jpg);">
-	                    	<div class="description">
-                            	<p class="alt">Description of the image 3</p>
-                                <p class="title"><a href="#">Title porfolio 3</a></p>
-                            </div>
-                            <div class="link_big"><a href="images/big_img12.jpg" rel="prettyPhoto[gallery1]"></a></div>
-	                    	<img src="images/img_home_min3.jpg" title="" alt="" data-pinit="registered">
-	                    </div>
-	                </div>
-	                <div class="img_box shadow_img see_big">
-	                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_home_min4.jpg);">
-	                    	<div class="description">
-                            	<p class="alt">Description of the image 4</p>
-                                <p class="title"><a href="#">Title porfolio 4</a></p>
-                            </div>
-                            <div class="link_big"><a href="images/big_img13.jpg" rel="prettyPhoto[gallery1]"></a></div>
-	                    	<img src="images/img_home_min4.jpg" title="" alt="" data-pinit="registered">
-	                    </div>
-	                </div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无产品</p>
+					 </div>
+					<%}%>
+                
+	               
+
                 </div>
             </div>
+            <%-partial('page/footer-top')%>

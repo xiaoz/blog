@@ -38,7 +38,7 @@
 						class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="/messages"><i class="icon-envelope"></i> 我的消息</a></li>
+						<li><a href="/messages/3"><i class="icon-envelope"></i> 我的消息</a></li>
 						<li><a href="/pwd"><i class="icon-chevron-right"></i>  修改密码</a></li>
 						<li><a href="/avatar"><i class="icon-chevron-right"></i>  修改头像</a></li>
 						<li class="divider"></li>
@@ -108,6 +108,14 @@
 						<li class="">
 							<ol class="activity" id="caregory_panel" ></ol>
 						</li>
+					  <% }else if(locals.current == 'message'){%>  
+					  
+					  	 <li class="<% if(locals.active == '3'){ %>active <% }%>" ><a href="/messages/3" >新闻回复</a></li>
+		              	 <li class="divider"></li>
+		              	 
+		              	<li class="<% if(locals.active == '7'){ %>active <% }%>"><a href="/messages/7">建议</a></li>
+					    <li class="divider"></li>
+					    <li class="<% if(locals.active == '8'){ %>active <% }%>"  ><a href="/messages/8" >产品回复</a></li>
 					  
 		              <% }%>  
 		              
@@ -135,12 +143,17 @@
 		            type : "POST",
 		            url : "/messages/unread",
 		            success : function(data) {
-		                if (data.count == 0) {
-		                    $('#message_m').html('');
+		            	var str = "";
+		                if (data.count1 > 0) {
+		                    str +='<a href="/messages/3"><i class="icon-envelope icon-white"></i> 新文章消息(' + data.count1 + ')</a>';
 		                }
-		                else {
-		                    $('#message_m').html('<a href="/messages"><i class="icon-envelope icon-white"></i> 新消息(' + data.count + ')</a>');
+		                if (data.count2 > 0) {
+		                	 str +='<a href="/messages/7"><i class="icon-envelope icon-white"></i> 新建议消息(' + data.count2 + ')</a>';
 		                }
+		                if (data.count3 > 0) {
+		                	 str +='<a href="/messages/8"><i class="icon-envelope icon-white"></i> 新产品回复消息(' + data.count3 + ')</a>';
+		                }
+		                $('#message_m').html(str);
 		            },
 		            error : function() {
 		                $('#message_m').html('');

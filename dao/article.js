@@ -101,7 +101,7 @@ exports.deleteArticle = function(articleId, authorId, callback) {
  * 查询最新新闻
  */
 exports.queryNewArticle = function(limit, callback){
-    mysql.query('select * from article  where author_id = 1 order by id desc limit ?', [ limit ], function(err, articles) {
+    mysql.query('select id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at from article  where author_id = 1 order by id desc limit ?', [ limit ], function(err, articles) {
         callback(err, articles);
     });
 };

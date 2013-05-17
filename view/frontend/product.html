@@ -1,17 +1,17 @@
 
         	<div class="page_title">
-            	<h1>Portfolio 1</h1>
-                <p class="page_description">This is a custom subpage description</p>
+            	<h1>产品</h1>
+                <p class="page_description">Products</p>
                 <div class="page_navigation">
                 	<ul>
-                    	<li><a href="index.html">Elephant Home</a></li>
+                    	<li><a href="/">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li>Portfolio 1</li>
+                        <li>产品</li>
                     </ul>
                 </div>
             </div>
             <div class="line"></div>
-            <div class="block_filter">
+         <!--    <div class="block_filter">
             	<p>Filter:</p>
                 <ul>
                 	<li class="first"><a href="#" class="active" title="all">All Categories</a></li>
@@ -20,90 +20,38 @@
                     <li><a href="#" title="illustrations">Illustrations</a></li>
                     <li class="last"><a href="#" title="video">Video</a></li>
                 </ul>
-            </div>
+            </div> -->
+             <% if(articles && articles.length > 0){
+					%>
             <div class="block_portfolio_c2 filter_conteiner">
-            	<div class="img_box filter_box see_big2" title="webdesign" data-id="item0">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p1_c2.jpg); ">
-                    	<a href="images/big_img3.jpg" rel="prettyPhoto[gallery1]"><img src="images/img_p1_c2.jpg" alt="" title="">
-                        <span class="description" style="padding-bottom: 12px; ">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="img_box filter_box see_big2" title="video" data-id="item1">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p2_c2.jpg); ">
-                    	<a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=08DMQ0SV6tM" rel="prettyPhoto[gallery1]"><img src="images/img_p2_c2.jpg" alt="" title="">
-                        <span class="description" style="padding-bottom: 12px; ">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="img_box filter_box see_big2" title="webdesign" data-id="item2">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p3_c2.jpg); ">
-                    	<a href="images/big_img24.jpg" rel="prettyPhoto[gallery1]"><img src="images/img_p3_c2.jpg" alt="" title="">
-                        <span class="description">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="img_box filter_box see_big2" title="illustrations" data-id="item3">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p4_c2.jpg); ">
-                    	<a href="images/big_img16.jpg" rel="prettyPhoto[gallery1]"><img src="images/img_p4_c2.jpg" alt="" title="">
-                        <span class="description" style="padding-bottom: 12px; ">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="img_box filter_box see_big2" title="icon" data-id="item4">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p5_c2.jpg); ">
-                    	<a href="images/big_img1.jpg" rel="prettyPhoto[gallery1]"><img src="images/img_p5_c2.jpg" alt="" title="">
-                        <span class="description">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="img_box filter_box see_big2" title="icon" data-id="item5">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p6_c2.jpg); ">
-                    	<a href="images/big_img21.jpg" rel="prettyPhoto[gallery1]"><img src="images/img_p6_c2.jpg" alt="" title="">
-                        <span class="description" style="padding-bottom: 12px; ">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="img_box filter_box see_big2" title="illustrations" data-id="item6">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p7_c2.jpg); ">
-                    	<a href="images/big_img6.jpg" rel="prettyPhoto[gallery1]"><img src="images/img_p7_c2.jpg" alt="" title="">
-                        <span class="description">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
-                <div class="img_box filter_box see_big2" title="illustrations" data-id="item7">
-                	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_p8_c2.jpg); ">
-                    	<a href="images/big_img14.jpg" rel="prettyPhoto[gallery1]"><img src="images/img_p8_c2.jpg" alt="" title="">
-                        <span class="description">
-                        	<span class="title">Work Title Goes Here</span>
-                            <span class="big_mark"></span>
-                        </span>
-                        </a>
-                    </div>
-                </div>
+		           
+					<%- partial('frontend/product/product_item',{collection:articles,as:'article'}) %>
                 <div class="clear"></div>
             </div>
+            <%}else{%>
+					<div class="block_info_boxes">
+					<div class="info_box">
+                            	<div>
+                                	<p><b>Info:</b> 还没有产品哦！</p>
+                                </div>
+	                        </div>
+	                        </div>
+					<%}%>
+              <% if(articles && articles.length > 0){
+					%>
+                <div class="block_blogs_nav">
+						<% if(current_page == pages){ %>
+						<a href="#2" class="prev">没有了</a>
+						<% }else{ %>
+						<a href="/news?page=<%=current_page+1 %>" class="prev">下一页</a>
+						<% } %>
+						<% if(current_page == 1){ %>
+						<a href="#2" class="next"></a> 
+						<% }else{ %>
+						<a href="/news?page=<%=current_page-1 %>" class="next">上一页</a> 
+						<% } %>
+                	</div>
+                	<%}%>
             <div class="clear"></div>
 
 		

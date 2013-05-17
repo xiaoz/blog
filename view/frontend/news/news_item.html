@@ -16,12 +16,12 @@
 	                        <div class="blog_info" style="padding-top: 4px;">
 	                        	<h3><a href="/newsdetail?article_id=<%=article.id%>"><%= article.title %></a></h3>
 	                            <ul>
-	                            	<li><a href="#"><%=article.visit_count%></a>&nbsp; 次点击</li>
-	                                <li><a href="#"><%=article.reply_count%></a>&nbsp; 次回复</li>
+	                            	<li><a href="#2"><%=article.visit_count%></a>&nbsp; 次点击</li>
+	                                <li><a href="#2"><%=article.reply_count%></a>&nbsp; 次回复</li>
 	                                <li><%if(article.update_at != article.create_at){%>
-										 <a href="#"><%=article.update_at%></a>&nbsp; 更新  
+										 <a href="#2"><%=article.update_at%></a>&nbsp; 更新  
 										<%}else{%>
-										  <a href="#"><%=article.create_at%></a>&nbsp; 发布  
+										  <a href="#2"><%=article.create_at%></a>&nbsp; 发布  
 										<%}%>
 									</li>
 	                            </ul>

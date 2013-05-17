@@ -60,7 +60,7 @@ exports.viewArticle = function(req, res, next) {
             });
         },
         product_replies : function(cb) {// 该篇产品的回复
-            replyDao.queryRepliesOfArticle(product_id, function(err, replies) {
+            replyDao.queryRepliesOfProduct(product_id, function(err, replies) {
                 if (err || !replies) {
                     cb(null, []);
                 }
@@ -71,8 +71,28 @@ exports.viewArticle = function(req, res, next) {
                             reply_item.author = user || {};
                             callback(null, reply_item);
                         });
-                    }, function(err, product_replies) {
-                        cb(null, product_replies);
+                    }, function(err, article_replies) {
+                    	
+                    	var replies2 = [];
+            			for(var i = article_replies.length-1; i>=0; i--){
+            				if(article_replies[i].reply_id){
+            					replies2.push(article_replies[i]);	
+            					article_replies.splice(i,1);
+            				}
+            			}
+            			for(var j=0; j<article_replies.length; j++){
+            				article_replies[j].replies = [];
+            				for(var k=0; k<replies2.length; k++){
+            					var id1 = replies[j].id;
+            					var id2 = replies2[k].reply_id;
+            					if(id1.toString() == id2.toString()){
+            						article_replies[j].replies.push(replies2[k]);	
+            					}	
+            				}
+            				article_replies[j].replies.reverse();
+            			}
+                    	
+                        cb(null, article_replies);
                     });
                 }
             });

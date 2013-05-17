@@ -1,11 +1,11 @@
 <div class='cell reply_area reply_item' id='reply<%= indexInCollection+1 %>' reply_id='<%= reply.id %>'>
 	<% if(reply.author.avatar){ %>
-	<div class='user_avatar'><a href='/user/<%= reply.author.id %>'><img src='<%= reply.author.avatar %>' title='<%= reply.author.loginname %>' /></a></div>
+	<div class='user_avatar'><img src='<%= reply.author.avatar %>' title='<%= reply.author.loginname %>' /></div>
 	<% }else{ %>
-	<div class='user_avatar'><a href='/user/<%= reply.author.id %>'><img src='/img/avatar.png' title='<%= reply.author.loginname %>' /></a></div>
+	<div class='user_avatar'><img src='/img/avatar.png' title='<%= reply.author.loginname %>' /></div>
 	<% } %>
 	<span class='col_fade fr'>#<%= indexInCollection+1 %></span>
-	<span class='reply_author'><a class='dark' href='/user/<%= reply.author.id %>'><%= reply.author.loginname %></a></span>
+	<span class='reply_author'><a class='dark' href='#2'><%= reply.author.loginname %><%= indexInCollection+1 %><%= reply.user_info %></a></span>
 	<div class='sep5'></div>
 	<div class='reply_content'>
 	<%- reply.content %>
@@ -21,8 +21,51 @@
 		</span>
 		<span class='fr'>
 			<% if(locals.current_user){ %>
-			<a href='#reply_editor_panel' class='dark reply2_btn'>回复</a>	
+			<a href='#2' class='dark reply2_btn cancle_btn' data="<%= reply.id %>" data-num ="<%= indexInCollection+1 %>">取消回复</a>	
+			
+			<a href='#2' class='dark reply2_btn reply_btn' data="<%= reply.id %>" data-num ="<%= indexInCollection+1 %>">回复</a>	
 			<% } %>
 		</span>
+		<div style="display:none" id="J_EditorBox<%= reply.id %>">
+		<textarea class='span8' id="editor<%= reply.id %>"  name='r_content<%= reply.id %>' rows='20'></textarea>
+		</div>
 	</div>
 </div>
+
+
+  			<% if(reply.replies && reply.replies.length > 0){
+	               		for(var i =0,len = reply.replies.length ; i< len ; i++){
+					%>
+   				<div class='cell reply_area reply_item'  style="margin-left: 60px;">
+					<% if(reply.replies[i].author.avatar){ %>
+					<div class='user_avatar'><img src='<%= reply.replies[i].author.avatar %>' title='<%= reply.replies[i].author.loginname %>' /></div>
+					<% }else{ %>
+					<div class='user_avatar'><img src='/img/avatar.png' title='<%= reply.replies[i].author.loginname %>' /></div>
+					<% } %>
+					<span class='col_fade fr'>#<%= indexInCollection+1 %></span>
+					<span class='reply_author'><a class='dark' href='#2'><%= reply.replies[i].author.loginname %><%= indexInCollection+1 %><%= reply.user_info %></a></span>
+					<div class='sep5'></div>
+					<div class='reply_content'>
+					<%- reply.replies[i].content %>
+					</div>
+					<div class='cl'>
+						<div class='sep5'></div>
+							<span class='col_fade'>
+							<%= reply.replies[i].friendly_create_at %>
+							<% if(locals.current_user && current_user.id == reply.replies[i].author.id){ %>
+							<span class='sp10'></span>
+							<a href='javascript:void(0);' class='delete_reply_btn'><img class='user_icon' src='/img/trash_icon&16.png' title='删除' /></a>
+							<% } %>
+							
+						</span>
+						<span class="fr"> 
+							<% if(locals.current_user){ %>
+								<a href='#2' class='dark reply2_btn cancle_btn' data="<%= reply.id %>" data-num ="<%= indexInCollection+1 %>">取消回复</a>	
+								
+								<a href='#2' class='dark reply2_btn reply_btn' data="<%= reply.id %>" data-num ="<%= indexInCollection+1 %>">回复</a>	
+							<% } %>
+						</span>
+					</div>
+				</div>
+   			 <% }	%>
+		<%}%>

@@ -1,11 +1,11 @@
-        	<div class="page_title">
-            	<h1>新闻&文件</h1>
-                <p class="page_description">News&Files</p>
+        		<div class="page_title">
+            	<h1>产品</h1>
+                <p class="page_description">Products</p>
                 <div class="page_navigation">
                 	<ul>
                     	<li><a href="/">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li>新闻&文件</li>
+                        <li>产品</li>
                     </ul>
                 </div>
             </div>
@@ -47,16 +47,16 @@
 						</p>
                 </div>
                 <div class="block_comments" id="comments">
-				<!-- 回复列表 -->	
-				<% if (article.replies && article.replies.length > 0) { %>
-			 		<h2>回复 <span>(<%= article.replies.length %>)</span></h2>
-			
-					<%- partial('frontend/news/reply',article.replies) %>
-				<% } %>
+<!-- 回复列表 -->	
+	<% if (article.replies && article.replies.length > 0) { %>
+ 		<h2>回复 <span>(<%= article.replies.length %>)</span></h2>
+
+		<%- partial('frontend/product/reply',article.replies) %>
+	<% } %>
                    
                 <div class="block_comments_form" id="reply_editor_panel">
                     <h2>添加回复</h2>
-                    <form  id='reply_form' action='/sendMsg?article_id=<%= article.id %>' method='post'>
+                    <form  id='reply_form' action='/sendProductMsg?product_id=<%= article.id %>' method='post'>
 					
                     <div class="comment_input active_bg_form">
                         <input type="text" name="u_name" class="s_inp_text" title="Name&lt;span&gt;*&lt;/span&gt;" style="display: none; ">
@@ -77,45 +77,32 @@
                     </a>
                     </form>
                 </div>
-                 <div id="J_MsgBox"></div>
             </div>
  	</div>
             <div class="block_cont_right">
-                <div class="block_blog_category">
-                  	<h4>文章分类</h4>
-                    <ul class="list2" id="caregory_panel-1">
-                    </ul>
-                </div>
-				<div class="line"></div>
-                <div class="block_archives">
-                  	<h4>文档</h4>
-                    <ul class="list2" id="folder_panel">
-                    	  <li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>
-                    </ul>
-                </div>
-                <div class="line"></div>
-               	<div class="block_recent_posts">
-                	<h4>最新产品</h4>
+             
+                <div class="block_recent_posts">
+                	<h4>最新新闻</h4>
                 	
-                	  <% if(new_products && new_products.length > 0){
+                	  <% if(new_articles && new_articles.length > 0){
 	               
-	               		for(var i =0,len = new_products.length ; i< len ; i++){
+	               		for(var i =0,len = new_articles.length ; i< len ; i++){
 					%>
    							<div class="post">
-			                <div class="img"><a href="/productdetail?product_id=<%=new_products[i].id%>"><img style="width: 52px;"  src="<%=new_products[i].goods_img%>" alt="" title="<%=new_products[i].title%>"></a></div>
+			                <div class="img"><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><img style="width: 52px;"  src="<%=new_articles[i].thumbnails%>" alt="" title=""></a></div>
 			                <div class="text">
-			                 <p><a href="/productdetail?product_id=<%=new_products[i].id%>"><%=new_products[i].title%></a></p>
-			                 <p class="date"><%=new_products[i].create_at%></p>
+			                 <p><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><%=new_articles[i].title%></a></p>
+			                 <p class="date"><%=new_articles[i].create_at%></p>
 			                </div>
 			               </div>
    					 <% }	%>
 					<%}else{%>
 					 <div class="post">
-						<p class='col_fade' style="margin:20px;">暂无产品</p>
+						<p class='col_fade' style="margin:20px;">暂无新闻</p>
 					 </div>
 					<%}%>
-               	 </div>
-               	  <div class="line"></div>
+                </div>
+                <div class="line"></div>
                 <div class="block_blog_category">
                   	<h4>联系我们</h4>
                     <ul class="list2">
@@ -125,7 +112,7 @@
                     	<li style="height: 60px;"><a href="#2"><b>Our adress:</b>  <%= locals.company_info.address %></a></li>
                     </ul>
                 </div>
-                
+                 <div class="line"></div>
             </div>
              <div class="clear"></div>
             <div class="separator_5"></div>
@@ -133,33 +120,12 @@
             <div class="clear"></div>
   <script>
 	$(document).ready(function() {    
-		var html_caregory_panel = '';
-		html_caregory_panel+='{@each categories as item,index}'+
-		'<li><a href="/newsincategory?user_id=${item.user_id}&category_id=${item.id}">${item.name}</a> ({@if !item.article_count}0{@else}${item.article_count}{@/if})</li>'+
-		'{@/each}';
-		var tpl_caregory_panel=juicer(html_caregory_panel);
-
-	    $.ajax({//得到用户文章分类
-			type: 'POST',
-			url: '/userinfo/category/1',
-			success:function(data){
-			    $('#caregory_panel-1').html(tpl_caregory_panel.render(data));
-			},
-		  	error:function(){}
-		});
+	
 		
-	    $("#J_SumitReply").click(function(event){
-		    event.preventDefault();
-		    document.getElementById('reply_form').submit();
-		    }
-	    )
-
-
-
-
-
-
-
-		 
+		  $("#J_SumitReply").click(function(event){
+			    event.preventDefault();
+			    document.getElementById('reply_form').submit();
+			    }
+		   )
 	});
 </script>

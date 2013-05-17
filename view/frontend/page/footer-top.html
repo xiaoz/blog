@@ -2,21 +2,25 @@
 	       <div class="block_other">
 	           <div class="block_blog">
 	               <h4>LATEST FROM THE BLOG</h4>
-	               <div class="post">
-	                <div class="img"><a href="#"><img src="images/img_blog1.jpg" alt="" title=""></a></div>
-	                <div class="text">
-	                 <p><a href="#">There are many variation of passages of Lorem.</a></p>
-	                 <p class="date">September 15, 2011</p>
-	                </div>
-	               </div>
-	               <div class="line2"></div>
-	               <div class="post">
-	                <div class="img"><a href="#"><img src="images/img_blog2.jpg" alt="" title=""></a></div>
-	                <div class="text">
-	                 <p><a href="#">Variations of passages of  available.</a></p>
-	                 <p class="date">September 12, 2011</p>
-	                </div>
-	               </div>
+	                <% if(new_articles && new_articles.length > 0){
+	               
+	               		for(var i =0,len = new_articles.length ; i< len ; i++){
+					%>
+   						 <div class="post">
+			                <div class="img"><a href="#"><img style="width: 52px;"  src="<%=new_articles[i].thumbnails%>" alt="" title=""></a></div>
+			                <div class="text">
+			                 <p><a href="#"><%=new_articles[i].title%></a></p>
+			                 <p class="date"><%=new_articles[i].create_at%></p>
+			                </div>
+			               </div>
+			               <div class="line2"></div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无新闻</p>
+					 </div>
+					<%}%>
+	               
 	           </div>
 	           <div class="block_twitter">
 	               <h4>Twitter Widget</h4>
@@ -31,17 +35,17 @@
 	</div>
 	           </div>
 	           <div class="block_portfolio">
-	               <h4>Portfolio category</h4>
-	               <a href="#">Web Design</a>
+	               <h4>联系我们</h4>
+	               
 	               <div class="line2"></div>
-	<a href="#">Photography</a>
+						<a href="#"><b>Phone:</b> <%= locals.company_info.phone %></a>
 	               <div class="line2"></div>
-	<a href="#">Icons</a>
+						<a href="#"><b>Fax:</b> <%= locals.company_info.tel %></a>
 	               <div class="line2"></div>
-	<a href="#">Illustration</a>
+						<a href="#"><b>Email:</b> <a href="mailto:info@elephantweb.com" class="main_link"><%= locals.company_info.email %></a></a>
 	               <div class="line2"></div>
-	<a href="#">Branding Design</a>
-	               <div class="line2"></div>
+	               <a href="#"><b>Our adress:</b>  <%= locals.company_info.address %></a>
+	              
 	           </div>
 	           <div class="block_contact">
 	               <h4>Contact form</h4>
@@ -63,59 +67,59 @@
 	                       </span>
 	                   </a>
 	               </form>
-				<div id="J_MsgBox"></div>
+	               <br/>
+	               <div id="J_MsgBox" style="width:206px"></div>
 	           </div>
+	           	
 	       </div>
 
     <script>
-
+    function message(a, b){
+		if(b == 1){
+			$('#J_MsgBox').html('<div class="download_box"><div><p><b>温馨提示:</b>'+a+'</p></div></div>');
+		}else{
+			$('#J_MsgBox').html('<div class="error_box"><div><p><b>错误:</b>'+a+'</p></div></div>');
+		}
+		$('#J_MsgBox').slideDown(function(){setTimeout(function(){$('#J_MsgBox').slideUp()},5000)});
+    }
       $(document).ready(function() {   
       		$('#submit').click(function(ev){
 				ev.preventDefault()
-				alert('a');
-if($('#submit').hasClass('ing')){
-	return ;
-}
-$('#submit').addClass('ing');
-$.ajax({
-   url: "/contact",
-	type:"POST",
-	data : $('#contact_form').serialize(),
-	success:function(o){
-			$('#submit').removeClass('ing');
-			status = o.status;
-			switch (status) {
-				case '0':
-					message('信息不完整！', 0); 
-					break
-				case '1':
-					message('不正确的电子邮箱！', 0); 
-					break
-				case '2':
-					message('您的消息已经成功发送，我们会尽快联系您！',1); 
-					$('#contact_form').reset();
-					break
-				case '3':
-					message('发送消息失败！', 0);
-					break
-				default:
-					message('错误,请稍候再试.', 0);					
-			}
-	},
-	error:function(o){
-		$('#submit').removeClass('ing');
-		message('错误,请稍候再试.', 0);	
-	}
+				if($('#submit').hasClass('ing')){
+					return ;
+				}
+				$('#submit').addClass('ing');
+				$.ajax({
+				   url: "/contact",
+					type:"POST",
+					data : $('#contact_form').serialize(),
+					success:function(o){
+							$('#submit').removeClass('ing');
+							status = o.status;
+							switch (status) {
+								case '0':
+									message('信息不完整！', 0); 
+									break
+								case '1':
+									message('不正确的电子邮箱！', 0); 
+									break
+								case '2':
+									message('您的消息已经成功发送，我们会尽快联系您！',1); 
+									$('#contact_form').reset();
+									break
+								case '3':
+									message('发送消息失败！', 0);
+									break
+								default:
+									message('请稍候再试.', 0);					
+							}
+					},
+					error:function(o){
+						$('#submit').removeClass('ing');
+						message('请稍候再试.', 0);	
+					}
 
-		});
-});
-function message(a, b){
-		if(b == 1){
-			$('#J_MsgBox').html('<div class="download_box"><div><p><b>温馨提示:</b>'+o.error+'</p></div></div>');
-		}else{
-			$('#J_MsgBox').html('<div class="error_box"><div><p><b>错误:</b>'+o.error+'</p></div></div>');
-		}
-		$('#J_MsgBox').slideDown(function(){setTimeout(function(){$('#J_MsgBox').slideUp()},3000)});
-    }
+				});
+			});
       });
       </script>

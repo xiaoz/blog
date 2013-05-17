@@ -16,8 +16,9 @@ var product_reply_ctrl = require('./controller/product/reply.js');
 
 // 前台相关首页
 var dashboard_ctrl = require('./controller/frontend/site.js');
-var reply_ctrl = require('./controller/frontend/reply.js');
-
+var frontreply_ctrl = require('./controller/frontend/reply.js');
+var product_front_ctrl = require('./controller/frontend/product.js');
+var news_ctrl = require('./controller/frontend/news.js');
 
 var front_base = require('./controller/frontend/base.js').base_info;// custom middleware
 
@@ -27,22 +28,26 @@ exports = module.exports = function(app) {
 //	// 关于我们
 	app.get('/about', front_base,dashboard_ctrl.about);
 //	// 产品展示
-	app.get('/product', front_base,dashboard_ctrl.product);
+	app.get('/product', front_base,product_front_ctrl.product);
+	app.get('/productdetail', front_base, product_front_ctrl.viewProductForFront);
+	app.get('/productsincategory',front_base, product_front_ctrl.viewProductsOfUserCategoryForFront);
+	app.post('/sendProductMsg',front_base,frontreply_ctrl.sendProductMsg);
 //	// 新闻 blog
-	app.get('/news', dashboard_ctrl.news);
-	app.get('/newsdetail', dashboard_ctrl.viewArticleForFront);
-	app.get('/newsincategory', dashboard_ctrl.viewArticlesOfUserCategoryForFront);
-	app.get('/filesForFront', dashboard_ctrl.filesForFront);
-	app.get('/:folder_id/filesForFront', dashboard_ctrl.viewFilesOfFolderForFront);
+	app.get('/news',front_base, news_ctrl.news);
+	app.get('/newsdetail', front_base, news_ctrl.viewArticleForFront);
+	app.get('/newsincategory',front_base, news_ctrl.viewArticlesOfUserCategoryForFront);
+	app.get('/filesForFront',front_base , news_ctrl.user_share_files);
+	app.get('/:folder_id/filesForFront', news_ctrl.viewFilesOfFolderForFront);
+	app.post('/sendMsg',front_base,frontreply_ctrl.sendMsg);
+	
+	
 //	//客户案例
 	app.get('/cases', front_base, dashboard_ctrl.cases);
 //	// 联系我们
 	app.get('/contact',front_base, dashboard_ctrl.contact);
-	app.post('/contact',front_base,reply_ctrl.sendReply);
+	app.post('/contact',front_base,frontreply_ctrl.sendReply);
 	
 	//foot-top
-	app.get('/sendMsg',front_base,reply_ctrl.sendMsg);
-	
 	
 	
 	
@@ -89,8 +94,8 @@ exports = module.exports = function(app) {
 	
     // message相关
     app.post('/messages/unread', message_ctrl.unread_message_count);
-    app.get('/messages', message_ctrl.view_messages);
-    app.get('/messages/mark_all_read', message_ctrl.mark_all_read);
+    app.get('/messages/:type', message_ctrl.view_messages);
+    app.get('/messages/mark_all_read/:type', message_ctrl.mark_all_read);
 	
 	// 文章分类相关
     app.get('/categories/edit', category_ctrl.editCategories);
@@ -112,6 +117,10 @@ exports = module.exports = function(app) {
 	// reply
     app.post('/:article_id/reply', reply_ctrl.createReply);
     app.post('/reply/:reply_id/delete', reply_ctrl.deleteReply);
+    
+    app.post('/:product_id/reply_product', reply_ctrl.createProductReply);
+    app.post('/reply_product/:reply_id/delete', reply_ctrl.deleteProductReply);
+    
     
 	// 产品分类相关
     app.get('/product/categories/edit', product_category_ctrl.editCategories);

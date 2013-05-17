@@ -49,10 +49,11 @@
 	<div class='sep10'></div>
 	<div class='panel' id='reply_editor_panel'>
 		<div class='header'>
-			<span class='col_fade'>添加回复</span>
+			<span class='col_fade' id="J_Relay" >添加回复</span>
 		</div>
 		<div class='sep10'></div><div class='sep10'></div>
 		<form class="form-horizontal" id='reply_form' action='/<%= article.id %>/reply' method='post'>
+			<input type="hidden" value="0" name="reply_id" id="J_Reply_Id" />
 			<div class='control-group'>
 				<div class='controls' style='margin-left:0px;'>
 					<textarea class='span8' id="editor"  name='r_content' rows='20'></textarea>
@@ -84,8 +85,19 @@
 		$('.reply_area').mouseout(function(){
 			$(this).find('.reply2_btn').hide();
 		});
-
-
+		$('.reply_btn').click(function(){
+			var reply_id = $(this).attr("data");
+			var num = $(this).attr("data-num");
+			$('#J_Relay').html('回复游客'+num);
+			$('#J_Reply_Id').val(reply_id);
+			
+		});
+		$('.cancle_btn').click(function(){
+			$('#J_Reply_Id').val(0);
+			$('#J_Relay').html('自己添加回复')
+			
+		});
+		
 		$('.delete_reply_btn').live('click', function() {
 			var $me = $(this);
 			if (confirm('确定要删除此回复吗？')) {

@@ -49,9 +49,15 @@ exports.view_messages = function(req, res, next) {
         return;
     }
     var user_id = req.session.user.id;
+    var type_id = req.params.type;
+    
+    var page  = Number(req.query.page) || 1;
+	var page_size = Number(req.query.page_size) || 6;
+	var start = (page - 1)*page_size;
+    
     async.auto({
         unread_messages : function(cb) {// 未读消息
-            messageDao.queryMessagesOfUser(user_id, 0, function(err, unread_messages) {
+            messageDao.queryMessagesOfUser(user_id, 0,type_id, function(err, unread_messages) {
                 if (err || !unread_messages) {
                     cb(null, []);
                 }
@@ -59,7 +65,7 @@ exports.view_messages = function(req, res, next) {
             });
         },
         hasread_messages : function(cb) {// 已读消息
-            messageDao.queryMessagesOfUser(user_id, 1, function(err, hasread_messages) {
+            messageDao.queryMessagesOfUser(user_id, 1, type_id,function(err, hasread_messages) {
                 if (err || !hasread_messages) {
                     cb(null, []);
                 }
@@ -75,6 +81,8 @@ exports.view_messages = function(req, res, next) {
         }
 
         res.render('message/index', {
+        	current: 'message',
+        	active : type_id,
             unread_messages : results.unread_messages,
             hasread_messages : results.hasread_messages
         });
@@ -93,10 +101,44 @@ exports.unread_message_count = function(req, res, next) {
         return;
     }
     var user_id = req.session.user.id;
-    messageDao.queryMessagesOfUser(user_id, 0, function(err, unread_messages) {
+    async.auto({
+        unread_messages3 : function(cb) {// 未读消息3
+    	 	messageDao.queryMessagesOfUser(user_id, 0, 3,function(err, unread_messages) {
+    	 		 if (err || !unread_messages) {
+                     cb(null, []);
+                 }
+                 cb(null, unread_messages);
+    	    });
+        },
+        unread_messages7 : function(cb) {// 未读消息7
+        	messageDao.queryMessagesOfUser(user_id, 0, 7,function(err, unread_messages) {
+   	 		 if (err || !unread_messages) {
+                    cb(null, []);
+                }
+                cb(null, unread_messages);
+        	});
+        },
+        unread_messages8 : function(cb) {// 已读消息8
+        	messageDao.queryMessagesOfUser(user_id, 0, 8,function(err, unread_messages) {
+   	 		 if (err || !unread_messages) {
+                    cb(null, []);
+                }
+                cb(null, unread_messages);
+        	});
+        }
+    }, function(err, results) {
+        if (err) {
+        	res.json({
+                count : 0
+            });
+            return;
+        }
         res.json({
-            count : (unread_messages ? unread_messages.length : 0)
+            count1 : (results.unread_messages3 ? results.unread_messages3.length : 0),
+            count2 : (results.unread_messages7 ? results.unread_messages7.length : 0),
+            count3 : (results.unread_messages8 ? results.unread_messages8.length : 0)
         });
+      
         return;
     });
 };
@@ -106,8 +148,9 @@ exports.unread_message_count = function(req, res, next) {
  */
 exports.mark_all_read = function(req, res, next) {
     var user_id = req.session.user.id;
-    messageDao.updateMessages(user_id , function(err, info) {
-        res.redirect('/messages');
+    var type_id = req.params.type;
+    messageDao.updateMessages(user_id ,type_id, function(err, info) {
+        res.redirect('/messages/'+type_id);
         return;
     });
 };

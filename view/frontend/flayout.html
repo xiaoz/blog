@@ -32,7 +32,6 @@
 		 <% } %>
 		  <% if(locals.active == 'contact'){ %> 
 			<script type="text/javascript" src="js/comm_input_bg.js"></script>
-			<script type="text/javascript" src="js/contact.form.js"></script>
 		 <% } %>
  		<% if(locals.active == 'news'){ %> 
 		<script type="text/javascript" charset="utf-8" src="/libs/juicer/juicer-min.js"></script>
@@ -49,12 +48,8 @@
 		<%-partial('page/header')%>
 		<div id="content" class="container">
 			<div class="inner">
-			 	<div id="messages"><%-partial('notify/notify')%></div>
+			 	<!--<div id="messages"><%-partial('notify/notify')%></div>-->
 				<%-body %>
-
- 			<% if(locals.active != 'contact'){ %> 
-				<%-partial('page/footer-top')%>
-		 	<% } %>
 			</div>
 		</div>
 		<!-- footer -->
@@ -64,7 +59,7 @@
  $(document).ready(function() {    
 		        		var html_caregory_panel = '';
 		        		html_caregory_panel+='{@each categories as item,index}'+
-		        		'<li><a href="/products/${item.user_id}/${item.id}">${item.name}&nbsp;&nbsp;</a></li>'+
+		        		'<li><a href="/productsincategory?user_id=${item.user_id}&category_id=${item.id}">${item.name}&nbsp;&nbsp;</a></li>'+
 		        		'{@/each}';
 		        		var tpl_caregory_panel=juicer(html_caregory_panel);
 		        	    $.ajax({//得到用户产品分类

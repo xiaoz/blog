@@ -1,0 +1,36 @@
+
+
+   	<tr>
+                        	<td>
+                                <p class="price_info">
+<%= file.name.substring(0,35) %></p>
+                            </td>
+                            <td>
+                                <p><%= file.description %></p>
+                            </td>
+                              <td>
+                                <p>	<%
+	var bytevalue = file.size;
+	if(bytevalue<1024){
+	%>
+    <%=bytevalue%> Bytes
+    <%}
+    else if(bytevalue>=1024 && bytevalue<1024*1024){
+    %>
+    <%=Math.round(bytevalue/1024)%> K
+    <%}
+    else if(bytevalue>=1024*1024 && bytevalue<1024*1024*1024){
+    %>
+    <%=Math.round(bytevalue/1024/1024)%> M
+    <%}%></p>
+                            </td>
+                            <td class="last">
+	                            <a href="/file/35/download" class="button blue">
+			                        <span class="left">
+			                            <span class="right">
+			                               	下载
+			                            </span>
+			                        </span>
+			                    </a>
+                            </td>
+                        </tr>

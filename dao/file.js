@@ -104,10 +104,8 @@ exports.queryHotFiles = function(limit, callback){
 /**
  * 查询用户的公开文件
  */
-exports.queryPublicFilesOfUser = function(userId, callback){
-    mysql.query('select * from file where user_id = ? and is_public = ?', [ userId, 1 ], function(err, files) {
+exports.queryPublicFilesOfUser = function(userId,start,page_size, callback){
+    mysql.query('select * from file where user_id = ? and is_public = ? limit ? ,?', [ userId, 1 ,start,page_size], function(err, files) {
         callback(err, files);
     });
 };
-
-

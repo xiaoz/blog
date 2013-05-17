@@ -1,5 +1,5 @@
 var articleDao = require('../../dao/article.js');
-
+var productDao = require('../../dao/product.js');
 var siteconfigDao = require('../../dao/siteconfig.js');
 var Util = require('../../lib/util.js');
 var async = require('async');
@@ -15,9 +15,27 @@ exports.base_info = function(req, res, next) {
                     cb(null, {
                         articles : {}
                     });
+                }else{
+                	 if(articles instanceof Array){
+   					  for(var i =0,len = articles.length ; i< len ; i++){
+   						  articles[i].thumbnails = articles[i].content.match(/\/user_data\/images\/1\/\d+\.\w+/) || "/user_data/images/default.jpg";
+   					  }
+                	 }
+                	 cb(null, articles);
                 }
-                else
-                    cb(null, articles);
+                    
+            });
+        },
+        products : function(cb) {// 关注
+        	productDao.queryNewProduct(5, function(err, products) {
+                if (err || !products) {
+                    cb(null, {
+                    	products : {}
+                    });
+                }else{
+                	 cb(null, products);
+                }
+                    
             });
         },
         info : function(cb) {
@@ -41,6 +59,7 @@ exports.base_info = function(req, res, next) {
                 res.local('contact_detail', result.info.contact_detail);
                 res.local('about_detail', result.info.about_detail);
 				res.local('new_articles', result.articles);
+				res.local('new_products', result.products);
                 return next();
             }else{
             	 return next();

@@ -45,14 +45,15 @@
 	<% } %>
 	
 	<!-- 回复输入框-->	
-	<% if (locals.current_user && locals.article) { %>
+	<% if (locals.current_user && locals.product) { %>
 	<div class='sep10'></div>
 	<div class='panel' id='reply_editor_panel'>
 		<div class='header'>
-			<span class='col_fade'>添加回复</span>
+			<span class='col_fade' id="J_Relay">添加回复</span>
 		</div>
 		<div class='sep10'></div><div class='sep10'></div>
-		<form class="form-horizontal" id='reply_form' action='/<%= article.id %>/reply' method='post'>
+		<form class="form-horizontal" id='reply_form' action='/<%= product.id %>/reply_product' method='post'>
+			<input type="hidden" value="0" name="reply_id" id="J_Reply_Id" />
 			<div class='control-group'>
 				<div class='controls' style='margin-left:0px;'>
 					<textarea class='span8' id="editor"  name='r_content' rows='20'></textarea>
@@ -69,7 +70,7 @@
 	<% } %>
 </div>
 
-<% if (locals.current_user && locals.article) { %>
+<% if (locals.current_user && locals.product) { %>
 
 <script type='text/javascript'>
 	$(document).ready(function() {
@@ -85,7 +86,18 @@
 			$(this).find('.reply2_btn').hide();
 		});
 
-
+		$('.reply_btn').click(function(){
+			var reply_id = $(this).attr("data");
+			var num = $(this).attr("data-num");
+			$('#J_Relay').html('回复游客'+num);
+			$('#J_Reply_Id').val(reply_id);
+			
+		});
+		$('.cancle_btn').click(function(){
+			$('#J_Reply_Id').val(0);
+			$('#J_Relay').html('自己添加回复')
+			
+		});
 		$('.delete_reply_btn').live('click', function() {
 			var $me = $(this);
 			if (confirm('确定要删除此回复吗？')) {
@@ -94,11 +106,11 @@
 					reply_id = $me.parents('.reply_item').attr('reply_id');
 				}
 				var data = {
-				    article_id:<%=article.id%>,
+				    article_id:<%=product.id%>,
 					reply_id: reply_id,
 					_csrf: "<%- csrf %>"
 				};
-				$.post('/reply/' + reply_id + '/delete', data, function(data) {
+				$.post('/reply_product/' + reply_id + '/delete', data, function(data) {
 					if (data.status === 'success') {
 						if($me.hasClass('delete_reply_btn')){
 							$me.parents('.reply_item').remove();	

@@ -187,73 +187,60 @@ Making it look like readable English.</p>
                 </div>
             </div>
             <div class="block_cont_right">
-            	<div class="search_block">
-                	<form action="">
-                	<div class="search_inp">
-                    	<input type="text" name="" class="s_inp_text" title="Search" style="display: none; ">
-                    <span>Search</span></div>
-                    <div class="search_submit">
-                    	<input type="submit" value="">
-                    </div>
-                    </form>
-                </div>
-                <div class="line"></div>
-                <div class="block_recent_posts">
-                	<h4>Recent Posts</h4>
-                    <div class="post">
-	                    <div class="img"><a href="#"><img src="images/img_blog3.jpg" alt="" title=""></a></div>
-	                    <div class="text">
-		                    <p><a href="#">There are many variation of passages of Lorem.</a></p>
-		                    <p class="date">October 5, 2011 </p>
-	                    </div>
-                    </div>
-                    <div class="post">
-	                    <div class="img"><a href="#"><img src="images/img_blog4.jpg" alt="" title=""></a></div>
-	                    <div class="text">
-		                    <p><a href="#">But the majority have suffered alteration.</a></p>
-		                    <p class="date">September 22, 2011</p>
-	                    </div>
-                    </div>
-                    <div class="post">
-	                    <div class="img"><a href="#"><img src="images/img_blog5.jpg" alt="" title=""></a></div>
-	                    <div class="text">
-		                    <p><a href="#">Alteration in some form, by injected.</a></p>
-		                    <p class="date">September 15, 2011</p>
-	                    </div>
-                    </div>
-                    <div class="post">
-	                    <div class="img"><a href="#"><img src="images/img_blog6.jpg" alt="" title=""></a></div>
-	                    <div class="text">
-		                    <p><a href="#">Randomised words which don't look even slightly.</a></p>
-		                    <p class="date">September 15, 2011 </p>
-	                    </div>
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="block_last_work">
-                	<h4>latest Work</h4>
-                    <p>Fact that a reader will be distracted by readable content.</p>
-                    <div class="latest_img see_big2">
-                    	<div style="background-image: url(http://elephantweb.webglogic.com/images/img_latest.jpg); ">
-                    		<a href="images/big_img9.jpg" rel="prettyPhoto[gallery1]" style="display: none; "><img src="images/img_latest.jpg" title="" alt="">
-                            	<span class="icon"></span></a>
-                        </div>
-                    </div>
-                    <div class="description">
-	                    <h5 class="title">There are many variations</h5>
-	                    <p class="alt">Photo of old Venice</p>
-                    </div>
+              	<div class="block_recent_posts">
+                	<h4>最新产品</h4>
+                	
+                	  <% if(new_products && new_products.length > 0){
+	               
+	               		for(var i =0,len = new_products.length ; i< len ; i++){
+					%>
+   							<div class="post">
+			                <div class="img"><a href="/productdetail?product_id=<%=new_products[i].id%>"><img style="width: 52px;"  src="<%=new_products[i].goods_img%>" alt="" title="<%=new_products[i].title%>"></a></div>
+			                <div class="text">
+			                 <p><a href="/productdetail?product_id=<%=new_products[i].id%>"><%=new_products[i].title%></a></p>
+			                 <p class="date"><%=new_products[i].create_at%></p>
+			                </div>
+			               </div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无产品</p>
+					 </div>
+					<%}%>
+               	 </div>
+            	  <div class="block_recent_posts">
+                	<h4>最新新闻</h4>
+                	
+                	  <% if(new_articles && new_articles.length > 0){
+	               
+	               		for(var i =0,len = new_articles.length ; i< len ; i++){
+					%>
+   							<div class="post">
+			                <div class="img"><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><img style="width: 52px;"  src="<%=new_articles[i].thumbnails%>" alt="" title="<%=new_articles[i].title%>"></a></div>
+			                <div class="text">
+			                 <p><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><%=new_articles[i].title%></a></p>
+			                 <p class="date"><%=new_articles[i].create_at%></p>
+			                </div>
+			               </div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无新闻</p>
+					 </div>
+					<%}%>
                 </div>
                 <div class="line"></div>
                 <div class="block_blog_category">
-                  	<h4>blog Category</h4>
+                  	<h4>联系我们</h4>
                     <ul class="list2">
-                    	<li><a href="#">Web Development</a> (3)</li>
-                    	<li><a href="#">Photography</a> (2)</li>
-                    	<li><a href="#">Illustration</a> (4)</li>
-                    	<li><a href="#">Branding Design</a> (3)</li>
+                    	<li><a href="#2"><b>Phone:</b> <%= locals.company_info.phone %></a> </li>
+                    	<li><a href="#2"><b>Fax:</b> <%= locals.company_info.tel %></a></li>
+                    	<li><a href="#2"><b>Email:</b> <a href="mailto:info@elephantweb.com" class="main_link"><%= locals.company_info.email %></a></li>
+                    	<li style="height: 60px;"><a href="#2"><b>Our adress:</b>  <%= locals.company_info.address %></a></li>
                     </ul>
                 </div>
+                 <div class="line"></div>
+               
             </div>
             <div class="clear"></div>
              <div class="separator_5"></div>
