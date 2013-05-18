@@ -1,9 +1,9 @@
         		<div class="page_title">
-            	<h1>产品</h1>
-                <p class="page_description">Products</p>
+            	<h1>产品详情</h1>
+                <p class="page_description">Product Details</p>
                 <div class="page_navigation">
                 	<ul>
-                    	<li><a href="/">主页</a></li>
+                    	<li><a href="/product">主页</a></li>
                         <li class="nav_line">/</li>
                         <li>产品</li>
                     </ul>
@@ -39,9 +39,9 @@
 					<p class="links">
  					<%for(var cli=0;cli < article_categories.length;cli++){%>
 						<% if(cli == 0){%>
-							<a href="/articles/<%=article.author_id%>/<%=article_categories[cli].id%>"><%=article_categories[cli].name%></a>  
+							<a href="#2"><%=article_categories[cli].name%></a>  
 						<%}else{%>
-							,<a href="/articles/<%=article.author_id%>/<%=article_categories[cli].id%>"><%=article_categories[cli].name%></a>  
+							,<a href="#2"><%=article_categories[cli].name%></a>  
 						<%}%>
 					<%}%>
 						</p>

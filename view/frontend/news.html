@@ -1,12 +1,13 @@
 
         	<div class="page_title">
             	<h1>新闻&文件</h1>
-                <p class="page_description">News&Files</p>
+                <p class="page_description"> <% if(category && category.name){%>在<%=category.name%> 分类下的新闻<% }else{ %>News&Files<% } %></p>
                 <div class="page_navigation">
                 	<ul>
-                    	<li><a href="/">主页</a></li>
+                    	<li><a href="/news">主页</a></li>
                         <li class="nav_line">/</li>
                         <li>新闻&文件</li>
+                       
                     </ul>
                 </div>
             </div>
@@ -35,18 +36,16 @@
                 <div class="block_info_boxes">
 					<div class="info_box">
                             	<div>
-                                	<p><b>Info:</b> 暂无文章哦！</p>
+                                	<p><b>Info:</b> <% if(category && category.name){%>在<%=category.name%> 分类下的<% } %> 暂无新闻哦！</p>
                                 </div>
 	                        </div>
 	                        </div>
 			<%}%>
                 <div class="line"></div>
             </div>
-
-
             <div class="block_cont_right">
 	                <div class="block_blog_category">
-	                  	<h4>文章分类</h4>
+	                  	<h4>新闻分类</h4>
 	                    <ul class="list2" id="caregory_panel-1">
 	                    </ul>
 	                </div>

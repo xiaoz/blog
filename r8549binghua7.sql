@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: r2602binghua7.mysql.aliyun.com
--- 生成日期: 2013 年 05 月 15 日 11:29
+-- 生成日期: 2013 年 05 月 17 日 08:51
 -- 服务器版本: 5.1.61
 -- PHP 版本: 5.3.3
 
@@ -53,8 +53,8 @@ INSERT INTO `article` (`id`, `title`, `content`, `author_id`, `reply_count`, `vi
 (97, '寻找网页设计灵感的27个最佳网站推荐', '<h1 class="postTitle" style="margin:0px 0px 15px; padding:0px 0px 0px 33px; font-size:16px; line-height:1.5em; width:897.7999877929688px; clear:both; color:#464646; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; white-space:normal; background-color:#faf7ef; "><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/lhb25/archive/2011/04/19/2014303.html" style="margin:0px; padding:0px; color:#6466b3; text-decoration:none; ">寻找网页设计灵感的27个最佳网站推荐</a></h1><p><a href="http://www.cnblogs.com/lhb25/archive/2011/04/19/2014303.html" target="_blank" title="看看那">点此</a></p>', 1, 0, 4, 0, '2012-12-03 14:12:57', '2012-12-03 14:13:58', 0, '1970-01-01 00:00:00', 0),
 (99, '梦想天空 有空 看看看看', '<p><a href="http://www.cnblogs.com/">http://www.cnblogs.com</a><br /></p>', 1, 0, 5, 0, '2012-12-03 14:16:11', '2012-12-03 14:16:11', 0, '1970-01-01 00:00:00', 0),
 (101, '的风格讽德诵功上的风格士大夫个地方', '<p>儿童test色身体是是&nbsp;</p>', 1, 0, 9, 0, '2013-04-11 17:26:30', '2013-04-24 21:12:21', 0, '1970-01-01 00:00:00', 0),
-(103, '彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺', '<p><img src="/user_data/images/1/11366810179483.jpg" style="float:none;" border="0" hspace="0" vspace="0" /><br /></p><p><br /></p><p><br /></p><p>你好&nbsp;！</p>', 1, 2, 90, 0, '2013-04-24 21:30:28', '2013-04-24 21:30:28', 0, '1970-01-01 00:00:00', 0),
-(105, '发的发生大幅', '<p>撒地方萨芬撒打发是的发送到</p>', 1, 0, 4, 0, '2013-05-11 13:58:04', '2013-05-11 13:58:04', 0, '1970-01-01 00:00:00', 0);
+(103, '彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺', '<p><img src="/user_data/images/1/11366810179483.jpg" style="float:none;" border="0" hspace="0" vspace="0" /><br /></p><p><br /></p><p><br /></p><p>你好&nbsp;！</p>', 1, 2, 94, 0, '2013-04-24 21:30:28', '2013-04-24 21:30:28', 0, '1970-01-01 00:00:00', 0),
+(105, '发的发生大幅', '<p>撒地方萨芬撒打发是的发送到</p>', 1, 11, 81, 0, '2013-05-11 13:58:04', '2013-05-11 13:58:04', 0, '1970-01-01 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `file` (
 
 INSERT INTO `file` (`id`, `name`, `user_id`, `folder_id`, `down_count`, `hash`, `size`, `mime`, `is_public`, `create_at`, `description`) VALUES
 (33, 'reset.css', 1, 15, 28, '11366810353923.css', 2316, 'text/css', 1, '2013-04-24 21:32:40', '分店'),
-(35, 'shop.html', 1, 15, 36, '11366811597224.htm', 10785, 'text/html', 1, '2013-04-24 21:53:20', 'dsd酸'),
+(35, 'shop.html', 1, 15, 37, '11366811597224.htm', 10785, 'text/html', 1, '2013-04-24 21:53:20', 'dsd酸'),
 (37, '11_100x100.jpg', 1, 17, 50, '11368255521153.jpg', 6050, 'image/jpeg', 1, '2013-05-11 14:58:43', 'sdfasd ');
 
 -- --------------------------------------------------------
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `is_read` bit(1) DEFAULT b'0' COMMENT '0表示未读，1表示已读',
   PRIMARY KEY (`id`),
   KEY `index_message_user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=122 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=148 ;
 
 --
 -- 转存表中的数据 `message`
@@ -257,7 +257,20 @@ INSERT INTO `message` (`id`, `type`, `user_id`, `content`, `create_at`, `is_read
 (115, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-26 17:33:09', b'1'),
 (117, 3, 1, '{"from_user_id":3,"from_user_name":"customer","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-28 11:09:19', b'1'),
 (119, 3, 1, '{"from_user_id":3,"from_user_name":"customer","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-28 11:09:49', b'1'),
-(121, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-28 12:14:31', b'1');
+(121, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-28 12:14:31', b'1'),
+(122, 7, 1, '{"userName":"21321","userEmail":"aaaa@163.com","title":"","content":"435345","phone":"","site":""}', '2013-05-16 12:26:03', b'1'),
+(124, 7, 1, '{"userName":"234","userEmail":"222@163.com","title":"dafasdf","content":"adfsdafads","phone":"sfadsf","site":"dasfa"}', '2013-05-16 12:29:16', b'1'),
+(126, 7, 1, '{"userName":"234","userEmail":"222@163.com","title":"dafasdf","content":"adfsdafads","phone":"sfadsf","site":"dasfa"}', '2013-05-16 12:30:17', b'1'),
+(128, 7, 1, '{"userName":"234","userEmail":"222@163.com","title":"dafasdf","content":"adfsdafads","phone":"sfadsf","site":"dasfa"}', '2013-05-16 12:31:04', b'1'),
+(130, 3, 1, '{"from_user_id":3,"from_user_name":"游客","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:02:55', b'0'),
+(132, 3, 1, '{"from_user_id":1,"from_user_name":"sd","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:06:39', b'0'),
+(134, 3, 1, '{"from_user_id":1,"from_user_name":"123123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:56:18', b'0'),
+(136, 3, 1, '{"from_user_id":1,"from_user_name":"用户名：123邮箱123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:58:22', b'0'),
+(138, 3, 1, '{"from_user_id":1,"from_user_name":"用户名：123,邮箱:123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 15:04:29', b'0'),
+(140, 3, 1, '{"from_user_id":1,"from_user_name":"用户名：asdfdas,邮箱:123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 15:06:24', b'0'),
+(142, 8, 1, '{"from_user_id":1,"from_user_name":"用户名：测试1,邮箱:aaaa@163.com","article_id":"6","article_title":"产品3"}', '2013-05-17 16:32:29', b'0'),
+(144, 8, 1, '{"from_user_id":1,"from_user_name":"用户名：测试1,邮箱:aaaa@163.com","article_id":"6","article_title":"产品3"}', '2013-05-17 16:32:31', b'0'),
+(146, 8, 1, '{"from_user_id":1,"from_user_name":"用户名：测试1,邮箱:aaaa@163.com","article_id":"6","article_title":"产品3"}', '2013-05-17 16:33:03', b'0');
 
 -- --------------------------------------------------------
 
@@ -280,15 +293,17 @@ CREATE TABLE IF NOT EXISTS `product` (
   `content_is_html` int(1) DEFAULT '0',
   `goods_img` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `product`
 --
 
 INSERT INTO `product` (`id`, `title`, `content`, `author_id`, `reply_count`, `visit_count`, `collect_count`, `create_at`, `update_at`, `last_reply`, `last_reply_at`, `content_is_html`, `goods_img`) VALUES
-(3, '照片墙为啥一直这么流行', '<p>是打发士大夫水电费山大先吃饭的筛选出撒旦</p>', 1, 0, 5, 0, '2013-05-12 12:37:38', '2013-05-12 12:42:15', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368333692630conv.png'),
-(5, '传递出', '<p><img src="/user_data/images/1/11368333788242.png" style="float:none;" />的范德萨发生<span style="font-family:黑体, simhei; font-size:36px; ">的发的身份撒的发</span></p><p><img src="/user_data/images/1/11368333788298.png" style="float:none;" /></p><p><br /></p>', 1, 0, 1, 0, '2013-05-12 12:43:47', '2013-05-12 12:43:47', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368333819479APPUIDVIEW.png');
+(3, '照片墙为啥一直这么流行', '<p>是打发士大夫水电费山大先吃饭的筛选出撒旦</p>', 1, 0, 31, 0, '2013-05-12 12:37:38', '2013-05-17 10:09:36', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368756574567big_img5.jpg'),
+(5, '产品1', '<p><img src="/user_data/images/1/11368333788242.png" style="float:none;" />的范德萨发生<span style="font-family:黑体, simhei;font-size:36px">的发的身份撒的发</span></p><p><img src="/user_data/images/1/11368333788298.png" style="float:none;" /></p><p><br /></p>', 1, 0, 5, 0, '2013-05-12 12:43:47', '2013-05-17 10:09:11', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368756544042big_img4.jpg'),
+(6, '产品3', '<p>产品3产品3产品3产品3产品3<br /></p>', 1, 15, 43, 0, '2013-05-17 12:28:35', '2013-05-17 12:28:35', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368764910751big_img6.jpg'),
+(8, '产品4', '<p>产品3产品3产品3产品3<br /></p>', 1, 0, 2, 0, '2013-05-17 12:29:00', '2013-05-17 12:29:00', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368764936185img_p2_c2.jpg');
 
 -- --------------------------------------------------------
 
@@ -306,8 +321,10 @@ CREATE TABLE IF NOT EXISTS `product_category` (
 --
 
 INSERT INTO `product_category` (`product_id`, `category_id`) VALUES
+(5, 9),
 (3, 1),
-(5, 9);
+(6, 1),
+(8, 9);
 
 -- --------------------------------------------------------
 
@@ -337,6 +354,35 @@ INSERT INTO `product_categorys` (`id`, `name`, `sequence`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `product_reply`
+--
+
+CREATE TABLE IF NOT EXISTS `product_reply` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(20000) DEFAULT '',
+  `article_id` int(11) DEFAULT '0',
+  `author_id` int(11) DEFAULT '0',
+  `create_at` datetime DEFAULT '1970-01-01 00:00:00',
+  `update_at` datetime DEFAULT '1970-01-01 00:00:00',
+  `content_is_html` int(11) DEFAULT '1',
+  `reply_id` int(11) NOT NULL,
+  `reply_type` int(11) NOT NULL,
+  `user_info` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reply_type` (`reply_type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `product_reply`
+--
+
+INSERT INTO `product_reply` (`id`, `content`, `article_id`, `author_id`, `create_at`, `update_at`, `content_is_html`, `reply_id`, `reply_type`, `user_info`) VALUES
+(2, '你好这款有货吗', 6, 3, '2013-05-17 16:33:03', '2013-05-17 16:33:03', 1, 0, 0, '用户名：测试1,邮箱:aaaa@163.com'),
+(4, '<p>不要意思，没有了，，，谢谢你</p>', 6, 1, '2013-05-17 16:33:24', '2013-05-17 16:33:24', 1, 2, 0, '');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `reply`
 --
 
@@ -349,13 +395,34 @@ CREATE TABLE IF NOT EXISTS `reply` (
   `update_at` datetime DEFAULT '1970-01-01 00:00:00',
   `content_is_html` int(11) DEFAULT '1',
   `reply_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=72 ;
+  `reply_type` int(11) NOT NULL,
+  `user_info` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reply_type` (`reply_type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
 
 --
 -- 转存表中的数据 `reply`
 --
 
+INSERT INTO `reply` (`id`, `content`, `article_id`, `author_id`, `create_at`, `update_at`, `content_is_html`, `reply_id`, `reply_type`, `user_info`) VALUES
+(72, 'dsfsdaf', NULL, 1, '2013-05-17 13:57:43', '2013-05-17 13:57:43', 1, 0, 0, ''),
+(74, 'dsfsdaf', NULL, 1, '2013-05-17 13:57:44', '2013-05-17 13:57:44', 1, 0, 0, ''),
+(76, 'dsfsdaf', NULL, 3, '2013-05-17 14:00:57', '2013-05-17 14:00:57', 1, 0, 0, ''),
+(78, 'dsfsdaf', NULL, 3, '2013-05-17 14:00:59', '2013-05-17 14:00:59', 1, 0, 0, ''),
+(80, '213', NULL, 3, '2013-05-17 14:02:13', '2013-05-17 14:02:13', 1, 0, 0, ''),
+(82, '213', NULL, 3, '2013-05-17 14:02:15', '2013-05-17 14:02:15', 1, 0, 0, ''),
+(84, '213', 105, 3, '2013-05-17 14:02:55', '2013-05-17 14:02:55', 1, 0, 0, ''),
+(86, '阿萨德发的萨芬', 105, 3, '2013-05-17 14:06:39', '2013-05-17 14:06:39', 1, 0, 0, ''),
+(88, 'dfd', 105, 3, '2013-05-17 14:56:18', '2013-05-17 14:56:18', 1, 0, 0, ''),
+(90, 'sdafdsf ', 105, 3, '2013-05-17 14:58:22', '2013-05-17 14:58:22', 1, 0, 0, ''),
+(92, 'sdfadsf', 105, 3, '2013-05-17 15:04:29', '0000-00-00 00:00:00', 1, 0, 0, '2013-5-17 15:04:29'),
+(94, 'asdfadsf', 105, 3, '2013-05-17 15:06:24', '2013-05-17 15:06:24', 1, 0, 0, '用户名：asdfdas,邮箱:123@163.com'),
+(96, '<p>houtdasr</p>', 105, 3, '2013-05-17 15:16:12', '2013-05-17 15:16:12', 1, 0, 0, ''),
+(98, '<p>dfgd</p>', 105, 1, '2013-05-17 15:16:35', '2013-05-17 15:16:35', 1, 0, 0, ''),
+(100, '<p>你好游客4</p>', 105, 1, '2013-05-17 15:17:52', '2013-05-17 15:17:52', 1, 90, 0, ''),
+(102, '<p>不isa的办法</p>', 105, 1, '2013-05-17 15:41:18', '2013-05-17 15:41:18', 1, 92, 0, ''),
+(104, '<p>阿发的身份</p>', 105, 1, '2013-05-17 15:41:28', '2013-05-17 15:41:28', 1, 90, 0, '');
 
 -- --------------------------------------------------------
 
@@ -378,7 +445,7 @@ CREATE TABLE IF NOT EXISTS `site_config` (
 --
 
 INSERT INTO `site_config` (`id`, `shop_config`, `company_info`, `about_info`, `contact_detail`, `about_detail`) VALUES
-(1, '{"site_name":"淘宝网 - 淘！我喜欢", "keyword":"淘宝,掏宝,网上购物,C2C,在线交易,交易市场,网上交易,交易市场,网上买,网上卖,购物网站,团购,网上贸易,安全购物,电子商务,放心买,供应,买卖信息,网店,一口价,拍卖,网上开店,网络购物,打折,免费开店,网购,频道,店铺", "content":"淘宝网 - 亚洲最大、最安全的网上交易平台，提供各类服饰、美容、家居、数码、话费/点卡充值… 8亿优质特价商品，同时提供担保交易(先收货后付款)、先行赔付、假一赔三、七天无理由退换货、数码免费维修等安全交易保障服务，让你全面安心享受网上购物乐趣！"}', '{"title":"WE SUPPORT YOU BY 24 HOURS, CONTACT US", "address":"Los Angeles, USA, 45896", "tel":"+1 568 247 15 44", "phone":"+1 568 354 78 25", "email":"info@elephantweb.com"}', '{"title":"ABOUT THE COMPANY", "content1":"Be distracted by of a page when looking at its layout. The point of using Lorem Ipsum is that. Has a more-or-less. Of letters, as opposed to using content here, content here. Making it look like readable English.", "content1_1":"阶段1描述", "content1_2":"阶段2描述", "content1_3":"阶段3描述", "content2_1":"服务1描述", "content2_2":"服务2描述", "content2_3":"服务3描述", "content2_4":"服务4描述"}', '<p><span class="Apple-style-span" style="font-family:tahoma, arial, 宋体, sans-serif"><div class="title" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:15px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; "><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 11px/17px arial, helvetica, sans-serif; color:#3096d0; text-align:justify; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted.</p></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; "><strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Рandful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate&nbsp;Lorem&nbsp;Ipsum&nbsp;which&nbsp;looks&nbsp;reasonable.&nbsp;The&nbsp;generated&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;therefor&nbsp;use&nbsp;Lorem&nbsp;Ipsum&nbsp;as&nbsp;their&nbsp;default&nbsp;model&nbsp;text.</strong></p><p class="separator_2" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; height:13px; float:none; ">&nbsp;</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; ">Need&nbsp;to&nbsp;be&nbsp;sure&nbsp;there&nbsp;isn&#39;t&nbsp;anything&nbsp;embarrassing&nbsp;hidden&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;text.&nbsp;All&nbsp;the&nbsp;Lorem&nbsp;Ipsum&nbsp;generators&nbsp;on&nbsp;the&nbsp;Internet&nbsp;tend&nbsp;to&nbsp;repeat&nbsp;predefined&nbsp;chunks&nbsp;as&nbsp;necessary,&nbsp;making&nbsp;this&nbsp;the&nbsp;first&nbsp;true&nbsp;generator&nbsp;on&nbsp;the&nbsp;Internet.&nbsp;It&nbsp;uses&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;over&nbsp;200&nbsp;Latin&nbsp;words,&nbsp;combined&nbsp;with&nbsp;a&nbsp;handful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate.</p></span><br /></p>', '<p><span class="Apple-style-span" style="font-family:tahoma, arial, 宋体, sans-serif"><p class="col_9c9c9c" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#9c9c9c; text-align:justify; overflow-x:hidden; overflow-y:hidden; "><em style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;the&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that&nbsp;it&nbsp;has&nbsp;a&nbsp;more-or-less&nbsp;normal&nbsp;distribution&nbsp;of&nbsp;letters.</em></p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">&nbsp;</p><div class="about_pic" style="padding-top:5px; padding-right:5px; padding-bottom:5px; padding-left:5px; margin-top:0px; margin-right:22px; margin-bottom:13px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; width:254px; height:163px; background-image:url(http://127.0.0.1:10080/images/img_border_264_173.jpg); background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; float:left; background-position:initial initial; background-repeat:no-repeat no-repeat; "><img src="http://127.0.0.1:10080/images/img_about1.jpg" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; border-top-style:none; border-right-style:none; border-bottom-style:none; border-left-style:none; border-width:initial; border-color:initial; vertical-align:top; " /></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">reader&nbsp;will&nbsp;be&nbsp;distracted</a>&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less&nbsp;<strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">normal&nbsp;distribution</strong>.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable.</p><p class="quote2" style="padding-top:2px; padding-right:0px; padding-bottom:0px; padding-left:14px; margin-top:9px; margin-bottom:12px; outline-style:none; outline-width:initial; outline-color:initial; font:italic normal normal 11px/17px serif; color:#bfbfbf; text-align:left; border-left-width:3px; border-left-style:solid; border-left-color:#f0f0f0; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;thatnormal&nbsp;distribution.</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;more-or-less.&nbsp;Of&nbsp;lettersopposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.</p><div class="clear" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; height:1px; background-image:none; background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; clear:both; background-position:initial initial; background-repeat:initial initial; "></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">readable&nbsp;content</a>&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.&nbsp;Many&nbsp;desktop&nbsp;publishing&nbsp;packages&nbsp;and&nbsp;web&nbsp;page&nbsp;editors&nbsp;now.</p></span><br /></p>');
+(1, '{"site_name":"淘宝网 - 淘！我喜欢","keyword":"淘宝,掏宝,网上购物,C2C,在线交易,交易市场,网上交易,交易市场,网上买,网上卖,购物网站,团购,网上贸易,安全购物,电子商务,放心买,供应,买卖信息,网店,一口价,拍卖,网上开店,网络购物,打折,免费开店,网购,频道,店铺","content":"淘宝网 - 亚洲最大、最安全的网上交易平台，提供各类服饰、美容、家居、数码、话费/点卡充值… 8亿优质特价商品，同时提供担保交易(先收货后付款)、先行赔付、假一赔三、七天无理由退换货、数码免费维修等安全交易保障服务，让你全面安心享受网上购物乐趣！"}', '{"title":"WE SUPPORT YOU BY 24 HOURS, CONTACT US","address":"福建省厦门市思明区软件园萨芬大撒范德萨","tel":"+1 568 247 15 44","phone":"+1 568 354 78 25","email":"info@elephantweb.com"}', '{"title":"关于我们公司123","content1":"目标描述1 2133","content1_1":"阶段1描述","content1_2":"阶段2描述","content1_3":"阶段3描述","content2_1":"服务1描述","content2_2":"服务2描述","content2_3":"服务3描述","content2_4":"服务4描述"}', '<p></p><div class="title" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:15px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; "><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 11px/17px arial, helvetica, sans-serif; color:#3096d0; text-align:justify; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted.</p></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; "><strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Рandful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate&nbsp;Lorem&nbsp;Ipsum&nbsp;which&nbsp;looks&nbsp;reasonable.&nbsp;The&nbsp;generated&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;therefor&nbsp;use&nbsp;Lorem&nbsp;Ipsum&nbsp;as&nbsp;their&nbsp;default&nbsp;model&nbsp;text.</strong></p><p class="separator_2" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; height:13px; float:none; ">&nbsp;</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; ">Need&nbsp;to&nbsp;be&nbsp;sure&nbsp;there&nbsp;isn&#39;t&nbsp;anything&nbsp;embarrassing&nbsp;hidden&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;text.&nbsp;All&nbsp;the&nbsp;Lorem&nbsp;Ipsum&nbsp;generators&nbsp;on&nbsp;the&nbsp;Internet&nbsp;tend&nbsp;to&nbsp;repeat&nbsp;predefined&nbsp;chunks&nbsp;as&nbsp;necessary,&nbsp;making&nbsp;this&nbsp;the&nbsp;first&nbsp;true&nbsp;generator&nbsp;on&nbsp;the&nbsp;Internet.&nbsp;It&nbsp;uses&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;over&nbsp;200&nbsp;Latin&nbsp;words,&nbsp;combined&nbsp;with&nbsp;a&nbsp;handful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate.</p><p><br /></p><p></p>', '<p></p><p class="col_9c9c9c" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#9c9c9c; text-align:justify; overflow-x:hidden; overflow-y:hidden; "><em style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;the&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that&nbsp;it&nbsp;has&nbsp;a&nbsp;more-or-less&nbsp;normal&nbsp;distribution&nbsp;of&nbsp;letters.</em></p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">&nbsp;</p><div class="about_pic" style="padding-top:5px; padding-right:5px; padding-bottom:5px; padding-left:5px; margin-top:0px; margin-right:22px; margin-bottom:13px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; width:254px; height:163px; background-image:url(http://127.0.0.1:10080/images/img_border_264_173.jpg); background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; float:left; background-position:initial initial; background-repeat:no-repeat no-repeat; "><img src="http://127.0.0.1:10080/images/img_about1.jpg" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; border-top-style:none; border-right-style:none; border-bottom-style:none; border-left-style:none; border-width:initial; border-color:initial; vertical-align:top; " /></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">reader&nbsp;will&nbsp;be&nbsp;distracted</a>&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less&nbsp;<strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">normal&nbsp;distribution</strong>.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable.</p><p class="quote2" style="padding-top:2px; padding-right:0px; padding-bottom:0px; padding-left:14px; margin-top:9px; margin-bottom:12px; outline-style:none; outline-width:initial; outline-color:initial; font:italic normal normal 11px/17px serif; color:#bfbfbf; text-align:left; border-left-width:3px; border-left-style:solid; border-left-color:#f0f0f0; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;thatnormal&nbsp;distribution.</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;more-or-less.&nbsp;Of&nbsp;lettersopposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.</p><div class="clear" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; height:1px; background-image:none; background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; clear:both; background-position:initial initial; background-repeat:initial initial; "></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">readable&nbsp;content</a>&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.&nbsp;Many&nbsp;desktop&nbsp;publishing&nbsp;packages&nbsp;and&nbsp;web&nbsp;page&nbsp;editors&nbsp;now.</p><p><br /></p><p></p>');
 
 -- --------------------------------------------------------
 
@@ -916,7 +983,7 @@ CREATE TABLE IF NOT EXISTS `userblog` (
 
 INSERT INTO `userblog` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`, `type`) VALUES
 (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', NULL, '1970-01-01 00:00:00', '/user_data/avatar/1.png', 0),
-(3, 'customer', '202cb962ac59075b964b07152d234b70', '24409917@qq.com', '2013-04-28 03:08:12', '/user_data/avatar/avatar.png', 0);
+(3, '游客', '202cb962ac59075b964b07152d234b70', '24409917@qq.com', '2013-04-28 03:08:12', '/user_data/avatar/avatar.png', 0);
 
 -- --------------------------------------------------------
 

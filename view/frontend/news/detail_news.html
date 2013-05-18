@@ -1,11 +1,11 @@
         	<div class="page_title">
-            	<h1>新闻&文件</h1>
-                <p class="page_description">News&Files</p>
+            	<h1>新闻详情</h1>
+                <p class="page_description">News Details</p>
                 <div class="page_navigation">
                 	<ul>
-                    	<li><a href="/">主页</a></li>
+                    	<li><a href="/news">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li>新闻&文件</li>
+                        <li>新闻详情</li>
                     </ul>
                 </div>
             </div>
@@ -39,9 +39,9 @@
 					<p class="links">
  					<%for(var cli=0;cli < article_categories.length;cli++){%>
 						<% if(cli == 0){%>
-							<a href="/articles/<%=article.author_id%>/<%=article_categories[cli].id%>"><%=article_categories[cli].name%></a>  
+							<a href="#2"><%=article_categories[cli].name%></a>  
 						<%}else{%>
-							,<a href="/articles/<%=article.author_id%>/<%=article_categories[cli].id%>"><%=article_categories[cli].name%></a>  
+							,<a href="#2"><%=article_categories[cli].name%></a>  
 						<%}%>
 					<%}%>
 						</p>

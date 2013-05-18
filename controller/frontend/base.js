@@ -56,8 +56,8 @@ exports.base_info = function(req, res, next) {
             	res.local('site_info', JSON.parse(result.info[0].shop_config));
                 res.local('company_info', JSON.parse(result.info[0].company_info));
                 res.local('about_info',  JSON.parse(result.info[0].about_info));
-                res.local('contact_detail', result.info.contact_detail);
-                res.local('about_detail', result.info.about_detail);
+                res.local('contact_detail', result.info[0].contact_detail);
+                res.local('about_detail', result.info[0].about_detail);
 				res.local('new_articles', result.articles);
 				res.local('new_products', result.products);
                 return next();

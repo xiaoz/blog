@@ -44,6 +44,14 @@ exports.deleteReply = function(userId, replyId, callback){
     });
 };
 
+/**
+ * 查询产品的最新评论信息
+ */
+exports.queryNewRepliesOfProduct = function(limit,callback) {
+    mysql.query('select * from product_reply  order by create_at limit ?',[limit], function(err, replies) {
+        callback(err, replies);
+    });
+};
 
 /**
  * 根据产品id查询产品的评论信息

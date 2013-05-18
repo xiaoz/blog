@@ -18,11 +18,11 @@ $(document).ready(function(){
 	all = mas.length;
 	for(x=0; x<mas.length; x++){
 		if(x!=0){
-		min_images_code += '<li><a href="#"><img src="'+mas[x][0]+'" alt="" title="" /></a></li>';
-		big_images_code += '<div style="overflow: hidden; display:none"><img src="'+mas[x][1]+'" alt="" title="" /></div>';
+		//min_images_code += '<li><a href="#"><img src="'+mas[x][0]+'" alt="" title="" /></a></li>';
+		big_images_code += '<div style="overflow: hidden; display:none"><a href="'+mas[x][0]+'" ><img src="'+mas[x][1]+'" alt="" title="" /></a></div>';
 		}else{
-		min_images_code += '<li><a href="#" class="active"><img src="'+mas[x][0]+'" alt="" title="" /></a></li>';
-		big_images_code += '<div style="overflow: hidden; display:block" class="active"><img src="'+mas[x][1]+'" alt="" title="" /></div>';
+		//min_images_code += '<li><a href="#" class="active"><img src="'+mas[x][0]+'" alt="" title="" /></a></li>';
+		big_images_code += '<div style="overflow: hidden; display:block" class="active"><a href="'+mas[x][0]+'" ><img src="'+mas[x][1]+'" alt="" title="" /></a></div>';
 		}
 	}
 	

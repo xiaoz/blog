@@ -1,26 +1,52 @@
 
         	<div class="page_title">
             	<h1>产品</h1>
-                <p class="page_description">Products</p>
+                <p class="page_description">Product</p>
                 <div class="page_navigation">
                 	<ul>
-                    	<li><a href="/">主页</a></li>
+                    	<li><a href="/product">主页</a></li>
                         <li class="nav_line">/</li>
                         <li>产品</li>
                     </ul>
                 </div>
             </div>
+            
             <div class="line"></div>
-         <!--    <div class="block_filter">
+            <div class="block_filter">
             	<p>Filter:</p>
-                <ul>
-                	<li class="first"><a href="#" class="active" title="all">All Categories</a></li>
-                    <li><a href="#" title="webdesign">Web Design</a></li>
-                    <li><a href="#" title="icon">Icons</a></li>
-                    <li><a href="#" title="illustrations">Illustrations</a></li>
-                    <li class="last"><a href="#" title="video">Video</a></li>
+                <ul id="J_ProductBox">
+                 <% if(categorys && categorys.length > 0){
+	               		for(var i =0,len = categorys.length ; i< len ; i++){
+					%>
+					
+					 <% if(i == 0){%>
+						  <% if(category && category.name){%>
+						 	<li class="first"><a href="/product" class="" title="all">All Categories</a></li>
+						 <% }else{ %>
+						 	<li class="first"><a href="/product" class="active" title="all">All Categories</a></li>
+						 <% } %>
+					 <% }else if(i == (len-1)){ %>
+					  	 <% if(category.id == categorys[i].id){%>
+						 	<li class="last"><a class="active" href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
+						 <% }else{ %>
+						 	 	<li class="last"><a  href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
+						 <% } %>
+					 <% }else{ %>
+					   	 <% if(category.id == categorys[i].id ){%>
+						 	<li ><a class="active" href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
+						 <% }else{ %>
+						 	 	<li ><a  href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
+						 <% } %>
+					 <% } %>
+					 
+   					 <% }	%>
+					<%}else{%>
+						<li class="first"><a href="#2" >暂无分类</a></li>
+					<%}%>
+                
+                	
                 </ul>
-            </div> -->
+            </div> 
              <% if(articles && articles.length > 0){
 					%>
             <div class="block_portfolio_c2 filter_conteiner">
@@ -32,7 +58,9 @@
 					<div class="block_info_boxes">
 					<div class="info_box">
                             	<div>
-                                	<p><b>Info:</b> 还没有产品哦！</p>
+                                	<p><b>Info:</b>  <% if(category && category.name){%>
+									<%=category.name %>分类下
+						 <% } %>还没有产品哦！</p>
                                 </div>
 	                        </div>
 	                        </div>
@@ -54,4 +82,4 @@
                 	<%}%>
             <div class="clear"></div>
 
-		
+		<%-partial('page/footer-top')%>

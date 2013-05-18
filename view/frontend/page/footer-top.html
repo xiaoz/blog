@@ -4,7 +4,7 @@
 	               <h4>LATEST FROM THE BLOG</h4>
 	                <% if(new_articles && new_articles.length > 0){
 	               
-	               		for(var i =0,len = new_articles.length ; i< len ; i++){
+	               		for(var i =0,len = new_articles.length ; i< 2 ; i++){
 					%>
    						 <div class="post">
 			                <div class="img"><a href="#"><img style="width: 52px;"  src="<%=new_articles[i].thumbnails%>" alt="" title=""></a></div>
@@ -24,15 +24,24 @@
 	           </div>
 	           <div class="block_twitter">
 	               <h4>Twitter Widget</h4>
-	               <div class="text">
-	               	<p>Sanfrancisco2010: Prefer freelancer that has experience are <a href="#">http://bit.ly/rIZgm6</a></p>
-	                   <p class="date">14 minutes ago</p>
-	</div>
+	                <% if(replies && replies.length > 0){
+	               		for(var i =0,len = replies.length ; i< len ; i++){
+					%>
+			       <div class="text">
+			       		 <% if(replies[i].author_id == 1){ %>
+			       		 	<%-replies[i].content	%>
+						<%}else{%>
+							<p><%=replies[i].content	%></p>
+						<%}%>
+	                   <p class="date"><%= replies[i].friendly_create_at%></p>
+					</div>
 	               <div class="line2"></div>
-	               <div class="text">
-	               	<p>Download Editable &amp; Password Free MTA NYC Subway Map <a href="#">http://goo.gl/vTGVF</a></p>
-	                   <p class="date">26 minutes ago</p>
-	</div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="text">
+						<p class='col_fade' style="margin:20px;">暂无评论</p>
+					 </div>
+					<%}%>
 	           </div>
 	           <div class="block_portfolio">
 	               <h4>联系我们</h4>

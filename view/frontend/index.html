@@ -1,20 +1,35 @@
 	    	<div id="my_slider">
-				<div class="info_block_my_slider">
-					<div id="min_images_my_slider">
-						<ul>
-						<li><a href="images/slider1/slider_img_thumbs1.jpg" class="active"><img src="images/slider1/slider_img1.jpg" alt="2" title="2222"></a></li>
-						<li><a href="images/slider1/slider_img_thumbs2.jpg" ><img src="images/slider1/slider_img2.jpg" alt="3" title=""></a></li>
-						<li><a href="images/slider1/slider_img_thumbs3.jpg"><img src="images/slider1/slider_img3.jpg" alt="" title=""></a></li>
-						<li><a href="images/slider1/slider_img_thumbs4.jpg" ><img src="images/slider1/slider_img4.jpg" alt="" title=""></a></li>
-						<li><a href="images/slider1/slider_img_thumbs5.jpg"><img src="images/slider1/slider_img5.jpg" alt="" title=""></a></li>
-						<li><a href="images/slider1/slider_img_thumbs6.jpg"><img src="images/slider1/slider_img6.jpg" alt="" title=""></a></li>
-						</ul>
+							<div class="info_block_my_slider">
+								<div id="min_images_my_slider">
+									<ul>
+	    	 <% if(focus && focus.length > 0){
+	               		for(var i =0,len = focus.length ; i< len ; i++){
+					%>
+   								
+   							
+									<li>
+									<% if(focus[i].link){%>
+									<a href="<%=focus[i].link%>" <% if(i == 0){%>  class="active" <%}%>	><img src="<%=focus[i].url%>" alt="<%=focus[i].content%>" title="<%=focus[i].title%>"></a>
+									<%}else{%>	
+										<a href="#2" <% if(i == 0){%>  class="active" <%}%>	><img src="<%=focus[i].url%>" alt="<%=focus[i].content%>" title="<%=focus[i].title%>"></a>
+									<%}%>	
+									</li>
+								
+   					 <% }	%>
+					<%}else{%>
+									<li><a href="images/slider1/slider_img_thumbs1.jpg" class="active"><img src="images/slider1/slider_img1.jpg" alt="2" title="2222"></a></li>
+									<li><a href="images/slider1/slider_img_thumbs2.jpg" ><img src="images/slider1/slider_img2.jpg" alt="3" title=""></a></li>
+									<li><a href="images/slider1/slider_img_thumbs3.jpg"><img src="images/slider1/slider_img3.jpg" alt="" title=""></a></li>
+									<li><a href="images/slider1/slider_img_thumbs4.jpg" ><img src="images/slider1/slider_img4.jpg" alt="" title=""></a></li>
+									<li><a href="images/slider1/slider_img_thumbs5.jpg"><img src="images/slider1/slider_img5.jpg" alt="" title=""></a></li>
+									<li><a href="images/slider1/slider_img_thumbs6.jpg"><img src="images/slider1/slider_img6.jpg" alt="" title=""></a></li>
+							
+					<%}%>
+	    	
+         						</ul>
+						</div>
 					</div>
 				</div>
-	
-
-			</div>
-           
 			 <div class="line"></div>
             <div class="block_slogan">
             	<p>ElephantWeb! is a clean Premium HTML Theme suitable for <span>portfolio, company</span> and any kind of websites.</p>
@@ -26,10 +41,8 @@
                 	<h2>About The Company</h2>
                     <div class="image">
                     </div>
-                    <div class="text">
-	                    <p>Established fact that a reader will be distracted by readable content of a page when looking at its layout. The point of using Lorem Ipsum is that. Has a more-or-less normal distribution.</p>
-	                    <p>&nbsp;</p>
-	                    <p>Making it look like readable English. Many desktop publishing packages and web page editors now use as their default.</p>
+                    <div class="text" style="color: #8E8E8E;">
+                    	<%- about_detail.match(/[^\x00-\xff]/g).join('').replace(/[宋体,楷体,隶书,黑体]/g,'').substring(0,200) %>...
                         <div class="clear"></div>
                         <a href="#" class="button">
                             <span class="left">
@@ -47,14 +60,14 @@
                         </div>
                     	<div class="text">
                     		<h5><a href="#">develop web sites</a></h5>
-                            <p>Established fact reader will be distracted by the read.</p>
+                           <p><%=about_info.content2_1%></p>
                         </div>
                         <div class="clear"></div>
                         <div class="image icon_program">
                         </div>
                     	<div class="text">
                     		<h5><a href="#">Programming </a></h5>
-                            <p>Reader will be distracted the content of a page when.</p>
+                          <p><%=about_info.content2_2%></p>
                         </div>
                     </div>
                     <div class="column_r">
@@ -62,14 +75,14 @@
                         </div>
                     	<div class="text">
                     		<h5><a href="#">Photography</a></h5>
-                            <p>Fact that reader be distracted by the readable content.</p>
+                            <p><%=about_info.content2_3%></p>
                         </div>
                         <div class="clear"></div>
                         <div class="image icon_comments">
                         </div>
                     	<div class="text">
                     		<h5><a href="#">customer support</a></h5>
-                            <p>Distracted by the content of a page when looking.</p>
+                           <p><%=about_info.content2_4%></p>
                         </div>
                     </div>
                 </div>

@@ -240,7 +240,6 @@ exports.aboutinfo = function(req, res, next) {
              return;
          }
         var box = JSON.stringify(o);
-        console.log(box);
     	siteconfigDao.updateAboutInfo(box,content,function(err,info){
     		if (err){
     			res.render('about_info/add', {
@@ -386,7 +385,7 @@ exports.focus_add = function(req, res, next) {
 		var sort = sanitize(req.body.sort).trim();
         var content = sanitize(req.body.content).trim();
         content = sanitize(content).xss();
-        if (title == '' || link == '' || url == '') {
+        if (title == '' || url == '') {
             res.render('focus/add', {
                 error : '信息不完整。',
                 current: 'index',
@@ -398,21 +397,21 @@ exports.focus_add = function(req, res, next) {
             });
             return;
         }
-		try {
-            check(link, '链接地址不正确。。').isUrl();
-        }
-        catch (e) {
-			 res.render('focus/add', {
-                error : e.message,
-                current: 'index',
-                active: 'focus_add',
-                title : title,
-                link : link,
-				url : url,
-				content:content
-            });
-            return;
-        }
+//		try {
+//            check(link, '链接地址不正确。。').isUrl();
+//        }
+//        catch (e) {
+//			 res.render('focus/add', {
+//                error : e.message,
+//                current: 'index',
+//                active: 'focus_add',
+//                title : title,
+//                link : link,
+//				url : url,
+//				content:content
+//            });
+//            return;
+//        }
         if(focus_id){
         	 focusDao.updateFocus(title, link, sort , url,content,focus_id , function(err, info) {
                  if (err)

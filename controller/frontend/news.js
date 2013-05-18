@@ -74,6 +74,7 @@ exports.news = function(req, res, next) {
 	        	articles : results.articles,
 	        	pages : results.pages,
 				current_page :page,
+				category :  {}
 	        });
         return;
 	    });
@@ -182,6 +183,7 @@ exports.viewArticleForFront = function(req, res, next) {
             author : results.author,
             article : results.article,
             article_categories : results.article_categories
+            
         });
         return;
     });
