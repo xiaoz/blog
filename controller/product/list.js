@@ -11,6 +11,8 @@ var categoryDao = require('../../dao/product_categorys.js');
 var replyDao = require('../../dao/reply.js');
 var productCategoryDao = require('../../dao/product_category.js');
 
+var productCategory2Dao = require('../../dao/product_categorys2.js');
+
 /**
  * 查看某篇产品
  */
@@ -219,30 +221,17 @@ exports.modifyArticle = function(req, res, next) {
         product_categories = req.body.product_categories.split(',');
     }
     var updateDate = Util.format_date(new Date());
-
+    var tags  = req.body.tag;
     async.auto({
         updateArticle : function(cb) {// 更新产品基本信息
-            productDao.updateArticle(title, content, updateDate, goods_img,product_id, function(err, info) {
+            productDao.updateArticle(title, content, updateDate, goods_img,product_id,tags, function(err, info) {
                 if (err) {
                     res.render('notify/notify', {
                         error : '修改产品发生错误'
                     });
                     return;
                 }
-                userDao.queryAllFollowers(req.session.user.id, function(err, users) {// 给粉丝发送消息
-                    async.forEach(users, function(user, callback) {
-                        var mbody = {};
-                        mbody.from_user_id = req.session.user.id;
-                        mbody.from_user_name = req.session.user.loginname;
-                        mbody.product_id = product_id;
-                        mbody.product_title = title;
-                        memssage_ctrl.create_message(common.MessageType.update_product, user.id, JSON.stringify(mbody), function() {
-                            callback();
-                        });
-                    }, function(err) {
-                        cb(null, '');
-                    });
-                });
+                cb(null, '');
             });
         },
         deleteCategoriesOfProduct : [ 'updateArticle', function(cb) {// 删除旧的产品分类
@@ -460,20 +449,46 @@ exports.createArticle = function(req, res, next) {
     var method = req.method.toLowerCase();
 
     if (method == 'get') {// 点击"发布"按钮
-        categoryDao.queryCategoriesOfUser(req.session.user.id, function(err, categories) {
+    	
+    	async.auto({
+    		categories : function(cb) {
+    		 	categoryDao.queryCategoriesOfUser(req.session.user.id, function(err, categories) {
+    	            if (err) {
+                        cb(null, []);
+                    }else{
+                    	cb(null,categories);
+                    }
+    	        });
+    		},
+    		categories2 : function(cb) {
+    			productCategory2Dao.queryCategoriesOfUser(req.session.user.id, function(err, categories2) {
+    	            if (err) {
+                        cb(null, []);
+                    }else{
+                    	cb(null,categories2);
+                    }
+    	        });
+    		}
+        
+        }, function(err, results) {
             if (err) {
-                res.render('notify/notify', {
-                    error : '获取所有分类出错'
-                });
-                return;
+            	 res.render('notify/notify', {
+            		 current	: 'product',
+         			 active	: 'user_index',
+                     error : '查找分类出错'
+                 });
+            	return;
             }
             res.render('product/create', {
             	current	: 'product',
     			active	: 'user_index',
-                categories : categories
+                categories : results.categories,
+                categories2 : results.categories2
             });
             return;
+            
         });
+       
     }
 
     if (method == 'post') {
@@ -485,9 +500,9 @@ exports.createArticle = function(req, res, next) {
         if (req.body.product_categories != '') {
             product_categories = req.body.product_categories.split(',');
         }
-
+        var tags  = req.body.tag;
         var insertDate = Util.format_date(new Date());
-        productDao.saveArticle(title, content, req.session.user.id, insertDate,goods_img, function(err ,info){
+        productDao.saveArticle(title, content, req.session.user.id, insertDate,goods_img,tags, function(err ,info){
             if (err) {
                 res.render('notify/notify', {
                 	current	: 'product',
@@ -507,20 +522,7 @@ exports.createArticle = function(req, res, next) {
                     return;
                 }
                 else {
-                    userDao.queryAllFollowers(req.session.user.id, function(err, users) {// 给粉丝发送消息
-                        async.forEach(users, function(user, callback) {
-                            var mbody = {};
-                            mbody.from_user_id = req.session.user.id;
-                            mbody.from_user_name = req.session.user.loginname;
-                            mbody.product_id = info.insertId;
-                            mbody._title = title;
-                            memssage_ctrl.create_message(common.MessageType.create_product, user.id, JSON.stringify(mbody), function() {
-                                callback();
-                            });
-                        }, function(err) {
-                            res.redirect('/product/' + info.insertId);
-                        });
-                    });
+                    res.redirect('/product/' + info.insertId);
                 }
             });         
         });

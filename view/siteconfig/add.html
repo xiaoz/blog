@@ -34,6 +34,20 @@
     </div>
   </div>
   
+   <div class="control-group">
+    <label class="control-label" for="inputDetail">新浪 :</label>
+    <div class="controls">
+     <input class="span8" type="text" id="inputUrl" name="sina" <% if(locals.o){ %>value="<%= o.sina %>" <% } %> placeholder="">
+    </div>
+  </div>
+  
+   <div class="control-group">
+    <label class="control-label" for="inputDetail">qq :</label>
+    <div class="controls">
+      <input class="span8" type="text" id="inputUrl" name="qq" <% if(locals.o){ %>value="<%= o.qq %>" <% } %> placeholder="">
+    </div>
+  </div>
+  
   <div class="control-group">
     <div class="controls">
       <button type="submit" class="btn">保存</button>

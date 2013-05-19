@@ -3,17 +3,17 @@
     		<div class="line"></div>
             <div class="block_footer">
             	<div id="logo_footer">
-	            	<a href="index.html"><img src="images/logo_f.jpg" alt="ElephantWeb" title="ElephantWeb"></a>
+	            	<a href="/"><img src="images/logo_f.jpg" alt="<%= site_info.site_name %>" title="<%= site_info.site_name %>"></a>
 	            </div>
                 <div class="block_copyrights">
-                	<p>The ElephantWeb, Los Angeles</p>
-					<p>tel: (489) 450-7821 email: info@elephant.com</p>
+                	<p><%= locals.company_info.address %></p>
+					<p>phone: <%= locals.company_info.phone %> email: <%= locals.company_info.email %></p>
                 </div>
                 <div class="block_social_footer">
                     <p>Follow us:</p>
-                    <a href="#" class="facebook">Facebook</a>
-                    <a href="#" class="twitter">Twitter</a>
-                    <a href="#" class="rss">Rss</a>
+                    <a href="<%= site_info.sina %>" target="_blank" class="facebook">sina</a>
+                    <a href="<%= site_info.qq %>" target="_blank" class="twitter">qq</a>
+                    <!--  <a href="#" class="rss">Rss</a>-->
                 </div>
             </div>
        	</div>

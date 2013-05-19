@@ -29,6 +29,22 @@ exports.queryFiles = function(folderId, userId, callback){
 };
 
 /**
+ * 查询用户文件夹下的所有共享文件
+ */
+exports.queryPublicFilesOfFolder = function(folderId, userId,start,page_size, callback){
+    mysql.query('select * from file where folder_id = ? and user_id =? and is_public = 1  order by create_at desc limit ? ,?', [ folderId, userId,start,page_size ], function(err, files) {
+        callback(err, files);
+    });
+};
+/**
+ * 查询用户文件夹下的所有共享文件 总数
+ */
+exports.queryPublicFilesOfFolderTotal = function(folderId, userId, callback){
+    mysql.query('select count(id) as count from file where folder_id = ? and user_id =? and is_public = 1 ', [ folderId, userId ], function(err, total) {
+        callback(err, total);
+    });
+};
+/**
  * 查询文件夹下的所有文件
  */
 exports.queryFilesOfFolder = function(folderId, callback){
@@ -105,7 +121,15 @@ exports.queryHotFiles = function(limit, callback){
  * 查询用户的公开文件
  */
 exports.queryPublicFilesOfUser = function(userId,start,page_size, callback){
-    mysql.query('select * from file where user_id = ? and is_public = ? limit ? ,?', [ userId, 1 ,start,page_size], function(err, files) {
+    mysql.query('select *  from file where user_id = ? and is_public = ? limit ? ,?', [ userId, 1 ,start,page_size], function(err, files) {
         callback(err, files);
+    });
+};
+/**
+ * 查询用户的公开文件总数
+ */
+exports.queryPublicFilesOfUserTotal = function(userId, callback){
+    mysql.query('select count(id) as count from file where user_id = ? and is_public = 1 ', [userId ], function(err, total) {
+        callback(err, total);
     });
 };

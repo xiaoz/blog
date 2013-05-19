@@ -3,6 +3,8 @@
 	<td><%= category.name %></td>
 	<td>
 	<a href='/product/category/<%= category.id %>/edit'><img class='user_icon' src='/img/doc_edit_icon&16.png' title='编辑' /></a>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href='/product/category2/<%= category.id %>/editall' class='icon-plus-sign' title='添加二级分类'></a>
 	</td>
 	<td>
 	<a class='delete_category_btn' href='/product/category/<%= category.id %>/delete'><img class='user_icon' src='/img/trash_icon&16.png' title='删除' /></a>

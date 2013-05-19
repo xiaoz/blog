@@ -92,8 +92,9 @@
                 <h2>最新产品</h2>
                 <div class="images">
                  <% if(new_products && new_products.length > 0){
-	               
-	               		for(var i =0,len = new_products.length ; i< 4 ; i++){
+	               		var len = new_products.length;
+                 		len = len >4 ? 4 : len;
+	               		for(var i =0 ; i< len ; i++){
 					%>
 					 <div class="img_box shadow_img see_big">
 	                	<div>

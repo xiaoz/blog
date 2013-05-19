@@ -19,7 +19,6 @@
 				     	字数在2到100个之间
 				    </div>
 				  </div>
-		
 				<div class='sep10'></div>
 				<div class='sep10'></div>
 					  <div class="control-group">
@@ -38,13 +37,34 @@
 							<span  class="label label-info" id="file_name_span">提示信息</span>
 						</div>
 				  		</div>
-				<div class='sep10'></div>
+				  		<div class='sep10'></div>
 				<div class='sep10'></div>
 				<div>
-					<label class='bold' for='t_content'>产品分类：</label>
+				
+					<label class='bold' for='tag'>标签</label>
+					<div>
+						<% if(locals.tag ){ %> 
+							<input class='span8' id='tag' name='tag' maxlength='100' style='width: 550px' value='<%= tag %>'> 
+						<% }else{ %> 
+							<input class='span8' id='tag' name='tag' maxlength='100' style='width: 550px' value=''>
+						<% } %> 填写格式  以英文（,）隔开  例如：     标签1,标签2, 标签3
+					</div>
+				</div>
+				<div class='sep10'></div>
+				<div class='sep10'></div>
+				<div id="J_Categories1Box">
+					<label class='bold' for='t_content'>产品一级分类：</label>
 					<div class='tabbable'>
 						<div style='width: 698px; height: 40px; padding: 10px 0;'>
 						<%-partial('product/category_selectable',{collection:categories, as:'category'}) %>
+						</div>
+					</div>
+				</div>
+				<div id="J_Categories2Box" >
+					<label class='bold' for='t_content'>产品二级分类：</label>
+					<div class='tabbable'>
+						<div style='width: 698px; height: 40px; padding: 10px 0;'>
+						<%-partial('product/category_selectable2',{collection:categories2, as:'category'}) %>
 						</div>
 					</div>
 				</div>
@@ -73,7 +93,22 @@
                     editor.render('editor');
 
                     $('.category_selectable').click(function() {
-                        $(this).toggleClass('category_select');
+                    	 var t = $(this).attr('data');
+                    	 if(t == 1){
+                    		$('#J_Categories1Box .category_selectable').removeClass('category_select');
+                            $(this).addClass('category_select');
+                    		var tag = $(this).attr('tag_id');
+      						$('#J_Categories2Box .category_selectable').hide();
+      						$('#J_Categories2Box .J_ParentCategory'+tag).show();
+
+                         }else{
+                        	 $('#J_Categories2Box .category_selectable').removeClass('category_select');
+                             $(this).addClass('category_select');
+                         }
+                        
+                    	
+                      
+                        
                     });
 
                     function check() {

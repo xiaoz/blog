@@ -54,6 +54,8 @@ exports.siteconfig = function(req, res, next) {
 				 o.site_name = '公司名称';
     	 		 o.keyword = '购物';
     	 		 o.content = '我们是';
+    	 		 o.qq = 'http://';
+   	 		 	 o.sina = 'http://';
 			}
     		
     		res.render('siteconfig/add', {
@@ -66,10 +68,15 @@ exports.siteconfig = function(req, res, next) {
     	 var site_name = sanitize(req.body.site_name).trim();
     	 var keyword = sanitize(req.body.keyword).trim();
     	 var content = sanitize(req.body.content).trim();
+    	 var qq = req.body.qq;
+    	 var sina = req.body.sina;
+    	 
     	 var o = {};
     	 o.site_name = site_name;
     	 o.keyword = keyword;
     	 o.content = content;
+    	 o.qq = qq;
+		 o.sina = sina;
          if (site_name == '' || keyword == '' || content == '') {
              res.render('siteconfig/add', {
                  error : '信息不完整。填写完整有助于SEO',

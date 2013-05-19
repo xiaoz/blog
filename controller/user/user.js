@@ -10,10 +10,12 @@ var userDao = require('../../dao/user.js');
 var followDao = require('../../dao/follow.js');
 var folderDao = require('../../dao/folder.js');
 var categoryDao = require('../../dao/category.js');
+
 var fileDao = require('../../dao/file.js');
 
 var productCategoryDao = require('../../dao/product_categorys.js');
 
+var productCategory2Dao = require('../../dao/product_categorys2.js');
 
 var path_prefix = config.avatar_path;
 var upload_path = path.join(path.dirname(__dirname), '../public' + path_prefix);
@@ -349,9 +351,32 @@ exports.getUserProductCategories = function(req, res, next) {
                             categories[j].article_count = kvs[i].count;
                     }
                 }
-            
-                res.json({
-                    categories : categories
+                
+                productCategory2Dao.queryChildCategoriesOfCategories(category_ids,function(err,kvs){
+                	 for ( var j = 0; j < categories.length; j++) {
+                		 categories[j].childCategories = [];
+                		 var category2_ids = [];
+                         for ( var i = 0; i < kvs.length; i++) {
+                             if (categories[j].id == kvs[i].category1_id)
+                                 categories[j].childCategories.push(kvs[i]);
+                                 category2_ids.push(kvs[i].id)
+                         }
+                     }
+                	 
+                	 productCategory2Dao.queryArticlesCountOfCategories(category2_ids,function(err,kvs){
+                    	 for ( var j = 0; j < categories.length; j++) {
+                    		 
+                    		 for ( var i = 0; i < categories[j].childCategories.length; i++) {
+                    			 for ( var m = 0; m < kvs.length; m++) {
+                                     if (categories[j].childCategories[i].id == kvs[m].category2_id)
+                                         categories[j].childCategories[i].article_count = (kvs[m].count);
+                                 }
+                             }
+                         }
+                    	   res.json({
+                               categories : categories
+                           });
+                    });
                 });
                 return;
             });

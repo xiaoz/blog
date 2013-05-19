@@ -6,8 +6,8 @@
 	<% }else{ %>
 	<title><%= site_info.site_name %></title>
 	 <% } %>
-	 <meta name="description" content="<%= site_info.content %>">
-	 <meta name="keywords" content="<%= site_info.keyword %>">
+	 <meta name="description" content="<%= site_info.content %>,<% if(locals.article) { %><%= article.title %><% } %>">
+	 <meta name="keywords" content="<%= site_info.keyword %>,<% if(locals.article) { %><%= article.tag %><% } %><% if(locals.article_categories) { %><%for(var cli=0;cli < article_categories.length;cli++){%><% if(cli == 0){%><%=article_categories[cli].name%><%}else{%>,<%=article_categories[cli].name%><%}%><%}%><% } %>">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<!-- head -->

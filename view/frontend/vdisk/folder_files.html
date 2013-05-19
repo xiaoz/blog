@@ -1,0 +1,147 @@
+			<div class="page_title">
+            	<h1>文件夹</h1>
+                <p class="page_description">Files </p>
+                <div class="page_navigation">
+                	<ul>
+                    	<li><a href="/news">主页</a></li>
+                        <li class="nav_line">/</li>
+                        <li>文件夹</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="separator"></div>
+             <div class="block_cont_left">
+            <div class="block_table_type1">
+                  	<h3><%=folder.name%>共<span><%=locals.total%></span>个共享文件</span></h3>
+                    <div class="separator_6"></div>
+                     <%if(files &&　files.length>0){%>
+                   	<table cellpadding="0" cellspacing="0" border="0" class="table_type1">
+                    	<tbody>
+                    		<tr>
+                        	<td>
+                                <p class="title">文件名</p>
+                            </td>
+                            <td>
+                            	<p class="title">描述</p>
+                            </td>
+                            <td>
+                            	<p class="title">大小</p>
+                            </td>
+                            <td class="last">
+                            	<p class="title">操作</p>
+                            </td>
+                        </tr>
+                    	<tr>
+                       	<%-partial('frontend/vdisk/file_item',{collection:files,as:'file'}) %>
+                    </tbody></table>
+                    <%}else{%>
+                       <div class="block_info_boxes">
+					<div class="info_box">
+                            	<div>
+                                	<p><b>Info:</b> 在<%=folder.name%> 文件夹下 暂无文件哦！</p>
+                                </div>
+	                        </div>
+	                        </div>
+						<%}%>
+                </div>
+          <%if(files &&　pages > 1){%>       
+                  <div class="block_blogs_nav">
+<% if(current_page == pages){ %>
+		<a href="#2" class="prev">没有了</a>
+		<% }else{ %>
+		<a href="/filesOfFolderFront?folder_id=<%=folder.id %>&page=<%=current_page+1 %>" class="prev">下一页</a>
+		<% } %>
+	<% if(current_page == 1){ %>
+		<a href="#2" class="next"></a> 
+		<% }else{ %>
+		<a href="/filesOfFolderFront?folder_id=<%=folder.id %>&page=<%=current_page-1 %>" class="next">上一页</a> 
+		<% } %>
+                </div>
+            <%}%>    
+                
+                </div>
+                
+                
+            <div class="block_cont_right">
+	                <div class="block_blog_category">
+	                  	<h4>文章分类</h4>
+	                    <ul class="list2" id="caregory_panel-1">
+	                    </ul>
+	                </div>
+	 				<div class="line"></div>
+	                <div class="block_archives">
+	                  	<h4>文件夹</h4>
+	                    <ul class="list2" id="folder_panel">
+	                    </ul>
+	                </div>
+                	<div class="block_recent_posts">
+                	<h4>最新产品</h4>
+                	
+                	  <% if(new_products && new_products.length > 0){
+	               
+	               		for(var i =0,len = new_products.length ; i< len ; i++){
+					%>
+   							<div class="post">
+			                <div class="img"><a href="/productdetail?product_id=<%=new_products[i].id%>"><img style="width: 52px;"  src="<%=new_products[i].goods_img%>" alt="" title="<%=new_products[i].title%>"></a></div>
+			                <div class="text">
+			                 <p><a href="/productdetail?product_id=<%=new_products[i].id%>"><%=new_products[i].title%></a></p>
+			                 <p class="date"><%=new_products[i].create_at%></p>
+			                </div>
+			               </div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无产品</p>
+					 </div>
+					<%}%>
+               	 </div>
+               	  <div class="line"></div>
+                <div class="block_blog_category">
+                  	<h4>联系我们</h4>
+                    <ul class="list2">
+                    	<li><a href="#2"><b>Phone:</b> <%= locals.company_info.phone %></a> </li>
+                    	<li><a href="#2"><b>Fax:</b> <%= locals.company_info.tel %></a></li>
+                    	<li><a href="#2"><b>Email:</b> <a href="mailto:info@elephantweb.com" class="main_link"><%= locals.company_info.email %></a></li>
+                    	<li style="height: 60px;"><a href="#2"><b>Our adress:</b>  <%= locals.company_info.address %></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="separator_5"></div>
+            
+            <script>
+	$(document).ready(function() {    
+		var html_caregory_panel = '';
+		html_caregory_panel+='{@each categories as item,index}'+
+		'<li><a href="/newsincategory?user_id=${item.user_id}&category_id=${item.id}">${item.name}</a> ({@if !item.article_count}0{@else}${item.article_count}{@/if})</li>'+
+		'{@/each}';
+		var tpl_caregory_panel=juicer(html_caregory_panel);
+
+	    $.ajax({//得到用户文章分类
+			type: 'POST',
+			url: '/userinfo/category/1',
+			success:function(data){
+			    $('#caregory_panel-1').html(tpl_caregory_panel.render(data));
+			},
+		  	error:function(){}
+		});
+	    var html_folder_panel = '';
+    	html_folder_panel+='<li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>'; 
+		html_folder_panel+='{@each folders as item,index}'+
+		'<li><a href="/filesOfFolderFront?folder_id=${item.id}">&nbsp;&nbsp;${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+		'{@/each}';
+		var tpl_folder_panel=juicer(html_folder_panel);
+	
+	    $.ajax({//得到用户网盘文件夹
+			type: "POST",
+			url: "/userinfo/folder/1",
+			success:function(data){
+			    $('#folder_panel').html(tpl_folder_panel.render(data));
+			},
+		  	error:function(){}
+		});
+	});
+</script>
+
+            

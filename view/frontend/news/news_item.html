@@ -2,7 +2,7 @@
 	<div class="block_blog_type2">
                     <div class="post_pic">
                     	<div >
-                        	<a href="/newsdetail?article_id=<%=article.id%>"><img width="250"src="<%=article.thumbnails %>" alt="" title="" /></a>
+                        	<a href="/newsdetail?article_id=<%=article.id%>" title="<%= article.title %>" ><img width="250"src="<%=article.thumbnails %>" alt="<%= article.title %>" title="<%= article.title %>" /></a>
                         </div>
                     </div>
                     <div class="block_content">
@@ -14,7 +14,7 @@
 								</div>
 	                        </div>
 	                        <div class="blog_info" style="padding-top: 4px;">
-	                        	<h3><a href="/newsdetail?article_id=<%=article.id%>"><%= article.title %></a></h3>
+	                        	<h3><a href="/newsdetail?article_id=<%=article.id%>" title="<%= article.title %>" ><%= article.title.substring(0,18) %>...</a></h3>
 	                            <ul>
 	                            	<li><a href="#2"><%=article.visit_count%></a>&nbsp; 次点击</li>
 	                                <li><a href="#2"><%=article.reply_count%></a>&nbsp; 次回复</li>

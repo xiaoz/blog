@@ -34,16 +34,22 @@
 						<%- article.content %>
                     </div>
 				</div>
-                <div class="tags">
-                    <p><b>Tags:</b></p>
+                <div class="tags" >
+                    <p><b>分类:</b></p>
 					<p class="links">
  					<%for(var cli=0;cli < article_categories.length;cli++){%>
 						<% if(cli == 0){%>
-							<a href="#2"><%=article_categories[cli].name%></a>  
+							<a href="/newsincategory?user_id=1&category_id=<%=article_categories[cli].id%>"><%=article_categories[cli].name%></a>  
 						<%}else{%>
-							,<a href="#2"><%=article_categories[cli].name%></a>  
+							,<a href="/newsincategory?user_id=1&category_id=<%=article_categories[cli].id%>"><%=article_categories[cli].name%></a>  
 						<%}%>
 					<%}%>
+						</p>
+                </div>
+                <div class="tags" style="margin-top:10px">
+                    <p><b>标签:</b></p>
+					<p class="links">
+							<%=article.tag%> 
 						</p>
                 </div>
                 <div class="block_comments" id="comments">
@@ -88,9 +94,8 @@
                 </div>
 				<div class="line"></div>
                 <div class="block_archives">
-                  	<h4>文档</h4>
+                  	<h4>文件夹</h4>
                     <ul class="list2" id="folder_panel">
-                    	  <li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>
                     </ul>
                 </div>
                 <div class="line"></div>
@@ -147,7 +152,23 @@
 			},
 		  	error:function(){}
 		});
-		
+
+	    var html_folder_panel = '';
+    	html_folder_panel+='<li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>'; 
+		html_folder_panel+='{@each folders as item,index}'+
+		'<li><a href="/filesOfFolderFront?folder_id=${item.id}">&nbsp;&nbsp;${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+		'{@/each}';
+	var tpl_folder_panel=juicer(html_folder_panel);
+
+    $.ajax({//得到用户网盘文件夹
+		type: "POST",
+		url: "/userinfo/folder/1",
+		success:function(data){
+		    $('#folder_panel').html(tpl_folder_panel.render(data));
+		},
+	  	error:function(){}
+	});
+	
 	    $("#J_SumitReply").click(function(event){
 		    event.preventDefault();
 		    document.getElementById('reply_form').submit();

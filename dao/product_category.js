@@ -14,7 +14,16 @@ exports.deleteCategoriesOfProduct = function(articleId, callback) {
  * 获取[产品-分类]关系
  */
 exports.queryProductCategoryByCategory = function(categoryId, callback){
-    mysql.query('select * from product_category where product_id = ?', [ categoryId ], function(err, kvs) {
+    mysql.query('select * from product_category where category_id = ?', [ categoryId ], function(err, kvs) {
+        callback(err, kvs);
+    });
+};
+
+/**
+ * 获取[产品-二级分类]关系
+ */
+exports.queryProductCategoryByCategory = function(categoryId, callback){
+    mysql.query('select * from product_category where category2_id = ?', [ categoryId ], function(err, kvs) {
         callback(err, kvs);
     });
 };

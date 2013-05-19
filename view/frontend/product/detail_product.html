@@ -35,7 +35,7 @@
                     </div>
 				</div>
                 <div class="tags">
-                    <p><b>Tags:</b></p>
+                    <p><b>分类:</b></p>
 					<p class="links">
  					<%for(var cli=0;cli < article_categories.length;cli++){%>
 						<% if(cli == 0){%>
@@ -44,6 +44,12 @@
 							,<a href="#2"><%=article_categories[cli].name%></a>  
 						<%}%>
 					<%}%>
+						</p>
+                </div>
+                 <div class="tags" style="margin-top:10px">
+                    <p><b>标签:</b></p>
+					<p class="links">
+							<%=article.tag%> 
 						</p>
                 </div>
                 <div class="block_comments" id="comments">

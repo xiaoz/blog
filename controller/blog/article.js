@@ -188,6 +188,8 @@ exports.editArticle = function(req, res, next) {
         }
 
         res.render('article/edit', {
+        	current	: 'blog',
+			active	: 'user_index',
             article : results.article,
             categories : results.all_categories,
             user_id :req.session.user.id
@@ -215,30 +217,17 @@ exports.modifyArticle = function(req, res, next) {
         article_categories = req.body.article_categories.split(',');
     }
     var updateDate = Util.format_date(new Date());
-
+    var tags  = req.body.tag;
     async.auto({
         updateArticle : function(cb) {// 更新文章基本信息
-            articleDao.updateArticle(title, content, updateDate, article_id, function(err, info) {
+            articleDao.updateArticle(title, content, updateDate, article_id,tags, function(err, info) {
                 if (err) {
                     res.render('notify/notify', {
                         error : '修改文章发生错误'
                     });
                     return;
                 }
-                userDao.queryAllFollowers(req.session.user.id, function(err, users) {// 给粉丝发送消息
-                    async.forEach(users, function(user, callback) {
-                        var mbody = {};
-                        mbody.from_user_id = req.session.user.id;
-                        mbody.from_user_name = req.session.user.loginname;
-                        mbody.article_id = article_id;
-                        mbody.article_title = title;
-                        memssage_ctrl.create_message(common.MessageType.update_article, user.id, JSON.stringify(mbody), function() {
-                            callback();
-                        });
-                    }, function(err) {
-                        cb(null, '');
-                    });
-                });
+                cb(null, '');
             });
         },
         deleteCategoriesOfArticle : [ 'updateArticle', function(cb) {// 删除旧的文章分类
@@ -480,9 +469,9 @@ exports.createArticle = function(req, res, next) {
         if (req.body.article_categories != '') {
             article_categories = req.body.article_categories.split(',');
         }
-
+        var tags  = req.body.tag;
         var insertDate = Util.format_date(new Date());
-        articleDao.saveArticle(title, content, req.session.user.id, insertDate, function(err ,info){
+        articleDao.saveArticle(title, content, req.session.user.id, insertDate,tags, function(err ,info){
             if (err) {
                 res.render('notify/notify', {
                 	current	: 'blog',
@@ -502,20 +491,7 @@ exports.createArticle = function(req, res, next) {
                     return;
                 }
                 else {
-                    userDao.queryAllFollowers(req.session.user.id, function(err, users) {// 给粉丝发送消息
-                        async.forEach(users, function(user, callback) {
-                            var mbody = {};
-                            mbody.from_user_id = req.session.user.id;
-                            mbody.from_user_name = req.session.user.loginname;
-                            mbody.article_id = info.insertId;
-                            mbody._title = title;
-                            memssage_ctrl.create_message(common.MessageType.create_article, user.id, JSON.stringify(mbody), function() {
-                                callback();
-                            });
-                        }, function(err) {
-                            res.redirect('/article/' + info.insertId);
-                        });
-                    });
+                      res.redirect('/article/' + info.insertId);
                 }
             });         
         });

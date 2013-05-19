@@ -2,21 +2,21 @@
     	<div class="inner">
 			<div class="block_top_navigation">
 	        	<div class="col_1">
-	            	<p>Call us now: (489) 450-7821</p>
+	            	<p>Call us now: <%= locals.company_info.phone %></p>
 	            </div>
 	        	<div class="col_2">
 	            	<div class="block_social_top">
                     	<p>Follow us:</p>
-	                	<a href="#" class="facebook">Facebook</a>
-                        <a href="#" class="twitter">Twitter</a>
-                        <a href="#" class="rss">Rss</a>
+	                	<a href="<%= site_info.sina %>" target="_blank" class="facebook">sina</a>
+                   		<a href="<%= site_info.qq %>" target="_blank" class="twitter">qq</a>
+                    	<!--  <a href="#" class="rss">Rss</a>-->
 	                </div>
 	            </div>
             </div>
             <div class="line"></div>
             <div class="block_mid">
 	            <div id="logo">
-	            	<a href="/signin"><img src="images/logo.jpg" alt="ElephantWeb" title="ElephantWeb" data-pinit="registered"></a>
+	            	<a href="/signin"><img src="images/logo.jpg" alt="<%= site_info.site_name %>" title="<%= site_info.site_name %>" data-pinit="registered"></a>
 	            </div>
                 <div id="menu">
                 	<ul>

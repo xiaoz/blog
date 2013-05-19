@@ -1,6 +1,7 @@
-var express = require('express');
+﻿var express = require('express');
 var route = require('./route.js');
 var config = require('./config.js').config;
+var httpProxy = require('http-proxy');
 
 var app = express.createServer();
 var static_dir = __dirname + '/public';
@@ -58,4 +59,14 @@ app.configure('production', function() {
 route(app);// route
 
 app.listen(config.app_port);
+
+
+var options = {
+		  router: {
+		    'xiaoz.caihongpu.com/': '127.0.0.1:10080/',
+		    'xiaoz.cnodejs.net/': '127.0.0.1:10080/'
+		  }
+		};
+var proxyServer = httpProxy.createServer(options);
+proxyServer.listen(8080);
 console.log("blog is listening on port %d in %s mode", app.address().port, app.settings.env);

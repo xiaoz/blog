@@ -51,9 +51,9 @@
 	                </div>
 	 				<div class="line"></div>
 	                <div class="block_archives">
-	                  	<h4>文档</h4>
+	                  	<h4>文件夹</h4>
 	                    <ul class="list2" id="folder_panel">
-	                    <li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>
+	                    
 	                    </ul>
 	                </div>
                 	<div class="block_recent_posts">
@@ -106,6 +106,22 @@
 			url: '/userinfo/category/1',
 			success:function(data){
 			    $('#caregory_panel-1').html(tpl_caregory_panel.render(data));
+			},
+		  	error:function(){}
+		});
+
+		var html_folder_panel = '';
+	    	html_folder_panel+='<li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>'; 
+			html_folder_panel+='{@each folders as item,index}'+
+			'<li><a href="/filesOfFolderFront?folder_id=${item.id}">&nbsp;&nbsp;${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+			'{@/each}';
+		var tpl_folder_panel=juicer(html_folder_panel);
+
+	    $.ajax({//得到用户网盘文件夹
+			type: "POST",
+			url: "/userinfo/folder/1",
+			success:function(data){
+			    $('#folder_panel').html(tpl_folder_panel.render(data));
 			},
 		  	error:function(){}
 		});

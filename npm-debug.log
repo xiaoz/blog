@@ -1,0 +1,16 @@
+3071 error Error: read ECONNRESET
+3071 error     at errnoException (net.js:863:11)
+3071 error     at TCP.onread (net.js:524:19)
+3072 error If you need help, you may report this log at:
+3072 error     <http://github.com/isaacs/npm/issues>
+3072 error or email it to:
+3072 error     <npm-@googlegroups.com>
+3073 error System Windows_NT 5.1.2600
+3074 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "http-proxy"
+3075 error cwd c:\Documents and Settings\Administrator\xiaoz
+3076 error node -v v0.10.0
+3077 error npm -v 1.2.14
+3078 error syscall read
+3079 error code ECONNRESET
+3080 error errno ECONNRESET
+3081 verbose exit [ 1, true ]

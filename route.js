@@ -37,7 +37,8 @@ exports = module.exports = function(app) {
 	app.get('/newsdetail', front_base, news_ctrl.viewArticleForFront);
 	app.get('/newsincategory',front_base, news_ctrl.viewArticlesOfUserCategoryForFront);
 	app.get('/filesForFront',front_base , news_ctrl.user_share_files);
-	app.get('/:folder_id/filesForFront', news_ctrl.viewFilesOfFolderForFront);
+	app.get('/filesOfFolderFront', front_base,news_ctrl.viewFilesOfFolderForFront);
+	app.get('/downloadForFront', front_base,news_ctrl.downloadFile);
 	app.post('/sendMsg',front_base,frontreply_ctrl.sendMsg);
 	
 	
@@ -128,6 +129,12 @@ exports = module.exports = function(app) {
     app.post('/product/category/:category_id/modify', product_category_ctrl.modifyCategory);
     app.post('/product/category/add', product_category_ctrl.addCategory);
     app.get('/product/category/:category_id/delete', product_category_ctrl.deleteCategory);
+    
+    app.get('/product/category2/:category_id/editall', product_category_ctrl.editAllCategory2);
+    app.get('/product/category2/:category_id/edit', product_category_ctrl.editCategory2);
+    app.post('/product/category2/:category_id/modify', product_category_ctrl.modifyCategory2);
+    app.post('/product/category2/add', product_category_ctrl.addCategory2);
+    app.get('/product/category2/:category_id/delete', product_category_ctrl.deleteCategory2);
     
     // 产品相关
     app.get('/product/create', product_ctrl.createArticle);

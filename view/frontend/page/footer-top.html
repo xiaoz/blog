@@ -3,8 +3,9 @@
 	           <div class="block_blog">
 	               <h4>LATEST FROM THE BLOG</h4>
 	                <% if(new_articles && new_articles.length > 0){
-	               
-	               		for(var i =0,len = new_articles.length ; i< 2 ; i++){
+	               		var len = new_articles.length;
+                 		len = len >2 ? 2 : len;
+	               		for(var i =0; i< len ; i++){
 					%>
    						 <div class="post">
 			                <div class="img"><a href="#"><img style="width: 52px;"  src="<%=new_articles[i].thumbnails%>" alt="" title=""></a></div>

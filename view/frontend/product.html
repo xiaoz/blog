@@ -15,17 +15,11 @@
             <div class="block_filter">
             	<p>Filter:</p>
                 <ul id="J_ProductBox">
+                	<li class="first"><a href="/product" class="" title="all">All Categories</a></li>
                  <% if(categorys && categorys.length > 0){
 	               		for(var i =0,len = categorys.length ; i< len ; i++){
 					%>
-					
-					 <% if(i == 0){%>
-						  <% if(category && category.name){%>
-						 	<li class="first"><a href="/product" class="" title="all">All Categories</a></li>
-						 <% }else{ %>
-						 	<li class="first"><a href="/product" class="active" title="all">All Categories</a></li>
-						 <% } %>
-					 <% }else if(i == (len-1)){ %>
+					 <% if(i == (len-1)){ %>
 					  	 <% if(category.id == categorys[i].id){%>
 						 	<li class="last"><a class="active" href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
 						 <% }else{ %>

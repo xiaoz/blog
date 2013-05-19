@@ -14,8 +14,15 @@
 			<%for(var cli=0;cli < product_categories.length;cli++){%>
 				<a class='category_tag_link' href='/products/<%=product.author_id%>/<%=product_categories[cli].id%>'><%=product_categories[cli].name%></a>
 			<%}%>
-
 			<div class='sep5'></div>
+			<%if(product.tag){%>
+			<span class='col_fade'>标签：</span>
+			<%for(var cli=0,tags = product.tag.split(','); cli < tags.length; cli++){%>
+				<%=tags[cli]%>&nbsp;&nbsp;
+			<%}%>
+			<div class='sep5'></div>
+			<%}%>
+			
 			<span class='col_fade'>
 				<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= product.create_at %> 发布
 				&nbsp;&nbsp;&nbsp;&nbsp;<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= product.update_at %> 重新编辑

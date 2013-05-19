@@ -5,7 +5,7 @@ var Util = require('../lib/util.js');
  * 根据文章id查询文章
  */
 exports.queryArticle = function(articleId, callback) {
-    mysql.queryOne('select id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at from article where id = ?', [ articleId ], function(err,
+    mysql.queryOne('select id,title,tag,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at from article where id = ?', [ articleId ], function(err,
             article) {
         callback(err, article);
     });
@@ -15,7 +15,7 @@ exports.queryArticle = function(articleId, callback) {
  * 查询用户的所有文章
  */
 exports.queryArticlesOfUser = function(userId,start,page_size, callback) {
-    mysql.query('select id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? order by update_at desc limit ? ,?',
+    mysql.query('select id,title,tag,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? order by update_at desc limit ? ,?',
             [ userId , start,page_size], function(err, articles) {
                 callback(err, articles);
             });
@@ -35,7 +35,7 @@ exports.queryArticlesOfUserTotal = function(userId, callback) {
  * 查询用户某分类下的所有文章
  */
 exports.queryArticlesOfUserCategory = function(userId, categoryId,start,page_size, callback) {
-    mysql.query('select  id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? and id in (select article_id from article_category where category_id = ?) order by update_at desc limit ? ,?',
+    mysql.query('select  id,title,tag,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at  from article where author_id = ? and id in (select article_id from article_category where category_id = ?) order by update_at desc limit ? ,?',
                     [ userId, categoryId , start,page_size], function(err, articles) {
                         callback(err, articles);
                     });
@@ -72,8 +72,8 @@ exports.updateReplyCountOfArticle = function(articleId, isAdd, callback) {
 /**
  * 创建文章
  */
-exports.saveArticle = function(title, content, userId, insertDate, callback) {
-    mysql.update('insert into article(title,content,author_id,create_at,update_at) values(?,?,?,?,?)', [ title, content, userId, insertDate, insertDate ], function(err, info) {
+exports.saveArticle = function(title, content, userId, insertDate,tags, callback) {
+    mysql.update('insert into article(title,content,author_id,create_at,update_at,tag) values(?,?,?,?,?,?)', [ title, content, userId, insertDate, insertDate,tags ], function(err, info) {
         callback(err, info);
     });
 };
@@ -81,8 +81,8 @@ exports.saveArticle = function(title, content, userId, insertDate, callback) {
 /**
  * 重新编辑文章
  */
-exports.updateArticle = function(title, content, updateDate, article_id, callback) {
-    mysql.update('update article set title = ?, content = ?, update_at = ? where id = ?', [ title, content, updateDate, article_id ], function(err, info) {
+exports.updateArticle = function(title, content, updateDate, article_id, tag,callback) {
+    mysql.update('update article set title = ?, content = ?,tag = ?, update_at = ? where id = ?', [ title, content, tag,updateDate, article_id ], function(err, info) {
         callback(err, info);
     });
 };
@@ -101,7 +101,7 @@ exports.deleteArticle = function(articleId, authorId, callback) {
  * 查询最新新闻
  */
 exports.queryNewArticle = function(limit, callback){
-    mysql.query('select id,title,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at from article  where author_id = 1 order by id desc limit ?', [ limit ], function(err, articles) {
+    mysql.query('select id,title,content,tag,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at from article  where author_id = 1 order by id desc limit ?', [ limit ], function(err, articles) {
         callback(err, articles);
     });
 };

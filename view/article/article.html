@@ -16,6 +16,14 @@
 			<%}%>
 
 			<div class='sep5'></div>
+			<%if(article.tag){%>
+			<span class='col_fade'>标签：</span>
+			<%for(var cli=0,tags = article.tag.split(','); cli < tags.length; cli++){%>
+				<%=tags[cli]%>&nbsp;&nbsp;
+			<%}%>
+			<div class='sep5'></div>
+			<%}%>
+			
 			<span class='col_fade'>
 				<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= article.create_at %> 发布
 				&nbsp;&nbsp;&nbsp;&nbsp;<a class='dark' href='/user/<%= author.id %>'><%= author.loginname %></a> 在 <%= article.update_at %> 重新编辑

@@ -1,11 +1,11 @@
 			<div class="page_title">
-            	<h1>文件详情</h1>
-                <p class="page_description">Files Details</p>
+            	<h1>文件夹</h1>
+                <p class="page_description">Files </p>
                 <div class="page_navigation">
                 	<ul>
                     	<li><a href="/news">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li>文件详情</li>
+                        <li>文件夹</li>
                     </ul>
                 </div>
             </div>
@@ -36,10 +36,17 @@
                        	<%-partial('frontend/vdisk/file_item',{collection:files,as:'file'}) %>
                     </tbody></table>
                     <%}else{%>
-						<p class='col_fade' style="margin:20px;">暂无文件</p>
+                         <div class="block_info_boxes">
+					<div class="info_box">
+                            	<div>
+                                	<p><b>Info:</b>  文件夹下 暂无文件哦！</p>
+                                </div>
+	                        </div>
+	                        </div>
 						<%}%>
                 </div>
-          <%if(files &&　files.length>0){%>       
+                
+          <%if(files &&　pages > 1){%>       
                   <div class="block_blogs_nav">
 <% if(current_page == pages){ %>
 		<a href="#2" class="prev">没有了</a>
@@ -65,9 +72,8 @@
 	                </div>
 	 				<div class="line"></div>
 	                <div class="block_archives">
-	                  	<h4>文档</h4>
+	                  	<h4>文件夹</h4>
 	                    <ul class="list2" id="folder_panel">
-	                    	<li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>
 	                    </ul>
 	                </div>
                 	<div class="block_recent_posts">
@@ -121,16 +127,13 @@
 			},
 		  	error:function(){}
 		});
-	});
-</script>
-
- <!--var html_folder_panel = '';
-		html_folder_panel+='<li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>';
-	
+	    var html_folder_panel = '';
+    	html_folder_panel+='<li><a href="/filesForFront">&nbsp;&nbsp;所有文件</a></li>'; 
 		html_folder_panel+='{@each folders as item,index}'+
-		'<li><a href="/${item.id}/filesForFront">${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
+		'<li><a href="/filesOfFolderFront?folder_id=${item.id}">&nbsp;&nbsp;${item.name}&nbsp;&nbsp;({@if !item.file_count}0{@else}${item.file_count}{@/if})</a></li>'+
 		'{@/each}';
 		var tpl_folder_panel=juicer(html_folder_panel);
+	
 	    $.ajax({//得到用户网盘文件夹
 			type: "POST",
 			url: "/userinfo/folder/1",
@@ -138,5 +141,8 @@
 			    $('#folder_panel').html(tpl_folder_panel.render(data));
 			},
 		  	error:function(){}
-		});-->
+		});
+	});
+</script>
+
             

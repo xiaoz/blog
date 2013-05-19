@@ -16,6 +16,12 @@ var articleCategoryDao = require('../../dao/article_category.js');
 var folderDao = require('../../dao/folder.js');
 var fileDao = require('../../dao/file.js');
 
+var path = require('path');
+var config = require('../../config.js').config;
+var path_prefix = config.vdisk_path;
+
+var upload_path = path.join(path.dirname(__dirname), '../' + path_prefix);
+
 
 /*网站首页新闻*/
 exports.news = function(req, res, next) {
@@ -230,7 +236,7 @@ exports.viewArticlesOfUserCategoryForFront = function(req, res, next) {
 				var nums = Math.ceil(total[0].total/page_size);
                 cb(null, nums);
 			})
-        },
+        }
       
     }, function(err, results) {
         if (err) {
@@ -300,63 +306,129 @@ exports.user_share_files = function(req, res, next) {
            return;
        }
        else {
-    	   var nums = Math.ceil( files.length/page_size);
-           res.render('frontend/vdisk/share_files', {
-        	   layout: 'frontend/flayout',
-           		active : 'news',
-               user_id : user_id,
-               files : files,
-               pages : nums,
-			   current_page :page
-           });
-           return;
+    	   fileDao.queryPublicFilesOfUserTotal(user_id, function(err, total) {
+               if (err) {
+               	 res.render('frontend/notify/notify', {
+         			 	layout: 'frontend/flayout',
+         				active : 'news',
+                        error : '获取文件列表总数出错'
+                     });
+                   return;
+               }
+               var nums = Math.ceil(total[0].count/page_size);
+               res.render('frontend/vdisk/share_files', {
+            	   layout: 'frontend/flayout',
+               		active : 'news',
+                   user_id : user_id,
+                   files : files,
+                   pages : nums,
+                   total :total[0].count ,
+    			   current_page :page
+               });
+               return;
+           })
        }
    });
 };
 
 /**
- * 查询文件夹下文件列表
+ * 查询文件夹下用户设为公开文件列表
  */
 exports.viewFilesOfFolderForFront = function(req, res, next) {
 
-    var folder_id = req.params.folder_id;
+    var folder_id = req.query.folder_id;
     var user_id = req.session.user.id || 1;
-
+    var page  = Number(req.query.page) || 1;
+    var page_size = Number(req.query.page_size) || 10;
+ 	var start = (page - 1)*page_size;
+ 	
     folderDao.queryFolder(user_id, folder_id, function(err, folder) {
         if (err) {
-            res.render('notify/notify', {
+        	 res.render('frontend/notify/notify', {
+ 			 	layout: 'frontend/flayout',
+ 				active : 'news',
                 error : '查找文件夹基本信息出错'
-            });
+             });
             return;
         }
         else if (!folder || folder.length <= 0) {
-            res.render('notify/notify', {
+            res.render('frontend/notify/notify', {
+ 			 	layout: 'frontend/flayout',
+ 				active : 'news',
                 error : '该文件夹不存在或您不具备访问该文件夹的权限'
-            });
+             });
             return;
         }
         else {
-            fileDao.queryFiles(folder_id, user_id, function(err, files) {
+            fileDao.queryPublicFilesOfFolder(folder_id, user_id, start,page_size,function(err, files) {
                 if (err) {
-                    res.render('vdisk/folder_files', {
-                        files : [],
-                        folder : folder,
-                        folders : [],
-                        user_id : user_id
-                    });
+                	 res.render('frontend/notify/notify', {
+          			 	layout: 'frontend/flayout',
+          				active : 'news',
+                         error : '获取文件列表出错'
+                      });
                     return;
                 }
-                folderDao.queryAllFoldersOfUser(user_id, function(err, folders) {
-                    res.render('vdisk/folder_files', {
+                fileDao.queryPublicFilesOfFolderTotal(folder_id, user_id, function(err, total) {
+                    if (err) {
+                    	 res.render('frontend/notify/notify', {
+              			 	layout: 'frontend/flayout',
+              				active : 'news',
+                             error : '获取文件列表总数出错'
+                          });
+                        return;
+                    }
+                    var nums = Math.ceil(total[0].count/page_size);
+   				 	res.render('frontend/vdisk/folder_files', {
+                    	layout: 'frontend/flayout',
+                    	active : 'news',
                         files : files || [],
                         folder : folder,
-                        folders : folders || [],
-                        user_id : user_id
+                        user_id : user_id,
+                        pages : nums,
+                        total :total[0].count ,
+         			     current_page :page
                     });
                     return;
-                });
+                })
             });
         }
     });
 };
+/**
+ * 下载文件
+ */
+exports.downloadFile = function(req, res, next) {
+    var file_id = req.query.file_id;
 
+    // 如果文件是公开的，则所有人可以下载，如果是私密的则只有拥有者可以下载
+    fileDao.queryFile(file_id, function(err, file) {
+        if (err) {
+        	 res.render('frontend/notify/notify', {
+   			 	layout: 'frontend/flayout',
+   				active : 'news',
+                  error : '下载文件出错,该文件可能不存在或已被删除'
+               });
+             return;
+        }
+        else if (file) {
+            	fileDao.updateFileDownload(file.id, function(err, info) {
+                    res.header('Content-Type', "application/octet-stream;charset=utf-8");
+                    res.header('Content-Length', file.size);
+                    res.header('Content-Disposition', "attachment;filename=" + file.name);
+                    //var newStr = String(""+upload_path + "/" + file.user_id + "/" + file.hash);
+                    //console.log("'"+newStr+"");
+                    res.sendfile(""+upload_path + "/" + file.user_id + "/" + file.hash);
+                });
+           
+            
+        }else {
+        	res.render('frontend/notify/notify', {
+   			 	layout: 'frontend/flayout',
+   				active : 'news',
+                  error : '您要下载的文件不存在'
+               });
+             return;
+        }
+    });
+};
