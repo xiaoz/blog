@@ -13,6 +13,7 @@ var categoryDao = require('../../dao/product_categorys.js');
 var replyDao = require('../../dao/reply.js');
 var articleCategoryDao = require('../../dao/product_category.js');
 
+var category2Dao = require('../../dao/product_categorys2.js');
 
 var siteconfigDao = require('../../dao/siteconfig.js');
 

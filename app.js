@@ -68,5 +68,5 @@ var options = {
 		  }
 		};
 var proxyServer = httpProxy.createServer(options);
-proxyServer.listen(80808);
+proxyServer.listen(80);
 console.log("blog is listening on port %d in %s mode", app.address().port, app.settings.env);
