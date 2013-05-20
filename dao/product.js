@@ -32,7 +32,7 @@ exports.queryArticlesOfUserTotal = function(userId, callback) {
 
 
 /**
- * 查询用户某分类下的所有产品
+ * 查询用户某一级分类下的所有产品
  */
 exports.queryArticlesOfUserCategory = function(userId, categoryId,start,page_size, callback) {
     mysql.query('select  id,title,tag,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at ,goods_img from product where author_id = ? and id in (select product_id from product_category where category_id = ?) order by update_at desc limit ? ,?',
@@ -42,10 +42,29 @@ exports.queryArticlesOfUserCategory = function(userId, categoryId,start,page_siz
 };
 
 /**
- * 查询用户某分类下的所有产品总数
+ * 查询用户某一级分类下的所有产品总数
  */
 exports.queryArticlesOfUserCategoryTotal = function(userId, categoryId, callback) {
     mysql.query('select  count(*) as total  from product where author_id = ? and id in (select product_id from product_category where category_id = ?)',
+            [ userId ,categoryId], function(err, total) {
+                callback(err, total);
+            });
+};
+/**
+ * 查询用户某二级分类下的所有产品
+ */
+exports.queryArticlesOfUserCategory2 = function(userId, categoryId,start,page_size, callback) {
+    mysql.query('select  id,title,tag,content,visit_count,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at ,goods_img from product where author_id = ? and id in (select product_id from product_category where category2_id = ?) order by update_at desc limit ? ,?',
+                    [ userId, categoryId , start,page_size], function(err, products) {
+                        callback(err, products);
+                    });
+};
+
+/**
+ * 查询用户某二级分类下的所有产品总数
+ */
+exports.queryArticlesOfUserCategory2Total = function(userId, categoryId, callback) {
+    mysql.query('select  count(*) as total  from product where author_id = ? and id in (select product_id from product_category where category2_id = ?)',
             [ userId ,categoryId], function(err, total) {
                 callback(err, total);
             });

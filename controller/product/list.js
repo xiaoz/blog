@@ -61,6 +61,16 @@ exports.viewArticle = function(req, res, next) {
                 }
             });
         },
+		product_categories2 : function(cb) {
+            category2Dao.queryCategoriesOfProduct(product_id, function(err, categories) {
+                if (err || !categories) {
+                    cb(null, []);
+                }
+                else {
+                    cb(null, categories);
+                }
+            });
+        },
         product_replies : function(cb) {// 该篇产品的回复
             replyDao.queryRepliesOfProduct(product_id, function(err, replies) {
                 if (err || !replies) {
@@ -114,7 +124,8 @@ exports.viewArticle = function(req, res, next) {
 			active	: 'user_index',
             author : results.author,
             product : results.product,
-            product_categories : results.product_categories
+            product_categories : results.product_categories,
+			product_categories2 : results.product_categories2
         });
         return;
     });
@@ -281,19 +292,14 @@ exports.modifyArticle = function(req, res, next) {
                 cb(null, '');
             });
         } ],
-		updatecategory2 : function(cb) {// 更新产品基本信息
-			category2Dao.saveCategoriesOfArticle(product_id,product_categories2, function(err, categories){
-			                if (err) {
-			                    res.render('notify/notify', {
-			                    	current	: 'product',
-			            			active	: 'user_index',
-			                        error : '保存产品二级分类时发生错误'
-			                    });
-			                    return;
-			                }
-							cb(null, '');
-			            }); 
-        }
+		saveCategories2OfArticle : [ 'deleteCategoriesOfProduct', function(cb) {// 插入新的产品分类
+            category2Dao.saveCategoriesOfArticle(product_id, product_categories2, function(err, categories) {
+                if (err) {
+                    log.error('修改产品：插入新的产品二级分类出现错误[' + product_id + ',' + product_categories + ']');
+                }
+                cb(null, '');
+            });
+        } ]
     }, function(err, results) {
         if (err) {
             res.render('notify/notify', {
@@ -471,9 +477,84 @@ exports.viewArticlesOfUserCategory = function(req, res, next) {
                 products : results.products,
                 current_page :page,
                 pages : results.pages,
-                category : category || {}
+                category : category || {},
+				category2 : {}
             });
             return;
+        });
+        
+    });
+};
+
+/**
+ * 查看用户某二级分类下产品
+ */
+exports.viewArticlesOfUserCategory2 = function(req, res, next) {
+    var category_id = req.params.category_id;
+    var user_id = req.params.user_id;
+    var page  = Number(req.query.page) || 1;
+	var page_size = Number(req.query.page_size) || 6;
+	var start = (page - 1)*page_size;
+	async.auto({
+        products : function(cb) {
+			 productDao.queryArticlesOfUserCategory2(user_id, category_id,start,page_size, function(err, products) {
+		        if (err) {
+		            res.render('notify/notify', {
+		            	current	: 'product',
+		    			active	: 'user_index',
+		                error : '查找分类下产品出错'
+		            });
+		            return;
+		        }
+		        
+		        cb(null, products);
+			 })
+        },
+        pages : function(cb) {
+           productDao.queryArticlesOfUserCategory2Total(user_id,category_id, function(err, total) {
+				if (err) {
+                    cb(null, []);
+                }
+                if (!total) {
+                    cb(null, 0);
+                }
+				var nums = Math.ceil(total[0].total/page_size);
+                cb(null, nums);
+			})
+        },
+      
+    }, function(err, results) {
+        if (err) {
+        	 res.render('notify/notify', {
+        		 current	: 'product',
+     			 active	: 'user_index',
+                 error : '查找分类下产品出错'
+             });
+        	return;
+        }
+        categoryDao.queryCategory(category_id, function(err, category) {
+			
+			 category2Dao.queryOneCategory(category_id, function(err, category2) {
+			 	if (err) {
+		        	 res.render('notify/notify', {
+		        		 current	: 'product',
+		     			 active	: 'user_index',
+		                 error : '查找产品下二级分类出错'
+		             });
+		        	return;
+		        }
+            	res.render('product/products', {
+	            	current	: 'product',
+	    			active	: 'user_index',
+	                user_id : user_id,
+	                products : results.products,
+	                current_page :page,
+	                pages : results.pages,
+	                category : category || {},
+					category2 : category2 || {}
+            	});
+            	return;
+        	});
         });
         
     });

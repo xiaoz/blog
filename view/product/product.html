@@ -13,7 +13,11 @@
 			<span class='col_fade'>分类：</span>
 			<%for(var cli=0;cli < product_categories.length;cli++){%>
 				<a class='category_tag_link' href='/products/<%=product.author_id%>/<%=product_categories[cli].id%>'><%=product_categories[cli].name%></a>
+				<%for(var cli=0;cli < product_categories2.length;cli++){%>
+					--<a class='category_tag_link' href='/products/<%=product.author_id%>/<%=product_categories[cli].id%>'><%=product_categories2[cli].name%></a>
+				<%}%>
 			<%}%>
+
 			<div class='sep5'></div>
 			<%if(product.tag){%>
 			<span class='col_fade'>标签：</span>

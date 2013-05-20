@@ -143,6 +143,7 @@ exports = module.exports = function(app) {
     app.post('/product/:product_id/modify', product_ctrl.modifyArticle);
     app.get('/product/:product_id/delete', product_ctrl.deleteArticle);
     app.get('/products/:user_id/:category_id', product_ctrl.viewArticlesOfUserCategory);
+	app.get('/productsOfCategory2/:user_id/:category_id', product_ctrl.viewArticlesOfUserCategory2);
     app.get('/:user_id/products', product_ctrl.viewArticlesOfUser);
     app.get('/product/:product_id', product_ctrl.viewArticle);
 	

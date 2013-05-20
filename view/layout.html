@@ -199,7 +199,7 @@
 		        		html_caregory_panel+='{@each categories as item,index}'+
 		        		'<li>▶&nbsp;&nbsp;<a href="/products/${item.user_id}/${item.id}">${item.name}&nbsp;&nbsp;({@if !item.article_count}0{@else}${item.article_count}{@/if})</a></li>'+
 		        		'{@if item.childCategories.length >0 }{@each item.childCategories as item1}'+
-		        		'<li style="margin-left:0px">▶&nbsp;&nbsp;<a href="">${item1.name}&nbsp;&nbsp;({@if !item1.article_count}0{@else}${item1.article_count}{@/if})</a></li>'+
+		        		'<li style="margin-left:0px">▶&nbsp;&nbsp;<a href="/productsOfCategory2/${item.user_id}/${item1.id}">${item1.name}&nbsp;&nbsp;({@if !item1.article_count}0{@else}${item1.article_count}{@/if})</a></li>'+
 		        		'{@/each}{@/if}'+
 		        		'{@/each}';
 		        		var tpl_caregory_panel=juicer(html_caregory_panel);
