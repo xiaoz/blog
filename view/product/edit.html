@@ -45,12 +45,20 @@
 				</div>
 					<div class='sep10'></div>
 					<div class='sep10'></div>
-					<div>
-						<label class='bold' for='t_content'>产品分类：</label>
+					<div id="J_Categories1Box">
+						<label class='bold' for='t_content'>产品一级分类：</label>
 						<div class='tabbable'>
 								<div style='width: 698px;height:40px;padding:10px 0;'>
 								<%- partial('product/category_selectable',{collection:categories, as:'category'}) %>
 								</div>
+						</div>
+					</div>
+					<div id="J_Categories2Box" >
+						<label class='bold' for='t_content'>产品二级分类：</label>
+						<div class='tabbable'>
+						<div style='width: 698px; height: 40px; padding: 10px 0;'>
+						<%-partial('product/category_selectable2',{collection:categories2, as:'category'}) %>
+						</div>
 						</div>
 					</div>
 						<div>
@@ -61,6 +69,7 @@
 								</div>
 						</div>
 					</div>
+					<input type='hidden' id='article_categories2' name='product_categories2' value=''></input>
 					<input type='hidden' id='article_categories' name='product_categories' value=''></input>
 					<input type='hidden' name='_csrf' value='<%= csrf %>' />
 					<div class='sep10'></div>
@@ -85,15 +94,39 @@
 		    window.UEDITOR_CONFIG.minFrameHeight=500;
 			var editor = new baidu.editor.ui.Editor();
 			editor.render('editor');
+
+                    $('.category_selectable').click(function() {
+                    	 var t = $(this).attr('data');
+                    	 if(t == 1){
+                    		$('#J_Categories1Box .category_selectable').removeClass('category_select');
+                            $(this).addClass('category_select');
+                    		var tag = $(this).attr('tag_id');
+      						$('#J_Categories2Box .category_selectable').hide();
+      						$('#J_Categories2Box .J_ParentCategory'+tag).show();
+
+                         }else{
+                        	 $('#J_Categories2Box .category_selectable').removeClass('category_select');
+                             $(this).addClass('category_select');
+                         }
+                    });
 		    function check(){
 		        editor.sync();//同步
-		        var values=[];
-				$('.category_selectable').each(function(){
-					if($(this).hasClass('category_select')){
-						values.push($(this).attr('tag_id'));
-					}
-				});
-				$('#article_categories').val(values);
+		        var values = [];
+						var values2 = [];
+                        $('#J_Categories1Box .category_selectable').each(function() {
+                            if ($(this).hasClass('category_select')) {
+									var tag = $(this).attr('tag_id');
+                                	values.push(tag);
+									$('#J_Categories2Box .J_ParentCategory'+tag).each(function() {
+                            			if ($(this).hasClass('category_select')) {
+                                			values2.push($(this).attr('tag_id'));
+                            			}
+                        			});
+                        			$('#article_categories2').val(values2);
+
+                            }
+                        });
+                        $('#article_categories').val(values);
 				if(document.getElementById('inputTitle').value.length >100 || document.getElementById('inputTitle').value.length <2){
 		   		 	alert('标题字数须在2-100之间');
 		   		    return false;

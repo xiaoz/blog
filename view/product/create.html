@@ -81,6 +81,7 @@
 						</div>
 					</div>
 				</div>
+				<input type='hidden' id='article_categories2' name='product_categories2' value=''></input>
 				<input type='hidden' id='article_categories' name='product_categories' value=''></input> <input type='hidden'
 					name='_csrf' value='<%= csrf %>' />
 
@@ -105,21 +106,29 @@
                         	 $('#J_Categories2Box .category_selectable').removeClass('category_select');
                              $(this).addClass('category_select');
                          }
-                        
-                    	
-                      
-                        
                     });
 
                     function check() {
                         editor.sync();//同步
                         var values = [];
-                        $('.category_selectable').each(function() {
+						var values2 = [];
+                        $('#J_Categories1Box .category_selectable').each(function() {
                             if ($(this).hasClass('category_select')) {
-                                values.push($(this).attr('tag_id'));
+									var tag = $(this).attr('tag_id');
+                                	values.push(tag);
+									$('#J_Categories2Box .J_ParentCategory'+tag).each(function() {
+                            			if ($(this).hasClass('category_select')) {
+                                			values2.push($(this).attr('tag_id'));
+                            			}
+                        			});
+                        			$('#article_categories2').val(values2);
+
                             }
                         });
                         $('#article_categories').val(values);
+ 						
+                        
+
                         if (document.getElementById('inputTitle').value.length > 100 || document.getElementById('inputTitle').value.length < 2) {
                             alert('标题字数须在2-100之间');
                             return false;

@@ -51,7 +51,7 @@ exports.deleteCategoryOfParent = function(userId, categoryId, callback){
  * 根据产品id查询产品的所属category信息
  */
 exports.queryCategoriesOfProduct = function(productId, callback) {
-    mysql.query("select * from product_categorys where id in (select category_id from product_category where product_id=?)", [ productId ], function(err, categories) {
+    mysql.query("select * from product_categorys2 where id in (select category2_id from product_category where product_id=?)", [ productId ], function(err, categories) {
         callback(err, categories);
     });
 };
@@ -98,7 +98,7 @@ exports.saveCategory = function(name, sequence, userId,category1_id, callback) {
  */
 exports.saveCategoriesOfArticle = function(articleId, categories, callback) {
     async.forEach(categories, function(category_item, cb) {
-        mysql.update('insert into product_category(product_id, category_id) values(?,?)', [ articleId, category_item ], function(err, info) {
+        mysql.update('insert into product_category(product_id, category2_id) values(?,?)', [ articleId, category_item ], function(err, info) {
             if (err) {
                 cb(err, info);
             }

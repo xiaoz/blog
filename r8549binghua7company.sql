@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.0.1
+-- version 3.0.1.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: r2602binghua7.mysql.aliyun.com
--- 生成日期: 2013 年 05 月 17 日 08:51
+-- 生成日期: 2013 年 05 月 20 日 01:07
 -- 服务器版本: 5.1.61
--- PHP 版本: 5.3.3
+-- PHP 版本: 5.2.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -25,9 +25,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 表的结构 `article`
 --
 
-CREATE TABLE IF NOT EXISTS `article` (
+CREATE TABLE `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) DEFAULT '',
+  `tag` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `content` varchar(20000) DEFAULT '' COMMENT 'utf8的只能接受21000多个字符(带中文)',
   `author_id` int(11) DEFAULT '0',
   `reply_count` int(11) DEFAULT '0',
@@ -39,22 +40,16 @@ CREATE TABLE IF NOT EXISTS `article` (
   `last_reply_at` datetime DEFAULT '1970-01-01 00:00:00',
   `content_is_html` int(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- 转存表中的数据 `article`
+-- 导出表中的数据 `article`
 --
 
-INSERT INTO `article` (`id`, `title`, `content`, `author_id`, `reply_count`, `visit_count`, `collect_count`, `create_at`, `update_at`, `last_reply`, `last_reply_at`, `content_is_html`) VALUES
-(89, '正则表达式基础', '<div class="body" style="padding:0px; margin:0px; float:left; width:570px; font-family:verdana, sans-serif, 宋体; font-size:13px; white-space:normal; background-color:#f9f9f9; "><div class="detail" style="padding:0px; margin:10px 0px; font-size:13px; "><p style="padding:0px; margin-top:0px; margin-bottom:10px; "><a href="http://regexpal.com/" style="padding:0px; margin:0px; color:#4466bb; outline:0px; ">http://regexpal.com/</a>这个网站的正则测试是我比较喜欢的</p></div></div><div class="clear" style="padding:0px; margin:0px; clear:both; font-size:1px; line-height:0; font-family:verdana, sans-serif, 宋体; white-space:normal; background-color:#f9f9f9; "></div><div class="replies" id="PostReplies_14487" style="padding:0px; margin:10px 0px 10px 50px; font-family:verdana, sans-serif, 宋体; font-size:13px; white-space:normal; background-color:#f9f9f9; "></div><p><br /></p>', 1, 0, 12, 0, '2012-11-23 15:21:51', '2012-11-23 15:21:51', 0, '1970-01-01 00:00:00', 0),
-(91, '简明Vim练级攻略', '<div class="content" style="word-break:break-all; color:#333333; font-family:tahoma, sans-serif; font-size:13px; line-height:18px; white-space:normal; background-color:#ffffff; "><p style="margin-top:0px; margin-bottom:8px; text-align:justify; ">Vim的学习曲线相当的大（参看<a target="_blank" href="http://coolshell.cn/articles/3125.html" style="color:#0088cc; text-decoration:none; ">各种文本编辑器的学习曲线</a>），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。你想以最快的速度学习人类史上最好的文本编辑器VIM吗？你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。</p><table style="max-width:100%; border-spacing:0px; background-color:transparent; border:1px solid #eeeeee; margin-top:10px; margin-right:0px; margin-left:0px; " border="1"><tbody><tr><td style="border:1px dotted #eeeeee; padding:5px; "><p style="margin-top:0px; margin-bottom:8px; text-align:justify; "><a href="http://www.vim.org/" target="_blank" style="color:#0088cc; text-decoration:none; ">Vim</a>&nbsp;the&nbsp;Six&nbsp;Billion&nbsp;Dollar&nbsp;editor</p><p style="margin-top:0px; margin-bottom:8px; text-align:justify; ">Better,&nbsp;Stronger,&nbsp;Faster.</p></td></tr></tbody></table><p style="margin-top:0px; margin-bottom:8px; text-align:justify; ">学习<a href="http://www.vim.org/" target="_blank" style="color:#0088cc; text-decoration:none; ">vim</a>并且其会成为你最后一个使用的文本编辑器。没有比这个更好的文本编辑器了，非常地难学，但是却不可思议地好用。</p><p style="margin-top:0px; margin-bottom:8px; text-align:justify; ">我建议下面这四个步骤：</p><ol style="padding:0px; margin:0px 0px 9px 25px; list-style-position:initial; list-style-image:initial; "><li><p>存活</p></li><li><p>感觉良好</p></li><li><p>觉得更好，更强，更快</p></li><li><p>使用VIM的超能力</p></li></ol><p style="margin-top:0px; margin-bottom:8px; text-align:justify; ">当你读完这篇文章，你会成为一个Vim的superstar。</p><p style="margin-top:0px; margin-bottom:8px; text-align:justify; ">在开始学习以前，我需要给你一些警告：</p><ul style="padding:0px; margin:0px 0px 9px 25px; list-style-position:initial; list-style-image:initial; "><li><p>学习vim在开始时是痛苦的。</p></li><li><p>需要时间</p></li><li><p>需要不断地练习，就像你学习一个乐器一样。</p></li><li><p>不要期望你能在3天内把vim练得比别的编辑器更有效率。</p></li><li><p>事实上，你需要2周时间的苦练，而不是3天。</p></li></ul></div><div class="meta" style="margin:10px 0px; color:#333333; font-family:tahoma, sans-serif; font-size:13px; line-height:18px; white-space:normal; background-color:#ffffff; "><span data-time="1342457976077" class="date" style="margin-right:10px; ">2012-07-17&nbsp;00:59</span><span class="text" style="margin-right:10px; ">529&nbsp;次浏览</span><span class="tags" style="margin-right:10px; "><a href="http://www.csser.com/tag/vim" title="VIM" style="color:#0088cc; text-decoration:none; margin-right:5px; ">#VIM</a></span><span class="pull-right" style="float:right; margin-right:10px; "><a data-id="500447b23ef1166d39000bcf" data-type="board" data-cmd="follow" class="btn btn-mini btn-inverse do-follow" style="color:#ffffff; text-decoration:none; display:inline-block; padding:2px 6px; margin-bottom:0px; font-size:11px; line-height:14px; text-align:center; text-shadow:0px -1px 0px; vertical-align:middle; background-color:#414141; background-image:-webkit-linear-gradient(top, #555555, #222222); border-width:1px; border-style:solid; border-color:; border-top-left-radius:4px; border-top-right-radius:4px; border-bottom-right-radius:4px; border-bottom-left-radius:4px; -webkit-box-shadow:0px 1px 0px inset,  0px 1px 2px; box-shadow:0px 1px 0px inset,  0px 1px 2px; cursor:pointer; margin-left:5px; background-repeat:repeat no-repeat; ">关注</a><span class="badge badge-warning" style="font-size:12.025px;color:#ffffff;background-color:#f89406">10</span></span></div><div class="line" style="height:1px; font-size:0px; overflow:hidden; border-top-width:3px; border-top-style:solid; border-top-color:#999999; margin:0px; padding:0px; color:#333333; font-family:tahoma, sans-serif; line-height:18px; white-space:normal; background-color:#ffffff; "></div><div class="posts" style="padding-top:20px; color:#333333; font-family:tahoma, sans-serif; font-size:13px; line-height:18px; white-space:normal; background-color:#ffffff; "><div class="post" style="margin-bottom:10px; padding:0px 0px 10px; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:#999999; position:relative; min-height:60px; line-height:1.8; "><div class="post-panel"><h1 style="margin:0px 0px 15px; font-family:inherit; color:inherit; text-rendering:optimizelegibility; font-size:16px; line-height:normal; ">&nbsp;第一级&nbsp;存活</h1><div class="post-content" style="padding-left:20px; "><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">第一级&nbsp;存活</p><ol style="padding:0px; margin:0px 0px 9px 25px; list-style-position:initial; list-style-image:initial; "><li style="line-height:18px; "><p>安装&nbsp;<a href="http://www.vim.org/" target="_blank" style="color:#0088cc; text-decoration:none; ">vim</a></p></li><li style="line-height:18px; "><p>启动Vim</p></li><li style="line-height:18px; "><p>什么也别干！请先阅读</p></li></ol><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">当你安装好一个编辑器后，你一定会想在其中输入点什么东西，然后看看这个编辑器是什么样子。但vim不是这样的，请按照下面的命令操作：</p><ul style="padding:0px; margin:0px 0px 9px 25px; list-style-position:initial; list-style-image:initial; "><li style="line-height:18px; "><p>启动Vim后，vim在&nbsp;Normal&nbsp;模式下。</p></li><li style="line-height:18px; "><p>让我们进入Insert模式，请按下键i。(陈皓注：你会看到vim左下角有一个–insert–字样，表示，你可以以插入的方式输入了）</p></li><li style="line-height:18px; "><p>此时，你可以输入文本了，就像你用“记事本”一样。</p></li><li style="line-height:18px; "><p>如果你想返回Normal模式，请按<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">ESC</code>键。</p></li></ul><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">现在，你知道如何在Insert和NormaL模式下切换了。下面是一些命令，可以让你在Normal模式下幸存下来：</p><table style="max-width:100%; border-spacing:0px; background-color:transparent; border:1px solid #eeeeee; margin-top:10px; margin-right:0px; margin-left:0px; " border="1"><tbody><tr><td style="border:1px dotted #eeeeee; padding:5px; "><blockquote style="padding:0px 0px 0px 15px; margin:0px 0px 18px; border-left-width:5px; border-left-style:solid; border-left-color:#eeeeee; "><p style="margin-top:0px; margin-bottom:8px; font-size:16px; line-height:22.5px; text-align:justify; "><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">i</code>&nbsp;→&nbsp;Insert&nbsp;模式，按<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">ESC</code>回到Normal模式.</p></blockquote><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; "><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">x</code>&nbsp;→&nbsp;删当前光标所在的一个字符。</p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; "><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:wq</code>&nbsp;→&nbsp;存盘+退出(<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:w</code>存盘<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:q</code>退出)（注：:w后可以跟文件名）</p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; "><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">dd</code>&nbsp;→删除当前行，并把删除的行存到剪贴板里</p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; "><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">p</code>&nbsp;→粘贴剪贴板</p><blockquote style="padding:0px 0px 0px 15px; margin:0px 0px 18px; border-left-width:5px; border-left-style:solid; border-left-color:#eeeeee; "><p style="margin-top:0px; margin-bottom:8px; font-size:16px; line-height:22.5px; text-align:justify; ">推荐:</p></blockquote><blockquote style="padding:0px 0px 0px 15px; margin:0px 0px 18px; border-left-width:5px; border-left-style:solid; border-left-color:#eeeeee; "><p style="margin-top:0px; margin-bottom:8px; font-size:16px; line-height:22.5px; text-align:justify; "><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">hjkl</code>(强例推荐使用其移动光标，但不必需)→你也可以使用光标键(←↓↑→).注:<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">j</code>就像下箭头。</p><p style="margin-top:0px; margin-bottom:8px; font-size:16px; line-height:22.5px; text-align:justify; "><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:help&nbsp;&lt;command&gt;</code>→显示相关命令的帮助。你也可以就输入&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:help</code>&nbsp;而不跟命令。（注：退出帮助需要输入:q）</p></blockquote></td></tr></tbody></table><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">你能在vim幸存下来只需要上述的那5个命令，你就可以编辑文本了，你一定要把这些命令练成一种下意识的状态。于是你就可以开始进阶到第二级了。</p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">当是，在你进入第二级时，需要再说一下Normal模式。在一般的编辑器下，当你需要copy一段文字的时候，你需要使用&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">Ctrl</code>键，比如：<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">Ctrl-C</code>。也就是说，Ctrl键就好像功能键一样，当你按下了功能键Ctrl后，C就不在是C了，而且就是一个命令或是一个快键键了，在VIM的Normal模式下，所有的键就是功能键了。这个你需要知道。</p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">标记:</p><ul style="padding:0px; margin:0px 0px 9px 25px; list-style-position:initial; list-style-image:initial; "><li style="line-height:18px; "><p>下面的文字中，如果是&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">Ctrl-λ</code>我会写成&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">&lt;C-λ&gt;</code>.</p></li><li style="line-height:18px; "><p>以&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:</code>&nbsp;开始的命令你需要输入&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">&lt;enter&gt;</code>回车，例如—如果我写成&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:q</code>&nbsp;也就是说你要输入&nbsp;<code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">:q&lt;enter&gt;</code>.</p></li></ul></div></div><div class="cmd" style="position:relative; margin-left:20px; "><a class="add-review" style="color:#0088cc; text-decoration:none; vertical-align:middle; ">添加评论</a><span class="bull" style="margin:0px 4px; vertical-align:middle; ">•</span><a href="http://www.csser.com/user/yours2008" title="丶水木灰" style="color:#0088cc; text-decoration:none; vertical-align:middle; ">丶水木灰</a><span class="bull" style="margin:0px 4px; vertical-align:middle; ">•</span><span class="date" data-time="1342457818526" style="vertical-align:middle; ">2012-07-17&nbsp;00:56</span></div></div><div class="post" style="margin-bottom:10px; padding:0px 0px 10px; border-bottom-width:1px; border-bottom-style:solid; border-bottom-color:#999999; position:relative; min-height:60px; line-height:1.8; "><div class="post-panel"><h1 style="margin:0px 0px 15px; font-family:inherit; color:inherit; text-rendering:optimizelegibility; font-size:16px; line-height:normal; ">&nbsp;第二级&nbsp;感觉良好</h1><div class="post-content" style="padding-left:20px; "><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; "></p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">第二级&nbsp;感觉良好</p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">上面的那些命令只能让你存活下来，现在是时候学习一些更多的命令了，下面是我的建议：（陈皓注：所有的命令都需要在Normal模式下使用，如果你不知道现在在什么样的模式，你就狂按几次ESC键）</p><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">1.各种插入模式</p><blockquote style="padding:0px 0px 0px 15px; margin:0px 0px 18px; border-left-width:5px; border-left-style:solid; border-left-color:#eeeeee; "><ul style="padding:0px; margin:0px 0px 9px 25px; list-style-position:initial; list-style-image:initial; "><li style="line-height:18px; "><p><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">a</code>&nbsp;→&nbsp;在光标后插入</p></li><li style="line-height:18px; "><p><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">o</code>&nbsp;→&nbsp;在当前行后插入一个新行</p></li><li style="line-height:18px; "><p><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">O</code>&nbsp;→&nbsp;在当前行前插入一个新行</p></li><li style="line-height:18px; "><p><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">cw</code>&nbsp;→&nbsp;替换光标所在位置的一个单词</p></li></ul></blockquote><p style="margin-top:0px; margin-bottom:8px; line-height:18px; text-align:justify; ">2.简单的移动光标</p><blockquote style="padding:0px 0px 0px 15px; margin:0px 0px 18px; border-left-width:5px; border-left-style:solid; border-left-color:#eeeeee; "><ul style="padding:0px; margin:0px 0px 9px 25px; list-style-position:initial; list-style-image:initial; "><li style="line-height:18px; "><p><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">0</code>&nbsp;→&nbsp;数字零，到行头</p></li><li style="line-height:18px; "><p><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">^</code>&nbsp;→&nbsp;到本行第一个不是blank字符的位置（所谓blank字符就是空格，tab，换行，回车等）</p></li><li style="line-height:18px; "><p><code style="font-family:menlo, monaco, &#39;courier new&#39;, monospace; font-size:12px; color:#dd1144; border-top-left-radius:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; border-bottom-left-radius:3px; padding:1px 2px; background-color:transparent; border:0px; margin:0px; word-break:break-all; ">$</code>&nbsp;→', 1, 0, 5, 0, '2012-11-29 13:56:51', '2012-11-29 13:56:51', 0, '1970-01-01 00:00:00', 0),
-(93, '实时监听输入框值变化的完美方案：oninput & onpropertychange', '<p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">在&nbsp;<a href="http://www.cnblogs.com/lhb25/category/279316.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">Web</strong></a>&nbsp;开发中经常会碰到需要动态监听输入框值变化的情况，如果使用&nbsp;<span style="margin:0px; padding:0px; ">onkeydown、onkeypress、onkeyup&nbsp;这个几个键盘事件来监测的话，监听不了右键的复制、剪贴和粘贴这些操作，处理组合快捷键也很麻烦。因此这篇文章向大家介绍一种完美的解决方案：结合&nbsp;<a href="http://www.cnblogs.com/lhb25/category/146076.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">HTML5</strong></a>标准事件&nbsp;oninput&nbsp;和&nbsp;IE&nbsp;专属事件&nbsp;onpropertychange&nbsp;事件来监听输入框值变化。</span></p><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; "><span style="margin:0px; padding:0px; ">　　oninput&nbsp;是&nbsp;<a href="http://www.cnblogs.com/lhb25/category/146076.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">HTML5</strong></a>&nbsp;的标准事件，对于检测&nbsp;textarea,&nbsp;input:text,&nbsp;input:password&nbsp;和&nbsp;input:search&nbsp;这几个元素通过用户界面发生的内容变化非常有用，在内容修改后立即被触发，不像&nbsp;onchange&nbsp;事件需要失去焦点才触发。</span><a href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">oninput</strong></a>&nbsp;事件在主流浏览器的兼容情况如下：</p><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">&nbsp;</p><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">　　<img src="http://pic002.cnblogs.com/images/2012/36987/2012112817534430.jpg" data-pinit="registered" style="margin:0px; padding:0px; border:5px solid #ffffff; box-shadow:#333333 1px 1px 5px; -webkit-box-shadow:#333333 1px 1px 5px; " /></p><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">&nbsp;</p><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">　　从上面表格可以看出，<a href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">oninput</strong></a>&nbsp;事件在&nbsp;IE9&nbsp;以下版本不支持，需要使用&nbsp;IE&nbsp;特有的&nbsp;onpropertychange&nbsp;事件替代，这个事件在用户界面改变或者使用脚本直接修改内容两种情况下都会触发，有以下几种情况：</p><ul style="margin:0px 0px 0px 45px; padding:0px; word-break:break-all; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; "><li style="margin:0px; padding:0px; list-style:inherit; list-style:inherit; "><p>修改了&nbsp;input:checkbox&nbsp;或者&nbsp;input:radio&nbsp;元素的选择中状态，&nbsp;checked&nbsp;属性发生变化。</p></li><li style="margin:0px; padding:0px; list-style:inherit; list-style:inherit; "><p>修改了&nbsp;input:text&nbsp;或者&nbsp;textarea&nbsp;元素的值，value&nbsp;属性发生变化。</p></li><li style="margin:0px; padding:0px; list-style:inherit; list-style:inherit; "><p>修改了&nbsp;select&nbsp;元素的选中项，selectedIndex&nbsp;属性发生变化。</p></li></ul><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">　　在监听到&nbsp;<a href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">onpropertychange</strong></a>&nbsp;事件后，可以使用&nbsp;event&nbsp;的&nbsp;propertyName&nbsp;属性来获取发生变化的属性名称。</p><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; "><span style="margin:0px; padding:0px; ">　　集合&nbsp;oninput&nbsp;&amp;&nbsp;onpropertychange&nbsp;监听输入框内容变化的示例代码如下：</span></p><div class="cnblogs_Highlighter" style="margin:0px; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; "><div style="margin:0px; padding:0px; "><pre>&lt;head&gt;\r\n    &lt;script type="text/javascript"&gt;\r\n    // Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9\r\n        function OnInput (event) {\r\n            alert ("The new content: " + event.target.value);\r\n        }\r\n    // Internet Explorer\r\n        function OnPropChanged (event) {\r\n            if (event.propertyName.toLowerCase () =="value") {\r\n                alert ("The new content: " + event.srcElement.value);\r\n            }\r\n        }\r\n    &lt;/script&gt;\r\n&lt;/head&gt;\r\n&lt;body&gt;\r\n    Please modify the contents of the text field.\r\n    &lt;input type="text" oninput="OnInput (event)" onpropertychange="OnPropChanged (event)" value="Text field" /&gt;\r\n&lt;/body&gt;</pre></div></div><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">　　使用&nbsp;<a href="http://www.cnblogs.com/lhb25/category/277997.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">jQuery</strong></a>&nbsp;库的话，只需要同时绑定&nbsp;on<span style="margin:0px; padding:0px; ">input&nbsp;和&nbsp;onpropertychange&nbsp;两个事件就可以了，</span>示例代码如下：</p><div class="cnblogs_Highlighter" style="margin:0px; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; "><div style="margin:0px; padding:0px; "><pre>$(''textarea'').bind(''input propertychange'',function() {\r\n    $(''.msg'').html($(this).val().length +'' characters'');\r\n});</pre></div></div><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">　　最后需要注意的是：<a href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">oninput</strong></a>&nbsp;和&nbsp;<a href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; "><strong style="margin:0px; padding:0px; ">onpropertychange</strong></a>&nbsp;这两个事件在&nbsp;IE9&nbsp;中都有个小BUG，那就是通过右键菜单菜单中的<span style="color:#ff0000">剪切</span>和<span style="color:#ff0000">删除</span>命令删除内容的时候不会触发，而&nbsp;IE&nbsp;其他版本都是正常的，目前还没有很好的解决方案。不过&nbsp;oninput&nbsp;&amp;&nbsp;onpropertychange&nbsp;仍然是监听输入框值变化的最佳方案，如果大家有更好的方法，欢迎参与讨论。</p><p style="margin:10px auto; padding:0px; color:#393939; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; "><span style="color:#393939;font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif;font-size:14px;background-color:#faf7ef">本文转至链接：</span><a href="http://www.cnblogs.com/lhb25/archive/2012/11/28/oninput-and-onpropertychange-event-for-input.html" target="_blank" style="margin:0px; padding:0px; color:#6466b3; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; font-size:14px; line-height:21px; white-space:normal; background-color:#faf7ef; ">使用&nbsp;oninput&nbsp;&amp;&nbsp;onpropertychange&nbsp;监听输入框</a><br /></p><p><br /></p>', 1, 0, 5, 0, '2012-12-03 10:19:47', '2012-12-03 10:19:47', 0, '1970-01-01 00:00:00', 0),
-(95, '推荐35款精致的 CSS3 和 HTML5 网页模板', '<h1 class="postTitle" style="margin:0px 0px 15px; padding:0px 0px 0px 33px; font-size:16px; line-height:1.5em; width:897.7999877929688px; clear:both; color:#464646; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; white-space:normal; background-color:#faf7ef; "><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/lhb25/archive/2012/08/03/5-creative-html5-and-css3-templates.html" style="margin:0px; padding:0px; color:#6466b3; text-decoration:none; ">推荐35款精致的&nbsp;CSS3&nbsp;和&nbsp;HTML5&nbsp;网页模板</a></h1><p><span style="color:#393939;font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif;font-size:14px;background-color:#faf7ef">来源：</span><a href="http://www.cnblogs.com/lhb25/archive/2012/08/03/5-creative-html5-and-css3-templates.html" target="_blank">梦想天空&nbsp;◆&nbsp;关注前端开发技术&nbsp;◆&nbsp;分享网页设计资源</a></p>', 1, 0, 5, 0, '2012-12-03 14:02:40', '2012-12-03 14:03:26', 0, '1970-01-01 00:00:00', 0),
-(97, '寻找网页设计灵感的27个最佳网站推荐', '<h1 class="postTitle" style="margin:0px 0px 15px; padding:0px 0px 0px 33px; font-size:16px; line-height:1.5em; width:897.7999877929688px; clear:both; color:#464646; font-family:verdana, &#39;ms song&#39;, arial, helvetica, sans-serif; white-space:normal; background-color:#faf7ef; "><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/lhb25/archive/2011/04/19/2014303.html" style="margin:0px; padding:0px; color:#6466b3; text-decoration:none; ">寻找网页设计灵感的27个最佳网站推荐</a></h1><p><a href="http://www.cnblogs.com/lhb25/archive/2011/04/19/2014303.html" target="_blank" title="看看那">点此</a></p>', 1, 0, 4, 0, '2012-12-03 14:12:57', '2012-12-03 14:13:58', 0, '1970-01-01 00:00:00', 0),
-(99, '梦想天空 有空 看看看看', '<p><a href="http://www.cnblogs.com/">http://www.cnblogs.com</a><br /></p>', 1, 0, 5, 0, '2012-12-03 14:16:11', '2012-12-03 14:16:11', 0, '1970-01-01 00:00:00', 0),
-(101, '的风格讽德诵功上的风格士大夫个地方', '<p>儿童test色身体是是&nbsp;</p>', 1, 0, 9, 0, '2013-04-11 17:26:30', '2013-04-24 21:12:21', 0, '1970-01-01 00:00:00', 0),
-(103, '彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺', '<p><img src="/user_data/images/1/11366810179483.jpg" style="float:none;" border="0" hspace="0" vspace="0" /><br /></p><p><br /></p><p><br /></p><p>你好&nbsp;！</p>', 1, 2, 94, 0, '2013-04-24 21:30:28', '2013-04-24 21:30:28', 0, '1970-01-01 00:00:00', 0),
-(105, '发的发生大幅', '<p>撒地方萨芬撒打发是的发送到</p>', 1, 11, 81, 0, '2013-05-11 13:58:04', '2013-05-11 13:58:04', 0, '1970-01-01 00:00:00', 0);
+INSERT INTO `article` (`id`, `title`, `tag`, `content`, `author_id`, `reply_count`, `visit_count`, `collect_count`, `create_at`, `update_at`, `last_reply`, `last_reply_at`, `content_is_html`) VALUES
+(2, '中国超声医学工程学会第二届全国介入超声医学学术大会', '', '<p class="sum" style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; "><span class="mr10">来源：</span></p><div class="x_box28" id="meeting_info" style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; "><ul style="padding:0px; margin:0px; "><li style="list-style:none; "><p>会议时间：&nbsp;2013-06-13至&nbsp;2013-06-16</p></li><li style="list-style:none; "><p>会议地点：&nbsp;济南市</p></li><li style="list-style:none; "><p>电话：010-66939530</p></li><li style="list-style:none; "><p>传真：</p></li><li style="list-style:none; "><p>联系人：穆梦娟</p></li><li style="list-style:none; "><p>Email：&nbsp;<a href="mailto:chinajrcs@yahoo.com.cn" style="color:#000000; text-decoration:none; ">chinajrcs@yahoo.com.cn</a></p></li><li style="list-style:none; "><p>联系地址：解放军301医院介入超声科</p></li><li style="list-style:none; "><p>会议网址：</p></li></ul></div><div class="x_detail1" id="content" style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; "><p>中国超声医学工程学会第二届全国介入超声医学学术大会将于2013年6月13-16日在山东济南举行。会议内容涵盖介入性超声在颅脑、心胸、腹部、妇产、肌骨及浅表器官各领域中临床应用及规范化。本着普及与提高相结合的原则，为从事介入超声的医师提供交流的平台，以促进介入超声在临床应用的规范化，欢迎广大介入超声同仁踊跃投稿并参会。</p><p>一、会议时间及地点：</p><p>时间：6月13-16日（6月13日报到）</p><p>地点：山东济南</p><p>二、&nbsp;介入超声学术学科范围：⑴颅脑、胸部（心脏、肺、胸膜腔、纵隔）；⑵腹部：主要包括消化系、泌尿系、腹膜后及腹膜腔；⑶妇产科；⑷肌骨、血管及浅表器官。含经皮、术中及内窥镜等技术。</p><p>三、会议形式：专题报告或讲座，主题发言,专题讨论，书面交流，现场或多媒体演示等。</p><p>四、征文内容：</p><p>1、&nbsp;介入性超声在颅脑、心胸、腹部、妇产、肌骨及浅表器官等各领域中临床应用及规范化；</p><p>2、&nbsp;介入超声治疗临床常见并发症及其预防处理（包括精彩个案）；</p><p>3、&nbsp;设中青年英文论坛（年龄≦45岁）。</p><p>五、征文要求：</p><p>1、&nbsp;稿件书写要求：office&nbsp;word&nbsp;2003或以上版本；字体：宋体；字号：（题目：四号字；正文及其它：小四号字）；</p><p>2、&nbsp;未公开发表的论文，摘要800～1000字。格式：文题、作者、单位；目的、方法、结果、结论。请在文后附详细通讯方式：作者姓名、地址、邮编、联系电话、E-mail地址（必须）及其他联系方式；</p><p>3、&nbsp;参加中青年英文论坛者，只需附相同格式的英文摘要一份。摘要前请注明参加中青年英文论坛，并附中文题目、单位、邮编、姓名。</p><p>4、&nbsp;为保证稿件投递准确和迅速，请务必全部通过电子信箱投稿（本次会议专用E-mail：<a href="mailto:chinajrcs@yahoo.com.cn" style="color:#000000; text-decoration:none; ">chinajrcs@yahoo.com.cn</a>）；</p><p>5、&nbsp;截稿日期：2013年5月3日；</p><p>6、&nbsp;本次会议的第二轮通知将在2013年4月通过网络、杂志和文件方式发送；</p><p>7、&nbsp;联系电话：010-66939530；联系人：穆梦娟。</p><p>主办：中国超声医学工程学会</p>承办：介入超声专业委员会（筹备组）</div><p><br /></p>', 1, 0, 8, 0, '2013-05-18 19:57:49', '2013-05-18 19:57:49', 0, '1970-01-01 00:00:00', 0),
+(4, 'cfsdafdsfdsaf', '', '<p>sdafds</p>', 1, 0, 4, 0, '2013-05-19 10:46:24', '2013-05-19 10:46:24', 0, '1970-01-01 00:00:00', 0),
+(6, '照片墙为啥一直这么流行', ' 标签1,标签2, 标签3, 标签4, 标签5', '<p>dsafsdafffffffffffffff</p>', 1, 0, 18, 0, '2013-05-19 11:08:52', '2013-05-19 11:16:21', 0, '1970-01-01 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -62,25 +57,20 @@ INSERT INTO `article` (`id`, `title`, `content`, `author_id`, `reply_count`, `vi
 -- 表的结构 `article_category`
 --
 
-CREATE TABLE IF NOT EXISTS `article_category` (
+CREATE TABLE `article_category` (
   `article_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `article_category`
+-- 导出表中的数据 `article_category`
 --
 
 INSERT INTO `article_category` (`article_id`, `category_id`) VALUES
-(89, 29),
-(91, 29),
-(93, 29),
-(95, 31),
-(97, 31),
-(99, 33),
-(101, 29),
-(103, 29),
-(105, 37);
+(2, 4),
+(4, 2),
+(4, 4),
+(6, 2);
 
 -- --------------------------------------------------------
 
@@ -88,25 +78,21 @@ INSERT INTO `article_category` (`article_id`, `category_id`) VALUES
 -- 表的结构 `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) DEFAULT '',
   `sequence` int(4) DEFAULT '0',
   `user_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 转存表中的数据 `category`
+-- 导出表中的数据 `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `sequence`, `user_id`) VALUES
-(29, 'javascript', 1, 1),
-(31, 'html+css', 2, 1),
-(33, 'ued 博客精选', 3, 1),
-(37, '测试测试', 4, 1),
-(39, '123', 1, 1),
-(41, '产品1', 1, 1);
+(2, '医疗展会', 1, 1),
+(4, '学术会议', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +100,7 @@ INSERT INTO `category` (`id`, `name`, `sequence`, `user_id`) VALUES
 -- 表的结构 `file`
 --
 
-CREATE TABLE IF NOT EXISTS `file` (
+CREATE TABLE `file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL DEFAULT '',
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '文件所有者',
@@ -127,16 +113,15 @@ CREATE TABLE IF NOT EXISTS `file` (
   `create_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `description` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- 转存表中的数据 `file`
+-- 导出表中的数据 `file`
 --
 
 INSERT INTO `file` (`id`, `name`, `user_id`, `folder_id`, `down_count`, `hash`, `size`, `mime`, `is_public`, `create_at`, `description`) VALUES
-(33, 'reset.css', 1, 15, 28, '11366810353923.css', 2316, 'text/css', 1, '2013-04-24 21:32:40', '分店'),
-(35, 'shop.html', 1, 15, 37, '11366811597224.htm', 10785, 'text/html', 1, '2013-04-24 21:53:20', 'dsd酸'),
-(37, '11_100x100.jpg', 1, 17, 50, '11368255521153.jpg', 6050, 'image/jpeg', 1, '2013-05-11 14:58:43', 'sdfasd ');
+(4, 'slider_img1.jpg', 1, 22, 2, '11368937816492.jpg', 87967, 'image/jpeg', 1, '2013-05-19 12:30:17', '测试测试'),
+(6, 'slider_img4.jpg', 1, 22, 1, '11368937843534.jpg', 107923, 'image/jpeg', 1, '2013-05-19 12:30:44', '测试测试');
 
 -- --------------------------------------------------------
 
@@ -144,7 +129,7 @@ INSERT INTO `file` (`id`, `name`, `user_id`, `folder_id`, `down_count`, `hash`, 
 -- 表的结构 `focus`
 --
 
-CREATE TABLE IF NOT EXISTS `focus` (
+CREATE TABLE `focus` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `title` varchar(100) DEFAULT NULL COMMENT '用户名',
   `link` varchar(200) DEFAULT NULL,
@@ -157,16 +142,12 @@ CREATE TABLE IF NOT EXISTS `focus` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `create_at` (`create_at`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- 转存表中的数据 `focus`
+-- 导出表中的数据 `focus`
 --
 
-INSERT INTO `focus` (`id`, `title`, `link`, `sort`, `create_at`, `url`, `category`, `content`, `status`) VALUES
-(1, '宝贝推荐', 'http://taobao.com', '0', '2013-04-23 12:41:54', '/user_data/images/1368247851937曾炳华.jpg', '0', 'dsaf 的发的发生水电费 算得上 所得税的', '0'),
-(3, '❤', 'http://taobao.com', '0', '2013-04-23 12:59:55', '/user_data/images/136672199233011_100x100.jpg', '0', 'rtetse', '1'),
-(5, '❤', 'http://taobao.com', '0', '2013-05-11 04:51:31', '/user_data/images/136824787965911_100x100.jpg', '0', 'dfgdfg', '0');
 
 -- --------------------------------------------------------
 
@@ -174,23 +155,22 @@ INSERT INTO `focus` (`id`, `title`, `link`, `sort`, `create_at`, `url`, `categor
 -- 表的结构 `folder`
 --
 
-CREATE TABLE IF NOT EXISTS `folder` (
+CREATE TABLE `folder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(15) NOT NULL DEFAULT '0',
   `create_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `sequence` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
--- 转存表中的数据 `folder`
+-- 导出表中的数据 `folder`
 --
 
 INSERT INTO `folder` (`id`, `user_id`, `name`, `create_at`, `sequence`) VALUES
-(15, 1, 'javascript', '2012-11-25 11:17:19', 1),
-(17, 1, '测试测试', '2013-05-11 14:04:47', 2),
-(19, 1, '范德萨个地方', '2013-05-12 10:31:26', 3);
+(22, 1, '临床', '2013-05-18 19:54:26', 1),
+(24, 1, '设计', '2013-05-18 19:54:37', 2);
 
 -- --------------------------------------------------------
 
@@ -198,7 +178,7 @@ INSERT INTO `folder` (`id`, `user_id`, `name`, `create_at`, `sequence`) VALUES
 -- 表的结构 `follow`
 --
 
-CREATE TABLE IF NOT EXISTS `follow` (
+CREATE TABLE `follow` (
   `user_id` int(11) NOT NULL,
   `following_id` int(11) NOT NULL,
   `create_at` datetime DEFAULT NULL,
@@ -207,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `follow` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `follow`
+-- 导出表中的数据 `follow`
 --
 
 
@@ -217,17 +197,17 @@ CREATE TABLE IF NOT EXISTS `follow` (
 -- 表的结构 `jod_info`
 --
 
-CREATE TABLE IF NOT EXISTS `jod_info` (
+CREATE TABLE `jod_info` (
   `id` int(11) NOT NULL,
   `comtent` varchar(20000) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `jod_info`
+-- 导出表中的数据 `jod_info`
 --
 
 INSERT INTO `jod_info` (`id`, `comtent`) VALUES
-(1, '<p><span class="Apple-style-span" style="color:#333333;font-family:&#39;??&#39;background-color:#ffffff"><div align="left"><span style="font-size:16px;font-size:12px; color:#555555; "><strong><div align="left"><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px; color:#555555; ">一、业务经理：1名</span></strong></div><div align="left">&nbsp;</div></strong></span></div><div align="left"><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px; color:#555555; ">岗位要求：</span></strong></div><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left"><span style=";color:#000000;font-size:12px; color:#555555; ">1.&nbsp;&nbsp;25-35岁，男性，专科及以上毕业；</span></div><div align="left"><span style=";color:#000000;font-size:12px; color:#555555; ">2.&nbsp;&nbsp;熟悉了解医疗行业<span id="tag4565" jquery17101474723096988494="2">业务拓展</span>方法，有一线<span id="tag6226" jquery17101474723096988494="3">医院耗材</span><span id="tag4410" jquery17101474723096988494="4">销售</span>工作经验优先考虑；</span></div><div align="left"><span style=";color:#000000;font-size:12px; color:#555555; ">3.&nbsp;&nbsp;对<span id="tag6338" jquery17101474723096988494="5">医疗器械</span>有基本了解，能很快掌握器械的临床使用方法；</span></div><div align="left"><span style=";color:#000000;font-size:12px; color:#555555; ">4.&nbsp;&nbsp;个性活跃外向，良好沟通能力，热爱<span id="tag3878" jquery17101474723096988494="6" style="color:#ff0000">市场拓展</span>工作，有良好客户关系管理能力；</span></div><div align="left">&nbsp;</div><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><strong><span style="font-size:16px;font-size:12px; color:#555555; ">任职要求：</span></strong></span></div><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left">1.&nbsp;生物医学、机械设计、临床医学等相关等相关专业，专科及以上学历；&nbsp;</div><div align="left"><div align="left">2.&nbsp;熟练掌握办公软件，熟悉客户开发流程和客户管理方法；</div><div align="left"></div><div align="left">&nbsp;</div><div align="left"><div align="left"><span style="font-size:16px;font-size:12px; color:#555555; "><strong><div align="left"><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px; color:#555555; ">二、行政秘书：1名</span></strong></div><div align="left">&nbsp;</div></strong></span></div><div align="left"><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px; color:#555555; ">岗位要求：</span></strong></div><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left">1、女性，20-30岁文科类相关专业专科以上学历，欢迎应届毕业生；<br />2、英语六级以上，有良好的英文翻译及口语表达能力；<br />3、品貌端正、气质佳，身高1.65米以上，普通话标准，性格开朗；<br />4、责任心较强，积极主动，有良好的沟通能力和领悟力。</div></span></div></span></div></div></div></span></div></span></div></span></p>');
+(1, '<p></p><div align="left"><span style="font-size:16px;font-size:12px;color:#555555"><p style="font-weight:bold; "><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px;color:#555555">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/user_data/images/1/11368841815817.jpg" style="float:none;" border="0" hspace="0" vspace="0" /></span></strong></p><p style="font-weight:bold; "><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px;color:#555555"><br /></span></strong></p><p style="font-weight:bold; "><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px;color:#555555"><br /></span></strong></p><p style="font-weight:bold; "><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px;color:#555555">一、业务经理：1名</span></strong></p></span></div><div align="left">&nbsp;&nbsp;&nbsp;&nbsp;<strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px;color:#555555">岗位要求：</span></strong></div><div align="left">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left"><span style="color:#000000;font-size:12px;color:#555555">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;&nbsp;25-35岁，男性，专科及以上毕业；</span></div><div align="left"><span style="color:#000000;font-size:12px;color:#555555">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&nbsp;熟悉了解医疗行业<span id="tag4565" jquery17101474723096988494="2">业务拓展</span>方法，有一线<span id="tag6226" jquery17101474723096988494="3">医院耗材</span><span id="tag4410" jquery17101474723096988494="4">销售</span>工作经验优先考虑；</span></div><div align="left"><span style="color:#000000;font-size:12px;color:#555555">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;&nbsp;对<span id="tag6338" jquery17101474723096988494="5">医疗器械</span>有基本了解，能很快掌握器械的临床使用方法；</span></div><div align="left"><span style="color:#000000;font-size:12px;color:#555555">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;&nbsp;个性活跃外向，良好沟通能力，热爱<span id="tag3878" jquery17101474723096988494="6" style="color:#ff0000">市场拓展</span>工作，有良好客户关系管理能力；</span></div><div align="left">&nbsp;</div><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><strong><span style="font-size:16px;font-size:12px;color:#555555">&nbsp;&nbsp;&nbsp;&nbsp;任职要求：</span></strong></span></div><div align="left">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;生物医学、机械设计、临床医学等相关等相关专业，专科及以上学历；&nbsp;</div><div align="left"><div align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;熟练掌握办公软件，熟悉客户开发流程和客户管理方法；</div><div align="left"></div><div align="left">&nbsp;</div><div align="left"><div align="left"><span style="font-size:16px;font-size:12px;color:#555555"><strong><div align="left"><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px;color:#555555">二、行政秘书：1名</span></strong></div><div align="left">&nbsp;</div></strong></span></div><div align="left"><strong><span style="font-family:微软雅黑;color:#333333;font-size:12px;font-size:16px;font-size:12px;color:#555555">&nbsp;&nbsp;&nbsp;&nbsp;岗位要求：</span></strong></div><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left"><span style="font-family:微软雅黑;color:#333333;font-size:12px"><div align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、女性，20-30岁文科类相关专业专科以上学历，欢迎应届毕业生；<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、英语六级以上，有良好的英文翻译及口语表达能力；<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、品貌端正、气质佳，身高1.65米以上，普通话标准，性格开朗；<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、责任心较强，积极主动，有良好的沟通能力和领悟力。</div></span></div></span></div></div></div></span></div></span></div><p></p>');
 
 -- --------------------------------------------------------
 
@@ -235,7 +215,7 @@ INSERT INTO `jod_info` (`id`, `comtent`) VALUES
 -- 表的结构 `message`
 --
 
-CREATE TABLE IF NOT EXISTS `message` (
+CREATE TABLE `message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) DEFAULT '0' COMMENT '消息类型',
   `user_id` int(11) DEFAULT '0' COMMENT '此条信息的接收者',
@@ -244,33 +224,12 @@ CREATE TABLE IF NOT EXISTS `message` (
   `is_read` bit(1) DEFAULT b'0' COMMENT '0表示未读，1表示已读',
   PRIMARY KEY (`id`),
   KEY `index_message_user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=148 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- 转存表中的数据 `message`
+-- 导出表中的数据 `message`
 --
 
-INSERT INTO `message` (`id`, `type`, `user_id`, `content`, `create_at`, `is_read`) VALUES
-(109, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-26 17:32:52', b'1'),
-(111, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-26 17:33:00', b'1'),
-(113, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-26 17:33:07', b'1'),
-(115, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-26 17:33:09', b'1'),
-(117, 3, 1, '{"from_user_id":3,"from_user_name":"customer","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-28 11:09:19', b'1'),
-(119, 3, 1, '{"from_user_id":3,"from_user_name":"customer","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-28 11:09:49', b'1'),
-(121, 3, 1, '{"from_user_id":1,"from_user_name":"admin","article_id":"103","article_title":"彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺彩虹铺"}', '2013-04-28 12:14:31', b'1'),
-(122, 7, 1, '{"userName":"21321","userEmail":"aaaa@163.com","title":"","content":"435345","phone":"","site":""}', '2013-05-16 12:26:03', b'1'),
-(124, 7, 1, '{"userName":"234","userEmail":"222@163.com","title":"dafasdf","content":"adfsdafads","phone":"sfadsf","site":"dasfa"}', '2013-05-16 12:29:16', b'1'),
-(126, 7, 1, '{"userName":"234","userEmail":"222@163.com","title":"dafasdf","content":"adfsdafads","phone":"sfadsf","site":"dasfa"}', '2013-05-16 12:30:17', b'1'),
-(128, 7, 1, '{"userName":"234","userEmail":"222@163.com","title":"dafasdf","content":"adfsdafads","phone":"sfadsf","site":"dasfa"}', '2013-05-16 12:31:04', b'1'),
-(130, 3, 1, '{"from_user_id":3,"from_user_name":"游客","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:02:55', b'0'),
-(132, 3, 1, '{"from_user_id":1,"from_user_name":"sd","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:06:39', b'0'),
-(134, 3, 1, '{"from_user_id":1,"from_user_name":"123123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:56:18', b'0'),
-(136, 3, 1, '{"from_user_id":1,"from_user_name":"用户名：123邮箱123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 14:58:22', b'0'),
-(138, 3, 1, '{"from_user_id":1,"from_user_name":"用户名：123,邮箱:123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 15:04:29', b'0'),
-(140, 3, 1, '{"from_user_id":1,"from_user_name":"用户名：asdfdas,邮箱:123@163.com","article_id":"105","article_title":"发的发生大幅"}', '2013-05-17 15:06:24', b'0'),
-(142, 8, 1, '{"from_user_id":1,"from_user_name":"用户名：测试1,邮箱:aaaa@163.com","article_id":"6","article_title":"产品3"}', '2013-05-17 16:32:29', b'0'),
-(144, 8, 1, '{"from_user_id":1,"from_user_name":"用户名：测试1,邮箱:aaaa@163.com","article_id":"6","article_title":"产品3"}', '2013-05-17 16:32:31', b'0'),
-(146, 8, 1, '{"from_user_id":1,"from_user_name":"用户名：测试1,邮箱:aaaa@163.com","article_id":"6","article_title":"产品3"}', '2013-05-17 16:33:03', b'0');
 
 -- --------------------------------------------------------
 
@@ -278,9 +237,10 @@ INSERT INTO `message` (`id`, `type`, `user_id`, `content`, `create_at`, `is_read
 -- 表的结构 `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
+CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) DEFAULT '',
+  `tag` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `content` varchar(20000) DEFAULT '' COMMENT 'utf8的只能接受21000多个字符(带中文)',
   `author_id` int(11) DEFAULT '0',
   `reply_count` int(11) DEFAULT '0',
@@ -293,17 +253,14 @@ CREATE TABLE IF NOT EXISTS `product` (
   `content_is_html` int(1) DEFAULT '0',
   `goods_img` varchar(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 转存表中的数据 `product`
+-- 导出表中的数据 `product`
 --
 
-INSERT INTO `product` (`id`, `title`, `content`, `author_id`, `reply_count`, `visit_count`, `collect_count`, `create_at`, `update_at`, `last_reply`, `last_reply_at`, `content_is_html`, `goods_img`) VALUES
-(3, '照片墙为啥一直这么流行', '<p>是打发士大夫水电费山大先吃饭的筛选出撒旦</p>', 1, 0, 31, 0, '2013-05-12 12:37:38', '2013-05-17 10:09:36', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368756574567big_img5.jpg'),
-(5, '产品1', '<p><img src="/user_data/images/1/11368333788242.png" style="float:none;" />的范德萨发生<span style="font-family:黑体, simhei;font-size:36px">的发的身份撒的发</span></p><p><img src="/user_data/images/1/11368333788298.png" style="float:none;" /></p><p><br /></p>', 1, 0, 5, 0, '2013-05-12 12:43:47', '2013-05-17 10:09:11', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368756544042big_img4.jpg'),
-(6, '产品3', '<p>产品3产品3产品3产品3产品3<br /></p>', 1, 15, 43, 0, '2013-05-17 12:28:35', '2013-05-17 12:28:35', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368764910751big_img6.jpg'),
-(8, '产品4', '<p>产品3产品3产品3产品3<br /></p>', 1, 0, 2, 0, '2013-05-17 12:29:00', '2013-05-17 12:29:00', 0, '1970-01-01 00:00:00', 0, '/user_data/images/1368764936185img_p2_c2.jpg');
+INSERT INTO `product` (`id`, `title`, `tag`, `content`, `author_id`, `reply_count`, `visit_count`, `collect_count`, `create_at`, `update_at`, `last_reply`, `last_reply_at`, `content_is_html`, `goods_img`) VALUES
+(2, '飞利浦(PHILIPS)腔内探头穿刺架', '', '<p style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; "><img src="/user_data/images/1/11368877913500.jpg" style="float:none;" border="0" hspace="0" vspace="0" /><br /></p><p style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">【产品名称】：腔内探头金属引导架</p><p style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">【规格型号】：适配16-18G针型；总长160mm，可以进入人体自然腔道的长度达125mm；</p><p style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">【适用范围】：适合于经直肠和经阴道的各种穿刺引导。</p><p style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">【性能特点】：</p><div style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">1、采用316L钢材料，相比于目前市场上最常用的304钢材料更耐腐蚀性,充分为经销商和终端客户的长远利益考虑。</div><div style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">2、加强设计的关节部位设计，不易损坏；采用后端扣压固定法，固定更方便和稳定。</div><div style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">3、总体加长设计到160mm，适合不同自然腔道的人群。</div><div style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">4、加大进针口的杯口设计，让进针更轻松。</div><div style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">5、结构设计更为简约，以减轻总体重量和体积，使用更为舒适。</div><div style="color:#333333; font-family:&#39;??&#39; line-height:22px; white-space:normal; background-color:#ffffff; ">6、金属材料，能够承受反复高温高压消毒。</div><p><br /></p>', 1, 0, 5, 0, '2013-05-18 19:51:59', '2013-05-18 19:51:59', 0, '1970-01-01 00:00:00', 0, '/user_data/images/136887789769420121025144641751.jpg');
 
 -- --------------------------------------------------------
 
@@ -311,20 +268,18 @@ INSERT INTO `product` (`id`, `title`, `content`, `author_id`, `reply_count`, `vi
 -- 表的结构 `product_category`
 --
 
-CREATE TABLE IF NOT EXISTS `product_category` (
+CREATE TABLE `product_category` (
   `product_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL
+  `category_id` int(11) DEFAULT NULL,
+  `category2_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `product_category`
+-- 导出表中的数据 `product_category`
 --
 
-INSERT INTO `product_category` (`product_id`, `category_id`) VALUES
-(5, 9),
-(3, 1),
-(6, 1),
-(8, 9);
+INSERT INTO `product_category` (`product_id`, `category_id`, `category2_id`) VALUES
+(2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -332,24 +287,45 @@ INSERT INTO `product_category` (`product_id`, `category_id`) VALUES
 -- 表的结构 `product_categorys`
 --
 
-CREATE TABLE IF NOT EXISTS `product_categorys` (
+CREATE TABLE `product_categorys` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) DEFAULT '',
   `sequence` int(4) DEFAULT '0',
   `user_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
--- 转存表中的数据 `product_categorys`
+-- 导出表中的数据 `product_categorys`
 --
 
 INSERT INTO `product_categorys` (`id`, `name`, `sequence`, `user_id`) VALUES
-(1, '麦包包1234', 1, 1),
-(3, 'admin2', 2, 1),
-(5, 'sumory234', 3, 1),
-(9, '说的水电费', 4, 1),
-(11, '是的发生', 5, 1);
+(2, '分类1', 1, 1),
+(12, '分类3', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `product_categorys2`
+--
+
+CREATE TABLE `product_categorys2` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category1_id` int(10) NOT NULL,
+  `name` varchar(15) DEFAULT '',
+  `sequence` int(4) DEFAULT '0',
+  `user_id` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+
+--
+-- 导出表中的数据 `product_categorys2`
+--
+
+INSERT INTO `product_categorys2` (`id`, `category1_id`, `name`, `sequence`, `user_id`) VALUES
+(2, 2, '二级分类1', 3, 1),
+(4, 2, '二级分类10', 2, 1),
+(6, 2, '二级分类3', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -357,7 +333,7 @@ INSERT INTO `product_categorys` (`id`, `name`, `sequence`, `user_id`) VALUES
 -- 表的结构 `product_reply`
 --
 
-CREATE TABLE IF NOT EXISTS `product_reply` (
+CREATE TABLE `product_reply` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(20000) DEFAULT '',
   `article_id` int(11) DEFAULT '0',
@@ -370,15 +346,12 @@ CREATE TABLE IF NOT EXISTS `product_reply` (
   `user_info` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `reply_type` (`reply_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- 转存表中的数据 `product_reply`
+-- 导出表中的数据 `product_reply`
 --
 
-INSERT INTO `product_reply` (`id`, `content`, `article_id`, `author_id`, `create_at`, `update_at`, `content_is_html`, `reply_id`, `reply_type`, `user_info`) VALUES
-(2, '你好这款有货吗', 6, 3, '2013-05-17 16:33:03', '2013-05-17 16:33:03', 1, 0, 0, '用户名：测试1,邮箱:aaaa@163.com'),
-(4, '<p>不要意思，没有了，，，谢谢你</p>', 6, 1, '2013-05-17 16:33:24', '2013-05-17 16:33:24', 1, 2, 0, '');
 
 -- --------------------------------------------------------
 
@@ -386,7 +359,7 @@ INSERT INTO `product_reply` (`id`, `content`, `article_id`, `author_id`, `create
 -- 表的结构 `reply`
 --
 
-CREATE TABLE IF NOT EXISTS `reply` (
+CREATE TABLE `reply` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(20000) DEFAULT '',
   `article_id` int(11) DEFAULT '0',
@@ -399,30 +372,12 @@ CREATE TABLE IF NOT EXISTS `reply` (
   `user_info` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `reply_type` (`reply_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- 转存表中的数据 `reply`
+-- 导出表中的数据 `reply`
 --
 
-INSERT INTO `reply` (`id`, `content`, `article_id`, `author_id`, `create_at`, `update_at`, `content_is_html`, `reply_id`, `reply_type`, `user_info`) VALUES
-(72, 'dsfsdaf', NULL, 1, '2013-05-17 13:57:43', '2013-05-17 13:57:43', 1, 0, 0, ''),
-(74, 'dsfsdaf', NULL, 1, '2013-05-17 13:57:44', '2013-05-17 13:57:44', 1, 0, 0, ''),
-(76, 'dsfsdaf', NULL, 3, '2013-05-17 14:00:57', '2013-05-17 14:00:57', 1, 0, 0, ''),
-(78, 'dsfsdaf', NULL, 3, '2013-05-17 14:00:59', '2013-05-17 14:00:59', 1, 0, 0, ''),
-(80, '213', NULL, 3, '2013-05-17 14:02:13', '2013-05-17 14:02:13', 1, 0, 0, ''),
-(82, '213', NULL, 3, '2013-05-17 14:02:15', '2013-05-17 14:02:15', 1, 0, 0, ''),
-(84, '213', 105, 3, '2013-05-17 14:02:55', '2013-05-17 14:02:55', 1, 0, 0, ''),
-(86, '阿萨德发的萨芬', 105, 3, '2013-05-17 14:06:39', '2013-05-17 14:06:39', 1, 0, 0, ''),
-(88, 'dfd', 105, 3, '2013-05-17 14:56:18', '2013-05-17 14:56:18', 1, 0, 0, ''),
-(90, 'sdafdsf ', 105, 3, '2013-05-17 14:58:22', '2013-05-17 14:58:22', 1, 0, 0, ''),
-(92, 'sdfadsf', 105, 3, '2013-05-17 15:04:29', '0000-00-00 00:00:00', 1, 0, 0, '2013-5-17 15:04:29'),
-(94, 'asdfadsf', 105, 3, '2013-05-17 15:06:24', '2013-05-17 15:06:24', 1, 0, 0, '用户名：asdfdas,邮箱:123@163.com'),
-(96, '<p>houtdasr</p>', 105, 3, '2013-05-17 15:16:12', '2013-05-17 15:16:12', 1, 0, 0, ''),
-(98, '<p>dfgd</p>', 105, 1, '2013-05-17 15:16:35', '2013-05-17 15:16:35', 1, 0, 0, ''),
-(100, '<p>你好游客4</p>', 105, 1, '2013-05-17 15:17:52', '2013-05-17 15:17:52', 1, 90, 0, ''),
-(102, '<p>不isa的办法</p>', 105, 1, '2013-05-17 15:41:18', '2013-05-17 15:41:18', 1, 92, 0, ''),
-(104, '<p>阿发的身份</p>', 105, 1, '2013-05-17 15:41:28', '2013-05-17 15:41:28', 1, 90, 0, '');
 
 -- --------------------------------------------------------
 
@@ -430,7 +385,7 @@ INSERT INTO `reply` (`id`, `content`, `article_id`, `author_id`, `create_at`, `u
 -- 表的结构 `site_config`
 --
 
-CREATE TABLE IF NOT EXISTS `site_config` (
+CREATE TABLE `site_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shop_config` text NOT NULL,
   `company_info` text NOT NULL,
@@ -441,11 +396,11 @@ CREATE TABLE IF NOT EXISTS `site_config` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- 转存表中的数据 `site_config`
+-- 导出表中的数据 `site_config`
 --
 
 INSERT INTO `site_config` (`id`, `shop_config`, `company_info`, `about_info`, `contact_detail`, `about_detail`) VALUES
-(1, '{"site_name":"淘宝网 - 淘！我喜欢","keyword":"淘宝,掏宝,网上购物,C2C,在线交易,交易市场,网上交易,交易市场,网上买,网上卖,购物网站,团购,网上贸易,安全购物,电子商务,放心买,供应,买卖信息,网店,一口价,拍卖,网上开店,网络购物,打折,免费开店,网购,频道,店铺","content":"淘宝网 - 亚洲最大、最安全的网上交易平台，提供各类服饰、美容、家居、数码、话费/点卡充值… 8亿优质特价商品，同时提供担保交易(先收货后付款)、先行赔付、假一赔三、七天无理由退换货、数码免费维修等安全交易保障服务，让你全面安心享受网上购物乐趣！"}', '{"title":"WE SUPPORT YOU BY 24 HOURS, CONTACT US","address":"福建省厦门市思明区软件园萨芬大撒范德萨","tel":"+1 568 247 15 44","phone":"+1 568 354 78 25","email":"info@elephantweb.com"}', '{"title":"关于我们公司123","content1":"目标描述1 2133","content1_1":"阶段1描述","content1_2":"阶段2描述","content1_3":"阶段3描述","content2_1":"服务1描述","content2_2":"服务2描述","content2_3":"服务3描述","content2_4":"服务4描述"}', '<p></p><div class="title" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:15px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; "><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 11px/17px arial, helvetica, sans-serif; color:#3096d0; text-align:justify; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted.</p></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; "><strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Рandful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate&nbsp;Lorem&nbsp;Ipsum&nbsp;which&nbsp;looks&nbsp;reasonable.&nbsp;The&nbsp;generated&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;therefor&nbsp;use&nbsp;Lorem&nbsp;Ipsum&nbsp;as&nbsp;their&nbsp;default&nbsp;model&nbsp;text.</strong></p><p class="separator_2" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; height:13px; float:none; ">&nbsp;</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; ">Need&nbsp;to&nbsp;be&nbsp;sure&nbsp;there&nbsp;isn&#39;t&nbsp;anything&nbsp;embarrassing&nbsp;hidden&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;text.&nbsp;All&nbsp;the&nbsp;Lorem&nbsp;Ipsum&nbsp;generators&nbsp;on&nbsp;the&nbsp;Internet&nbsp;tend&nbsp;to&nbsp;repeat&nbsp;predefined&nbsp;chunks&nbsp;as&nbsp;necessary,&nbsp;making&nbsp;this&nbsp;the&nbsp;first&nbsp;true&nbsp;generator&nbsp;on&nbsp;the&nbsp;Internet.&nbsp;It&nbsp;uses&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;over&nbsp;200&nbsp;Latin&nbsp;words,&nbsp;combined&nbsp;with&nbsp;a&nbsp;handful&nbsp;of&nbsp;model&nbsp;sentence&nbsp;structures,&nbsp;to&nbsp;generate.</p><p><br /></p><p></p>', '<p></p><p class="col_9c9c9c" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#9c9c9c; text-align:justify; overflow-x:hidden; overflow-y:hidden; "><em style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;the&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that&nbsp;it&nbsp;has&nbsp;a&nbsp;more-or-less&nbsp;normal&nbsp;distribution&nbsp;of&nbsp;letters.</em></p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">&nbsp;</p><div class="about_pic" style="padding-top:5px; padding-right:5px; padding-bottom:5px; padding-left:5px; margin-top:0px; margin-right:22px; margin-bottom:13px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; width:254px; height:163px; background-image:url(http://127.0.0.1:10080/images/img_border_264_173.jpg); background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; float:left; background-position:initial initial; background-repeat:no-repeat no-repeat; "><img src="http://127.0.0.1:10080/images/img_about1.jpg" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; border-top-style:none; border-right-style:none; border-bottom-style:none; border-left-style:none; border-width:initial; border-color:initial; vertical-align:top; " /></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">reader&nbsp;will&nbsp;be&nbsp;distracted</a>&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less&nbsp;<strong style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; ">normal&nbsp;distribution</strong>.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable.</p><p class="quote2" style="padding-top:2px; padding-right:0px; padding-bottom:0px; padding-left:14px; margin-top:9px; margin-bottom:12px; outline-style:none; outline-width:initial; outline-color:initial; font:italic normal normal 11px/17px serif; color:#bfbfbf; text-align:left; border-left-width:3px; border-left-style:solid; border-left-color:#f0f0f0; overflow-x:hidden; overflow-y:hidden; ">Established&nbsp;fact&nbsp;that&nbsp;a&nbsp;reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;thatnormal&nbsp;distribution.</p><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Reader&nbsp;will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;readable&nbsp;content&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout&nbsp;more-or-less.&nbsp;Of&nbsp;lettersopposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.</p><div class="clear" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; height:1px; background-image:none; background-attachment:initial; background-origin:initial; background-clip:initial; background-color:initial; clear:both; background-position:initial initial; background-repeat:initial initial; "></div><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#8e8e8e; text-align:justify; overflow-x:hidden; overflow-y:hidden; ">Will&nbsp;be&nbsp;distracted&nbsp;by&nbsp;<a href="http://127.0.0.1:10080/about#" class="main_link" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 12px/17px arial, helvetica, sans-serif; color:#3096d0; text-decoration:none; ">readable&nbsp;content</a>&nbsp;of&nbsp;a&nbsp;page&nbsp;when&nbsp;looking&nbsp;at&nbsp;its&nbsp;layout.&nbsp;The&nbsp;point&nbsp;of&nbsp;using&nbsp;Lorem&nbsp;Ipsum&nbsp;is&nbsp;that.&nbsp;Has&nbsp;a&nbsp;more-or-less.&nbsp;Of&nbsp;letters,&nbsp;as&nbsp;opposed&nbsp;to&nbsp;using&nbsp;content&nbsp;here,&nbsp;content&nbsp;here.&nbsp;Making&nbsp;it&nbsp;look&nbsp;like&nbsp;readable&nbsp;English.&nbsp;Many&nbsp;desktop&nbsp;publishing&nbsp;packages&nbsp;and&nbsp;web&nbsp;page&nbsp;editors&nbsp;now.</p><p><br /></p><p></p>');
+(1, '{"site_name":"SZJF","keyword":"淘宝,掏宝,网上购物,C2C,在线交易,交易市场,网上交易,交易市场,网上买,网上卖,购物网站,团购,网上贸易,安全购物,电子商务,放心买,供应,买卖信息,网店,一口价,拍卖,网上开店,网络购物,打折,免费开店,网购,频道,店铺","content":"淘宝网 - 亚洲最大、最安全的网上交易平台，提供各类服饰、美容、家居、数码、话费/点卡充值… 8亿优质特价商品，同时提供担保交易(先收货后付款)、先行赔付、假一赔三、七天无理由退换货、数码免费维修等安全交易保障服务，让你全面安心享受网上购物乐趣！","qq":"http://","sina":"http://blog.sina.com.cn/u/2704925365"}', '{"title":"WE SUPPORT YOU BY 24 HOURS, CONTACT US","address":"福建省厦门市思明区软件园萨芬大","tel":"+1 568 247 15 44","phone":"+1 568 354 78 25","email":"info@elephantweb.com"}', '{"title":"公司简介","content1":"专业化、个性化创新性超声介入产品供应商","content1_1":"专业化","content1_2":"个性化","content1_3":"创新性","content2_1":"更专业","content2_2":"更专注","content2_3":"更专心","content2_4":"客户的满意就是我们最大的心愿！"}', '<p></p><p><img src="/user_data/images/1/11368841629795.jpg" style="float:none;" border="0" hspace="0" vspace="0" /></p><p><br /></p><p><span style="font-size:24px; ">这里是一些服务描述，</span></p><div class="title" style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-right:0px; margin-bottom:15px; margin-left:0px; outline-style:none; outline-width:initial; outline-color:initial; overflow-x:hidden; overflow-y:hidden; "><p style="padding-top:0px; padding-right:0px; padding-bottom:0px; padding-left:0px; margin-top:0px; margin-bottom:0px; outline-style:none; outline-width:initial; outline-color:initial; font:normal normal normal 11px/17px arial, helvetica, sans-serif; color:#3096d0; text-align:justify; "></p></div><p></p>', '<p><span class="Apple-style-span" style="color:#333333;background-color:#ffffff;font-family:楷体, 楷体_gb2312, simkai"><img src="/user_data/images/1/11368861635904.jpg" style="float:left; " border="0" hspace="0" vspace="0" /><span style="color:#333333;background-color:#ffffff;font-family:楷体, 楷体_gb2312, simkai;font-size:14px">&nbsp;</span><span style="color:#555555;font-family:verdana;background-color:#ffffff;font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;深圳市经方医疗器械有限公司位于深圳南山区，公司是中国领先的超声介入产品的厂商，自2010年以来，公司致力于超声介入领域产品的研发和生产，产品涵盖各种超声品牌的无菌支架、金属支架、超声穿刺活检针、一次性无菌藕合剂等产品，公司设计人员具有长期从事超声临床以及超声研发的工作背景，从实际临床应用出发，开发出专业、个性化、创新的超声介入产品，并以高效的服务迅速赢得客户的认可。</span></span><br /></p>');
 
 -- --------------------------------------------------------
 
@@ -453,7 +408,7 @@ INSERT INTO `site_config` (`id`, `shop_config`, `company_info`, `about_info`, `c
 -- 表的结构 `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `loginname` varchar(30) DEFAULT '' COMMENT '用户名',
   `pwd` varchar(100) DEFAULT '',
@@ -467,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1100 ;
 
 --
--- 转存表中的数据 `user`
+-- 导出表中的数据 `user`
 --
 
 INSERT INTO `user` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`, `type`) VALUES
@@ -964,7 +919,7 @@ INSERT INTO `user` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`, `t
 -- 表的结构 `userblog`
 --
 
-CREATE TABLE IF NOT EXISTS `userblog` (
+CREATE TABLE `userblog` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `loginname` varchar(30) DEFAULT '' COMMENT '用户名',
   `pwd` varchar(100) DEFAULT '',
@@ -978,7 +933,7 @@ CREATE TABLE IF NOT EXISTS `userblog` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- 转存表中的数据 `userblog`
+-- 导出表中的数据 `userblog`
 --
 
 INSERT INTO `userblog` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`, `type`) VALUES
@@ -991,7 +946,7 @@ INSERT INTO `userblog` (`id`, `loginname`, `pwd`, `email`, `create_at`, `avatar`
 -- 表的结构 `xx_case`
 --
 
-CREATE TABLE IF NOT EXISTS `xx_case` (
+CREATE TABLE `xx_case` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linktopic` varchar(255) NOT NULL DEFAULT '',
   `linkimg` varchar(255) NOT NULL DEFAULT '',
@@ -1002,7 +957,7 @@ CREATE TABLE IF NOT EXISTS `xx_case` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- 转存表中的数据 `xx_case`
+-- 导出表中的数据 `xx_case`
 --
 
 INSERT INTO `xx_case` (`id`, `linktopic`, `linkimg`, `smallimg`, `linkstate`, `orders`) VALUES

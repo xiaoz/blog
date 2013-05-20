@@ -2,7 +2,7 @@ var mysql = require('../lib/mysql.js');
 var Util = require('../lib/util.js');
 
 /**
- * 删除产品分类关系
+ * 删除产品一级分类关系
  */
 exports.deleteCategoriesOfProduct = function(articleId, callback) {
     mysql.update('delete from product_category where product_id = ?', [ articleId ], function(err, info) {

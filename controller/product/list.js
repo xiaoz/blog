@@ -11,7 +11,7 @@ var categoryDao = require('../../dao/product_categorys.js');
 var replyDao = require('../../dao/reply.js');
 var productCategoryDao = require('../../dao/product_category.js');
 
-var productCategory2Dao = require('../../dao/product_categorys2.js');
+var category2Dao = require('../../dao/product_categorys2.js');
 
 /**
  * 查看某篇产品
@@ -171,6 +171,25 @@ exports.editArticle = function(req, res, next) {
                     cb(null, product_categories);
                 }
             });
+        },
+		categories2 : function(cb) {
+    			category2Dao.queryCategoriesOfUser(req.session.user.id, function(err, categories2) {
+    	            if (err) {
+                        cb(null, []);
+                    }else{
+                    	cb(null,categories2);
+                    }
+    	        });
+    		},
+		 product_categories2 : function(cb) {
+            category2Dao.queryCategoriesOfProduct(product_id, function(err, product_categories2) {
+                if (err || !product_categories2) {
+                    cb(null, []);
+                }
+                else {
+                    cb(null, product_categories2);
+                }
+            });
         }
     }, function(err, results) {
         if (err) {
@@ -189,12 +208,21 @@ exports.editArticle = function(req, res, next) {
                 }
             }
         }
+		
+		for ( var i = 0; results.categories2.length && i < results.categories2.length; i++) {
+            for ( var j = 0; j < results.product_categories2.length; j++) {
+                if (results.product_categories2[j].id == results.categories2[i].id) {
+                    results.categories2[i].is_selected = true;
+                }
+            }
+        }
 
         res.render('product/edit', {
         	current	: 'product',
 			active	: 'user_index',
             product : results.product,
             categories : results.all_categories,
+			categories2 : results.categories2,
             user_id :req.session.user.id
         });
         return;
@@ -221,6 +249,9 @@ exports.modifyArticle = function(req, res, next) {
         product_categories = req.body.product_categories.split(',');
     }
     var updateDate = Util.format_date(new Date());
+	if (req.body.product_categories2 != '') {
+            product_categories2 = req.body.product_categories2.split(',');
+    }
     var tags  = req.body.tag;
     async.auto({
         updateArticle : function(cb) {// 更新产品基本信息
@@ -250,6 +281,19 @@ exports.modifyArticle = function(req, res, next) {
                 cb(null, '');
             });
         } ],
+		updatecategory2 : function(cb) {// 更新产品基本信息
+			category2Dao.saveCategoriesOfArticle(product_id,product_categories2, function(err, categories){
+			                if (err) {
+			                    res.render('notify/notify', {
+			                    	current	: 'product',
+			            			active	: 'user_index',
+			                        error : '保存产品二级分类时发生错误'
+			                    });
+			                    return;
+			                }
+							cb(null, '');
+			            }); 
+        }
     }, function(err, results) {
         if (err) {
             res.render('notify/notify', {
@@ -461,7 +505,7 @@ exports.createArticle = function(req, res, next) {
     	        });
     		},
     		categories2 : function(cb) {
-    			productCategory2Dao.queryCategoriesOfUser(req.session.user.id, function(err, categories2) {
+    			category2Dao.queryCategoriesOfUser(req.session.user.id, function(err, categories2) {
     	            if (err) {
                         cb(null, []);
                     }else{
@@ -500,6 +544,9 @@ exports.createArticle = function(req, res, next) {
         if (req.body.product_categories != '') {
             product_categories = req.body.product_categories.split(',');
         }
+		if (req.body.product_categories2 != '') {
+            product_categories2 = req.body.product_categories2.split(',');
+        }
         var tags  = req.body.tag;
         var insertDate = Util.format_date(new Date());
         productDao.saveArticle(title, content, req.session.user.id, insertDate,goods_img,tags, function(err ,info){
@@ -517,12 +564,23 @@ exports.createArticle = function(req, res, next) {
                     res.render('notify/notify', {
                     	current	: 'product',
             			active	: 'user_index',
-                        error : '保存产品分类时发生错误'
+                        error : '保存产品一级分类时发生错误'
                     });
                     return;
-                }
-                else {
-                    res.redirect('/product/' + info.insertId);
+                }else {
+					
+					 category2Dao.saveCategoriesOfArticle(info.insertId,product_categories2, function(err, categories){
+			                if (err) {
+			                    res.render('notify/notify', {
+			                    	current	: 'product',
+			            			active	: 'user_index',
+			                        error : '保存产品二级分类时发生错误'
+			                    });
+			                    return;
+			                }else {
+			                    res.redirect('/product/' + info.insertId);
+			                }
+			            }); 
                 }
             });         
         });
