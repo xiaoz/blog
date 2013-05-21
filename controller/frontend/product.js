@@ -209,7 +209,7 @@ exports.viewProductsOfUserCategoryForFront = function(req, res, next) {
     var category_id = req.query.category_id;
     var user_id = req.query.user_id;
     var page  = Number(req.query.page) || 1;
-	var page_size = Number(req.query.page_size) || 6;
+	var page_size = Number(req.query.page_size) || 9;
 	var start = (page - 1)*page_size;
 	async.auto({
         articles : function(cb) {
@@ -249,14 +249,6 @@ exports.viewProductsOfUserCategoryForFront = function(req, res, next) {
 	            	 cb(null, new_replies);
 	            });
 			})
-      },
-      categories : function(cb) {
-			categoryDao.queryCategoriesOfUser(1,function(err,categories){
-				if (err) {
-                  cb(null, []);
-              }
-	            cb(null, categories);
-			})
       }
       
     }, function(err, results) {
@@ -277,10 +269,84 @@ exports.viewProductsOfUserCategoryForFront = function(req, res, next) {
   	        	pages : results.pages,
   				current_page :page,
   				replies:results.new_replies,
-  				categorys : results.categories,
-  				category : category || {}
+  				category : category || {},
+  				category2 : {}
   	        });
             return;
+        });
+        
+    });
+};
+
+/**
+ * 查看用户某二级分类下产品
+ */
+exports.viewArticlesOfUserCategory2 = function(req, res, next) {
+    var category_id = req.query.category_id;
+    var user_id = req.query.user_id;
+    var page  = Number(req.query.page) || 1;
+	var page_size = Number(req.query.page_size) || 9;
+	var start = (page - 1)*page_size;
+	async.auto({
+        products : function(cb) {
+			 articleDao.queryArticlesOfUserCategory2(user_id, category_id,start,page_size, function(err, products) {
+		        if (err) {
+		            res.render('frontend/notify/notify', {
+					 	layout: 'frontend/flayout',
+						active : 'product',
+		                 error : '查找分类下产品出错'
+		             });
+		            return;
+		        }
+		        
+		        cb(null, products);
+			 })
+        },
+        pages : function(cb) {
+           articleDao.queryArticlesOfUserCategory2Total(user_id,category_id, function(err, total) {
+				if (err) {
+                    cb(null, []);
+                }
+                if (!total) {
+                    cb(null, 0);
+                }
+				var nums = Math.ceil(total[0].total/page_size);
+                cb(null, nums);
+			})
+        },
+      
+    }, function(err, results) {
+        if (err) {
+        	 res.render('frontend/notify/notify', {
+				 	layout: 'frontend/flayout',
+					active : 'product',
+	                 error : '查找分类下产品出错'
+	             });
+        	 return;
+        }
+        categoryDao.queryCategory(category_id, function(err, category) {
+			
+			 category2Dao.queryOneCategory(category_id, function(err, category2) {
+			 	if (err) {
+			 		 res.render('frontend/notify/notify', {
+						 	layout: 'frontend/flayout',
+							active : 'product',
+			                 error : '查找产品下二级分类出错'
+			             });
+		        	return;
+		        }
+			 	res.render('frontend/product', {
+		  	    	layout: 'frontend/flayout',
+		  	        active : 'product',
+	                user_id : user_id,
+	                articles : results.products,
+	                current_page :page,
+	                pages : results.pages,
+	                category : category || {},
+					category2 : category2 || {}
+            	});
+            	return;
+        	});
         });
         
     });

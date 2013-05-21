@@ -949,7 +949,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_portfolio_c3_wl { margin: 16px 0 8px -28px;}
 	#content .block_portfolio_c3_wl .img_block { float:left; margin: 14px 0 15px 28px; width:288px;}
 	#content .block_portfolio_c4 { margin: 0 0 8px -18px;}
-	#content .block_portfolio_c4 .img_box { float:left; margin: 14px 0 14px 18px; width:204px; height: 149px; background:url(../images/img_border_216_161.jpg) no-repeat; padding:6px;}
+	#content .block_portfolio_c4 .img_box { float:left; margin: 14px 0 14px 12px; width:204px; height: 149px; background:url(../images/img_border_216_161.jpg) no-repeat; padding:6px;}
 	#content .block_portfolio_c4_t2 { margin: 0 0 24px -18px;}
 	#content .block_portfolio_c4_t2 .img_block { float:left; margin: 14px 0 3px 18px; width:216px;}
 	#content .block_portfolio_c4_t2 .img_box,
