@@ -10,14 +10,14 @@ $(document).ready(function() {
 		slideshow : false,
 		opacity : 0.29
 	});
-	$('.shadow_img>div').each(function(){
-		var img = $(this).find('img').attr('src');
-			$(this).css({'background-image': 'url('+img+')'});
-		})
-	$('.see_big2>div').each(function(){
-		var img = $(this).find('img').attr('src');
-		$(this).css({'background-image': 'url('+img+')'});
-		})
+//	$('.shadow_img>div').each(function(){
+//		var img = $(this).find('img').attr('src');
+//			$(this).css({'background-image': 'url('+img+')'});
+//		})
+//	$('.see_big2>div').each(function(){
+//		var img = $(this).find('img').attr('src');
+//		$(this).css({'background-image': 'url('+img+')'});
+//		})
 	$('.see_big').hover(function(){
 		$(this).find('.description').slideDown();
 		$(this).find('.link_big').slideDown();
