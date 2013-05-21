@@ -857,13 +857,13 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_portfolio_c4_ws .img_box img,
 	#content .block_similar_projects .block_s_content .img_box img {
 		filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
-		-moz-opacity: 1;
-		-khtml-opacity: 1;
-		opacity: 1;
+		-moz-opacity: 0;
+		-khtml-opacity: 0;
+		opacity: 0;
 	}
-	.pic{width:204px;height:149px;text-align:center;}
+	/*.pic{width:204px;height:149px;text-align:center;}
 	.pic a{display:table-cell;width:204px;height:149px;vertical-align:middle;*display:block;*font-family:Arial!important;*font-size:130px;*line-height:1;}
-	.pic a img{vertical-align:middle;max-width:204px;max-height:149px;}
+	.pic a img{vertical-align:middle;max-width:204px;max-height:149px;}*/
 	
 	#content .block_portfolio_c2 .img_box .description,
 	#content .block_portfolio_c3 .img_box .description,
