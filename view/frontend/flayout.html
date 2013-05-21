@@ -62,7 +62,7 @@
 								html_caregory_panel+='{@each categories as item,index}'+
 								'<li><a href="/productsincategory?user_id=1&category_id=${item.id}">${item.name}&nbsp;&nbsp;</a>'+
 								'{@if item.childCategories }<ul style="display: none; ">{@each item.childCategories as item1,index1}'+
-								'<li><a href="/productsOfCategory2Front/1/${item1.id}">${item1.name}&nbsp;&nbsp;</a></li>'+
+								'<li><a href="/productsOfCategory2Front?user_id=1&category_id=${item1.id}">${item1.name}&nbsp;&nbsp;</a></li>'+
 								'{@/each}</ul>{@/if}'+
 								'</li>{@/each}';
 								
