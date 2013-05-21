@@ -58,8 +58,28 @@
 
 						</ul> 
 	                </div>
-
-
+<div class="line"></div>
+<div class="block_recent_posts">
+                	<h4>最新新闻</h4>
+                	
+                	  <% if(new_articles && new_articles.length > 0){
+	               
+	               		for(var i =0,len = new_articles.length ; i< len ; i++){
+					%>
+   							<div class="post">
+			                <div class="img"><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><img style="width: 52px;"  src="<%=new_articles[i].thumbnails%>" alt="" title=""></a></div>
+			                <div class="text">
+			                 <p><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><%=new_articles[i].title%></a></p>
+			                 <p class="date"><%=new_articles[i].create_at%></p>
+			                </div>
+			               </div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无新闻</p>
+					 </div>
+					<%}%>
+                </div>
 
                	  <div class="line"></div>
                 <div class="block_blog_category">
