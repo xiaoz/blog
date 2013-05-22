@@ -206,7 +206,6 @@ exports.viewProductForFront = function(req, res, next) {
             categories : results.categories,
             article_categories : results.article_categories,
             article_categories2 : results.article_categories2
-            
         });
         return;
     });

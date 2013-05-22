@@ -864,6 +864,7 @@ body.stretched #wrapper { width:100%; min-width:982px; background: #FFFFFF url(.
 	#content .block_portfolio_c4 .pic{width:204px;height:149px;text-align:center;}
 	#content .block_portfolio_c4 .pic .imgbox{display:table-cell;width:204px;height:149px;vertical-align:middle;*display:block;*font-family:Arial!important;*font-size:130px;*line-height:1;}
 	#content .block_portfolio_c4 .pic .imgbox img{vertical-align:middle;max-width:204px;max-height:149px;}
+
 	
 	#content .block_portfolio_c2 .img_box .description,
 	#content .block_portfolio_c3 .img_box .description,
