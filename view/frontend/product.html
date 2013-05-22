@@ -1,40 +1,49 @@
 
-        	<div class="page_title">
-            	<h1>产品</h1>
+ 
+  <!--有二级目录的  显示 二级目录 -->
+  <% if(category2 && category2.length > 0){ %>
+ 			<div class="page_title">
+            	<h1> <% if(category && category.name){%><%=category.name %>分类下的<% } %>厂家</h1>
                 <p class="page_description">Product</p>
                 <div class="page_navigation">
                 	<ul>
                     	<li><a href="/product">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li>产品</li>
+                        <li><%=category.name %></li>
                     </ul>
                 </div>
             </div>
             
             <div class="line"></div>
-
-  <div class="block_cont_left">
-             <% if(articles && articles.length > 0){
-					%>
+ 		<div class="block_cont_left">
+            <div class="block_portfolio_c4 filter_conteiner">
+				<%- partial('frontend/product/category2_item',{collection:category2,as:'category2'}) %>
+                <div class="clear"></div>
+            </div>
+ 		<div class="clear"></div>
+     </div> 
+  <%}else{%>  
+			<div class="page_title">
+            	<h1> <% if(category && category.name){%><%=category.name %>分类下的<% } %>产品</h1>
+                <p class="page_description">Product</p>
+                <div class="page_navigation">
+                	<ul>
+                    	<li><a href="/product">主页</a></li>
+                        <li class="nav_line">/</li>
+                        <li><% if(category && category.name){%><%=category.name %>分类下的<% } %>产品</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="line"></div>
+ 		<div class="block_cont_left">
+ 		<% if(articles && articles.length > 0){ %>
             <div class="block_portfolio_c4 filter_conteiner">
 		           
 					<%- partial('frontend/product/product_item',{collection:articles,as:'article'}) %>
                 <div class="clear"></div>
             </div>
-            <%}else{%>
-					<div class="block_info_boxes">
-					<div class="info_box">
-                            	<div>
-                                	<p><b>Info:</b>  <% if(category && category.name){%>
-									<%=category.name %>分类下
-						 <% } %>还没有产品哦！</p>
-                                </div>
-	                        </div>
-	                        </div>
-					<%}%>
-              <% if(articles && articles.length > 0){
-					%>
-                <div class="block_blogs_nav">
+ 					<div class="block_blogs_nav">
 						<% if(current_page == pages){ %>
 						<a href="#2" class="prev">没有了</a>
 						<% }else{ %>
@@ -46,16 +55,43 @@
 						<a href="/news?page=<%=current_page-1 %>" class="next">上一页</a> 
 						<% } %>
                 	</div>
-                	<%}%>
-            <div class="clear"></div>
-</div>
+
+
+            <%}else{%>
+					<div class="block_info_boxes">
+					<div class="info_box">
+                            	<div>
+                                	<p><b>Info:</b>  <% if(category && category.name){%>
+									<%=category.name %>分类下
+						 <% } %>还没有产品哦！</p>
+                                </div>
+	                        </div>
+	                        </div>
+			<%}%>
+      		 <div class="clear"></div>
+           </div>    
+  <%}%>
+
+
+
+            
+
 			<div class="block_cont_right">
                 
 <div class="block_blog_category"> 
 	                  	<h4>产品分类</h4> 
 	                    <ul class="list2" id="product_caregory_panel" >
-
-
+					<% if(categories && categories.length > 0){
+	               
+	               		for(var i =0,len = categories.length ; i< len ; i++){
+					%>
+   						<li><a href="/productsincategory?user_id=1&category_id=<%= categories[i].id %>"><b><%= categories[i].name %></b>&nbsp;&nbsp;</a> </li>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无分类</p>
+					 </div>
+					<%}%>
 						</ul> 
 	                </div>
 

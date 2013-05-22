@@ -60,22 +60,13 @@
   
 		        			var html_caregory_panel = '';
 								html_caregory_panel+='{@each categories as item,index}'+
-								'<li><a href="/productsincategory?user_id=1&category_id=${item.id}">${item.name}&nbsp;&nbsp;</a>'+
+								'{@if item}<li><a href="/productsincategory?user_id=1&category_id=${item.id}">${item.name}&nbsp;&nbsp;</a>'+
 								'{@if item.childCategories }<ul style="display: none; ">{@each item.childCategories as item1,index1}'+
 								'<li><a href="/productsOfCategory2Front?user_id=1&category_id=${item1.id}">${item1.name}&nbsp;&nbsp;</a></li>'+
 								'{@/each}</ul>{@/if}'+
-								'</li>{@/each}';
-								
-								var html_caregory_panel1 = '';
-								html_caregory_panel1+='{@each categories as item,index}'+
-								'<li><a href="/productsincategory?user_id=1&category_id=${item.id}">${item.name}&nbsp;&nbsp;({@if !item.article_count}0{@else}${item.article_count}{@/if})</a></li>'+
-								'{@if item.childCategories }{@each item.childCategories as item1,index1}'+
-								'<li style="margin-left: 20px;"><a href="/productsOfCategory2Front?user_id=1&category_id=${item1.id}">${item1.name}&nbsp;&nbsp;({@if !item1.article_count}0{@else}${item1.article_count}{@/if})</a></li>'+
-								'{@/each}{@/if}'+
-								'{@/each}';
+								'</li>{@/if}{@/each}';
 								
 	var tpl_caregory_panel=juicer(html_caregory_panel);
-	var tpl_caregory_panel1=juicer(html_caregory_panel1);
     $.ajax({//得到用户产品分类
 		type: 'POST',
 		url: '/userinfo/product/1',
@@ -102,15 +93,6 @@
 					$(this).find('ul').slideUp(100);
 					}
 			)
-
- 		<% if(locals.active == 'product'){ %> 
-			
-			
-			$('#product_caregory_panel').html(tpl_caregory_panel1.render(data));
-
-
-		 <% } %>
-		    
 		},
 	  	error:function(){}
 	});	

@@ -351,6 +351,8 @@ exports.modifyCategory2 = function(req, res, next) {
     var user_id = req.session.user.id;
     var category_id = req.params.category_id;
     var category1_id = req.body.category1_id;
+    var category_img = req.body.category_img || '/user_data/avatar/10.jpg';
+    
     async.parallel({// 并行执行
         categories : function(cb){
             category2Dao.queryCategory(category1_id,function(err,categories){
@@ -375,7 +377,7 @@ exports.modifyCategory2 = function(req, res, next) {
             var name = sanitize(req.body.name).trim();
             name = sanitize(name).xss();
             var sequence = req.body.sequence;
-            category2Dao.updateCategory(name, sequence, user_id, category_id, function(err, info) {
+            category2Dao.updateCategory(name, sequence, category_img, user_id, category_id, function(err, info) {
                 if (err) {
                     res.render('notify/notify', {
                     	current	: 'product',
@@ -423,8 +425,8 @@ exports.addCategory2 = function(req, res, next) {
     var name = sanitize(req.body.name).trim();
     name = sanitize(name).xss();
     var sequence = req.body.sequence;
-
-    if (name == '') {
+    var category_img = req.body.category_img || '/user_data/avatar/10.jpg';
+    if (name == '' || category_img == '') {
         res.render('notify/notify', {
         	current	: 'product',
 			active	: 'user_index',
@@ -433,7 +435,7 @@ exports.addCategory2 = function(req, res, next) {
         return;
     }
     var category1_id = req.body.category1_id;
-    category2Dao.saveCategory(name, sequence, req.session.user.id, category1_id ,function(err, info) {
+    category2Dao.saveCategory(name, sequence,req.session.user.id, category1_id , category_img,function(err, info) {
         if (err) {
             res.render('notify/notify', {
             	current	: 'product',
