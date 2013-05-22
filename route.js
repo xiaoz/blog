@@ -32,7 +32,7 @@ exports = module.exports = function(app) {
 	app.get('/productdetail', front_base, product_front_ctrl.viewProductForFront);
 	app.get('/productsincategory',front_base, product_front_ctrl.viewProductsOfUserCategoryForFront);
 	app.post('/sendProductMsg',front_base,frontreply_ctrl.sendProductMsg);
-	app.get('/productsOfCategory2Front/:user_id/:category_id', frontreply_ctrl.viewArticlesOfUserCategory2);
+	app.get('/productsOfCategory2Front',front_base , product_front_ctrl.viewArticlesOfUserCategory2);
 //	// 新闻 blog
 	app.get('/news',front_base, news_ctrl.news);
 	app.get('/newsdetail', front_base, news_ctrl.viewArticleForFront);

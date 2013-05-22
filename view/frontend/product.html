@@ -1,67 +1,55 @@
 
-        	<div class="page_title">
-            	<h1>产品</h1>
-                <p class="page_description">Product</p>
+ 
+  <!--有二级目录的  显示 二级目录 -->
+  <% if(category2 && category2.length > 0){ %>
+ 			<div class="page_title">
+            	<h1> <% if(category && category.name){%><%=category.name %>分类下的<% } %>产品</h1>
+                <p class="page_description">Products</p>
                 <div class="page_navigation">
                 	<ul>
                     	<li><a href="/product">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li>产品</li>
+                        <li><% if(category && category.name){%><a href="/productsincategory?user_id=1&category_id=<%=category.id %>"><%=category.name %></a><%}else{%>产品<% }%></li>
                     </ul>
                 </div>
             </div>
             
             <div class="line"></div>
-            <div class="block_filter">
-            	<p>Filter:</p>
-                <ul id="J_ProductBox">
-                	<li class="first"><a href="/product" class="" title="all">All Categories</a></li>
-                 <% if(categorys && categorys.length > 0){
-	               		for(var i =0,len = categorys.length ; i< len ; i++){
-					%>
-					 <% if(i == (len-1)){ %>
-					  	 <% if(category.id == categorys[i].id){%>
-						 	<li class="last"><a class="active" href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
-						 <% }else{ %>
-						 	 	<li class="last"><a  href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
-						 <% } %>
-					 <% }else{ %>
-					   	 <% if(category.id == categorys[i].id ){%>
-						 	<li ><a class="active" href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
-						 <% }else{ %>
-						 	 	<li ><a  href="/productsincategory?user_id=1&category_id=<%=categorys[i].id%>" ><%=categorys[i].name %></a></li>
-						 <% } %>
-					 <% } %>
-					 
-   					 <% }	%>
-					<%}else{%>
-						<li class="first"><a href="#2" >暂无分类</a></li>
-					<%}%>
-                
-                	
-                </ul>
-            </div> 
-             <% if(articles && articles.length > 0){
-					%>
-            <div class="block_portfolio_c2 filter_conteiner">
+ 		<div class="block_cont_left">
+            <div class="block_portfolio_c4 filter_conteiner">
+				<%- partial('frontend/product/category2_item',{collection:category2,as:'category2'}) %>
+                <div class="clear"></div>
+            </div>
+ 		<div class="clear"></div>
+     </div> 
+  <%}else{%>  
+			<div class="page_title">
+            	<h1> <% if(category && category.name){%><%=category.name %><% if(category2detail && category2detail.name){%><%=category2detail.name %><% }%>分类下的<%}else{%>所有<% }%>产品</h1>
+                <p class="page_description">Products</p>
+                <div class="page_navigation">
+                	<ul>
+                    	<li><a href="/product">主页</a></li>
+                        <li class="nav_line">/</li>
+                        <li><% if(category && category.name){%><a href="/productsincategory?user_id=1&category_id=<%=category.id %>"><%=category.name %></a><%}else{%>产品<% }%></li>
+                       	<% if(category2detail && category2detail.name){%>
+                        <li class="nav_line">/</li>
+                        <li><a href="/productsOfCategory2Front?user_id=1&category_id=<%=category.id %>&category2_id=<%=category2detail.id %>"><%=category2detail.name %></a></li>
+                        <% }%>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="line"></div>
+ 		<div class="block_cont_left">
+ 		<% if(articles && articles.length > 0){ %>
+            <div class="block_portfolio_c4 filter_conteiner">
 		           
 					<%- partial('frontend/product/product_item',{collection:articles,as:'article'}) %>
                 <div class="clear"></div>
             </div>
-            <%}else{%>
-					<div class="block_info_boxes">
-					<div class="info_box">
-                            	<div>
-                                	<p><b>Info:</b>  <% if(category && category.name){%>
-									<%=category.name %>分类下
-						 <% } %>还没有产品哦！</p>
-                                </div>
-	                        </div>
-	                        </div>
-					<%}%>
-              <% if(articles && articles.length > 0){
-					%>
-                <div class="block_blogs_nav">
+            	<% if(pages > 1){ %>
+            
+ 					<div class="block_blogs_nav">
 						<% if(current_page == pages){ %>
 						<a href="#2" class="prev">没有了</a>
 						<% }else{ %>
@@ -73,7 +61,78 @@
 						<a href="/news?page=<%=current_page-1 %>" class="next">上一页</a> 
 						<% } %>
                 	</div>
-                	<%}%>
-            <div class="clear"></div>
 
-		<%-partial('page/footer-top')%>
+					<%}%>
+            <%}else{%>
+					<div class="block_info_boxes">
+					<div class="info_box">
+                            	<div>
+                                	<p><b>Info:</b>  <% if(category && category.name){%>
+									<%=category.name %><% if(category2detail && category2detail.name){%><%=category2detail.name %><% }%>分类下
+						 <% } %>还没有产品哦！</p>
+                                </div>
+	                        </div>
+	                        </div>
+			<%}%>
+      		 <div class="clear"></div>
+           </div>    
+  <%}%>
+
+
+
+            
+
+			<div class="block_cont_right">
+                
+<div class="block_blog_category"> 
+	                  	<h4>产品分类</h4> 
+	                    <ul class="list2" id="product_caregory_panel" >
+					<% if(categories && categories.length > 0){
+	               
+	               		for(var i =0,len = categories.length ; i< len ; i++){
+					%>
+   						<li><a href="/productsincategory?user_id=1&category_id=<%= categories[i].id %>"><b><%= categories[i].name %></b>&nbsp;&nbsp;</a> </li>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无分类</p>
+					 </div>
+					<%}%>
+						</ul> 
+	                </div>
+
+<div class="block_recent_posts">
+                	<h4>最新新闻</h4>
+                	
+                	  <% if(new_articles && new_articles.length > 0){
+	               
+	               		for(var i =0,len = new_articles.length ; i< len ; i++){
+					%>
+   							<div class="post">
+			                <div class="img"><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><img style="width: 52px;"  src="<%=new_articles[i].thumbnails%>" alt="" title=""></a></div>
+			                <div class="text">
+			                 <p><a href="/newsdetail?article_id=<%=new_articles[i].id%>"><%=new_articles[i].title%></a></p>
+			                 <p class="date"><%=new_articles[i].create_at%></p>
+			                </div>
+			               </div>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无新闻</p>
+					 </div>
+					<%}%>
+                </div>
+
+               	  <div class="line"></div>
+                <div class="block_blog_category">
+                  	<h4>联系我们</h4>
+                    <ul class="list2">
+                    	<li><a href="#2"><b>Phone:</b> <%= locals.company_info.phone %></a> </li>
+                    	<li><a href="#2"><b>Fax:</b> <%= locals.company_info.tel %></a></li>
+                    	<li><a href="#2"><b>Email:</b> <a href="mailto:info@elephantweb.com" class="main_link"><%= locals.company_info.email %></a></li>
+                    	<li style="height: 60px;"><a href="#2"><b>Our adress:</b>  <%= locals.company_info.address %></a></li>
+                    </ul>
+                </div>
+            </div>
+
+

@@ -5,7 +5,11 @@
                 	<ul>
                     	<li><a href="/product">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li>产品</li>
+						<li><%for(var cli=0;cli < article_categories.length;cli++){%>
+							<a href="/productsincategory?user_id=1&category_id=<%=article_categories[cli].id%>"><%=article_categories[cli].name%></a>  
+						<%}%></li>
+						<li class="nav_line">/</li>
+                        <li><a href="#2"><%= article.title.substring(0,12)%></a></li>
                     </ul>
                 </div>
             </div>
@@ -86,7 +90,24 @@
             </div>
  	</div>
             <div class="block_cont_right">
-             
+             <div class="block_blog_category"> 
+	                  	<h4>产品分类</h4> 
+	                    <ul class="list2" id="product_caregory_panel" >
+					<% if(categories && categories.length > 0){
+	               
+	               		for(var i =0,len = categories.length ; i< len ; i++){
+					%>
+   						<li><a href="/productsincategory?user_id=1&category_id=<%= categories[i].id %>"><b><%= categories[i].name %></b>&nbsp;&nbsp;</a> </li>
+   					 <% }	%>
+					<%}else{%>
+					 <div class="post">
+						<p class='col_fade' style="margin:20px;">暂无分类</p>
+					 </div>
+					<%}%>
+
+						</ul> 
+	                </div>
+
                 <div class="block_recent_posts">
                 	<h4>最新新闻</h4>
                 	

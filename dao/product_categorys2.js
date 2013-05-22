@@ -78,8 +78,8 @@ exports.queryArticlesCountOfCategories = function(categoryIds, callback){
 /**
  * 更新分类
  */
-exports.updateCategory = function(name, sequence, userId, categoryId, callback) {
-    mysql.update('update product_categorys2 set name=?, sequence=? where user_id = ? and id = ?', [ name, sequence, userId, categoryId ], function(err, info) {
+exports.updateCategory = function(name, sequence,category_img, userId, categoryId, callback) {
+    mysql.update('update product_categorys2 set name=?, sequence=? ,category_img=?where user_id = ? and id = ?', [ name, sequence,category_img, userId, categoryId ], function(err, info) {
         callback(err, info);
     });
 };
@@ -87,8 +87,8 @@ exports.updateCategory = function(name, sequence, userId, categoryId, callback) 
 /**
  * 保存产品分类
  */
-exports.saveCategory = function(name, sequence, userId,category1_id, callback) {
-    mysql.update('insert into product_categorys2(name,sequence,user_id,category1_id) values(?,?,?,?)', [ name, sequence, userId,category1_id ], function(err, info) {
+exports.saveCategory = function(name, sequence, userId,category1_id,category_img, callback) {
+    mysql.update('insert into product_categorys2(name,sequence,user_id,category1_id,category_img) values(?,?,?,?,?)', [ name, sequence, userId,category1_id,category_img ], function(err, info) {
         callback(err, info);
     });
 };

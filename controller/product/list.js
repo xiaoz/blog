@@ -293,12 +293,16 @@ exports.modifyArticle = function(req, res, next) {
             });
         } ],
 		saveCategories2OfArticle : [ 'deleteCategoriesOfProduct', function(cb) {// 插入新的产品分类
-            category2Dao.saveCategoriesOfArticle(product_id, product_categories2, function(err, categories) {
-                if (err) {
-                    log.error('修改产品：插入新的产品二级分类出现错误[' + product_id + ',' + product_categories + ']');
-                }
-                cb(null, '');
-            });
+			if (req.body.product_categories2 != '') {
+	            category2Dao.saveCategoriesOfArticle(product_id, product_categories2, function(err, categories) {
+	                if (err) {
+	                    log.error('修改产品：插入新的产品二级分类出现错误[' + product_id + ',' + product_categories + ']');
+	                }
+	                cb(null, '');
+	            });
+			}else{
+				cb(null, '');
+			}
         } ]
     }, function(err, results) {
         if (err) {
@@ -649,7 +653,7 @@ exports.createArticle = function(req, res, next) {
                     });
                     return;
                 }else {
-					
+                	if (req.body.product_categories2 != '') {
 					 category2Dao.saveCategoriesOfArticle(info.insertId,product_categories2, function(err, categories){
 			                if (err) {
 			                    res.render('notify/notify', {
@@ -662,6 +666,9 @@ exports.createArticle = function(req, res, next) {
 			                    res.redirect('/product/' + info.insertId);
 			                }
 			            }); 
+                	}else{
+                		res.redirect('/product/' + info.insertId);
+                	}
                 }
             });         
         });
