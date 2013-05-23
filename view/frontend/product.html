@@ -3,13 +3,13 @@
   <!--有二级目录的  显示 二级目录 -->
   <% if(category2 && category2.length > 0){ %>
  			<div class="page_title">
-            	<h1> <% if(category && category.name){%><%=category.name %>分类下的<% } %>厂家</h1>
-                <p class="page_description">Product</p>
+            	<h1> <% if(category && category.name){%><%=category.name %>分类下的<% } %>产品</h1>
+                <p class="page_description">Products</p>
                 <div class="page_navigation">
                 	<ul>
                     	<li><a href="/product">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li><%=category.name %></li>
+                        <li><% if(category && category.name){%><a href="/productsincategory?user_id=1&category_id=<%=category.id %>"><%=category.name %></a><%}else{%>产品<% }%></li>
                     </ul>
                 </div>
             </div>
@@ -24,13 +24,17 @@
      </div> 
   <%}else{%>  
 			<div class="page_title">
-            	<h1> <% if(category && category.name){%><%=category.name %>分类下的<% } %>产品</h1>
-                <p class="page_description">Product</p>
+            	<h1> <% if(category && category.name){%><%=category.name %><% if(category2detail && category2detail.name){%><%=category2detail.name %><% }%>分类下的<%}else{%>所有<% }%>产品</h1>
+                <p class="page_description">Products</p>
                 <div class="page_navigation">
                 	<ul>
                     	<li><a href="/product">主页</a></li>
                         <li class="nav_line">/</li>
-                        <li><% if(category && category.name){%><%=category.name %>分类下的<% } %>产品</li>
+                        <li><% if(category && category.name){%><a href="/productsincategory?user_id=1&category_id=<%=category.id %>"><%=category.name %></a><%}else{%>产品<% }%></li>
+                       	<% if(category2detail && category2detail.name){%>
+                        <li class="nav_line">/</li>
+                        <li><a href="/productsOfCategory2Front?user_id=1&category_id=<%=category.id %>&category2_id=<%=category2detail.id %>"><%=category2detail.name %></a></li>
+                        <% }%>
                     </ul>
                 </div>
             </div>
@@ -43,6 +47,7 @@
 					<%- partial('frontend/product/product_item',{collection:articles,as:'article'}) %>
                 <div class="clear"></div>
             </div>
+            	<% if(pages > 1){ %>
  					<div class="block_blogs_nav">
 						<% if(current_page == pages){ %>
 						<a href="#2" class="prev">没有了</a>
@@ -55,14 +60,13 @@
 						<a href="/news?page=<%=current_page-1 %>" class="next">上一页</a> 
 						<% } %>
                 	</div>
-
-
+					<%}%>
             <%}else{%>
 					<div class="block_info_boxes">
 					<div class="info_box">
                             	<div>
                                 	<p><b>Info:</b>  <% if(category && category.name){%>
-									<%=category.name %>分类下
+									<%=category.name %><% if(category2detail && category2detail.name){%><%=category2detail.name %><% }%>分类下
 						 <% } %>还没有产品哦！</p>
                                 </div>
 	                        </div>
@@ -128,5 +132,3 @@
                     </ul>
                 </div>
             </div>
-
-

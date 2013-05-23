@@ -76,7 +76,8 @@ exports.product = function(req, res, next) {
 				current_page :page,
 				categories : results.categories,
 				category : {},
-				category2 : {}
+				category2 : {},
+				category2detail : {}
 	        });
         return;
 	    });
@@ -128,6 +129,16 @@ exports.viewProductForFront = function(req, res, next) {
                 }
                 else {
                     cb(null, categories);
+                }
+            });
+        },
+        article_categories2 : function(cb) {
+            category2Dao.queryCategoriesOfProduct(product_id, function(err, categories2) {
+                if (err || !categories2) {
+                    cb(null, []);
+                }
+                else {
+                    cb(null, categories2);
                 }
             });
         },
@@ -193,7 +204,8 @@ exports.viewProductForFront = function(req, res, next) {
             author : results.author,
             article : results.article,
             categories : results.categories,
-            article_categories : results.article_categories
+            article_categories : results.article_categories,
+            article_categories2 : results.article_categories2
         });
         return;
     });
@@ -265,7 +277,8 @@ exports.viewProductsOfUserCategoryForFront = function(req, res, next) {
 		                pages : results.pages,
 		                categories : results.categories,
 		                category : category || {},
-						category2 : category2 || {}
+						category2 : category2 || {},
+						category2detail : {}
 	         	});
 	         	return;
 	     	});
@@ -279,13 +292,14 @@ exports.viewProductsOfUserCategoryForFront = function(req, res, next) {
  */
 exports.viewArticlesOfUserCategory2 = function(req, res, next) {
     var category_id = req.query.category_id;
+    var category2_id = req.query.category2_id;
     var user_id = req.query.user_id;
     var page  = Number(req.query.page) || 1;
 	var page_size = Number(req.query.page_size) || 9;
 	var start = (page - 1)*page_size;
 	async.auto({
         products : function(cb) {
-			 articleDao.queryArticlesOfUserCategory2(user_id, category_id,start,page_size, function(err, products) {
+			 articleDao.queryArticlesOfUserCategory2(user_id, category2_id,start,page_size, function(err, products) {
 		        if (err) {
 		            res.render('frontend/notify/notify', {
 					 	layout: 'frontend/flayout',
@@ -330,7 +344,7 @@ exports.viewArticlesOfUserCategory2 = function(req, res, next) {
         }
         categoryDao.queryCategory(category_id, function(err, category) {
 			
-			 category2Dao.queryOneCategory(category_id, function(err, category2detail) {
+			 category2Dao.queryOneCategory(category2_id, function(err, category2detail) {
 			 	if (err) {
 			 		 res.render('frontend/notify/notify', {
 						 	layout: 'frontend/flayout',
@@ -339,7 +353,6 @@ exports.viewArticlesOfUserCategory2 = function(req, res, next) {
 			             });
 		        	return;
 		        }
-			 	
 			 	res.render('frontend/product', {
 		  	    	layout: 'frontend/flayout',
 		  	        active : 'product',
