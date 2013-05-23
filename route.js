@@ -79,6 +79,9 @@ exports = module.exports = function(app) {
     app.get('/signout', sign_ctrl.signout);
     app.post('/signup', sign_ctrl.signup);
     app.post('/signin', sign_ctrl.signin);
+    
+    app.get('/clearcookie', sign_ctrl.clearcookie);
+    
      
     // 用户相关
     app.get('/user/:id', user_ctrl.index);

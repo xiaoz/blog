@@ -119,7 +119,7 @@ exports.deleteArticle = function(productId, authorId, callback) {
  * 查询最新新闻
  */
 exports.queryNewProduct = function(limit, callback){
-    mysql.query('select id,title,content,tag,visit_count,goods_img,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at from product  where author_id = 1 order by id desc limit ?', [ limit ], function(err, articles) {
+    mysql.query('select id,title,content,tag,visit_count,goods_img,reply_count,author_id,DATE_FORMAT(update_at,"%Y-%m-%d %H:%i:%s") as update_at,DATE_FORMAT(create_at,"%Y-%m-%d %H:%i:%s") as create_at from product  where author_id = 1 order by update_at desc limit ?', [ limit ], function(err, articles) {
         callback(err, articles);
     });
 };

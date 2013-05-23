@@ -159,6 +159,61 @@ exports.signout = function(req, res, next) {
     res.redirect('/signin');
 };
 
+/**
+ * 更新系统前台cookies
+ */
+exports.clearcookie = function(req, res, next) {
+    res.clearCookie('*', { path: '/' });
+    res.clearCookie('*', {
+        path : '/about'
+    });
+    res.clearCookie('*', {
+        path : '/product'
+    });
+    res.clearCookie('*', {
+        path : '/productdetail'
+    });
+    res.clearCookie('*', {
+        path : '/productsincategory'
+    });
+    res.clearCookie('*', {
+        path : '/sendProductMsg'
+    });
+    res.clearCookie('*', {
+        path : '/productsOfCategory2Front'
+    });
+    res.clearCookie('*', {
+        path : '/news'
+    });
+    res.clearCookie('*', {
+        path : '/newsdetail'
+    });
+    res.clearCookie('*', {
+        path : '/newsincategory'
+    });
+    res.clearCookie('*', {
+        path : '/filesForFront'
+    });
+    res.clearCookie('*', {
+        path : '/filesOfFolderFront'
+    });
+    res.clearCookie('*', {
+        path : '/downloadForFront'
+    });
+    res.clearCookie('*', {
+        path : '/sendMsg'
+    });
+    res.clearCookie('*', {
+        path : '/cases'
+    });
+    res.clearCookie('*', {
+        path : '/contact'
+    });
+    res.render('notify/notify', {
+    	current	: 'index',
+        success : '成功更新'
+    });
+};
 
 function gen_session(user, res) {
     var auth_token = Util.encrypt(user.id + '\t' + user.loginname + '\t' + user.pwd + '\t' + user.email, config.session_secret);
