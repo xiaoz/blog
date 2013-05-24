@@ -9,11 +9,11 @@ var download_dir = __dirname + '/home';
 app.configure(function() {
     app.set('view engine', 'html');
     app.set('views', __dirname + '/view');
-    var one_year = 1000 * 60 * 60 * 24 * 30;
-    app.use(express.static(static_dir, {
-        maxAge : one_year
-    }));
-    app.set('view cache', true);
+    //var one_year = 1000 * 60 * 60 * 24 * 30;
+    //app.use(express.static(static_dir, {
+    //    maxAge : one_year
+    //}));
+    //app.set('view cache', true);
     
     app.register('.html', require('ejs'));
     app.use(express.bodyParser({
