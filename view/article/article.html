@@ -140,26 +140,9 @@
 
 </script>
 <% } %>
-
 <script type='text/javascript'>
 	//为了在编辑器之外能展示高亮代码
-	SyntaxHighlighter.highlight();
-
-	$(document).ready(function(){
-		//fancy image
-		$('.topic_content img,.reply_content img').each(function(){
-			if($(this).width > 500){
-				$(this).width(500);
-			}
-			var elem = $('<a class="content_img"></a>');
-			elem.attr('href',$(this).attr('src'));
-			$(this).wrap(elem);		
-		});
-		$('.content_img').fancybox({
-			transitionIn: 'elastic',
-			transitionOut: 'elastic'
-		});
-	});
+	
 	
 	function deleteConfirm(){
         if(confirm('确定要删除吗?删除后将不可恢复')==true)
