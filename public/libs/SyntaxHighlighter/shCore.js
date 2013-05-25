@@ -287,6 +287,7 @@ if (XRegExp) {
     //   rather than the empty string.
     // - `lastIndex` should not be incremented after zero-length matches.
     RegExp.prototype.exec = function (str) {
+    	if(str!==undefined && str !== null){
         var match = real.exec.apply(this, arguments),
             name, r2;
         if (match) {
@@ -316,6 +317,7 @@ if (XRegExp) {
                 this.lastIndex--;
         }
         return match;
+    	};
     };
 
     // Don't override `test` if it won't change anything
