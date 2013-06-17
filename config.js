@@ -17,7 +17,7 @@ exports.config = {
 	password : "r6081760d",
 	database : "r8549binghua7",
 	maxSockets : 80,//pool使用
-	timeout : 1,//pool使用
+	timeout : 30000,//pool使用
 	
 	base_path : __dirname ,
 	tmp_upload_path : __dirname +'/home/tmp/uploads', //express的临时上传路径,需首先建立这个文件夹(在app.use(express.bodyParser({uploadDir:'/home/tmp/uploads'}));设置)
